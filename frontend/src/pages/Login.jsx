@@ -1,14 +1,14 @@
-export const LoginButton1 = () => {
+import KakaoLoginButton from "../components/login/KakaoLoginButton";
+import GoogleLoginButton from "../components/login/GoogleLoginButton";
+
+
+const Login = () => {
   return (
-    <>
-      <button>카카오 버튼</button>
-    </>
+    <div className="w-full h-full">
+      <KakaoLoginButton />
+      <GoogleLoginButton />
+    </div>
   );
 };
-export const LoginButton2 = () => {
-  return (
-    <>
-      <button>구글 버튼</button>
-    </>
-  );
-};
+
+export default Login;
