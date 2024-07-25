@@ -1,12 +1,13 @@
-import KakaoLoginComponent from "../components/KakaoLoginComponent";
+import KakaoLoginButton from "../components/login/KakaoLoginButton";
 import MainNav from "../components/common/MainNav";
-import style from "./Home.module.css";
-import { LoginButton1, LoginButton2 } from "./Login";
+import GoogleLoginButton from "../components/login/GoogleLoginButton";
+
 
 const Home = () => {
   return (
     <div className="w-full h-full">
-      <KakaoLoginComponent />
+      <KakaoLoginButton />
+      <GoogleLoginButton />
       <footer>
         <MainNav />
       </footer>
