@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const KakaoLoginComponent = () => {
+const KakaoLoginButton = () => {
   useEffect(() => {
     // 카카오 SDK 초기화
     window.Kakao.init(import.meta.env.VITE_KAKAO_JS_KEY); // 카카오 앱 키 입력
@@ -47,4 +47,4 @@ const KakaoLoginComponent = () => {
   );
 };
 
-export default KakaoLoginComponent;
+export default KakaoLoginButton;
