@@ -1,5 +1,5 @@
-import KakaoLoginButton from "../components/login/KakaoLoginButton";
-import GoogleLoginButton from "../components/login/GoogleLoginButton";
+import KakaoLoginButton from "../../components/login/KakaoLoginButton";
+import GoogleLoginButton from "../../components/login/GoogleLoginButton";
 
 
 const Login = () => {
