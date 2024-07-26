@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import AlarmIcon from "../../assets/icon/nav-alarmBell.svg";
 import HomeIcon from "../../assets/icon/nav-home.svg";
 import MyPageIcon from "../../assets/icon/nav-mypage.svg";
-import style from "./MainNav.module.css";
+import "./MainNav.css";
 
 const MainNav = () => {
   const nav = useNavigate();
 
   return (
-    <footer className="w-[393px] h-[100px] p-10 bg-white shadow flex justify-between items-center fixed bottom-0 left-0">
+    <footer className={`w-full h-full p-10 bg-white shadow flex justify-between items-center bottom-0 left-0`}>
       <div
         className="w-[30px] h-[30px] flex flex-col justify-center items-center relative cursor-pointer"
         onClick={() => nav("/notification")}
@@ -19,7 +19,7 @@ const MainNav = () => {
           className="w-[27.86px] h-[27.86px]"
         />
         <div
-          className={`text-center text-black text-sm font-normal ${style["footer-element"]}`}
+          className={`text-center text-black text-sm font-normal footer-element`}
         >
           알림
         </div>
@@ -30,7 +30,7 @@ const MainNav = () => {
       >
         <img src={HomeIcon} alt="Home" className="w-[27.86px] h-[27.86px]" />
         <div
-          className={`text-center text-black text-sm font-normal ${style["footer-element"]}`}
+          className={`text-center text-black text-sm font-normal footer-element`}
         >
           홈
         </div>
@@ -45,7 +45,7 @@ const MainNav = () => {
           className="w-[27.86px] h-[27.86px]"
         />
         <div
-          className={`text-center text-black text-sm font-normal whitespace-nowrap ${style["footer-element"]}`}
+          className={`text-center text-black text-sm font-normal whitespace-nowrap footer-element`}
         >
           마이페이지
         </div>

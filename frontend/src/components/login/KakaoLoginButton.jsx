@@ -41,7 +41,7 @@ const KakaoLoginButton = () => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <button onClick={loginWithKakao}>카카오로 로그인</button>
     </div>
   );

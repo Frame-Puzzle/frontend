@@ -1,42 +1,39 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  /* 객관적 최상위 요소를 의미. 주로 HTML 문서에서는 <html> 태그를 의미. */
+  --vh: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.main-frame {
+  /* 실질적 최상위 요소 */
+  font-family: 'Pretendard-Regular';
+  font-weight: 400; /* 100 ~ 900 설정 가능 */
+  font-style: normal;
+  width: 393px;
+  height: calc(var(--vh, 1vh) * 100);
+  margin: auto;
 }
 
-.card {
-  padding: 2em;
+div {
+  box-sizing: border-box;
 }
 
-.read-the-docs {
-  color: #888;
+table {
+  border-collapse: collapse;
+}
+
+img {
+  width: 100%;
+  /* 이미지 아래 선 생기는거 방지 */
+  display: block;
 }
