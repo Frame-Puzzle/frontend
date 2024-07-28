@@ -1,19 +1,34 @@
+# Build Stage
 FROM node:20.15-alpine as build
+
 WORKDIR /app
+
+# Copy package files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
+
+# Copy all files and build the application
 COPY . .
 RUN npm run build
 
-# 프로덕션 환경을 위한 이미지를 빌드합니다.
+# Run Stage
 FROM node:20.15-alpine
-WORKDIR /app
-COPY --from=build /app/dist /app/dist
-COPY package.json package-lock.json ./
-RUN npm install --only=production
 
-# 애플리케이션이 사용하는 포트를 노출합니다.
+WORKDIR /app
+
+# Copy only the built files from the build stage
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/package-lock.json ./package-lock.json
+
+# Install only production dependencies
+RUN npm install --production
+
+# Expose the port the app runs on
 EXPOSE 3000
 
-# 컨테이너가 시작될 때 실행할 명령어를 설정합니다.
-CMD ["npm", "run"]
+# Set environment variable for production
+ENV NODE_ENV=production
+
+# Command to run the app
+CMD ["npm", "run", "preview"]
