@@ -16,4 +16,4 @@ RUN npm install --only=production
 EXPOSE 3000
 
 # 컨테이너가 시작될 때 실행할 명령어를 설정합니다.
-CMD ["npm", "start"]
+CMD ["npm", "run"]
