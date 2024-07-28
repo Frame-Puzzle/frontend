@@ -37,3 +37,27 @@ img {
   /* 이미지 아래 선 생기는거 방지 */
   display: block;
 }
+
+.bg-color1 {
+  background-color: #F3E7FB;
+}
+
+.bg-color2 {
+  background-color: #F1BDEC;
+}
+
+.bg-color3 {
+  background-color: #C3C7F4;
+}
+
+.color1 {
+  color: #F3E7FB;
+}
+
+.color2 {
+  color: #F1BDEC;
+}
+
+.color3 {
+  color: #C3C7F4;
+}

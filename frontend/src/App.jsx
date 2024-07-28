@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Notification from "./pages/Notification";
 import MyPage from "./pages/MyPage";
 import GoogleLogin from "./pages/login/GoogleLogin";
+import KakaoLogin from "./pages/login/KakaoLogin";
 
 import { useEffect } from "react";
 
@@ -27,9 +28,12 @@ function App() {
         <Route path="/notification" element={<Notification />} />
         <Route path="/mypage" element={<MyPage />} />
 
-        {/* 로그인 API */}
+        {/* Google Login API */}
         <Route path="/" element={<Login />} />
         <Route path="/login/oauth2/code/google" element={<GoogleLogin />} />
+
+        {/* Kakao Login API */}
+        <Route path="/login/oauth2/code/kakao" element={<KakaoLogin />} />
       </Routes>
     </div>
   );
