@@ -31,4 +31,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Command to run the app
-CMD ["npm", "run", "preview"]
+CMD ["npm", "run"]
