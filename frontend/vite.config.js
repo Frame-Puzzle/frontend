@@ -23,12 +23,7 @@ export default defineConfig({
     }),
   ],
   server: {
-<<<<<<< HEAD
-    port: 3000
-  }
-=======
     port: 3000,
     host: '0.0.0.0',
   },
->>>>>>> 45c516611aee113d37fcab22d1c819d365e80d56
 });
