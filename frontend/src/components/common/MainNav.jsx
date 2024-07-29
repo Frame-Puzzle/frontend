@@ -5,6 +5,7 @@ import MyPageIcon from "../../assets/icon/nav-mypage.svg";
 import "./MainNav.css";
 
 const MainNav = () => {
+  
   const nav = useNavigate();
 
   return (
