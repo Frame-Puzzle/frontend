@@ -3,12 +3,21 @@ FROM node:20.15-alpine as build
 
 WORKDIR /app
 
-# Copy package files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy all files and build the application
 COPY . .
+RUN npm run build
+
+FROM node:20.15-alpine
+
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=build /app/build /app/build
 
 EXPOSE 3000
-CMD ["npm", "run", "build"]
+
+
+CMD ["serve", "-s", "build", "-l", "3000"]
