@@ -38,6 +38,12 @@ img {
   display: block;
 }
 
+span {
+  /* The display: inline property prevents width from having an effect.
+  Try setting display to something other than inline. */
+  display: block;
+}
+
 .bg-color1 {
   background-color: #F3E7FB;
 }
