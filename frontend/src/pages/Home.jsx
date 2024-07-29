@@ -19,7 +19,7 @@ const Home = () => {
         <div className="user-info">
           <p>안녕하세요</p>
           {/* use Redux */}
-          <p>???? 님</p>
+          <p>{/* Need data binding */} 님</p>
         </div>
         <div>
           <MainSwipe />
