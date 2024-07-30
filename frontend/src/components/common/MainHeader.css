@@ -4,6 +4,7 @@
   /* 임시 패딩 */
   padding: 20px 0px;
   border-bottom: 1px solid rgb(226, 226, 226);
+  justify-content: space-between;
 }
 
 .header_prev {
@@ -27,6 +28,7 @@
 }
 
 .header_icon {
-  background-color: gray;
-  justify-content: flex-end;
+  background-color: white;
+  width: 24px;
+  justify-content: flex;
 }
