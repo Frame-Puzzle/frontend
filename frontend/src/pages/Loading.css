@@ -1,0 +1,13 @@
+.background-loading {
+  width: 100vw;
+  height: 100vh;
+  background-color: #c3c7f4;
+  padding-top: 32vh;
+}
+
+.background-loading img {
+  width: 60vw;
+  margin: auto;
+  height: auto;
+  padding-top: 5vh;
+}
