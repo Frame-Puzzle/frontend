@@ -1,12 +1,13 @@
 .main-content {
   width: 100%;
   height: 70%;
-  padding-top: 12vh;
+  padding-top: 15vh;
 }
 
 .button-content {
   width: 100%;
   height: 30%;
+  padding-top: 7vh;
 }
 
 .main-content img {
