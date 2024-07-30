@@ -1,0 +1,21 @@
+.kakao-button {
+  width: 65vw;
+  height: 6.5vh;
+  background-color: #FEE500;
+  border: none;
+  border-radius: 100px;
+  padding: 2vw;
+  cursor: pointer;
+  margin: auto;
+}
+
+.kakao-button img {
+  width: 7.7%;
+  margin-left: 8vw;
+}
+
+.kakao-button span {
+  font-size: 3vw;
+  margin-left: 10vw;
+  margin-top: 0.3vh;
+}

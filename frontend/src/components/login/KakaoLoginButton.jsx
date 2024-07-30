@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./KakaoLoginButton.css";
 
 const KakaoLoginButton = () => {
 
@@ -13,8 +14,9 @@ const KakaoLoginButton = () => {
   };
 
   return (
-    <div>
-      <button onClick={loginWithKakao}>카카오로 로그인</button>
+    <div className="kakao-button flex align-items-center" onClick={ loginWithKakao }>
+      <img src="/img/kakao-logo.png" alt="kakao-logo" />
+      <span>카카오톡으로 로그인</span>
     </div>
   );
 };
