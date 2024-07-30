@@ -86,6 +86,14 @@ span {
   display: flex;
 }
 
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -100,4 +108,20 @@ span {
 
 .fixed {
   position: fixed;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.margin-auto {
+  margin: auto;
 }
