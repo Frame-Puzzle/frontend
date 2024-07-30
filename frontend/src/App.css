@@ -1,6 +1,7 @@
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -17,7 +18,7 @@ body {
 
 .main-frame {
   /* 실질적 최상위 요소 */
-  font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
   font-weight: 400; /* 100 ~ 900 설정 가능 */
   font-style: normal;
   width: calc(var(--vw, 1vw) * 100);
@@ -46,27 +47,27 @@ span {
 }
 
 .bg-color1 {
-  background-color: #F3E7FB;
+  background-color: #f3e7fb;
 }
 
 .bg-color2 {
-  background-color: #F1BDEC;
+  background-color: #f1bdec;
 }
 
 .bg-color3 {
-  background-color: #C3C7F4;
+  background-color: #c3c7f4;
 }
 
 .color1 {
-  color: #F3E7FB;
+  color: #f3e7fb;
 }
 
 .color2 {
-  color: #F1BDEC;
+  color: #f1bdec;
 }
 
 .color3 {
-  color: #C3C7F4;
+  color: #c3c7f4;
 }
 
 .w-full {

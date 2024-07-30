@@ -1,0 +1,19 @@
+.change-nick-button {
+  cursor: pointer;
+  width: fit-content;
+  height: 100%;
+  background-color: white;
+  color: black;
+  border: 1px #6d6d6d solid;
+  border-radius: 15px;
+  font-size: 1.2vh;
+  padding: 7px;
+  text-align: center;
+  white-space: nowrap;
+  margin: auto;
+  margin-bottom: 20%;
+  margin-top: 10%;
+}
+
+/* height: 25, border: */
+/* border: 2px solid var(--Color3, #c3c7f4); */

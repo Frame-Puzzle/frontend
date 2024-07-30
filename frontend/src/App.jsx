@@ -5,20 +5,20 @@ import Login from "./pages/login/Login";
 import Home from "./pages/Home";
 import Notification from "./pages/Notification";
 import MyPage from "./pages/MyPage";
+import ChangeNick from "./pages/ChangeNick";
 import GoogleLogin from "./pages/login/GoogleLogin";
 import KakaoLogin from "./pages/login/KakaoLogin";
 
 import { useEffect } from "react";
 
 function App() {
-
   const setScreenSize = () => {
     let vw = window.innerWidth * 0.01;
     document.documentElement.style.setProperty("--vw", `${vw}px`);
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
-  }
-  
+  };
+
   useEffect(() => {
     setScreenSize();
   });
@@ -29,6 +29,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/edit" element={<ChangeNick />} />
 
         {/* Google Login API */}
         <Route path="/" element={<Login />} />
