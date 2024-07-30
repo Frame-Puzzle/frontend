@@ -8,6 +8,7 @@
 
 :root {
   /* 객관적 최상위 요소를 의미. 주로 HTML 문서에서는 <html> 태그를 의미. */
+  --vw: 100%;
   --vh: 100%;
 }
 
@@ -20,7 +21,7 @@ body {
   font-family: "Pretendard-Regular";
   font-weight: 400; /* 100 ~ 900 설정 가능 */
   font-style: normal;
-  width: 393px;
+  width: calc(var(--vw, 1vw) * 100);
   height: calc(var(--vh, 1vh) * 100);
   margin: auto;
 }
@@ -36,6 +37,12 @@ table {
 img {
   width: 100%;
   /* 이미지 아래 선 생기는거 방지 */
+  display: block;
+}
+
+span {
+  /* The display: inline property prevents width from having an effect.
+  Try setting display to something other than inline. */
   display: block;
 }
 
@@ -61,4 +68,61 @@ img {
 
 .color3 {
   color: #c3c7f4;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.b-full {
+  width: 100%;
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.margin-auto {
+  margin: auto;
 }

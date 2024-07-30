@@ -2,7 +2,7 @@ import "./MainSwipe.css";
 
 const MainSwipe = () => {
   return (
-    <div></div>
+    <div>스와이프입니다 !</div>
   )
 };
 

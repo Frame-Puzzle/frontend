@@ -13,6 +13,8 @@ import { useEffect } from "react";
 
 function App() {
   const setScreenSize = () => {
+    let vw = window.innerWidth * 0.01;
+    document.documentElement.style.setProperty("--vw", `${vw}px`);
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   };
