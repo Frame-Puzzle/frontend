@@ -1,5 +1,5 @@
 import React from "react";
-import PuzzleCanvas from "../components/board/PuzzleCanvas";
+import PuzzleCanvas from "../components/puzzleBoard/PuzzleCanvas";
 
 const PuzzleBoard = () => {
   return (
