@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import authApi from "../../apis/authApi";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../../stores/userSlice";
 
 const GoogleLogin = () => {
+
+  let dispatch = useDispatch();
+
   const getAccessToken = (url) => {
     const urlParams = new URLSearchParams(url.split("?")[1]);
     return urlParams.get("code");
@@ -20,7 +25,18 @@ const GoogleLogin = () => {
     const data = {
       accessToken: code,
     };
-    await authApi.post("/google", data);
+    try {
+      const response = await authApi.post("/google", data);
+      console.log(response.data.data.accessToken);
+      console.log(typeof(response.data.data.accessToken));
+      const accessToken = response.data.data.accessToken;
+      dispatch(setAccessToken(accessToken));
+    } catch(error) {
+      console.log(error);
+      alert(error);
+    }
+    // JWT Token이 로컬에 잘 저장되어 있는지 확인하고 싶다면 HomePage에서
+    // onClick eventListener로 console.log로 콘솔에 찍어보자.
   };
 
   return <div>Processing login...</div>;
