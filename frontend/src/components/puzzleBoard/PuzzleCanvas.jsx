@@ -13,7 +13,8 @@ const PuzzleCanvas = () => {
 
     const boardConfig = Puzzle3X4Config;
 
-    const tiles = CreateTiles(boardConfig);
+    // 퍼즐 조각 생성
+    const {tiles, tileIndexes} = CreateTiles(boardConfig);
 
     return () => {
       paper.project.clear();
