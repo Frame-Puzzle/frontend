@@ -14,7 +14,6 @@ const GoogleLogin = () => {
 
   useEffect(() => {
     const code = getAccessToken(window.location.href);
-    console.log("googleAccessToken", code);
 
     sendGoogleAccessToken(code).then(() => {
       window.location.href = import.meta.env.VITE_FRONT_URL + "/home";
@@ -27,8 +26,6 @@ const GoogleLogin = () => {
     };
     try {
       const response = await authApi.post("/google", data);
-      console.log(response.data.data.accessToken);
-      console.log(typeof(response.data.data.accessToken));
       const accessToken = response.data.data.accessToken;
       dispatch(setAccessToken(accessToken));
     } catch(error) {
@@ -40,6 +37,7 @@ const GoogleLogin = () => {
   };
 
   return <div>Processing login...</div>;
+  
 };
 
 export default GoogleLogin;
