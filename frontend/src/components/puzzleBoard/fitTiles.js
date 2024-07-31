@@ -1,9 +1,6 @@
-import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
+const fitTiles = (tiles, boardConfig) => {
 
-const { coordinates, tilesPerRow } = puzzle3X4Config;
-const fitTiles = (tiles) => {
-
-
+  const { coordinates, tilesPerRow } = boardConfig;
   tiles.forEach((tile, index) => {
     const row = Math.floor(index / tilesPerRow);
     const col = index % tilesPerRow;
