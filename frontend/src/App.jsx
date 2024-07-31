@@ -8,6 +8,7 @@ import MyPage from "./pages/MyPage";
 import ChangeNick from "./pages/ChangeNick";
 import GoogleLogin from "./pages/login/GoogleLogin";
 import KakaoLogin from "./pages/login/KakaoLogin";
+import PuzzleBoard from "./pages/PuzzleBoard";
 
 import { useEffect } from "react";
 
@@ -37,6 +38,9 @@ function App() {
 
         {/* Kakao Login API */}
         <Route path="/login/oauth2/code/kakao" element={<KakaoLogin />} />
+
+        {/* 퍼즐 저장 공간*/}
+        <Route path="/puzzle" element={<PuzzleBoard />} />
       </Routes>
     </div>
   );
