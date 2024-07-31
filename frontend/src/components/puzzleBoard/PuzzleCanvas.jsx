@@ -24,10 +24,16 @@ const PuzzleCanvas = () => {
 
     // 퍼즐 조각 생성
     const { tiles, tileIndexes } = createTiles(boardConfig);
-
     // 퍼즐 조각 배치
     fitTiles(tiles, boardConfig);
     //autoSnapTiles(tiles, boardConfig);
+
+    // 클릭 이벤트 생성
+    tiles.forEach((tile) => {
+      tile.onClick = (event) => {
+        console.log("onClickTile", tile.index);
+      };
+    });
 
     return () => {
       paper.project.clear();
