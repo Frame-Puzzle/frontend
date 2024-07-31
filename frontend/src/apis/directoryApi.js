@@ -28,7 +28,24 @@ directoryApi.interceptors.request.use(
 directoryApi.interceptors.response.use(
   (response) => response,
   (error) => {
-    // TO DO
+    //권한 오류 발생 시
+    console.error("요청 응답 오류", error);
+    console.log("error", error.response.data);
+    const status = error.response.status;
+
+    // 사용자 인증이 실패한 경우, 로그인 페이지로 리다이렉트
+    if (status === 401) {
+      window.location.href = "/";
+    }
+    // 요청이 만들어졌지만 서버로부터 응답이 없을 때, error.request에 요청 정보가 들어간다.
+    else if (error.request) {
+      console.error("No response received from the server:", error.request);
+    }
+    // 그 외의 에러 메시지를 처리
+    else {
+      console.error("Error setting up request:", error.message);
+    }
+    return Promise.reject(error);
   }
 );
 
