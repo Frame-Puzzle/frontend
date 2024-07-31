@@ -5,6 +5,7 @@ import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import fitTiles from "./fitTiles";
 import autoSnapTiles from "./autoSnapTiles";
+import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
 const PuzzleCanvas = () => {
   const canvasRef = useRef(null);
@@ -12,13 +13,14 @@ const PuzzleCanvas = () => {
   useEffect(() => {
     // paper.js 초기화
     paper.setup(canvasRef.current);
-    
+
     // 퍼즐 크기 지정
-    const level = 2;
+    const level = 3;
     let boardConfig;
-    if(level == 1) boardConfig = puzzle3X4Config;
-    else if(level == 2) boardConfig = puzzle4X5Config;
-    
+    if (level == 1) boardConfig = puzzle3X4Config;
+    else if (level == 2) boardConfig = puzzle4X5Config;
+    else if (level == 3) boardConfig = puzzle5X6Config;
+    else console.error("올바르지 않은 level입니다.");
 
     // 퍼즐 조각 생성
     const { tiles, tileIndexes } = createTiles(boardConfig);
