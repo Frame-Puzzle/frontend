@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import paper from "paper";
 import { useDispatch, useSelector } from "react-redux";
-import CreateTiles from "./CreateTiles";
-import Puzzle3X4Config from "../../utils/puzzleBoard/Puzzle3X4Config";
+import createTiles from "./createTiles";
+import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
+import fitTiles from "./fitTiles";
 
 const PuzzleCanvas = () => {
   const canvasRef = useRef(null);
@@ -11,10 +12,13 @@ const PuzzleCanvas = () => {
     // paper.js 초기화
     paper.setup(canvasRef.current);
 
-    const boardConfig = Puzzle3X4Config;
+    const boardConfig = puzzle3X4Config;
 
     // 퍼즐 조각 생성
-    const {tiles, tileIndexes} = CreateTiles(boardConfig);
+    const { tiles, tileIndexes } = createTiles(boardConfig);
+
+    // 퍼즐 조각 배치
+    fitTiles(tiles, boardConfig);
 
     return () => {
       paper.project.clear();
@@ -24,7 +28,7 @@ const PuzzleCanvas = () => {
   return (
     <div>
       <canvas
-        style={{ width: "300spx", height: "300px" }}
+        style={{ width: "300px", height: "300px" }}
         ref={canvasRef}
         className="canvas"
       ></canvas>

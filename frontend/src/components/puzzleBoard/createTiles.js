@@ -1,8 +1,8 @@
-import puzzleMask from "./PuzzleMask";
+import PuzzleMask from "./puzzleMask";
 import paper from "paper";
 import { Point } from "paper/dist/paper-core";
 
-const CreateTiles = (boardConfig) => {
+const createTiles = (boardConfig) => {
   const { tilesPerColumn, tilesPerRow, tileWidth, shapes } = boardConfig;
 
   const tileRatio = tileWidth / 100;
@@ -12,7 +12,7 @@ const CreateTiles = (boardConfig) => {
   for (let y = 0; y < tilesPerColumn; y++) {
     for (let x = 0; x < tilesPerRow; x++) {
       const shape = shapes[y * tilesPerRow + x];
-      const mask = puzzleMask(
+      const mask = PuzzleMask(
         tileRatio,
         shape.topTab,
         shape.rightTab,
@@ -47,4 +47,4 @@ const CreateTiles = (boardConfig) => {
   return { tiles, tileIndexes };
 };
 
-export default CreateTiles;
+export default createTiles;
