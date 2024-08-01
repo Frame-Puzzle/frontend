@@ -28,7 +28,7 @@ const DirectoryList = () => {
 
   // 위에서 정의한 함수 호출하기
   useEffect(() => {
-
+    
   });
 
   return (
