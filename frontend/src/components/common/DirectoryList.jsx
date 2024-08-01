@@ -18,27 +18,36 @@ const DirectoryList = () => {
       throw error;
     }
   }
+  // 예시로 'friend' 카테고리에 대한 데이터를 가져오는 경우
+  // fetchDirectories('friend');
 
   // 실질적으로 아래 JSX 문법 중 map을 이용해서 반복을 돌건데, 그 기준이 되는 배열
-  // 배열 갈아치울 때, 얕은 복사를 고려해서 spread 연산자를 사용해야 한다.
-  // 배열 초깃값을 useState안에 적어주어야 하는데 보통 뭘로 하더라? 찾아보자.
-  let [categoryList, setCategoryList] = useState();
+  // [{...}, {...}, ..., {...}] 형태
+  let [categoryList, setCategoryList] = useState([]);
 
-  let [category, setCategory] = useState();
+  let [category, setCategory] = useState('');
 
   // 위에서 정의한 함수 호출하기
   useEffect(() => {
-
-  });
+    if (category === '') {
+      const response = fetchDirectories();
+      const directoryList = response.data.data.directoryList;
+      setCategoryList(directoryList);
+    } else {
+      const response = fetchDirectories(category);
+      const directoryList = response.data.data.directoryList;
+      setCategoryList(directoryList);
+    }
+  }, [category]);
 
   return (
     <div className="w-full h-full">
       <div className="category-index flex">
-        <span>전체</span>
-        <span>친구</span>
-        <span>가족</span>
-        <span>연인</span>
-        <span>반려동물</span>
+        <span onClick={() => { setCategory(''); }}>전체</span>
+        <span onClick={() => { setCategory('friend'); }}>친구</span>
+        <span onClick={() => { setCategory('family'); }}>가족</span>
+        <span onClick={() => { setCategory('lover'); }}>연인</span>
+        <span onClick={() => { setCategory('pet'); }}>반려동물</span>
       </div>
       <div className="category-content">
         {
