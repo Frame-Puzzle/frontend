@@ -18,19 +18,21 @@ const ChangeNickName = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [newNickName, setNewNickName] = useState("");
+  const [isDuplicated, setIsDuplicated] = useState(false);
 
   const handleNickNameChange = (e) => {
     setNewNickName(e.target.value);
-    console.log(e.target.value);
+    checkIsDuplicated(e.target.value);
   };
 
   const submitNewNickName = () => {
     // dispatch(updateNickName(newNickName));
   };
 
-  useEffect(() => {
-
-  })
+  const checkIsDuplicated = async (name) => {
+    const response = await userApi.get(`find?nickname=${newNickName}`);
+    setIsDuplicated(response.data.isExistNickname);
+  };
 
   return (
     <>
@@ -47,7 +49,25 @@ const ChangeNickName = () => {
             placeholder={user.nickName}
             className="nickname-input"
           />
-          <button className="nickname-confirm">확인</button>
+          {!isDuplicated && newNickName !== "" && (
+            <div>
+              <p >사용 가능한 닉네임입니다.</p>
+            </div>
+          )}
+          {newNickName === "" && (
+            <div>
+              <p >닉네임을 입력해주세요</p>
+            </div>
+          )}
+          {isDuplicated && newNickName !== "" && (
+            <div>
+              <p >사용 가능한 닉네임입니다.</p>
+            </div>
+          )}
+          <button
+            className="nickname-confirm"
+            disabled={isDuplicated || newNickName === ""}
+          >확인</button>
         </div>
         <div className="change-nick-name-footer">
           <MainNav />
