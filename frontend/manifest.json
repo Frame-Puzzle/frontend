@@ -1,0 +1,20 @@
+{
+  "name": "FrazzlePWA.V1.0",
+  "short_name": "Frazzle",
+  "theme_color": "#ffffff",
+  "display": "fullscreen",
+  "background-color": "#C3C7F4",
+  "icons": [
+    {
+      "src": "/icons/puzzle512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/puzzle192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "."
+}
