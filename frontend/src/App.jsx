@@ -5,7 +5,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/Home";
 import Notification from "./pages/Notification";
 import MyPage from "./pages/MyPage";
-import ChangeNick from "./pages/ChangeNick";
+import ChangeNickName from "./pages/ChangeNickName";
 import GoogleLogin from "./pages/login/GoogleLogin";
 import KakaoLogin from "./pages/login/KakaoLogin";
 import Loading from "./pages/Loading";
@@ -30,7 +30,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/edit" element={<ChangeNick />} />
+        <Route path="/mypage/edit" element={<ChangeNickName />} />
 
         {/* Google Login API */}
         <Route path="/" element={<Login />} />
