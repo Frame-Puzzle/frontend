@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './DirectoryList.css';
 import directoryApi from '../../apis/directoryApi';
+import Directory from './Directory';
 
 const DirectoryList = () => {
 
@@ -32,11 +33,13 @@ const DirectoryList = () => {
     if (category === '') {
       const response = fetchDirectories();
       const directoryList = response.data.data.directoryList;
-      setCategoryList(directoryList);
+      const deepcopy = [...directoryList];
+      setCategoryList(deepcopy);
     } else {
       const response = fetchDirectories(category);
       const directoryList = response.data.data.directoryList;
-      setCategoryList(directoryList);
+      const deepcopy = [...directoryList];
+      setCategoryList(deepcopy);
     }
   }, [category]);
 
@@ -51,6 +54,11 @@ const DirectoryList = () => {
       </div>
       <div className="category-content">
         {
+          categoryList.map((a, i) => {
+            return (
+              <Directory key={ i } info={ a } />
+            )
+          })
           /* create Component to use map function */
           /* <components/common/Directory /> 여러 개에 각각 정보 넘겨주기 */
         }
