@@ -26,7 +26,10 @@ const ChangeNickName = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   const submitNewNickName = async () => {
-    const response = await userApi.put(`/nickname?nickname=${newNickName}`);
+    const data = {
+      nickname: newNickName,
+    };
+    const response = await userApi.put(`/nickname`, data);
     dispatch(setNickName(response.data.nickname));
 
     nav("/mypage");
@@ -38,7 +41,7 @@ const ChangeNickName = () => {
   useEffect(() => {
     const checkIsDuplicated = async (name) => {
       const response = await userApi.get(`/find?nickname=${newNickName}`);
-    
+
       setIsDuplicated(response.data.data.isExistNickname);
     };
 
@@ -46,7 +49,6 @@ const ChangeNickName = () => {
 
     if (isFocused) {
       intervalId = setInterval(() => {
-
         checkIsDuplicated(newNickName);
       }, 500);
     }
