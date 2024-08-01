@@ -1,8 +1,10 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import MainHeader from "../components/common/MainHeader";
 import { useSelector, useDispatch } from "react-redux";
 import MainNav from "../components/common/MainNav";
 import "./ChangeNickName.css";
+import { setNickName } from "../stores/userSlice";
+import userApi from "../apis/userApi";
 
 // 1. 가운데 동그란 프로필 사진
 // 1-1. 동그란 사진 아래에 버튼 누르면 (사진 보관함 연결 버튼 보이게 클릭)
@@ -19,11 +21,16 @@ const ChangeNickName = () => {
 
   const handleNickNameChange = (e) => {
     setNewNickName(e.target.value);
+    console.log(e.target.value);
   };
 
   const submitNewNickName = () => {
     // dispatch(updateNickName(newNickName));
   };
+
+  useEffect(() => {
+
+  })
 
   return (
     <>
@@ -37,9 +44,10 @@ const ChangeNickName = () => {
             type="text"
             value={newNickName}
             onChange={handleNickNameChange}
-            placeholder={user.nickname}
+            placeholder={user.nickName}
             className="nickname-input"
           />
+          <button className="nickname-confirm">확인</button>
         </div>
         <div className="change-nick-name-footer">
           <MainNav />

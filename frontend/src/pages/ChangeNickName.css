@@ -23,3 +23,9 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+.nickname-confirm{
+  border-radius: 10px;
+  background-color: #f1bdec;
+  padding: 4px;
+}
