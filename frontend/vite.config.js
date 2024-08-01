@@ -14,11 +14,12 @@ export default defineConfig({
         theme_color: "#ffffff",
         icons: [
           {
-            src: "icons/figma192.png", // icons 폴더 내의 아이콘 임시 파일
+            src: "icons/figma192.png", // img 폴더 내의 임시 파일
             sizes: "192x192",
             type: "image/png",
           },
         ],
+        display: "fullscreen" // fullscreen, standalone, minimal-ui, browser
       },
     }),
   ],

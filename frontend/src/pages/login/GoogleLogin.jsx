@@ -28,7 +28,7 @@ const GoogleLogin = () => {
       const response = await authApi.post("/google", data);
       const accessToken = response.data.data.accessToken;
       dispatch(setAccessToken(accessToken));
-    } catch(error) {
+    } catch (error) {
       console.log(error);
       alert(error);
     }
@@ -37,7 +37,7 @@ const GoogleLogin = () => {
   };
 
   return <div>Processing login...</div>;
-  
+
 };
 
 export default GoogleLogin;

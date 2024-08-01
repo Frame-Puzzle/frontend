@@ -25,22 +25,24 @@ const DirectoryList = () => {
   // 실질적으로 아래 JSX 문법 중 map을 이용해서 반복을 돌건데, 그 기준이 되는 배열
   // [{...}, {...}, ..., {...}] 형태
   let [categoryList, setCategoryList] = useState([]);
-
   let [category, setCategory] = useState('');
 
   // 위에서 정의한 함수 호출하기
   useEffect(() => {
-    if (category === '') {
-      const response = fetchDirectories();
-      const directoryList = response.data.data.directoryList;
-      const deepcopy = [...directoryList];
-      setCategoryList(deepcopy);
-    } else {
-      const response = fetchDirectories(category);
-      const directoryList = response.data.data.directoryList;
-      const deepcopy = [...directoryList];
-      setCategoryList(deepcopy);
-    }
+    const ueFetchDirectories = async (category) => {
+      if (category === '') {
+        const response = await fetchDirectories();
+        const directoryList = response.data.data.directoryList;
+        const deepcopy = [...directoryList];
+        setCategoryList(deepcopy);
+      } else {
+        const response = await fetchDirectories(category);
+        const directoryList = response.data.data.directoryList;
+        const deepcopy = [...directoryList];
+        setCategoryList(deepcopy);
+      }
+    };
+    ueFetchDirectories(category);
   }, [category]);
 
   return (
@@ -56,7 +58,7 @@ const DirectoryList = () => {
         {
           categoryList.map((a, i) => {
             return (
-              <Directory key={ i } info={ a } />
+              <Directory key={i} info={a} />
             )
           })
           /* create Component to use map function */

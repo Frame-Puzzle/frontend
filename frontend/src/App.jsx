@@ -9,7 +9,6 @@ import ChangeNick from "./pages/ChangeNick";
 import GoogleLogin from "./pages/login/GoogleLogin";
 import KakaoLogin from "./pages/login/KakaoLogin";
 import Loading from "./pages/Loading";
-
 import { useEffect } from "react";
 
 function App() {
