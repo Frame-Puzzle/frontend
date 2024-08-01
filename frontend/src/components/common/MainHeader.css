@@ -1,34 +1,41 @@
 .header {
   display: flex;
   align-items: center;
-  /* 임시 패딩 */
-  padding: 20px 0px;
+  padding: 20px 0;
   border-bottom: 1px solid rgb(226, 226, 226);
   justify-content: space-between;
 }
 
-.header_prev {
+.header_prev,
+.header_title,
+.header_icon {
+  display: flex;
+  align-items: center;
   color: #000;
   font-size: 24px;
-  font-style: normal;
   font-weight: 600;
-  line-height: 27.668px; /* 115.283% */
-  width: 10%;
-  /* font-size: 25px; */
-  justify-content: flex-start;
+}
+
+.header_prev {
+  cursor: pointer;
+  justify-content: center;
+  width: 20%;
+  text-align: center;
 }
 
 .header_title {
-  color: #000;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 27.668px; /* 115.283% */
-  justify-content: center;
+  justify-content: flex-start;
+  width: 60%;
+  padding-left: 1rem;
 }
 
 .header_icon {
-  background-color: white;
-  width: 24px;
-  justify-content: flex;
+  justify-content: center;
+  width: 20%;
+  text-align: center;
+}
+
+.header_icon img {
+  width: 24px; /* 텍스트 크기와 동일하게 설정 */
+  height: 24px; /* 텍스트 크기와 동일하게 설정 */
 }
