@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store } from "./../stores/store";
+import { store } from "./../stores/store"; 
 
 // axios 객체 만들기
 const userApi = axios.create({

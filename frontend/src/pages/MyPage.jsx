@@ -8,7 +8,7 @@ import MainNav from "../components/common/MainNav";
 import "./MyPage.css";
 import ProfileCircle from "../components/myPage/ProfileCircle";
 import userApi from "../apis/userApi";
-import { setNickName } from "../stores/userSlice";
+import { setNickName, setProfileImg } from "../stores/userSlice";
 import { useDispatch } from "react-redux";
 
 // 1. 가운데 동그란 프로필 사진
@@ -32,7 +32,10 @@ const MyPage = () => {
 
         setuserData(data);
         dispatch(setNickName(data.nickname));
-        
+   
+        if (data.profileImg) {
+          dispatch(setProfileImg(data.profileImg));
+        }
       } catch (error) {
         console.error(error);
         alert("데이터를 불러오는 중 오류가 발생했습니다.");
@@ -61,7 +64,7 @@ const MyPage = () => {
             <ChangeNickButton
               onClick={() => nav("/mypage/edit")}
               text="닉네임 변경"
-              nickname = {userData.nickname}
+              nickname={userData.nickname}
             />
           </div>
           <div>{/* 라인 */}</div>
