@@ -21,8 +21,10 @@ const createTiles = (boardConfig) => {
         tileWidth
       );
 
+      // 투명하면 클릭 불가
       mask.opacity = 0.25;
       mask.strokeColor = "black";
+      mask.fillColor = new paper.Color(0, 0, 0, 0.01);
 
       const border = mask.clone();
       border.strokeColor = "black";
