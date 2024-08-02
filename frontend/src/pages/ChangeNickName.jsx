@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainHeader from "../components/common/MainHeader";
 import { useSelector, useDispatch } from "react-redux";
 import MainNav from "../components/common/MainNav";
@@ -6,103 +6,114 @@ import "./ChangeNickName.css";
 import { setNickName } from "../stores/userSlice";
 import userApi from "../apis/userApi";
 import { useNavigate } from "react-router-dom";
-
-// 1. 가운데 동그란 프로필 사진
-// 1-1. 동그란 사진 아래에 버튼 누르면 (사진 보관함 연결 버튼 보이게 클릭)
-// 2. 아래 닉네임 text
-// 3. 이메일 text
-// 4. 닉네임 변경 버튼 생성
-// 5. 라인 그리기
-// 6. 아래에 로그아웃, 회원탈퇴 버튼 생성
+import checkAvailableWord from "../utils/stringConfig/checkAvailableWord";
+import checkWordLength from "../utils/stringConfig/checkWordLength";
 
 const ChangeNickName = () => {
   const nav = useNavigate();
-
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [newNickName, setNewNickName] = useState("");
   const [isDuplicated, setIsDuplicated] = useState(false);
+  const [isAvailableLength, setAvailableLength] = useState(true);
+  const [isAvailableWord, setAvailableWord] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
 
+  /*
+      입력 유효성 확인
+      1. 입력 형식 확인
+      2. 문자 길이 확인
+      3. 중복 확인
+    */
+  const handleNickNameChange = (e) => {
+    const value = e.target.value;
+    setNewNickName(value);
+    setAvailableWord(checkAvailableWord(value));
+    setAvailableLength(checkWordLength(value, 20));
+  };
+
   const submitNewNickName = async () => {
-    const data = {
-      nickname: newNickName,
-    };
+    const data = { nickname: newNickName };
     const response = await userApi.put(`/nickname`, data);
     dispatch(setNickName(response.data.nickname));
-
     nav("/mypage");
-  };
-  const handleNickNameChange = (e) => {
-    setNewNickName(e.target.value);
   };
 
   useEffect(() => {
-    const checkIsDuplicated = async (name) => {
-      const response = await userApi.get(`/find?nickname=${newNickName}`);
+    if (isAvailableLength && isAvailableWord) {
+      const checkIsDuplicated = async (name) => {
+        const response = await userApi.get(`/find?nickname=${name}`);
+        
+        setIsDuplicated(response.data.data.isExistNickname);
+      };
 
-      setIsDuplicated(response.data.data.isExistNickname);
-    };
+      let intervalId;
 
-    let intervalId;
-
-    if (isFocused) {
-      intervalId = setInterval(() => {
-        checkIsDuplicated(newNickName);
-      }, 500);
+      if (isFocused) {
+        intervalId = setInterval(() => {
+          checkIsDuplicated(newNickName);
+        }, 500);
+      }
+      return () => {
+        if (intervalId) clearInterval(intervalId);
+      };
     }
-
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [isFocused, newNickName, isDuplicated]);
+  }, [isFocused, newNickName, isAvailableLength, isAvailableWord]);
 
   return (
-    <>
-      <div>
-        <div className="change-nick-name-header">
-          <MainHeader title="닉네임 변경" />
-        </div>
-        <div className="change-nick-name-main-content">
-          <h2> 새로운 닉네임을 입력해주세요</h2>
-          <input
-            type="text"
-            value={newNickName}
-            onChange={handleNickNameChange}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            placeholder={user.nickName}
-            className="nickname-input"
-          />
-          {!isDuplicated && newNickName !== "" && (
-            <div>
-              <p>사용 가능한 닉네임입니다.</p>
-            </div>
-          )}
-          {newNickName === "" && (
-            <div>
-              <p>닉네임을 입력해주세요</p>
-            </div>
-          )}
-          {isDuplicated && newNickName !== "" && (
-            <div>
-              <p>사용 불가능한 닉네임입니다.</p>
-            </div>
-          )}
-          <button
-            className="nickname-confirm"
-            onClick={submitNewNickName}
-            disabled={isDuplicated || newNickName === ""}
-          >
-            확인
-          </button>
-        </div>
-        <div className="change-nick-name-footer">
-          <MainNav />
-        </div>
+    <div className="change-nick-name-container">
+      <div className="change-nick-name-header">
+        <MainHeader title="닉네임 변경" />
       </div>
-    </>
+      <div className="change-nick-name-main-content">
+        <input
+          type="text"
+          value={newNickName}
+          onChange={handleNickNameChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder={user.nickName}
+          className="nickname-input"
+        />
+        {!isDuplicated && isAvailableWord && 
+        isAvailableLength && newNickName !== "" && (
+          <div>
+            <p>사용 가능한 닉네임입니다.</p>
+          </div>
+        )}
+        {newNickName === "" && (
+          <div>
+            <p>닉네임을 입력해주세요</p>
+          </div>
+        )}
+        {isDuplicated && (
+          <div>
+            <p>이미 존재하는 닉네임입니다.</p>
+          </div>
+        )}
+        {!isAvailableWord && newNickName !== "" && (
+          <div>
+            <p> 입력 형식이 올바르지 않습니다. </p>
+          </div>
+        )}
+        {!isAvailableLength && newNickName !== "" && (
+          <div>
+            <p>한글 10자 영어 20자 이내만 가능합니다. </p>
+          </div>
+        )}
+        <button
+          className="nickname-confirm"
+          onClick={submitNewNickName}
+          disabled={isDuplicated || newNickName === ""}
+        >
+          확인
+        </button>
+      </div>
+      <div className="change-nick-name-footer">
+        <MainNav />
+      </div>
+    </div>
   );
 };
 

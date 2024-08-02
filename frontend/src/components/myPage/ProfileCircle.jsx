@@ -48,7 +48,7 @@ const ProfileCircle = () => {
         {profileSrc ? "" : "동그라미"}
       </div>
       <img
-        src="/img/camera-logo.png"
+        src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/camera-logo.png"
         alt="camera-logo"
         onClick={handleClick}
         style={{ cursor: "pointer", width: "5%" }}
