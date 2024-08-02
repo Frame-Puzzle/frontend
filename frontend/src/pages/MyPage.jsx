@@ -1,12 +1,15 @@
 import MainHeader from "../components/common/MainHeader";
 import RectangularButton from "../components/common/buttons/RectangularButton";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TempIcon from "../assets/icon/navh-directoryRename.svg";
 import ChangeNickButton from "../components/myPage/ChangeNickButton";
 import MainNav from "../components/common/MainNav";
 import "./MyPage.css";
 import ProfileCircle from "../components/myPage/ProfileCircle";
+import userApi from "../apis/userApi";
+import { setNickName } from "../stores/userSlice";
+import { useDispatch } from "react-redux";
 
 // 1. 가운데 동그란 프로필 사진
 // 1-1. 동그란 사진 아래에 버튼 누르면 (사진 보관함 연결 버튼 보이게 클릭)
@@ -18,6 +21,26 @@ import ProfileCircle from "../components/myPage/ProfileCircle";
 
 const MyPage = () => {
   const nav = useNavigate();
+  const [userData, setuserData] = useState({});
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await userApi.get("");
+        const data = response.data.data;
+
+        setuserData(data);
+        dispatch(setNickName(data.nickname));
+        
+      } catch (error) {
+        console.error(error);
+        alert("데이터를 불러오는 중 오류가 발생했습니다.");
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <>
@@ -32,18 +55,13 @@ const MyPage = () => {
         </div>
         <div className="mypage-main-content">
           <ProfileCircle />
-          <div className="nickname">
-            {/* 임시 이름 */}
-            꽃든포차코
-          </div>
-          <div className="email">
-            {/* 임시 이메일 */}
-            frazzle@gmail.com
-          </div>
+          <div className="nickname">{userData.nickname}</div>
+          <div className="email">{userData.email}</div>
           <div>
             <ChangeNickButton
               onClick={() => nav("/mypage/edit")}
               text="닉네임 변경"
+              nickname = {userData.nickname}
             />
           </div>
           <div>{/* 라인 */}</div>
