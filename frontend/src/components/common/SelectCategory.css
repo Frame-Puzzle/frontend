@@ -3,12 +3,46 @@
   height: 100%;
 }
 
-.category-image {
+.category-image-friend {
+  background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/friend01.png");
+  background-size: cover;
+  border-radius: 100%;
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  /* height: 60%라고 하면 width와 길이가 같아지는 것이 아니다. */
+  margin: auto;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.category-image-family {
   background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/family01.png");
   background-size: cover;
   border-radius: 100%;
   width: 60%;
-  height: 60%;
+  aspect-ratio: 1 / 1;
+  margin: auto;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.category-image-lover {
+  background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/lover01.png");
+  background-size: cover;
+  border-radius: 100%;
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  margin: auto;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.category-image-pet {
+  background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/pet01.png");
+  background-size: cover;
+  border-radius: 100%;
+  width: 60%;
+  aspect-ratio: 1 / 1;
   margin: auto;
   margin-top: 1vh;
   margin-bottom: 1vh;

@@ -5,21 +5,30 @@ const SelectCategory = (props) => {
   if (props.category === "friend") {
     return (
       <div className="select-category-component-container">
-        <div className="category-image"></div>
+        <div className="category-image-friend"></div>
         <span>친구</span>
       </div>
     )
   } else if (props.category === "family") {
     return (
-      <div className="select-category-component-container"></div>
+      <div className="select-category-component-container">
+        <div className="category-image-family"></div>
+        <span>가족</span>
+      </div>
     )
   } else if (props.category === "lover") {
     return (
-      <div className="select-category-component-container"></div>
+      <div className="select-category-component-container">
+        <div className="category-image-lover"></div>
+        <span>연인</span>
+      </div>
     )
   } else if (props.category === "pet") {
     return (
-      <div className="select-category-component-container"></div>
+      <div className="select-category-component-container">
+        <div className="category-image-pet"></div>
+        <span>반려동물</span>
+      </div>
     )
   } else {
     return (
