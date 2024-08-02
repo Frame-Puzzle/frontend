@@ -10,6 +10,9 @@ const CreateDirectory = (props) => {
           props.setModal(false);
         }} />
       </div>
+      <div className="create-directory-modal-body">
+        
+      </div>
     </div>
   )
 }

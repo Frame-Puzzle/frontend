@@ -37,3 +37,9 @@
   margin-bottom: auto;
   cursor: pointer;
 }
+
+.create-directory-modal-body {
+  width: 100%;
+  height: 80%;
+  padding: 2vw; /* 7.8px in iphone14pro */
+}
