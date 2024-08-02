@@ -8,3 +8,12 @@
   margin-bottom: 5%;
   overflow: hidden; /* 나중에 이미지 넣을 때 넘치는 부분 숨기기*/
 }
+
+.image-library {
+  border-radius: 10%;
+  border: 2px solid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -2,7 +2,9 @@ import "./ProfileCircle.css";
 import React, { useRef, useState } from "react";
 
 const ProfileCircle = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+  const [profileSrc, setProfileSrc] = useState(null);
+  const [logoSrc, setLogoSrc] = useState(false);
+
   const fileInputRef = useRef(null);
 
   const handleClick = () => {
@@ -14,7 +16,7 @@ const ProfileCircle = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImageSrc(reader.result);
+        setProfileSrc(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -25,19 +27,30 @@ const ProfileCircle = () => {
       <div
         className="profile-circle"
         style={{
-          backgroundImage: imageSrc ? `url(${imageSrc})` : "none",
+          backgroundImage: profileSrc ? `url(${profileSrc})` : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        {imageSrc ? "" : "동그라미"}
+        {profileSrc ? "" : "동그라미"}
       </div>
       <img
         src="/img/camera-logo.png"
         alt="camera-logo"
-        onClick={handleClick}
+        onClick={() => setLogoSrc(true)}
         style={{ cursor: "pointer", width: "5%" }}
       />
+
+      {logoSrc && (
+        <div className="image-library" onClick={handleClick}>
+          <p> 사진 보관함</p>
+          <img
+            src="/img/image-logo.png"
+            alt="image-logo"
+            style={{ cursor: "pointer", width: "20%", height: "20%" }}
+          />
+        </div>
+      )}
 
       <input
         type="file"
