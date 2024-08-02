@@ -11,6 +11,7 @@ const puzzleMask = (
   leftTab,
   tileWidth
 ) => {
+
   // 곡선으로 자르기 위한 값
   const curvyCoords = [
     0, 0, 35, 15, 37, 5, 37, 5, 40, 0, 38, -5, 38, -5, 20, -20, 50, -20, 50,
