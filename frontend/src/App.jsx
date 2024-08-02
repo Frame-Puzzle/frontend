@@ -27,9 +27,17 @@ function App() {
   return (
     <div className="main-frame">
       <Routes>
+
+        {/* 홈페이지, 메인페이지 */}
         <Route path="/home" element={<Home />} />
+
+        {/* 알림 페이지 */}
         <Route path="/notification" element={<Notification />} />
+
+        {/* 마이 페이지 */}
         <Route path="/mypage" element={<MyPage />} />
+
+        {/* 마이 페이지 중 닉네임 수정 페이지 */}
         <Route path="/mypage/edit" element={<ChangeNick />} />
 
         {/* Google Login API */}
@@ -38,7 +46,6 @@ function App() {
 
         {/* Kakao Login API */}
         <Route path="/login/oauth2/code/kakao" element={<KakaoLogin />} />
-
 
         {/* Loading viewport test */}
         <Route path="/loading" element={<Loading />} />

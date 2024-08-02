@@ -6,7 +6,7 @@ const HomeModalFrame = () => {
   //if (){}
 
   return (
-    <div className="home-modal">
+    <div className="home-modal flex justify-content-center align-items-center">
       <CreateDirectory />
     </div>
   )
