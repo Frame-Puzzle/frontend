@@ -1,14 +1,10 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 20px 2px;
+  padding: 20px 0;
+
   border-bottom: 1px solid rgb(226, 226, 226);
   justify-content: space-between;
-}
-
-.header_left {
-  display: flex;
-  align-items: center;
 }
 
 .header_prev,
@@ -23,21 +19,22 @@
 
 .header_prev {
   cursor: pointer;
-}
+
+  justify-content: center;
+  width: 20%;
+  text-align: center;
+} 
 
 .header_title {
+  justify-content: flex-start;
+  width: 60%;
   padding-left: 1rem;
 }
 
-.header_category {
-  border-radius: 10px;
-  text-align: center;
-}
-
 .header_icon {
+  justify-content: center;
   width: 20%;
   text-align: center;
-  justify-content: flex-end;
 }
 
 .header_icon img {
