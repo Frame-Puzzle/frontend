@@ -1,7 +1,13 @@
 import "./ProfileCircle.css";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import userApi from "../../apis/userApi";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfileImg } from "../../stores/userSlice";
 
 const ProfileCircle = () => {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const [profileSrc, setProfileSrc] = useState(null);
   const [logoSrc, setLogoSrc] = useState(false);
 
@@ -11,16 +17,24 @@ const ProfileCircle = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileSrc(reader.result);
-      };
       reader.readAsDataURL(file);
+
+      // 백으로 데이터 전달
+      const formData = new FormData();
+      formData.append("profileImg", file);
+
+      const response = await userApi.put("/profile-img", formData);
+      dispatch(setProfileImg(response.data.data.profileImg));
     }
   };
+
+  useEffect(() => {
+    setProfileSrc(user.profileImg);
+  }, [user.profileImg]);
 
   return (
     <>
