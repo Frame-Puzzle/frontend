@@ -5,7 +5,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/Home";
 import Notification from "./pages/Notification";
 import MyPage from "./pages/MyPage";
-import ChangeNick from "./pages/ChangeNick";
+import ChangeNickName from "./pages/ChangeNickName";
 import GoogleLogin from "./pages/login/GoogleLogin";
 import KakaoLogin from "./pages/login/KakaoLogin";
 import Loading from "./pages/Loading";
@@ -37,8 +37,8 @@ function App() {
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<MyPage />} />
 
-        {/* 마이 페이지 중 닉네임 수정 페이지 */}
-        <Route path="/mypage/edit" element={<ChangeNick />} />
+        {/* 마이 페이지 중 닉네임 변경 페이지 */}
+        <Route path="/mypage/edit" element={<ChangeNickName />} />
 
         {/* Google Login API */}
         <Route path="/" element={<Login />} />

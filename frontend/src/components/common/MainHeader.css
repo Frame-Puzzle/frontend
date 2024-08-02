@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   padding: 20px 0;
+
   border-bottom: 1px solid rgb(226, 226, 226);
   justify-content: space-between;
 }
@@ -18,10 +19,11 @@
 
 .header_prev {
   cursor: pointer;
+
   justify-content: center;
   width: 20%;
   text-align: center;
-}
+} 
 
 .header_title {
   justify-content: flex-start;

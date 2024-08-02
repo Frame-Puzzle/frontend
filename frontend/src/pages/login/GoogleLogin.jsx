@@ -19,7 +19,7 @@ const GoogleLogin = () => {
     sendGoogleAccessToken(code).then(() => {
       window.location.href = import.meta.env.VITE_FRONT_URL + "/home";
     });
-  }, []);
+  });
 
   const sendGoogleAccessToken = async (code) => {
     const data = {

@@ -1,7 +1,11 @@
 import "./CreateDirectory.css";
 import SelectCategory from "../../common/SelectCategory";
+import { useState } from "react";
 
 const CreateDirectory = (props) => {
+
+  let [directoryName, setDirectoryName] = useState('');
+
   return (
     <div className="create-directory-modal flex flex-wrap">
       <div className="create-directory-modal-header flex"> {/* 1. 20% */}
@@ -24,7 +28,10 @@ const CreateDirectory = (props) => {
           </div>
         </div>
         <div className="input-directory-name"> {/* 2. 35% */}
-
+          <span className="input-directory-name-text">디렉토리 이름을 설정해 주세요.</span>
+          <input className="input-directory-name-input block" maxLength={20} onChange={(e) => {
+            setDirectoryName(e.target.value);
+          }} />
         </div>
         <div className="create-directory-button"> {/* 2. 20% */}
 

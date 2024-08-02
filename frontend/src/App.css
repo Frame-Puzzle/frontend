@@ -29,8 +29,7 @@ body {
 div {
   box-sizing: border-box;
 }
-
-table {
+ss table {
   border-collapse: collapse;
 }
 
@@ -59,7 +58,7 @@ span {
 }
 
 .color1 {
-  color: #f3e7fb;
+  color: #f3e7fb; 
 }
 
 .color2 {
