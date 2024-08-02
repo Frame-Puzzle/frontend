@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className="w-full h-full">
       <div className="main-content">
-        <img src="/img/frazzle-puzzle.png" alt="frazzle-puzzle" />
+        <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/frazzle-puzzle.png" alt="frazzle-puzzle" />
         <span className="oneline">
           <span className="bold">퍼즐 조각</span>에
         </span>
