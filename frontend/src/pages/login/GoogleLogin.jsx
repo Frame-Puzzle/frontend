@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import authApi from "../../apis/authApi";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../stores/userSlice";
+import Loading from "../Loading";
 
 const GoogleLogin = () => {
 
@@ -36,7 +37,7 @@ const GoogleLogin = () => {
     // onClick eventListener로 console.log로 콘솔에 찍어보자.
   };
 
-  return <div>Processing login...</div>;
+  return <Loading />;
 
 };
 

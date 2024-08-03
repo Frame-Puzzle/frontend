@@ -17,7 +17,7 @@ const GoogleLoginButton = () => {
 
   return (
     <div className="google-button flex align-items-center" onClick={ loginWithGoogle }>
-      <img src="/img/google-logo.png" alt="google-logo" />
+      <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/google-logo.png" alt="google-logo" />
       <span>구글로 로그인</span>
     </div>
   );

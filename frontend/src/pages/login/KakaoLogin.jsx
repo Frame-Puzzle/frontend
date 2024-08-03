@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import authApi from "../../apis/authApi";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../stores/userSlice";
+import Loading from "../Loading";
 
 const KakaoLogin = () => {
 
@@ -35,7 +36,7 @@ const KakaoLogin = () => {
 
   };
 
-  return <div>Processing login...</div>;
+  return <Loading />;
   
 };
 

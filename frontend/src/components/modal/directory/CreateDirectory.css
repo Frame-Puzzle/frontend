@@ -1,0 +1,104 @@
+.create-directory-modal {
+  /* 크기와 색상만 지정해주면 된다. */
+  width: 80vw;
+  height: 55vh; /* 기존에는 40vh */
+  background: #FFFFFF;
+  border: none;
+  border-radius: 4vw; /* 15.6px in iphone14pro */
+}
+
+.create-directory-modal-header {
+  width: 100%;
+  height: 20%;
+  padding: 2vw; /* 7.8px in iphone14pro */
+}
+
+.folder-icon {
+  width: 7.3%;
+  margin-left: 3vw;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.create-directory-modal-title {
+  width: 60%;
+  font-size: 4vw; /* 15.6px in iphone14pro */
+  font-weight: 700;
+  margin-left: 3vw;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.x-symbol {
+  width: 5.3%;
+  margin-right: 5vw;
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}
+
+.create-directory-modal-body {
+  width: 100%;
+  height: 80%;
+  padding: 2vw; /* 7.8px in iphone14pro */
+}
+
+.select-category-container {
+  width: 100%;
+  height: 45%;
+}
+
+.select-category-text {
+  width: 100%;
+  height: 20%;
+  padding-left: 6vw;
+  padding-top: 1vh;
+}
+
+.select-category-text span {
+  font-size: 3vw;
+  font-weight: 600;
+}
+
+.select-category-content {
+  width: 100%;
+  height: 80%;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 1vh;
+}
+
+/* *************************************** */
+
+.input-directory-name {
+  width: 100%;
+  height: 35%;
+}
+
+/* *************************************** */
+
+.create-directory-button {
+  width: 100%;
+  height: 20%;
+}
+
+.create-directory-button span {
+  position: absolute;
+  z-index: 2;
+  background-color: #E7E7E7;
+  color: #888888;
+  /* 버튼 크기, 버튼 위치, 폰트 속성 보면서 수정 */
+  font-size: 4vw;
+  font-weight: 600;
+  text-align: center;
+  width: 60%;
+  height: 70%;
+}
+
+#active {
+  cursor: pointer;
+  z-index: 3;
+  background-color: #C3C7F4;
+  color: #FFFFFF;
+}
