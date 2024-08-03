@@ -3,6 +3,7 @@ import authApi from "../../apis/authApi";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../stores/userSlice";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
 
 const GoogleLogin = () => {
   let dispatch = useDispatch();
@@ -44,7 +45,8 @@ const GoogleLogin = () => {
     // onClick eventListener로 console.log로 콘솔에 찍어보자.
   };
 
-  return <div>Processing login...</div>;
+  return <Loading />;
+
 };
 
 export default GoogleLogin;

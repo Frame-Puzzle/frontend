@@ -7,10 +7,10 @@ const Directory = (props) => {
         <img src="" alt="open or close"></img>
       </div>
       <div className="directory-category-box">
-        <span className="directory-category">{ props.info.category /* category data binding */ }</span>
+        <span className="directory-category">{ /* category data binding */ props.info.category }</span>
       </div>
       <div className="directory-name-box">
-        <span className="directory-name">{ props.info.directoryName /* Need data binding */ }</span>
+        <span className="directory-name">{ /* directory name data binding */ props.info.directoryName }</span>
       </div>
     </div>
   )

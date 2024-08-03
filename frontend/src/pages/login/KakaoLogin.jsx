@@ -3,6 +3,8 @@ import authApi from "../../apis/authApi";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../stores/userSlice";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
+
 
 const KakaoLogin = () => {
   let dispatch = useDispatch();
@@ -43,7 +45,8 @@ const KakaoLogin = () => {
     }
   };
 
-  return <div>Processing login...</div>;
+  return <Loading />;
+
 };
 
 export default KakaoLogin;
