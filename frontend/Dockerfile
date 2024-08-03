@@ -9,3 +9,4 @@ RUN npm install
 COPY . .
 
 CMD ["npm", "run", "build"]
+CMD ["npx", "serve", "-s", "dist"]
