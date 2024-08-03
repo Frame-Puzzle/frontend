@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import authApi from "../../apis/authApi";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../stores/userSlice";
+import { Navigate } from "react-router-dom";
 
 const GoogleLogin = () => {
-
   let dispatch = useDispatch();
+  const nav = Navigate();
 
   const getAccessToken = (url) => {
     const urlParams = new URLSearchParams(url.split("?")[1]);
@@ -15,9 +16,14 @@ const GoogleLogin = () => {
   useEffect(() => {
     const code = getAccessToken(window.location.href);
 
-    sendGoogleAccessToken(code).then(() => {
-      window.location.href = import.meta.env.VITE_FRONT_URL + "/home";
-    });
+    sendGoogleAccessToken(code)
+      .then(() => {
+        nav("/home");
+      })
+      .catch((error) => {
+        alert("로그인 실패");
+        nav("/");
+      });
   });
 
   const sendGoogleAccessToken = async (code) => {
@@ -31,13 +37,13 @@ const GoogleLogin = () => {
     } catch (error) {
       console.log(error);
       alert(error);
+      throw error;
     }
     // JWT Token이 로컬에 잘 저장되어 있는지 확인하고 싶다면 HomePage에서
     // onClick eventListener로 console.log로 콘솔에 찍어보자.
   };
 
   return <div>Processing login...</div>;
-
 };
 
 export default GoogleLogin;
