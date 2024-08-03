@@ -10,6 +10,7 @@ import GoogleLogin from "./pages/login/GoogleLogin";
 import KakaoLogin from "./pages/login/KakaoLogin";
 import Loading from "./pages/Loading";
 import PuzzleBoard from "./pages/PuzzleBoard";
+import Directory from "./pages/directory/Directory";
 import { useEffect } from "react";
 
 function App() {
@@ -49,6 +50,9 @@ function App() {
 
         {/* Loading viewport test */}
         <Route path="/loading" element={<Loading />} />
+
+        {/* 고유 디렉토리로 구분되는 디렉토리 상세페이지 */}
+        <Route path="/directories/:id" element={<Directory />} />
 
         {/* 퍼즐 저장 공간*/}
         <Route path="/puzzle" element={<PuzzleBoard />} />

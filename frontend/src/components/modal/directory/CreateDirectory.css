@@ -69,12 +69,36 @@
   padding-top: 1vh;
 }
 
+/* *************************************** */
+
 .input-directory-name {
   width: 100%;
   height: 35%;
 }
 
+/* *************************************** */
+
 .create-directory-button {
   width: 100%;
   height: 20%;
+}
+
+.create-directory-button span {
+  position: absolute;
+  z-index: 2;
+  background-color: #E7E7E7;
+  color: #888888;
+  /* 버튼 크기, 버튼 위치, 폰트 속성 보면서 수정 */
+  font-size: 4vw;
+  font-weight: 600;
+  text-align: center;
+  width: 60%;
+  height: 70%;
+}
+
+#active {
+  cursor: pointer;
+  z-index: 3;
+  background-color: #C3C7F4;
+  color: #FFFFFF;
 }

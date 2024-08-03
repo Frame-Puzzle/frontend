@@ -1,6 +1,7 @@
 .select-category-component-container {
   width: 25%;
   height: 100%;
+  cursor: pointer;
 }
 
 .category-image-friend {

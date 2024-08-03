@@ -1,10 +1,79 @@
 import "./CreateDirectory.css";
 import SelectCategory from "../../common/SelectCategory";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import checkAvailableWord from "../../../utils/stringConfig/checkAvailableWord";
+import chekcWordLength from "../../../utils/stringConfig/checkWordLength";
+import directoryApi from "../../../apis/directoryApi";
+import { useNavigate } from "react-router-dom";
 
 const CreateDirectory = (props) => {
 
+  // 백에게 디렉토리 생성 요청을 하고, 고유 디렉토리 번호를 받아오는 함수 정의하기
+  const postDirectories = async (directoryName, who) => {
+    try {
+      // Request Body 데이터 가공
+      const requestData = {
+        category: who,
+        directoryName: directoryName
+      };
+      // 백엔드에 POST 요청을 보내기
+      const response = await directoryApi.post(``, requestData);
+      // 응답 데이터에서 고유 디렉토리 번호를 반환
+      return response.data.data.directoryId;
+    } catch (error) {
+      console.error('Error posting directories', error);
+      throw error;
+    }
+  }
+
+  // 사용자의 input 저장
   let [directoryName, setDirectoryName] = useState('');
+  // 1(유효하지 않은 형식), 2(길이 초과), 3(사용 가능). => 예외 동적 UI를 위한 state
+  let [exceptionMessage, setExceptionMessage] = useState(0);
+  // '만들기' 버튼 활성화를 위한 state
+  let [activate, setActivate] = useState(false);
+  // 누구와의 추억을 저장하고 싶나요? 질문에서 어떤 카테고리를 골랐는지에 대한 state
+  let [who, setWho] = useState('');
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+
+    if (directoryName === '') {
+      setExceptionMessage(0);
+    } else if (!checkAvailableWord(directoryName)) {
+      setExceptionMessage(1);
+    } else if (!chekcWordLength(directoryName, 32)) {
+      setExceptionMessage(2);
+    } else {
+      setExceptionMessage(3);
+    }
+
+  }, [directoryName]);
+
+  useEffect(() => {
+
+    if ((exceptionMessage === 3) && (who !== '')) {
+      // '만들기' 버튼 활성화
+      setActivate(true);
+    } else {
+      // '만들기' 버튼 비활성화
+      setActivate(false);
+    }
+
+  }, [exceptionMessage, who]);
+
+  // '만들기' 버튼을 활성화 시키는 방법은 같은 사이즈의 버튼인데 다른 스타일의 버튼을
+  // 기존 버튼과 동률의 위치에 위치시킨 후, z-index를 줘서 위에 위치시키고 동적 UI 처리
+
+  // 그걸 클릭하면 위에서 const로 정의할 함수를 호출하여 state 정보를 읽어와서
+  // api 호출을 시키고, 상세페이지로 이동할 것.
+
+  // setWho로 state 갈아치우는 것은 쉬워보이지만, css 효과를 부여하는 것이 어려워 보인다.
+  // 다른 거 다 떼고, 클릭한 것만 붙여주기. 뭐를? border css 효과를.
+
+  // 마지막에 Exception Message 띄우는 것(props로 state 넘겨서 동적으로 바뀌는 메시지)
+  // 클릭하면 border css 주는 것을 하자. 우선은 만들기 버튼 활성화 시켜서 라우팅 시키는 것이 급함.
 
   return (
     <div className="create-directory-modal flex flex-wrap">
@@ -21,20 +90,28 @@ const CreateDirectory = (props) => {
             <span>누구와의 추억을 저장하고 싶나요?</span>
           </div>
           <div className="select-category-content flex"> {/* 3. 80% */}
-            <SelectCategory category={"friend"} /> {/* 4. 25% */}
-            <SelectCategory category={"family"} /> {/* 4. 25% */}
-            <SelectCategory category={"lover"} /> {/* 4. 25% */}
-            <SelectCategory category={"pet"} /> {/* 4. 25% */}
+            <SelectCategory category={"friend"} setWho={ setWho } /> {/* 4. 25% */}
+            <SelectCategory category={"family"} setWho={ setWho } /> {/* 4. 25% */}
+            <SelectCategory category={"lover"} setWho={ setWho } /> {/* 4. 25% */}
+            <SelectCategory category={"pet"} setWho={ setWho } /> {/* 4. 25% */}
           </div>
         </div>
         <div className="input-directory-name"> {/* 2. 35% */}
           <span className="input-directory-name-text">디렉토리 이름을 설정해 주세요.</span>
-          <input className="input-directory-name-input block" maxLength={20} onChange={(e) => {
+          <input className="input-directory-name-input block" onChange={(e) => {
             setDirectoryName(e.target.value);
           }} />
         </div>
-        <div className="create-directory-button"> {/* 2. 20% */}
-
+        <div className="create-directory-button relative"> {/* 2. 20% */}
+          { activate ? <span id="active" onClick={() => {
+            const postAndRoute = async (directoryName, who) => {
+              const directoryId = await postDirectories(directoryName, who);
+              // Route
+              navigate(`/directories/${directoryId}`);
+            }
+            postAndRoute(directoryName, who);
+          }}>만들기</span> : null }
+          <span>만들기</span>
         </div>
       </div>
     </div>
