@@ -1,8 +1,20 @@
 import "./Login.css";
+import React from "react";
 import KakaoLoginButton from "../../components/login/KakaoLoginButton";
 import GoogleLoginButton from "../../components/login/GoogleLoginButton";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+  const user = useSelector((state) => state.user);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (user.accessToken !== "") {
+      nav("/home");
+    }
+  });
   return (
     <div className="w-full h-full">
       <div className="main-content">
