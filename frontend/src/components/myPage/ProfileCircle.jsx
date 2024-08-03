@@ -24,7 +24,7 @@ const ProfileCircle = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
-      if (file.size >= 1024 * 1024 * 1) {
+      if (file.size >= 1024 * 1024 * 10) {
         setAvailableSize(false);
         return;
       }
