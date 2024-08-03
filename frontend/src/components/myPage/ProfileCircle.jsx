@@ -3,12 +3,14 @@ import React, { useRef, useState, useEffect } from "react";
 import userApi from "../../apis/userApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfileImg } from "../../stores/userSlice";
+import compressImage from "../../utils/compressImg";
 
 const ProfileCircle = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [profileSrc, setProfileSrc] = useState(null);
+  const [availableSize, setAvailableSize] = useState(true);
 
   const fileInputRef = useRef(null);
 
@@ -22,9 +24,15 @@ const ProfileCircle = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
+      if (file.size >= 1024 * 1024 * 10) {
+        setAvailableSize(false);
+        return;
+      }
+      // 이미지 압축
+      const compressedImage = await compressImage(file);
       // 백으로 데이터 전달
       const formData = new FormData();
-      formData.append("profileImg", file);
+      formData.append("profileImg", compressedImage);
 
       const response = await userApi.put("/profile-img", formData);
       dispatch(setProfileImg(response.data.data.profileImg));
@@ -53,6 +61,7 @@ const ProfileCircle = () => {
         onClick={handleClick}
         style={{ cursor: "pointer", width: "5%" }}
       />
+      {!availableSize ? <span>10MB 미만의 사진만 가능합니다. </span> : null}
 
       <input
         type="file"
