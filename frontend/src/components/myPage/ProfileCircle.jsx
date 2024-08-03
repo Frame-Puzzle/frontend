@@ -10,6 +10,7 @@ const ProfileCircle = () => {
   const dispatch = useDispatch();
 
   const [profileSrc, setProfileSrc] = useState(null);
+  const [availableSize, setAvailableSize] = useState(true);
 
   const fileInputRef = useRef(null);
 
@@ -23,6 +24,10 @@ const ProfileCircle = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
+      if (file.size >= 1024 * 1024 * 1) {
+        setAvailableSize(false);
+        return;
+      }
       // 이미지 압축
       const compressedImage = await compressImage(file);
       // 백으로 데이터 전달
@@ -56,6 +61,7 @@ const ProfileCircle = () => {
         onClick={handleClick}
         style={{ cursor: "pointer", width: "5%" }}
       />
+      {!availableSize ? <span>10MB 미만의 사진만 가능합니다. </span> : null}
 
       <input
         type="file"
