@@ -30,7 +30,7 @@ const ChangeNickName = () => {
     const value = e.target.value;
     setNewNickName(value);
     setAvailableWord(checkAvailableWord(value));
-    setAvailableLength(checkWordLength(value, 20));
+    setAvailableLength(checkWordLength(value, 32));
   };
 
   const submitNewNickName = async () => {
@@ -44,7 +44,6 @@ const ChangeNickName = () => {
     if (isAvailableLength && isAvailableWord) {
       const checkIsDuplicated = async (name) => {
         const response = await userApi.get(`/find?nickname=${name}`);
-        
         setIsDuplicated(response.data.data.isExistNickname);
       };
 
@@ -76,12 +75,14 @@ const ChangeNickName = () => {
           placeholder={user.nickName}
           className="nickname-input"
         />
-        {!isDuplicated && isAvailableWord && 
-        isAvailableLength && newNickName !== "" && (
-          <div>
-            <p>사용 가능한 닉네임입니다.</p>
-          </div>
-        )}
+        {!isDuplicated &&
+          isAvailableWord &&
+          isAvailableLength &&
+          newNickName !== "" && (
+            <div>
+              <p>사용 가능한 닉네임입니다.</p>
+            </div>
+          )}
         {newNickName === "" && (
           <div>
             <p>닉네임을 입력해주세요</p>
@@ -105,7 +106,12 @@ const ChangeNickName = () => {
         <button
           className="nickname-confirm"
           onClick={submitNewNickName}
-          disabled={isDuplicated || newNickName === ""}
+          disabled={
+            isDuplicated ||
+            newNickName === "" ||
+            !isAvailableWord ||
+            !isAvailableLength
+          }
         >
           확인
         </button>
