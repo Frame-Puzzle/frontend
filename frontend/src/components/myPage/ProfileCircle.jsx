@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import userApi from "../../apis/userApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfileImg } from "../../stores/userSlice";
+import compressImage from "../../utils/compressImg";
 
 const ProfileCircle = () => {
   const user = useSelector((state) => state.user);
@@ -22,9 +23,11 @@ const ProfileCircle = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
+      // 이미지 압축
+      const compressedImage = await compressImage(file);
       // 백으로 데이터 전달
       const formData = new FormData();
-      formData.append("profileImg", file);
+      formData.append("profileImg", compressedImage);
 
       const response = await userApi.put("/profile-img", formData);
       dispatch(setProfileImg(response.data.data.profileImg));
