@@ -24,6 +24,11 @@ export default defineConfig({
       // },
     }),
   ],
+  build: {
+    rollupOptions: {
+      external: ['browser-image-compression']
+    }
+  },
   server: {
     port: 3000,
     host: "0.0.0.0",
