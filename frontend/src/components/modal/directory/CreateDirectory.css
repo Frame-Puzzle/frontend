@@ -76,6 +76,36 @@
   height: 35%;
 }
 
+.input-directory-name-text {
+  width: 100%;
+  padding-left: 6vw;
+  margin-bottom: 1.5vh;
+}
+
+.input-directory-name-text span {
+  font-size: 3vw;
+  font-weight: 600;
+}
+
+.input-directory-name-input {
+  width: 80%;
+  height: 4.5vh;
+  margin: auto;
+  padding: 0 4vw;
+  border: 2px solid #E5E7EB;
+  border-radius: 9999px;
+  font-size: 2.5vw;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 바로 아래 위치하는 동적 UI와의 간격 */
+  margin-bottom: 1vh;
+}
+
+.input-directory-name-input:focus {
+  border-color: #3B82F6; /* 포커스 시 파란색 테두리 */
+}
+
 /* *************************************** */
 
 .create-directory-button {
