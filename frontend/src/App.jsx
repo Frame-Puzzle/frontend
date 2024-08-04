@@ -55,7 +55,7 @@ function App() {
 
         {/* 퍼즐판 상세페이지 */}
         <Route
-          path="/boards/:id"
+          path="/boards/:boardID"
           element={<PuzzleBoard />}
         />
       </Routes>

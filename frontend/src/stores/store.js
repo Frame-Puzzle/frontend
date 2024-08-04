@@ -26,7 +26,7 @@ const persistConfig = {
   // user Reducer만 persist 적용하려면 whitelist 사용하세요.
   // whitelist 외에도 blacklist 등 여러 option이 존재합니다.
   // whitelist: ['user']
-  whitelist: ['user', 'tile']
+  whitelist: ['user']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

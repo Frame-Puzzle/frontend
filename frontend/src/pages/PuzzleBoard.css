@@ -20,10 +20,10 @@
 }
 
 .board-keyword{
-  border: skyblue 2px, solid;
+  border: #C3C7F4 2px solid;
   padding: 5px 10px;
   margin: 2px 0px;
-  border-radius: 20%;
+  border-radius: 40%;
 }
 
 .board-footer {

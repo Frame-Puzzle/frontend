@@ -12,3 +12,49 @@
   height: 20%;
   padding: 2vw; /* 7.8px in iphone14pro */
 }
+
+.create-choose-img-modal-body {
+
+  margin: 2vh 10vw;
+  border-radius: 10%;
+}
+
+.choose-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3vh 2vw;
+  flex-direction: column;
+  background-color: lightgray;
+  border-radius: 10%;
+}
+
+.choose-img {
+  width: 10vh;
+  height: 10vw;
+  margin-bottom: 2vh;
+}
+
+.choose-img-container span {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.image-description{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.choose-img-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.choose-img-buttons button{
+  background-color: #C3C7F4;
+  color: white;
+  border: none;
+}

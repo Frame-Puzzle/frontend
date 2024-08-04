@@ -1,10 +1,13 @@
 import react, { useState, useRef, useEffect } from "react";
 import paper from "paper";
+import { setTileId } from "../../../stores/tileSlice";
 import "./ChooseImg.css";
+import { useSelector, useDispatch } from "react-redux";
 
-const ChooseImg = ({ setModal, modalData }) => {
+const ChooseImg = ({ setModal }) => {
   const canvasRef = useRef(null);
-  const { tile, tileWidth } = modalData;
+  const tile = useSelector((state) => state.tile);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     paper.setup(canvasRef.current);
@@ -22,7 +25,7 @@ const ChooseImg = ({ setModal, modalData }) => {
       }
     };*/
     return () => {};
-  }, [tile]);
+  }, []);
 
   return (
     <div className="create-board-modal">
@@ -32,12 +35,27 @@ const ChooseImg = ({ setModal, modalData }) => {
           alt="x-symbol"
           className="x-symbol"
           onClick={() => {
-            setModal(false);
+            dispatch(setTileId(0));
           }}
         />
       </div>
-      <div>
-        아아아아아
+      <div className="create-choose-img-modal-body">
+        <div className="choose-img-container ">
+          <img
+            className="choose-img"
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit-image-photo.png"
+            alt="edit-image-photo"
+          />
+          <span>Upload Photos</span>
+        </div>
+        <div className="image-description">
+          <span>덧붙이고 싶은 설명을 적어주세요.</span>
+          <input type="text" />
+        </div>
+      </div>
+
+      <div className="choose-img-buttons">
+        <button>등록</button>
       </div>
     </div>
   );

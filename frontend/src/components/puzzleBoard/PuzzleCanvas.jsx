@@ -2,26 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import paper from "paper";
 import createTiles from "./createTiles";
 import fitTiles from "./fitTiles";
-import autoSnapTiles from "./autoSnapTiles";
 
 import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
-import BoardModalFrame from "../../pages/modalFrame/BoardModalFrame";
+import { setTileId, setTileInfo } from "../../stores/tileSlice";
+import { useDispatch } from "react-redux";
 import "./PuzzleCanvas.css";
 
 const PuzzleCanvas = () => {
   const canvasRef = useRef(null);
-
-  // 모달 창
-  const [modal, setModal] = useState(false);
-  const [modalData, setModalData] = useState(null);
-
-  const openModal = (data) => {
-    setModalData(data);
-    setModal(true);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // paper.js 초기화
@@ -40,30 +32,27 @@ const PuzzleCanvas = () => {
 
     // 퍼즐 조각 배치
     fitTiles(tiles, boardConfig);
-    //autoSnapTiles(tiles, boardConfig);
 
     // 클릭 이벤트 생성
     tiles.forEach((tile) => {
-      tile.onClick = (event) => {
+      tile.onMouseDown = (event) => {
         const data = {
           tile: tile,
           tileWidth: boardConfig.tileWidth,
         };
-        openModal(data);
+        dispatch(setTileId(10));
+        //dispatch(setTileInfo(data));
       };
     });
 
     return () => {
-      paper.project.clear(); 
+      paper.project.clear();
     };
   }, []);
 
   return (
-    <div className="canvas-container flex flex-wrap relative">
+    <div className="canvas-container">
       <canvas ref={canvasRef} className="canvas"></canvas>
-      {modal ? (
-        <BoardModalFrame setModal={setModal} modalData={modalData} />
-      ) : null}
     </div>
   );
 };
