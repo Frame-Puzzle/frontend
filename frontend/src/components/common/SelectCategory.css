@@ -54,3 +54,7 @@
   color: #888888;
   text-align: center;
 }
+
+.select-effect {
+  border: 0.7vw solid #C3C7F4;
+}
