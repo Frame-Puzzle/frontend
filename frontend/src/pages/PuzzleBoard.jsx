@@ -13,17 +13,35 @@ import { useParams } from "react-router-dom";
 const PuzzleBoard = () => {
   // 모달 창
   const [modal, setModal] = useState(false);
+  const [boardName, setBoardName] = useState("");
+  const [category, setCategory] = useState("");
+  const [keywords, setKeywords] = useState([]);
+  const [boardSize, setBoardSize] = useState(0);
+  const [tileId, setTileId] = useState(0);
+
   const { boardID } = useParams();
 
   const tile = useSelector((state) => state.tile);
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
-      const response = await directoryApi.get(`/boards/${boardID}`);
-      console.log(response);
+      const response = await boardApi.get(`/${boardID}`);
+      const data = response.data.data;
+
+      // 이름 저장
+      console.log(data);
+
+      setBoardName(data.directoryName + "#" + data.boardNum);
+      setCategory(data.category);
+      setKeywords(data.keyword);
+      setBoardSize(data.boardSize);
+      setTileId(data.pieceList[0].pieceId);
     };
 
     fetchPuzzleData();
+  },[]);
+
+  useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
     if (tile.tileId !== 0) {
       setModal(true);
@@ -31,12 +49,13 @@ const PuzzleBoard = () => {
       setModal(false);
     }
   }, [tile.tileId]);
+
   return (
     <div className="w-full h-full flex flex-wrap relative">
       {modal ? <BoardModalFrame setModal={setModal} /> : null}
       <div className="board-header">
         <MainHeader
-          title="폴더이름#1"
+          title={boardName}
           icon={
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
@@ -44,16 +63,18 @@ const PuzzleBoard = () => {
               className="header-icon"
             />
           }
-          category={"친구"}
+          category={category}
         />
       </div>
       <div className="board-main-content">
         <div className="board-keywords">
-          <div className="board-keyword">a</div>
-          <div className="board-keyword">b</div>
-          <div className="board-keyword">c</div>
+          {keywords.map((keyword, index) => (
+            <div key={index} className="board-keyword">
+              {keyword}
+            </div>
+          ))}
         </div>
-        <PuzzleCanvas />
+        <PuzzleCanvas boardSize={boardSize} tileId={tileId}/>
       </div>
 
       <div className="board-footer">

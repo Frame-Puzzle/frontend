@@ -9,21 +9,35 @@ const ChooseImg = ({ setModal }) => {
   const tile = useSelector((state) => state.tile);
   const dispatch = useDispatch();
 
+  const [imgSrc, setImgSrc] = useState(null);
+  const [imgText, setImgText] = useState("");
+  const [mission, setMission] = useState("");
+  const fileInputRef = useRef(null);
+
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImgSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleImgText = (e) => {
+    const value = e.target.value;
+    setImgText(value);
+    // 255 byte이상 입력 경우 제한
+  };
+
   useEffect(() => {
     paper.setup(canvasRef.current);
 
-    /*const drawTile = tile.clone();
-
-    drawTile.position = new paper.Point(200, 200);
-    drawTile.strokeColor = new paper.Color(0, 0, 0);
-    drawTile.fillColor = new paper.Color(1, 1, 1);
-    drawTile.opacity = 1;
-
-    return () => {
-      if (drawTile) {
-        drawTile.remove();
-      }
-    };*/
     return () => {};
   }, []);
 
@@ -40,17 +54,32 @@ const ChooseImg = ({ setModal }) => {
         />
       </div>
       <div className="create-choose-img-modal-body">
-        <div className="choose-img-container ">
-          <img
-            className="choose-img"
-            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit-image-photo.png"
-            alt="edit-image-photo"
-          />
-          <span>Upload Photos</span>
+        <div className="mission-container"></div>
+        <div className="uploading-img" onClick={handleClick}>
+          {imgSrc ? (
+            <img src={imgSrc} alt="new-img" className="uploaded-img" />
+          ) : (
+            <div className="choose-img-container">
+              <img
+                className="choose-img"
+                src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit-image-photo.png"
+                alt="edit-image-photo"
+              />
+              <span>Upload Photos</span>
+            </div>
+          )}
         </div>
+
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/gif"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
         <div className="image-description">
           <span>덧붙이고 싶은 설명을 적어주세요.</span>
-          <input type="text" />
+          <input type="text" value={imgText} onChange={handleImgText} />
         </div>
       </div>
 

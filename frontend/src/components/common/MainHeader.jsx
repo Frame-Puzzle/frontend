@@ -12,7 +12,7 @@ const MainHeader = ({ title, category, icon }) => {
         </div>
         <div className="header_title">{title}</div>
         {/* 조건부 렌더링, icon을 넣어주면 icon이 나오도록 설계 */}
-        {category && <div className="header_category bg-color2">category</div>}
+        {category && <div className="header_category bg-color2">{category}</div>}
       </div>
 
       {icon && <div className="header_icon">{icon}</div>}

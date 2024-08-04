@@ -4,7 +4,7 @@ import { store } from "./../stores/store";
 
 // axios 객체 만들기
 const boardApi = axios.create({
-  baseURL: `${import.meta.env.VITE_BACK_URL}/boards`,
+  baseURL: `${import.meta.env.VITE_BACK_URL}/api/v1/boards`,
 }); // BASE_URL/api/vi/directories?category={category}
 
 // axios 객체에 요청 인터셉터 추가하기 (헤더에 JWT Token 삽입하기)

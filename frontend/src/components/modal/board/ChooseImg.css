@@ -14,9 +14,14 @@
 }
 
 .create-choose-img-modal-body {
-
   margin: 2vh 10vw;
   border-radius: 10%;
+}
+
+.uploading-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .choose-img-container {
@@ -40,21 +45,27 @@
   font-weight: bold;
 }
 
-.image-description{
+.image-description {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.choose-img-buttons{
+.choose-img-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.choose-img-buttons button{
-  background-color: #C3C7F4;
+.choose-img-buttons button {
+  background-color: #c3c7f4;
   color: white;
   border: none;
+}
+
+.uploaded-img {
+  max-width: 50%;
+  max-height: 50%;
+  object-fit: contain;
 }

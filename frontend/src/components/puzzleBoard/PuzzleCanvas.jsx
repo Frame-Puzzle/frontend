@@ -11,7 +11,7 @@ import { setTileId, setTileInfo } from "../../stores/tileSlice";
 import { useDispatch } from "react-redux";
 import "./PuzzleCanvas.css";
 
-const PuzzleCanvas = () => {
+const PuzzleCanvas = ({ boardSize, tileId }) => {
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -20,15 +20,17 @@ const PuzzleCanvas = () => {
     paper.setup(canvasRef.current);
 
     // 퍼즐 크기 지정
-    const level = 1;
     let boardConfig;
-    if (level == 1) boardConfig = puzzle3X4Config;
-    else if (level == 2) boardConfig = puzzle4X5Config;
-    else if (level == 3) boardConfig = puzzle5X6Config;
-    else console.error("올바르지 않은 level입니다.");
+    if (boardSize == 12) boardConfig = puzzle3X4Config;
+    else if (boardSize == 20) boardConfig = puzzle4X5Config;
+    else if (boardSize == 30) boardConfig = puzzle5X6Config;
+    else {
+      console.error("올바르지 않은 퍼즐판입니다.");
+      return;
+    }
 
     // 퍼즐 조각 생성
-    const { tiles, tileIndexes } = createTiles(boardConfig);
+    const { tiles, tileIndexes } = createTiles(boardConfig, tileId);
 
     // 퍼즐 조각 배치
     fitTiles(tiles, boardConfig);
@@ -48,7 +50,7 @@ const PuzzleCanvas = () => {
     return () => {
       paper.project.clear();
     };
-  }, []);
+  }, [boardSize, dispatch]);
 
   return (
     <div className="canvas-container">
