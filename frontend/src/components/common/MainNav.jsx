@@ -8,7 +8,7 @@ const MainNav = () => {
   const nav = useNavigate();
 
   return (
-    <footer className="footer">
+    <div className="footer flex justify-content-center align-items-center">
       <div className="nav-item" onClick={() => nav("/notification")}>
         <div className="icon-container">
           <img src={AlarmIcon} alt="Notification" className="icon" />
@@ -27,7 +27,7 @@ const MainNav = () => {
         </div>
         <div className="footer-element">마이페이지</div>
       </div>
-    </footer>
+    </div>
   );
 };
 
