@@ -5,7 +5,7 @@ import checkAvailableWord from "../../../utils/stringConfig/checkAvailableWord";
 import chekcWordLength from "../../../utils/stringConfig/checkWordLength";
 import directoryApi from "../../../apis/directoryApi";
 import { useNavigate } from "react-router-dom";
-
+ 
 const CreateDirectory = (props) => {
 
   // 백에게 디렉토리 생성 요청을 하고, 고유 디렉토리 번호를 받아오는 함수 정의하기

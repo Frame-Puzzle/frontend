@@ -5,6 +5,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 // sessionStorage에 저장하고 싶으면
 // import sessionStorage from 'redux-persist/lib/storage';
 import user from './userSlice';
+import tile from './tileSlice';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   // 아래 예제처럼 추가하면 됩니다.
   // user: user.reducer,
   // cart: cart.reducer
-  user: user.reducer
+  user: user.reducer,
+  tile: tile.reducer
 });
 
 const persistConfig = {
@@ -24,14 +26,14 @@ const persistConfig = {
   // user Reducer만 persist 적용하려면 whitelist 사용하세요.
   // whitelist 외에도 blacklist 등 여러 option이 존재합니다.
   // whitelist: ['user']
-  whitelist: ['user']
+  whitelist: ['user', 'tile']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => 
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

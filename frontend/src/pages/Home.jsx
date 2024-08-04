@@ -13,7 +13,7 @@ const Home = () => {
   let [modal, setModal] = useState(false);
   const [userNickName, showUserNickName] = useState("");
 
-  // JWT Token Test
+  // JWT Token Test 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 

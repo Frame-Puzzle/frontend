@@ -8,24 +8,19 @@ import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
-import ChooseImg from "../modal/board/ChooseImg";
+import BoardModalFrame from "../../pages/modalFrame/BoardModalFrame";
 import "./PuzzleCanvas.css";
 
 const PuzzleCanvas = () => {
   const canvasRef = useRef(null);
 
   // 모달 창
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState(null);
 
   const openModal = (data) => {
     setModalData(data);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalData(null);
+    setModal(true);
   };
 
   useEffect(() => {
@@ -33,7 +28,7 @@ const PuzzleCanvas = () => {
     paper.setup(canvasRef.current);
 
     // 퍼즐 크기 지정
-    const level = 2;
+    const level = 1;
     let boardConfig;
     if (level == 1) boardConfig = puzzle3X4Config;
     else if (level == 2) boardConfig = puzzle4X5Config;
@@ -54,19 +49,21 @@ const PuzzleCanvas = () => {
           tile: tile,
           tileWidth: boardConfig.tileWidth,
         };
-        openModal(data, closeModal);
+        openModal(data);
       };
     });
 
     return () => {
-      paper.project.clear();
+      paper.project.clear(); 
     };
   }, []);
 
   return (
-    <div className="canvas-container">
+    <div className="canvas-container flex flex-wrap relative">
       <canvas ref={canvasRef} className="canvas"></canvas>
-      {isModalOpen && <ChooseImg data={modalData} onClose={closeModal} />}
+      {modal ? (
+        <BoardModalFrame setModal={setModal} modalData={modalData} />
+      ) : null}
     </div>
   );
 };
