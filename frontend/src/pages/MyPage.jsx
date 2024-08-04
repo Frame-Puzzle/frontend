@@ -32,7 +32,7 @@ const MyPage = () => {
 
         setuserData(data);
         dispatch(setNickName(data.nickname));
-   
+
         if (data.profileImg) {
           dispatch(setProfileImg(data.profileImg));
         }
@@ -46,45 +46,43 @@ const MyPage = () => {
   }, []);
 
   return (
-    <>
-      <div>
-        <div className="mypage-header">
-          <MainHeader
-            title="My Page"
-            icon={
-              <img src={TempIcon} alt="thirdIcon" className="header-icon" />
-            }
-          />
-        </div>
-        <div className="mypage-main-content">
-          <ProfileCircle />
-          <div className="nickname">{userData.nickname}</div>
-          <div className="email">{userData.email}</div>
-          <div>
-            <ChangeNickButton
-              onClick={() => nav("/mypage/edit")}
-              text="닉네임 변경"
-              nickname={userData.nickname}
-            />
-          </div>
-          <div>{/* 라인 */}</div>
-          <div></div>
-          <RectangularButton
-            onClick={() => nav("/home")} // logout modal
-            text={"로그 아웃"}
-            type={"purple"}
-          />
-          <RectangularButton
-            onClick={() => nav("/home")} // logout modal
-            text={"회원 탈퇴"}
-            type={"reverse_purple"}
-          />
-        </div>
-        <div className="mypage-footer">
-          <MainNav />
-        </div>
+    <div className="w-full h-full">
+      <div className="mypage-header">
+        <MainHeader
+          title="My Page"
+          icon={
+            <img src={TempIcon} alt="thirdIcon" className="icon-header" />
+          }
+        />
       </div>
-    </>
+      <div className="mypage-main-content">
+        <ProfileCircle />
+        <div className="nickname">{userData.nickname}</div>
+        <div className="email">{userData.email}</div>
+        <div>
+          <ChangeNickButton
+            onClick={() => nav("/mypage/edit")}
+            text="닉네임 변경"
+            nickname={userData.nickname}
+          />
+        </div>
+        <div>{/* 라인 */}</div>
+        <div></div>
+        <RectangularButton
+          onClick={() => nav("/home")} // logout modal
+          text={"로그 아웃"}
+          type={"purple"}
+        />
+        <RectangularButton
+          onClick={() => nav("/home")} // logout modal
+          text={"회원 탈퇴"}
+          type={"reverse_purple"}
+        />
+      </div>
+      <div className="mypage-footer">
+        <MainNav />
+      </div>
+    </div>
   );
 };
 

@@ -61,9 +61,9 @@ const ChangeNickName = () => {
   }, [isFocused, newNickName, isAvailableLength, isAvailableWord]);
 
   return (
-    <div className="change-nick-name-container">
+    <div className="w-full h-full">
       <div className="change-nick-name-header">
-        <MainHeader title="닉네임 변경" />
+        <MainHeader title={"닉네임 변경"} category={"친구"} /> {/* category는 test */}
       </div>
       <div className="change-nick-name-main-content">
         <input
