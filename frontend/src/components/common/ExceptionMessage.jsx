@@ -8,7 +8,7 @@ const ExceptionMessage = (props) => {
   } else if (props.exceptionMessage === 2) {
     return (<span className="exception-message">길이가 너무 깁니다.</span>)
   } else {
-    return (<span className="exception-message">이 이름은 사용할 수 있습니다.</span>)
+    return (<span className="exception-message" style={{color: "#27C28A"}}>이 이름은 사용할 수 있습니다.</span>)
   }
 }
 
