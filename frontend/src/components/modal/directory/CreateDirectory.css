@@ -118,12 +118,17 @@
   z-index: 2;
   background-color: #E7E7E7;
   color: #888888;
+  border-radius: 3vw;
   /* 버튼 크기, 버튼 위치, 폰트 속성 보면서 수정 */
-  font-size: 4vw;
+  font-size: 3.7vw;
   font-weight: 600;
   text-align: center;
   width: 60%;
-  height: 70%;
+  height: 55%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 2vh;
 }
 
 #active {
