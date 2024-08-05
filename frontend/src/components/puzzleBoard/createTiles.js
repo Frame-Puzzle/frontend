@@ -2,7 +2,7 @@ import PuzzleMask from "./puzzleMask";
 import paper from "paper";
 import { Point } from "paper/dist/paper-core";
 
-const createTiles = (boardConfig) => {
+const createTiles = (boardConfig, tileId) => {
   const { tilesPerColumn, tilesPerRow, tileWidth, shapes } = boardConfig;
 
   const tileRatio = tileWidth / 100;
@@ -40,6 +40,8 @@ const createTiles = (boardConfig) => {
       tile.opacity = 1;
 
       tile.shape = shape;
+
+      tile.data.id = tileId ++;
 
       tiles.push(tile);
       tileIndexes.push(tiles.length - 1);

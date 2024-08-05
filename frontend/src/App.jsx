@@ -28,7 +28,6 @@ function App() {
   return (
     <div className="main-frame">
       <Routes>
-
         {/* 홈페이지, 메인페이지 */}
         <Route path="/home" element={<Home />} />
 
@@ -54,9 +53,11 @@ function App() {
         {/* 고유 디렉토리로 구분되는 디렉토리 상세페이지 */}
         <Route path="/directories/:id" element={<Directory />} />
 
-        {/* 퍼즐 저장 공간*/}
-        <Route path="/puzzle" element={<PuzzleBoard />} />
-
+        {/* 퍼즐판 상세페이지 */}
+        <Route
+          path="/boards/:boardID"
+          element={<PuzzleBoard />}
+        />
       </Routes>
     </div>
   );

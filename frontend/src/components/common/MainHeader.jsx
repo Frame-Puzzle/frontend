@@ -6,8 +6,13 @@ const MainHeader = ({ title, category, icon }) => {
   const nav = useNavigate();
   return (
     <div className="header flex">
-      <div className="header-left flex align-items-center"> {/* 85% */}
-        <div className="header-prev flex justify-content-center align-items-center" onClick={() => nav(-1)}>
+      <div className="header-left flex align-items-center">
+        {" "}
+        {/* 85% */}
+        <div
+          className="header-prev flex justify-content-center align-items-center"
+          onClick={() => nav(-1)}
+        >
           <div>&lt;</div>
         </div>
         <div className="header-title">{title}</div>
