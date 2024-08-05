@@ -1,20 +1,19 @@
 .change-nick-name-header {
   width: 100%;
   height: 10%;
-  overflow: hidden;
 }
 
-.change-nick-name {
+.change-nick-name-main-content {
   width: 100%;
   height: 80%;
-  overflow: hidden;
 }
 
 .change-nick-name-footer {
   width: 100%;
   height: 10%;
-  overflow: hidden;
 }
+
+/* ************************************** */
 
 .nickname-input {
   border: 1px solid #f1bdec;
@@ -28,4 +27,10 @@
   border-radius: 10px;
   background-color: #f1bdec;
   padding: 4px;
+}
+
+.change-nick-name {
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
 }
