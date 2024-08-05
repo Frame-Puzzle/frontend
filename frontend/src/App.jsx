@@ -58,11 +58,7 @@ function App() {
         <Route path="/directories/:id" element={<Directory />} />
 
         {/* 퍼즐판 상세페이지 */}
-        <Route
-          path="/boards/:boardID"
-          element={<PuzzleBoard />}
-        />
-
+        <Route path="/boards/:boardID" element={<PuzzleBoard />} />
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { OpenVidu } from "openvidu-browser";
 import { useSelector } from "react-redux";
-import gameOpenViduApi from "../apis/gameOpenViduApi";
+import gameOpenViduApi from "../../apis/gameOpenViduApi";
 import { detectVoice } from "./detectVoice";
 import AudioDeviceSelector from "./AudioDeviceSelector";
 
