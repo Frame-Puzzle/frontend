@@ -4,12 +4,12 @@ import { Path, Point } from "paper";
   퍼즐 조각을 곡선으로 자르는 함수 
 */
 const puzzleMask = (
-  tileRatio,
+  pieceRatio,
   topTab,
   rightTab,
   bottomTab,
   leftTab,
-  tileWidth
+  pieceWidth
 ) => {
 
   // 곡선으로 자르기 위한 값
@@ -28,20 +28,20 @@ const puzzleMask = (
   for (let i = 0; i < curvyCoords.length / 6; i++) {
     const p1 = topLeftEdge.add(
       new Point(
-        curvyCoords[i * 6 + 0] * tileRatio,
-        topTab * curvyCoords[i * 6 + 1] * tileRatio
+        curvyCoords[i * 6 + 0] * pieceRatio,
+        topTab * curvyCoords[i * 6 + 1] * pieceRatio
       )
     );
     const p2 = topLeftEdge.add(
       new Point(
-        curvyCoords[i * 6 + 2] * tileRatio,
-        topTab * curvyCoords[i * 6 + 3] * tileRatio
+        curvyCoords[i * 6 + 2] * pieceRatio,
+        topTab * curvyCoords[i * 6 + 3] * pieceRatio
       )
     );
     const p3 = topLeftEdge.add(
       new Point(
-        curvyCoords[i * 6 + 4] * tileRatio,
-        topTab * curvyCoords[i * 6 + 5] * tileRatio
+        curvyCoords[i * 6 + 4] * pieceRatio,
+        topTab * curvyCoords[i * 6 + 5] * pieceRatio
       )
     );
 
@@ -49,24 +49,24 @@ const puzzleMask = (
   }
 
   // Right
-  const topRightEdge = topLeftEdge.add(new Point(tileWidth, 0));
+  const topRightEdge = topLeftEdge.add(new Point(pieceWidth, 0));
   for (let i = 0; i < curvyCoords.length / 6; i++) {
     const p1 = topRightEdge.add(
       new Point(
-        -rightTab * curvyCoords[i * 6 + 1] * tileRatio,
-        curvyCoords[i * 6 + 0] * tileRatio
+        -rightTab * curvyCoords[i * 6 + 1] * pieceRatio,
+        curvyCoords[i * 6 + 0] * pieceRatio
       )
     );
     const p2 = topRightEdge.add(
       new Point(
-        -rightTab * curvyCoords[i * 6 + 3] * tileRatio,
-        curvyCoords[i * 6 + 2] * tileRatio
+        -rightTab * curvyCoords[i * 6 + 3] * pieceRatio,
+        curvyCoords[i * 6 + 2] * pieceRatio
       )
     );
     const p3 = topRightEdge.add(
       new Point(
-        -rightTab * curvyCoords[i * 6 + 5] * tileRatio,
-        curvyCoords[i * 6 + 4] * tileRatio
+        -rightTab * curvyCoords[i * 6 + 5] * pieceRatio,
+        curvyCoords[i * 6 + 4] * pieceRatio
       )
     );
 
@@ -74,24 +74,24 @@ const puzzleMask = (
   }
 
   // Bottom
-  const bottomRightEdge = topRightEdge.add(new Point(0, tileWidth));
+  const bottomRightEdge = topRightEdge.add(new Point(0, pieceWidth));
   for (let i = 0; i < curvyCoords.length / 6; i++) {
     const p1 = bottomRightEdge.subtract(
       new Point(
-        curvyCoords[i * 6 + 0] * tileRatio,
-        bottomTab * curvyCoords[i * 6 + 1] * tileRatio
+        curvyCoords[i * 6 + 0] * pieceRatio,
+        bottomTab * curvyCoords[i * 6 + 1] * pieceRatio
       )
     );
     const p2 = bottomRightEdge.subtract(
       new Point(
-        curvyCoords[i * 6 + 2] * tileRatio,
-        bottomTab * curvyCoords[i * 6 + 3] * tileRatio
+        curvyCoords[i * 6 + 2] * pieceRatio,
+        bottomTab * curvyCoords[i * 6 + 3] * pieceRatio
       )
     );
     const p3 = bottomRightEdge.subtract(
       new Point(
-        curvyCoords[i * 6 + 4] * tileRatio,
-        bottomTab * curvyCoords[i * 6 + 5] * tileRatio
+        curvyCoords[i * 6 + 4] * pieceRatio,
+        bottomTab * curvyCoords[i * 6 + 5] * pieceRatio
       )
     );
 
@@ -99,24 +99,24 @@ const puzzleMask = (
   }
 
   // Left
-  const bottomLeftEdge = bottomRightEdge.subtract(new Point(tileWidth, 0));
+  const bottomLeftEdge = bottomRightEdge.subtract(new Point(pieceWidth, 0));
   for (let i = 0; i < curvyCoords.length / 6; i++) {
     const p1 = bottomLeftEdge.subtract(
       new Point(
-        -leftTab * curvyCoords[i * 6 + 1] * tileRatio,
-        curvyCoords[i * 6 + 0] * tileRatio
+        -leftTab * curvyCoords[i * 6 + 1] * pieceRatio,
+        curvyCoords[i * 6 + 0] * pieceRatio
       )
     );
     const p2 = bottomLeftEdge.subtract(
       new Point(
-        -leftTab * curvyCoords[i * 6 + 3] * tileRatio,
-        curvyCoords[i * 6 + 2] * tileRatio
+        -leftTab * curvyCoords[i * 6 + 3] * pieceRatio,
+        curvyCoords[i * 6 + 2] * pieceRatio
       )
     );
     const p3 = bottomLeftEdge.subtract(
       new Point(
-        -leftTab * curvyCoords[i * 6 + 5] * tileRatio,
-        curvyCoords[i * 6 + 4] * tileRatio
+        -leftTab * curvyCoords[i * 6 + 5] * pieceRatio,
+        curvyCoords[i * 6 + 4] * pieceRatio
       )
     );
 

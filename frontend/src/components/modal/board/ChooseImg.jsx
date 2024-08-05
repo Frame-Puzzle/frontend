@@ -1,13 +1,13 @@
 import react, { useState, useRef, useEffect } from "react";
 import paper from "paper";
-import { setTileId } from "../../../stores/tileSlice";
+import { setPieceId } from "../../../stores/pieceSlice";
 import "./ChooseImg.css";
 import pieceApi from "../../../apis/pieceApi";
 import { useSelector, useDispatch } from "react-redux";
 import compressImage from "../../../utils/compressImg";
 
 const ChooseImg = () => {
-  const tile = useSelector((state) => state.tile);
+  const piece = useSelector((state) => state.piece);
   const dispatch = useDispatch();
 
   const [imgUrl, setImgUrl] = useState(null);
@@ -42,11 +42,11 @@ const ChooseImg = () => {
   };
 
   useEffect(() => {
-    if (tile.tileId === 0) return;
+    if (piece.pieceId === 0) return;
     // 퍼즐 조각 클릭 시 이벤트
     const fetchPiece = async () => {
       try {
-        const response = await pieceApi.get(`${tile.tileId}`);
+        const response = await pieceApi.get(`$ pieceId}`);
         setImgUrl(response.data.data.imgUrl);
 
         const comment = response.data.data.comment;
@@ -59,7 +59,7 @@ const ChooseImg = () => {
     fetchPiece();
 
     return () => {};
-  }, [tile.tileId]);
+  },  [piece.pieceId]);
 
   const fetchSaveImg = async () => {
     // 사진이 없을 경우 에러 메시지 출력
@@ -70,14 +70,14 @@ const ChooseImg = () => {
       formData.append("imgFile", imgFile);
       formData.append("comment", imgText);
 
-      const response = await pieceApi.put(`/${tile.tileId}`, formData, {
+      const response = await pieceApi.put(`/${piece.pieceId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
       console.log("퍼즐 조각 등록:", response);
-      dispatch(setTileId(0));
+      dispatch(setPieceId(0));
     } catch (error) {
       console.error("이미지 저장에 실패했습니다:", error);
     }
@@ -91,7 +91,7 @@ const ChooseImg = () => {
           alt="x-symbol"
           className="x-symbol"
           onClick={() => {
-            dispatch(setTileId(0));
+            dispatch(setPieceId(0));
           }}
         />
       </div>
