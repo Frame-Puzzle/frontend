@@ -7,7 +7,12 @@ import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
-import { setPieceId, setComment, setImgUrl } from "../../stores/pieceSlice";
+import {
+  setPieceId,
+  setComment,
+  setImgUrl,
+  setMission,
+} from "../../stores/pieceSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "./PuzzleCanvas.css";
 
@@ -22,7 +27,6 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
     paper.project.clear();
     paper.view.update();
   };
-
 
   useEffect(() => {
     // paper.js 초기화
@@ -58,11 +62,17 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
           try {
             const response = await pieceApi.get(`${pieceId + index}`);
 
+            console.log(response);
             const imgUrl = response.data.data.imgUrl;
             dispatch(setImgUrl(imgUrl));
+            
             const comment = response.data.data.comment;
             if (comment) dispatch(setComment(comment));
             else dispatch(setComment(""));
+
+            const mission = response.data.data.missionName;
+            if (mission) dispatch(setMission(mission));
+            else dispatch(setMission(""));
           } catch (error) {
             console.error("Error fetching piece:", error);
           }

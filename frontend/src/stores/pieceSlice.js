@@ -6,6 +6,7 @@ let piece = createSlice({
     imgUrl: "",
     comment: "",
     pieceId: 0,
+    mission: "",
   },
   reducers: {
     setPieceId(state, action) {
@@ -16,12 +17,15 @@ let piece = createSlice({
     },
     setComment(state, action) {
       state.comment = action.payload
+    },
+    setMission(state, action) {
+      state.mission = action.payload
     }
   }
 });
 
 // 이건 실제로 변경함수를 사용하고자 하는 파일에서 import하기
-export let { setPieceId, setImgUrl, setComment } = piece.actions;
+export let { setPieceId, setImgUrl, setComment, setMission } = piece.actions;
 
 // 이건 store.js에서 import하기
 export default piece;

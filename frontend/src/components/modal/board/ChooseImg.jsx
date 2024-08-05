@@ -44,9 +44,11 @@ const ChooseImg = () => {
     if (piece.pieceId === 0) {
       setComment("");
       setImgUrl("");
+      setMission("");
     } else {
       setComment(piece.comment);
       setImgUrl(piece.imgUrl);
+      setMission(piece.mission);
     }
   }, [piece.pieceId, piece.comment, piece.imgUrl]);
 
@@ -83,7 +85,12 @@ const ChooseImg = () => {
         />
       </div>
       <div className="create-choose-img-modal-body">
-        <div className="mission-container"></div>
+        {mission ? (
+          <div className="mission-container">
+            <span className="mission-title">Mission</span>
+            <span>{mission}</span>
+          </div>
+        ) : null}
         <div className="uploading-img" onClick={handleClick}>
           {imgUrl ? (
             <img src={imgUrl} alt="new-img" className="uploaded-img" />

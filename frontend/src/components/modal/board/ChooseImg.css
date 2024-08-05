@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .choose-img-container {
@@ -69,4 +69,17 @@
   max-width: 50%;
   max-height: 50%;
   object-fit: contain;
+}
+
+.mission-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2vh;
+}
+
+.mission-title {
+  font-size: 5vh;
+  font-weight: bold;
 }

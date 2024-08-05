@@ -3,11 +3,13 @@
   height: 100%;
   position: relative;
   overflow: hidden; /* 자식 요소가 넘칠 때 숨김 처리 */
+  display: flex;
+  justify-content: center;
 }
 
 .canvas {
   display: block;
-  width: 90vw;
-  height: 90vh;
+  width: 50vw;
+  height: 80vh;
   box-sizing: border-box; 
 }

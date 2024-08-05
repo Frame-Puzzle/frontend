@@ -64,6 +64,7 @@ const PuzzleBoard = () => {
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
               alt="thirdIcon"
               className="header-icon"
+              style={{ width: "30%" }}
             />
           }
           category={category}
