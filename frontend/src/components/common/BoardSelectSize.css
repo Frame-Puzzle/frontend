@@ -17,3 +17,13 @@
 .board-select-size-next {
   /*  */
 }
+
+.board-select-size-next span {
+  position: absolute;
+  z-index: 2;
+}
+
+#board-select-size-next-activate {
+  cursor: pointer;
+  z-index: 3;
+}
