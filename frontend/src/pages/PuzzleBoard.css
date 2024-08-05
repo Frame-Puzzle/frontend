@@ -4,7 +4,6 @@
   overflow: hidden;
 }
 
-
 .board-main-content {
   width: 100%;
   height: 80%;
@@ -13,21 +12,42 @@
   align-items: center;
 }
 
-.board-keywords{
+.board-keywords {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.board-keyword{
-  border: #C3C7F4 2px solid;
+.board-keyword {
+  border: #c3c7f4 2px solid;
   padding: 5px 10px;
   margin: 2px 0px;
-  border-radius: 40%;
+  border-radius: 10px;
 }
 
 .board-footer {
   width: 100%;
   height: 10%;
 }
- 
+
+.game-room-button {
+  background-color: #c3c7f4;
+  border: #c3c7f4;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.game-room-button:disabled {
+  background-color: lightgray;
+  border: lightgray;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.game-room-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
