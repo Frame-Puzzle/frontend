@@ -12,6 +12,7 @@ import Loading from "./pages/Loading";
 import PuzzleBoard from "./pages/PuzzleBoard";
 import Directory from "./pages/directory/Directory";
 import { useEffect } from "react";
+import GameOpenVidu from "./gameTalk/GameOpenvidu";
 
 function App() {
   const setScreenSize = () => {
@@ -40,6 +41,9 @@ function App() {
         {/* 마이 페이지 중 닉네임 변경 페이지 */}
         <Route path="/mypage/edit" element={<ChangeNickName />} />
 
+        {/* !!! 테스트 페이지 rtc !!!*/}
+        <Route path="/testrtc" element={<GameOpenVidu />} />
+
         {/* Google Login API */}
         <Route path="/" element={<Login />} />
         <Route path="/login/oauth2/code/google" element={<GoogleLogin />} />
@@ -58,6 +62,7 @@ function App() {
           path="/boards/:boardID"
           element={<PuzzleBoard />}
         />
+
       </Routes>
     </div>
   );
