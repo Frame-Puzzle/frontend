@@ -1,43 +1,45 @@
 .header {
-  display: flex;
-  align-items: center;
-  padding: 20px 0;
-
-  border-bottom: 1px solid rgb(226, 226, 226);
-  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  padding: 1.5vw;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.header_prev,
-.header_title,
-.header_icon {
-  display: flex;
-  align-items: center;
-  color: #000;
-  font-size: 24px;
-  font-weight: 600;
+/* ******************************************* */
+
+.header-left {
+  width: 85%;
+  height: 100%;
 }
 
-.header_prev {
-  cursor: pointer;
-
-  justify-content: center;
-  width: 20%;
-  text-align: center;
-} 
-
-.header_title {
-  justify-content: flex-start;
-  width: 60%;
-  padding-left: 1rem;
+.header-prev {
+  width: 15%;
+  height: 100%;
 }
 
-.header_icon {
-  justify-content: center;
-  width: 20%;
-  text-align: center;
+.header-prev div {
+  font-size: 6vw;
+  font-weight: 900;
 }
 
-.header_icon img {
-  width: 24px; /* 텍스트 크기와 동일하게 설정 */
-  height: 24px; /* 텍스트 크기와 동일하게 설정 */
+.header-title {
+  font-size: 5vw;
+  font-weight: 900;
+  margin-right: 3vw;
+}
+
+.header-category {
+  background-color: #F1BDEC;
+  color: #FFFFFF;
+  padding: 1.5vw;
+  border-radius: 20px;
+  font-size: 3vw;
+}
+
+/* ******************************************* */
+
+.header-icon {
+  width: 15%;
+  height: 100%;
 }

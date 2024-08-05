@@ -12,4 +12,4 @@ const HomeModalFrame = (props) => {
   )
 }
 
-export default HomeModalFrame;
+export default HomeModalFrame; 

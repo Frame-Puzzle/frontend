@@ -1,11 +1,11 @@
 .create-directory-modal {
   /* 크기와 색상만 지정해주면 된다. */
-  width: 80vw;
+  width: 80vw;  
   height: 55vh; /* 기존에는 40vh */
   background: #FFFFFF;
   border: none;
   border-radius: 4vw; /* 15.6px in iphone14pro */
-}
+} 
 
 .create-directory-modal-header {
   width: 100%;
@@ -76,6 +76,36 @@
   height: 35%;
 }
 
+.input-directory-name-text {
+  width: 100%;
+  padding-left: 6vw;
+  margin-bottom: 1.5vh;
+}
+
+.input-directory-name-text span {
+  font-size: 3vw;
+  font-weight: 600;
+}
+
+.input-directory-name-input {
+  width: 80%;
+  height: 4.5vh;
+  margin: auto;
+  padding: 0 4vw;
+  border: 2px solid #E5E7EB;
+  border-radius: 9999px;
+  font-size: 2.5vw;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 바로 아래 위치하는 동적 UI와의 간격 */
+  margin-bottom: 1vh;
+}
+
+.input-directory-name-input:focus {
+  border-color: #3B82F6; /* 포커스 시 파란색 테두리 */
+}
+
 /* *************************************** */
 
 .create-directory-button {
@@ -88,12 +118,17 @@
   z-index: 2;
   background-color: #E7E7E7;
   color: #888888;
+  border-radius: 3vw;
   /* 버튼 크기, 버튼 위치, 폰트 속성 보면서 수정 */
-  font-size: 4vw;
+  font-size: 3.7vw;
   font-weight: 600;
   text-align: center;
   width: 60%;
-  height: 70%;
+  height: 55%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 2vh;
 }
 
 #active {

@@ -1,18 +1,20 @@
 .mypage-header {
   width: 100%;
   height: 10%;
-  overflow: hidden;
 }
+
+.icon-header {
+  width: 120%;
+}
+
 .mypage-main-content {
   width: 100%;
   height: 80%;
-  overflow: hidden;
 }
 
 .mypage-footer {
   width: 100%;
   height: 10%;
-  overflow: hidden;
 }
 
 .nickname {
