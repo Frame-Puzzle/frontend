@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import GameOpenvidu from "../gameTalk/GameOpenvidu";
 
 const Notification = () => {
   const nav = useNavigate();
