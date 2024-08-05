@@ -12,7 +12,7 @@ import Loading from "./pages/Loading";
 import PuzzleBoard from "./pages/PuzzleBoard";
 import Directory from "./pages/directory/Directory";
 import { useEffect } from "react";
-import GameOpenVidu from "./gameTalk/GameOpenvidu";
+import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 
 function App() {
   const setScreenSize = () => {
