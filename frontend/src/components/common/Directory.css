@@ -1,6 +1,7 @@
 .directory {
   width: 75px;
   height: 40%;
+  cursor: pointer;
 }
 
 .directory-icon {
@@ -35,4 +36,8 @@
 .directory-name {
   color: #000;
   font-size: 12px;
+}
+
+.category-content {
+  justify-content: space-evenly;
 }

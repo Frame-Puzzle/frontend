@@ -54,7 +54,7 @@ const DirectoryList = () => {
         <span onClick={() => { setCategory('lover'); }}>연인</span>
         <span onClick={() => { setCategory('pet'); }}>반려동물</span>
       </div>
-      <div className="category-content">
+      <div className="category-content flex">
         {
           categoryList.map((a, i) => {
             return (

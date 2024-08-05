@@ -5,7 +5,8 @@ import checkAvailableWord from "../../../utils/stringConfig/checkAvailableWord";
 import chekcWordLength from "../../../utils/stringConfig/checkWordLength";
 import directoryApi from "../../../apis/directoryApi";
 import { useNavigate } from "react-router-dom";
- 
+import ExceptionMessage from "../../common/ExceptionMessage";
+
 const CreateDirectory = (props) => {
 
   // 백에게 디렉토리 생성 요청을 하고, 고유 디렉토리 번호를 받아오는 함수 정의하기
@@ -36,6 +37,10 @@ const CreateDirectory = (props) => {
   let [who, setWho] = useState('');
 
   let navigate = useNavigate();
+  let [friend, setFriend] = useState('');
+  let [family, setFamily] = useState('');
+  let [lover, setLover] = useState('');
+  let [pet, setPet] = useState('');
 
   useEffect(() => {
 
@@ -63,17 +68,27 @@ const CreateDirectory = (props) => {
 
   }, [exceptionMessage, who]);
 
-  // '만들기' 버튼을 활성화 시키는 방법은 같은 사이즈의 버튼인데 다른 스타일의 버튼을
-  // 기존 버튼과 동률의 위치에 위치시킨 후, z-index를 줘서 위에 위치시키고 동적 UI 처리
+  useEffect(() => {
+    // who state가 무엇이냐에 따라서 특정 SelectCategory에 Border CSS 속성을 주는 작업
+    if (who === 'friend') {
+      setFriend('select-effect');
+    } else if (who === 'family') {
+      setFamily('select-effect');
+    } else if (who === 'lover') {
+      setLover('select-effect');
+    } else if (who === 'pet') {
+      setPet('select-effect');
+    }
 
-  // 그걸 클릭하면 위에서 const로 정의할 함수를 호출하여 state 정보를 읽어와서
-  // api 호출을 시키고, 상세페이지로 이동할 것.
+    return () => {
+      // Border CSS 속성을 모두 떼는 작업
+      setFriend('');
+      setFamily('');
+      setLover('');
+      setPet('');
+    }
 
-  // setWho로 state 갈아치우는 것은 쉬워보이지만, css 효과를 부여하는 것이 어려워 보인다.
-  // 다른 거 다 떼고, 클릭한 것만 붙여주기. 뭐를? border css 효과를.
-
-  // 마지막에 Exception Message 띄우는 것(props로 state 넘겨서 동적으로 바뀌는 메시지)
-  // 클릭하면 border css 주는 것을 하자. 우선은 만들기 버튼 활성화 시켜서 라우팅 시키는 것이 급함.
+  }, [who]);
 
   return (
     <div className="create-directory-modal flex flex-wrap">
@@ -90,17 +105,21 @@ const CreateDirectory = (props) => {
             <span>누구와의 추억을 저장하고 싶나요?</span>
           </div>
           <div className="select-category-content flex"> {/* 3. 80% */}
-            <SelectCategory category={"friend"} setWho={ setWho } /> {/* 4. 25% */}
-            <SelectCategory category={"family"} setWho={ setWho } /> {/* 4. 25% */}
-            <SelectCategory category={"lover"} setWho={ setWho } /> {/* 4. 25% */}
-            <SelectCategory category={"pet"} setWho={ setWho } /> {/* 4. 25% */}
+            <SelectCategory category={"friend"} setWho={ setWho } friend={ friend } /> {/* 4. 25% */}
+            <SelectCategory category={"family"} setWho={ setWho } family={ family } /> {/* 4. 25% */}
+            <SelectCategory category={"lover"} setWho={ setWho } lover={ lover } /> {/* 4. 25% */}
+            <SelectCategory category={"pet"} setWho={ setWho } pet={ pet } /> {/* 4. 25% */}
           </div>
         </div>
         <div className="input-directory-name"> {/* 2. 35% */}
-          <span className="input-directory-name-text">디렉토리 이름을 설정해 주세요.</span>
+          <div className="input-directory-name-text">
+            <span>디렉토리 이름을 설정해 주세요.</span>
+          </div>
           <input className="input-directory-name-input block" onChange={(e) => {
             setDirectoryName(e.target.value);
           }} />
+          {/* 예외 메시지 동적 UI */}
+          <ExceptionMessage exceptionMessage={exceptionMessage} />
         </div>
         <div className="create-directory-button relative"> {/* 2. 20% */}
           { activate ? <span id="active" onClick={() => {
