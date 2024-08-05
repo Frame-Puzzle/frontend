@@ -41,8 +41,8 @@ const ChooseImg = () => {
     // 255 byte이상 입력 경우 제한
   };
 
-
   useEffect(() => {
+    if (tile.tileId === 0) return;
     // 퍼즐 조각 클릭 시 이벤트
     const fetchPiece = async () => {
       try {
@@ -63,18 +63,24 @@ const ChooseImg = () => {
 
   const fetchSaveImg = async () => {
     // 사진이 없을 경우 에러 메시지 출력
-    if (imgFile === null) return;
-    const formData = new FormData();
-    formData.append("imgFile", imgFile);
-    //formData.append('comment', imgText);
 
-    const data = {
-      imgFile: formData,
-      comment: imgText,
-    };
+    if (imgFile === null && imgUrl === null) return;
+    try {
+      const formData = new FormData();
+      formData.append("imgFile", imgFile);
+      formData.append("comment", imgText);
 
-    const response = await pieceApi.put(`${tile.tileId}`, data);
-    console.log(response);
+      const response = await pieceApi.put(`/${tile.tileId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("퍼즐 조각 등록:", response);
+      dispatch(setTileId(0));
+    } catch (error) {
+      console.error("이미지 저장에 실패했습니다:", error);
+    }
   };
 
   return (
