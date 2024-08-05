@@ -11,7 +11,7 @@ const ChooseImg = () => {
   const dispatch = useDispatch();
 
   const [imgUrl, setImgUrl] = useState(null);
-  const [imgText, setImgText] = useState("");
+  const [comment, setComment] = useState("");
   const [imgFile, setImgFile] = useState(null);
   const [mission, setMission] = useState("");
   const fileInputRef = useRef(null);
@@ -37,29 +37,18 @@ const ChooseImg = () => {
 
   const handleImgText = (e) => {
     const value = e.target.value;
-    setImgText(value);
+    setComment(value);
     // 255 byte이상 입력 경우 제한
   };
 
   useEffect(() => {
     if (piece.pieceId === 0) return;
-    // 퍼즐 조각 클릭 시 이벤트
-    const fetchPiece = async () => {
-      try {
-        const response = await pieceApi.get(`$ pieceId}`);
-        setImgUrl(response.data.data.imgUrl);
 
-        const comment = response.data.data.comment;
-        if (comment) setImgText(comment);
-      } catch (error) {
-        console.error("Error fetching piece:", error);
-      }
-    };
-
-    fetchPiece();
+    setComment(piece.comment);
+    setImgUrl(piece.imgUrl);
 
     return () => {};
-  },  [piece.pieceId]);
+  },  []);
 
   const fetchSaveImg = async () => {
     // 사진이 없을 경우 에러 메시지 출력
@@ -68,7 +57,7 @@ const ChooseImg = () => {
     try {
       const formData = new FormData();
       formData.append("imgFile", imgFile);
-      formData.append("comment", imgText);
+      formData.append("comment", comment);
 
       const response = await pieceApi.put(`/${piece.pieceId}`, formData, {
         headers: {
@@ -121,7 +110,7 @@ const ChooseImg = () => {
         />
         <div className="image-description">
           <span>덧붙이고 싶은 설명을 적어주세요.</span>
-          <input type="text" value={imgText} onChange={handleImgText} />
+          <input type="text" value={comment} onChange={handleImgText} />
         </div>
       </div>
 

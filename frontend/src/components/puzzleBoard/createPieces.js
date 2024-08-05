@@ -2,13 +2,14 @@ import PuzzleMask from "./puzzleMask";
 import paper from "paper";
 import { Point } from "paper/dist/paper-core";
 
-const createPieces = (boardConfig, pieceId) => {
+const createPieces = (boardConfig, pieceId, pieceData) => {
   const { piecesPerColumn, piecesPerRow, pieceWidth, shapes } = boardConfig;
 
   const picecRatio = pieceWidth / 100;
   const pieces = [];
   const pieceIndexes = [];
 
+  let count = 0;
   for (let y = 0; y < piecesPerColumn; y++) {
     for (let x = 0; x < piecesPerRow; x++) {
       const shape = shapes[y * piecesPerRow + x];
@@ -41,7 +42,7 @@ const createPieces = (boardConfig, pieceId) => {
 
       piece.shape = shape;
 
-      piece.data.id = pieceId ++;
+      piece.data.id = pieceId + count++;
 
       pieces.push(piece);
       pieceIndexes.push(pieces.length - 1);

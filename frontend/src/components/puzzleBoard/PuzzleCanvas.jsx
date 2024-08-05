@@ -7,17 +7,20 @@ import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
-import { setPieceId } from "../../stores/pieceSlice";
+import { setPieceId, setComment, setImgUrl } from "../../stores/pieceSlice";
 import { useDispatch } from "react-redux";
 import "./PuzzleCanvas.css";
 
-const PuzzleCanvas = ({ boardSize, pieceId }) => {
+import pieceApi from "../../apis/pieceApi";
+
+const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     // paper.js 초기화
     paper.setup(canvasRef.current);
+    console.log(pieceData);
 
     // 퍼즐 크기 지정
     let boardConfig;
@@ -30,27 +33,44 @@ const PuzzleCanvas = ({ boardSize, pieceId }) => {
     }
 
     // 퍼즐 조각 생성
-    const { pieces, pieceIndexes } = createPieces(boardConfig, pieceId);
+    const { pieces, pieceIndexes } = createPieces(
+      boardConfig,
+      pieceId,
+      pieceData
+    );
 
     // 퍼즐 조각 배치
     fitPieces(pieces, boardConfig);
 
     // 클릭 이벤트 생성
-    pieces.forEach((piece) => {
+    pieces.forEach((piece, index) => {
       piece.onMouseDown = (event) => {
-        const data = {
-          piece: piece,
-          pieceWidth: boardConfig.pieceWidth,
+        const fetchPiece = async () => {
+          try {
+            console.log(pieceId + index);
+            const response = await pieceApi.get(`${pieceId + index}`);
+            
+            console.log(response);
+            const imgUrl = response.data.data.imgUrl;
+            dispatch(setImgUrl(imgUrl));
+            const comment = response.data.data.comment;
+            if(comment) dispatch(setComment(comment));
+
+          } catch (error) {
+            console.error("Error fetching piece:", error);
+          }
         };
+
+        fetchPiece();
         dispatch(setPieceId(piece.data.id));
-        //dispatch(setpieceInfo(data));
+
       };
     });
 
     return () => {
       paper.project.clear();
     };
-  }, [boardSize, pieceId, dispatch]);
+  }, [pieceData]);
 
   return (
     <div className="canvas-container">

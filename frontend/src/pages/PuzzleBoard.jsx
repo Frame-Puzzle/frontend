@@ -17,7 +17,8 @@ const PuzzleBoard = () => {
   const [category, setCategory] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [boardSize, setBoardSize] = useState(0);
-  const [pieceId, setpieceId] = useState(0);
+  const [pieceId, setPieceId] = useState(0);
+  const [pieceData, setPieceData] = useState([]);
 
   const { boardID } = useParams();
 
@@ -33,7 +34,8 @@ const PuzzleBoard = () => {
       setCategory(data.category);
       setKeywords(data.keyword);
       setBoardSize(data.boardSize);
-      setpieceId(data.pieceList[0].pieceId);
+      setPieceId(data.pieceList[0].pieceId);
+      setPieceData(data.pieceList);
     };
 
     fetchPuzzleData();
@@ -72,7 +74,11 @@ const PuzzleBoard = () => {
             </div>
           ))}
         </div>
-        <PuzzleCanvas boardSize={boardSize} pieceId={pieceId} />
+        <PuzzleCanvas
+          boardSize={boardSize}
+          pieceId={pieceId}
+          pieceData={pieceData}
+        />
       </div>
 
       <div className="board-footer">
