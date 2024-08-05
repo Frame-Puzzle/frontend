@@ -50,7 +50,7 @@ const PuzzleBoard = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
-      {modal ? <BoardModalFrame setModal={setModal} /> : null}
+      {modal ? <BoardModalFrame /> : null}
       <div className="board-header">
         <MainHeader
           title={boardName}

@@ -6,10 +6,14 @@
   justify-content: space-between;
 }
 
+.header_left {
+  display: flex;
+  align-items: center;
+}
+
 .header_prev,
 .header_title,
-.header_icon,
-.header_left {
+.header_category {
   display: flex;
   align-items: center;
   color: #000;
@@ -20,25 +24,27 @@
 .header_prev {
   cursor: pointer;
   justify-content: center;
-  width: 20%;
+  width: 50px; /* 적절한 너비로 수정 */
   text-align: center;
 }
 
 .header_title {
   justify-content: flex-start;
-  width: 60%;
+  flex-grow: 1; /* 남은 공간을 차지하도록 수정 */
   padding-left: 1rem;
   white-space: nowrap;
 }
 
-.header_icon {
-  justify-content: center;
-  width: 20%;
-  text-align: center;
-}
-
 .header_category {
   border-radius: 10%;
+  padding: 0 10px; /* 패딩 추가로 겹침 방지 */
+  white-space: nowrap;
+}
+
+.header_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header_icon img {
