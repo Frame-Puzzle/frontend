@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import paper from "paper";
-import createTiles from "./createTiles";
-import fitTiles from "./fitTiles";
+import createPieces from "./createPieces";
+import fitPieces from "./fitPieces";
 
 import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
-import { setTileId, setTileInfo } from "../../stores/tileSlice";
+import { setPieceId } from "../../stores/pieceSlice";
 import { useDispatch } from "react-redux";
 import "./PuzzleCanvas.css";
 
-const PuzzleCanvas = ({ boardSize, tileId }) => {
+const PuzzleCanvas = ({ boardSize, pieceId }) => {
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -30,27 +30,27 @@ const PuzzleCanvas = ({ boardSize, tileId }) => {
     }
 
     // 퍼즐 조각 생성
-    const { tiles, tileIndexes } = createTiles(boardConfig, tileId);
+    const { pieces, pieceIndexes } = createPieces(boardConfig, pieceId);
 
     // 퍼즐 조각 배치
-    fitTiles(tiles, boardConfig);
+    fitPieces(pieces, boardConfig);
 
     // 클릭 이벤트 생성
-    tiles.forEach((tile) => {
-      tile.onMouseDown = (event) => {
+    pieces.forEach((piece) => {
+      piece.onMouseDown = (event) => {
         const data = {
-          tile: tile,
-          tileWidth: boardConfig.tileWidth,
+          piece: piece,
+          pieceWidth: boardConfig.pieceWidth,
         };
-        dispatch(setTileId(tile.data.id));
-        //dispatch(setTileInfo(data));
+        dispatch(setPieceId(piece.data.id));
+        //dispatch(setpieceInfo(data));
       };
     });
 
     return () => {
       paper.project.clear();
     };
-  }, [boardSize, tileId, dispatch]);
+  }, [boardSize, pieceId, dispatch]);
 
   return (
     <div className="canvas-container">

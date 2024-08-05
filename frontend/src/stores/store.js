@@ -5,7 +5,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 // sessionStorage에 저장하고 싶으면
 // import sessionStorage from 'redux-persist/lib/storage';
 import user from './userSlice';
-import tile from './tileSlice';
+import piece from './pieceSlice';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   // user: user.reducer,
   // cart: cart.reducer
   user: user.reducer,
-  tile: tile.reducer
+  piece: piece.reducer
 });
 
 const persistConfig = {

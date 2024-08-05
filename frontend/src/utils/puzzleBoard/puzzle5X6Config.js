@@ -33,11 +33,11 @@ const puzzle5X6Config = {
     { topTab: -1, rightTab: 0, bottomTab: 0, leftTab: 1 }
   ],
   // 타일 크기
-  tileWidth: 40,
+  pieceWidth: 40,
   // 한 열당 퍼즐 개수 -> 행
-  tilesPerRow: 5,
+  piecesPerRow: 5,
   // 한 행당 퍼즐 개수 -> 열
-  tilesPerColumn: 6,
+  piecesPerColumn: 6,
 
   coordinates: [
     [{ x: 50, y: 50 }, { x: 90, y: 50 }, { x: 130, y: 50 }, { x: 170, y: 50 }, { x: 210, y: 50 }],

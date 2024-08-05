@@ -17,11 +17,11 @@ const PuzzleBoard = () => {
   const [category, setCategory] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [boardSize, setBoardSize] = useState(0);
-  const [tileId, setTileId] = useState(0);
+  const [pieceId, setpieceId] = useState(0);
 
   const { boardID } = useParams();
 
-  const tile = useSelector((state) => state.tile);
+  const piece = useSelector((state) => state.piece);
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
@@ -33,7 +33,7 @@ const PuzzleBoard = () => {
       setCategory(data.category);
       setKeywords(data.keyword);
       setBoardSize(data.boardSize);
-      setTileId(data.pieceList[0].pieceId);
+      setpieceId(data.pieceList[0].pieceId);
     };
 
     fetchPuzzleData();
@@ -41,12 +41,12 @@ const PuzzleBoard = () => {
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
-    if (tile.tileId !== 0) {
+    if (piece.pieceId !== 0) {
       setModal(true);
     } else {
       setModal(false);
     }
-  }, [tile.tileId]);
+  }, [piece.pieceId]);
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
@@ -72,7 +72,7 @@ const PuzzleBoard = () => {
             </div>
           ))}
         </div>
-        <PuzzleCanvas boardSize={boardSize} tileId={tileId} />
+        <PuzzleCanvas boardSize={boardSize} pieceId={pieceId} />
       </div>
 
       <div className="board-footer">
