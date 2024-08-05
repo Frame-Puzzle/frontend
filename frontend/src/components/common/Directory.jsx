@@ -4,7 +4,7 @@ const Directory = (props) => {
   return (
     <div className="directory">
       <div className="directory-icon">
-        <img src="" alt="open or close"></img>
+        <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/directory-folder.png" alt="directory-icon"></img>
       </div>
       <div className="directory-category-box">
         <span className="directory-category">{ /* category data binding */ props.info.category }</span>
