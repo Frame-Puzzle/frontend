@@ -12,6 +12,11 @@ import Loading from "./pages/Loading";
 import PuzzleBoard from "./pages/PuzzleBoard";
 import Directory from "./pages/directory/Directory";
 import { useEffect } from "react";
+import CreateBoard from "./pages/board/CreateBoard";
+import BoardSelectSize from "./components/common/BoardSelectSize";
+import BoardMissionOn from "./components/common/BoardMissionOn";
+import BoardMissionOff from "./components/common/BoardMissionOff";
+import BoardSelectMission from "./components/common/BoardSelectMission";
 
 function App() {
   const setScreenSize = () => {
@@ -56,6 +61,15 @@ function App() {
 
         {/* 퍼즐 저장 공간*/}
         <Route path="/puzzle" element={<PuzzleBoard />} />
+
+        {/* 퍼즐판 생성 페이지 */}
+        <Route path="/create-board" element={<CreateBoard />}>
+          <Route path="select-size" element={<BoardSelectSize />} />
+          <Route path="mission-on" element={<BoardMissionOn />} />
+          <Route path="mission-off" element={<BoardMissionOff />} />
+          <Route path="select-mission" element={<BoardSelectMission />} />
+          <Route />
+        </Route>
 
       </Routes>
     </div>
