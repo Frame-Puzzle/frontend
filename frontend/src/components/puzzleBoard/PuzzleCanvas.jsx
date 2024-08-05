@@ -9,7 +9,7 @@ import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
 import {
   setPieceId,
-  setComment,
+  setComment, 
   setImgUrl,
   setMission,
 } from "../../stores/pieceSlice";

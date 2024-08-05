@@ -19,6 +19,7 @@ const PuzzleBoard = () => {
   const [boardSize, setBoardSize] = useState(0);
   const [pieceId, setPieceId] = useState(0);
   const [pieceData, setPieceData] = useState([]);
+  const [activateGameRoom, setActivateGameRoom] = useState(0);
 
   const { boardID } = useParams();
 
@@ -28,6 +29,8 @@ const PuzzleBoard = () => {
     const fetchPuzzleData = async () => {
       const response = await boardApi.get(`/${boardID}`);
       const data = response.data.data;
+
+      console.log("data", data);
 
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
@@ -83,6 +86,20 @@ const PuzzleBoard = () => {
           pieceId={pieceId}
           pieceData={pieceData}
         />
+        <div className="game-room-container">
+          {activateGameRoom !== 2 ? (
+            <button
+              className="game-room-button"
+              disabled={activateGameRoom === 0}
+            >
+              게임 방 만들기
+            </button>
+          ) : null}
+
+          {activateGameRoom === 2 ? (
+            <button className="game-room-button">게임 방 참여하기</button>
+          ) : null}
+        </div>
       </div>
 
       <div className="board-footer">
