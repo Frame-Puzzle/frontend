@@ -24,11 +24,32 @@ const createPieces = (boardConfig, pieceId, pieceData) => {
 
       // 투명하면 클릭 불가
       mask.opacity = 0.25;
-      mask.strokeColor = "black";
-      mask.fillColor = new paper.Color(0, 0, 0, 0.01);
+      const authority = pieceData[count].authority;
+      switch (authority) {
+        case 1:
+          // 비어있는 상태
+          mask.fillColor = new paper.Color(0, 0, 0, 0.01);
+          break;
+        case 2:
+
+          // 본인 수정 가능
+          mask.fillColor = "#F3E7FB";
+
+          break;
+        case 3:
+          // 탈퇴 하여 수정 가능
+          mask.fillColor = "#F1BDEC";
+
+          break;
+        case 4:
+          // 수정 불가
+          mask.fillColor = "#C3C7F4";
+          break;
+      }
+      mask.strokeColor = new paper.Color("black");
 
       const border = mask.clone();
-      border.strokeColor = "black";
+      border.strokeColor = mask.strokeColor;
       border.strokeWidth = 2;
 
       const piece = new paper.Group([mask, border]);

@@ -1,5 +1,4 @@
 import react, { useState, useRef, useEffect } from "react";
-import paper from "paper";
 import { setPieceId } from "../../../stores/pieceSlice";
 import "./ChooseImg.css";
 import pieceApi from "../../../apis/pieceApi";
@@ -42,13 +41,14 @@ const ChooseImg = () => {
   };
 
   useEffect(() => {
-    if (piece.pieceId === 0) return;
-
-    setComment(piece.comment);
-    setImgUrl(piece.imgUrl);
-
-    return () => {};
-  },  []);
+    if (piece.pieceId === 0) {
+      setComment("");
+      setImgUrl("");
+    } else {
+      setComment(piece.comment);
+      setImgUrl(piece.imgUrl);
+    }
+  }, [piece.pieceId, piece.comment, piece.imgUrl]);
 
   const fetchSaveImg = async () => {
     // 사진이 없을 경우 에러 메시지 출력
@@ -79,9 +79,7 @@ const ChooseImg = () => {
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
           alt="x-symbol"
           className="x-symbol"
-          onClick={() => {
-            dispatch(setPieceId(0));
-          }}
+          onClick={() => dispatch(setPieceId(0))}
         />
       </div>
       <div className="create-choose-img-modal-body">

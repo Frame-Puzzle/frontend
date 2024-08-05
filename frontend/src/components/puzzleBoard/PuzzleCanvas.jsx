@@ -8,7 +8,7 @@ import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
 import { setPieceId, setComment, setImgUrl } from "../../stores/pieceSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./PuzzleCanvas.css";
 
 import pieceApi from "../../apis/pieceApi";
@@ -16,11 +16,20 @@ import pieceApi from "../../apis/pieceApi";
 const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
+  const piece = useSelector((state) => state.piece);
+
+  const resetCanvas = () => {
+    paper.project.clear();
+    paper.view.update();
+  };
+
 
   useEffect(() => {
     // paper.js 초기화
     paper.setup(canvasRef.current);
-    console.log(pieceData);
+
+    if (pieceData.length === 0) return;
+    resetCanvas();
 
     // 퍼즐 크기 지정
     let boardConfig;
@@ -47,15 +56,13 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
       piece.onMouseDown = (event) => {
         const fetchPiece = async () => {
           try {
-            console.log(pieceId + index);
             const response = await pieceApi.get(`${pieceId + index}`);
-            
-            console.log(response);
+
             const imgUrl = response.data.data.imgUrl;
             dispatch(setImgUrl(imgUrl));
             const comment = response.data.data.comment;
-            if(comment) dispatch(setComment(comment));
-
+            if (comment) dispatch(setComment(comment));
+            else dispatch(setComment(""));
           } catch (error) {
             console.error("Error fetching piece:", error);
           }
@@ -63,14 +70,13 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
 
         fetchPiece();
         dispatch(setPieceId(piece.data.id));
-
       };
     });
 
     return () => {
       paper.project.clear();
     };
-  }, [pieceData]);
+  });
 
   return (
     <div className="canvas-container">

@@ -39,12 +39,15 @@ const PuzzleBoard = () => {
     };
 
     fetchPuzzleData();
-  }, []);
+  }, [piece.pieceId]);
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
     if (piece.pieceId !== 0) {
-      setModal(true);
+      // DB에서 정보 불러오는 시간
+      setTimeout(() => {
+        setModal(true);
+      }, 500);
     } else {
       setModal(false);
     }
