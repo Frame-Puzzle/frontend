@@ -41,7 +41,7 @@ const createTiles = (boardConfig, tileId) => {
 
       tile.shape = shape;
 
-      tile.id = tileId ++;
+      tile.data.id = tileId ++;
 
       tiles.push(tile);
       tileIndexes.push(tiles.length - 1);

@@ -28,9 +28,7 @@ const PuzzleBoard = () => {
       const response = await boardApi.get(`/${boardID}`);
       const data = response.data.data;
 
-      // 이름 저장
-      console.log(data);
-
+      // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
       setKeywords(data.keyword);
@@ -39,7 +37,7 @@ const PuzzleBoard = () => {
     };
 
     fetchPuzzleData();
-  },[]);
+  }, []);
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
@@ -74,7 +72,7 @@ const PuzzleBoard = () => {
             </div>
           ))}
         </div>
-        <PuzzleCanvas boardSize={boardSize} tileId={tileId}/>
+        <PuzzleCanvas boardSize={boardSize} tileId={tileId} />
       </div>
 
       <div className="board-footer">

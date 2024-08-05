@@ -42,7 +42,7 @@ const PuzzleCanvas = ({ boardSize, tileId }) => {
           tile: tile,
           tileWidth: boardConfig.tileWidth,
         };
-        dispatch(setTileId(10));
+        dispatch(setTileId(tile.data.id));
         //dispatch(setTileInfo(data));
       };
     });
@@ -50,7 +50,7 @@ const PuzzleCanvas = ({ boardSize, tileId }) => {
     return () => {
       paper.project.clear();
     };
-  }, [boardSize, dispatch]);
+  }, [boardSize, tileId, dispatch]);
 
   return (
     <div className="canvas-container">
