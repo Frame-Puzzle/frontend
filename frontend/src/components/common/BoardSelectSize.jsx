@@ -19,7 +19,7 @@ const BoardSelectSize = () => {
       </div>
       <div className="board-select-size-title">
         <span>퍼즐 판의 크기를</span>
-        <span>설정해 주세요.</span>
+        <span>설정해 주세요</span>
       </div>
       <div className="board-select-size-button">
         <span onClick={() => {
