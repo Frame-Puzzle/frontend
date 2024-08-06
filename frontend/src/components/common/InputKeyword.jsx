@@ -52,7 +52,7 @@ const InputKeyword = () => {
           keyword.map((a, i) => {
             return (
               // a의 타입은 String
-              <KeywordPill key={i} info={a} />
+              <KeywordPill key={i} info={a} setKeyword={setKeyword} keyword={keyword} />
             )
           })
         }
