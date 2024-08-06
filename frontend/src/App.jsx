@@ -15,7 +15,6 @@ import { useEffect } from "react";
 import CreateBoard from "./pages/board/CreateBoard";
 import BoardSelectSize from "./components/common/BoardSelectSize";
 import BoardMissionOn from "./components/common/BoardMissionOn";
-import BoardMissionOff from "./components/common/BoardMissionOff";
 import BoardSelectMission from "./components/common/BoardSelectMission";
 import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 
@@ -69,14 +68,13 @@ function App() {
         <Route path="/create-board" element={<CreateBoard />}>
           <Route path="select-size" element={<BoardSelectSize />} />
           <Route path="mission-on" element={<BoardMissionOn />} />
-          <Route path="mission-off" element={<BoardMissionOff />} />
           <Route path="select-mission" element={<BoardSelectMission />} />
           <Route />
         </Route>
 
         {/* 퍼즐판 상세페이지 */}
         <Route path="/boards/:boardID" element={<PuzzleBoard />} />
-        
+
       </Routes>
     </div>
   );
