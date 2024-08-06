@@ -1,4 +1,4 @@
-.canvas-container {
+.puzzle-canvas-container {
   width: 100%;
   height: 60%;
   position: relative;
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.canvas {
+.puzzle-canvas {
   display: block;
   /* 퍼즐 판의 크기에 따라 다른 크기로 지정해야 할 수 있음 */
   width: 220px;

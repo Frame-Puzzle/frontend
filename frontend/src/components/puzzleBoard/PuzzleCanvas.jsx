@@ -89,8 +89,8 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
   });
 
   return (
-    <div className="canvas-container">
-      <canvas ref={canvasRef} className="canvas"></canvas>
+    <div className="puzzle-canvas-container">
+      <canvas ref={canvasRef} className="puzzle-canvas"></canvas>
     </div>
   );
 };
