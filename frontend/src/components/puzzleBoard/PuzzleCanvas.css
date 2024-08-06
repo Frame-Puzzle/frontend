@@ -1,16 +1,18 @@
 .canvas-container {
   width: 100%;
-  height: 60%;
+  height: 78%;
   position: relative;
   overflow: hidden; /* 자식 요소가 넘칠 때 숨김 처리 */
   display: flex;
   justify-content: center;
+  padding-top: 6vw;
+  /* padding-left: -1vw; */
 }
 
 .canvas {
   display: block;
   /* 퍼즐 판의 크기에 따라 다른 크기로 지정해야 할 수 있음 */
-  width: 220px;
+  width: 285px;
   height: 60vh;
   box-sizing: border-box;
 }
