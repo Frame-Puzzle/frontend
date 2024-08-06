@@ -9,3 +9,13 @@
   transition: border-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.input-keyword-next span {
+  position: absolute;
+  z-index: 2;
+}
+
+#input-keyword-next-activate {
+  cursor: pointer;
+  z-index: 3;
+}

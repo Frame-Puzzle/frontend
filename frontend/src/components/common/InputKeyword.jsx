@@ -14,6 +14,8 @@ const InputKeyword = () => {
   let [isDisabled, setIsDisabled] = useState(false);
   // 예외 동적 메시지 UI를 조작하는 스위치 (0이면 null, 1이면 형식문제, 2면 중복문제, 3이면 OK)
   let [exceptionMessage, setExceptionMessage] = useState(0);
+  // '미션 생성하기' 버튼 활성화 스위치
+  let [activate, setActivate] = useState(false);
 
   // 사용자가 <input> 태그에서 Enter 또는 Spacebar를 눌렀을 때, 실행되어야 하는 작업들
   const handleKeyDown = (e) => {
@@ -48,6 +50,14 @@ const InputKeyword = () => {
     } else {
       // 그게 아니라면 <input> 태그에 입력 가능하게끔 설정
       setIsDisabled(false);
+    }
+
+    // 만약 입력한 keyword가 최소한 하나라도 있으면
+    if (keyword.length >= 1) {
+      // '미션 생성하기' 버튼을 클릭 가능하도록 활성화
+      setActivate(true);
+    } else { // 그게 아니라면 '미션 생성하기' 버튼 비활성화
+      setActivate(false);
     }
   }, [keyword]);
 
@@ -86,6 +96,11 @@ const InputKeyword = () => {
             )
           })
         }
+      </div>
+      {/* '미션 생성하기' 버튼 활성화 or 비활성화 */}
+      <div className="input-keyword-next">
+        { activate ? <span id="input-keyword-next-activate">미션 생성하기</span> : null }
+        <span>미션 생성하기</span>
       </div>
     </div>
   )
