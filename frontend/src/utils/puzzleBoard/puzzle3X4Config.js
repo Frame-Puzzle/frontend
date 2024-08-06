@@ -75,11 +75,11 @@ const puzzle3X4Config = {
     },
   ],
   // 타일 크기
-  tileWidth: 64,
+  pieceWidth: 64,
   // 한 열당 퍼즐 개수 -> 행
-  tilesPerRow: 3,
+  piecesPerRow: 3,
   // 한 행당 퍼즐 개수 -> 열
-  tilesPerColumn: 4,
+  piecesPerColumn: 4,
 
   coordinates: [
     [{ x: 50, y: 50 }, { x: 110, y: 54 }, { x: 167, y: 50 }],

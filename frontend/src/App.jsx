@@ -17,6 +17,7 @@ import BoardSelectSize from "./components/common/BoardSelectSize";
 import BoardMissionOn from "./components/common/BoardMissionOn";
 import BoardMissionOff from "./components/common/BoardMissionOff";
 import BoardSelectMission from "./components/common/BoardSelectMission";
+import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 
 function App() {
   const setScreenSize = () => {
@@ -33,7 +34,6 @@ function App() {
   return (
     <div className="main-frame">
       <Routes>
-
         {/* 홈페이지, 메인페이지 */}
         <Route path="/home" element={<Home />} />
 
@@ -45,6 +45,9 @@ function App() {
 
         {/* 마이 페이지 중 닉네임 변경 페이지 */}
         <Route path="/mypage/edit" element={<ChangeNickName />} />
+
+        {/* !!! 테스트 페이지 rtc !!!*/}
+        <Route path="/testrtc" element={<GameOpenVidu />} />
 
         {/* Google Login API */}
         <Route path="/" element={<Login />} />
@@ -71,6 +74,9 @@ function App() {
           <Route />
         </Route>
 
+        {/* 퍼즐판 상세페이지 */}
+        <Route path="/boards/:boardID" element={<PuzzleBoard />} />
+        
       </Routes>
     </div>
   );

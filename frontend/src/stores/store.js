@@ -6,6 +6,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 // import sessionStorage from 'redux-persist/lib/storage';
 import user from './userSlice';
 import createBoard from './createBoardSlice';
+import piece from './pieceSlice';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   // user: user.reducer,
   // cart: cart.reducer
   user: user.reducer,
-  createBoard: createBoard.reducer
+  createBoard: createBoard.reducer,
+  piece: piece.reducer
 });
 
 const persistConfig = {
@@ -33,7 +35,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => 
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

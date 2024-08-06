@@ -1,11 +1,11 @@
 .create-directory-modal {
   /* 크기와 색상만 지정해주면 된다. */
-  width: 80vw;
+  width: 80vw;  
   height: 55vh; /* 기존에는 40vh */
   background: #FFFFFF;
   border: none;
   border-radius: 4vw; /* 15.6px in iphone14pro */
-}
+} 
 
 .create-directory-modal-header {
   width: 100%;
