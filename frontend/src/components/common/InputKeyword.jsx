@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./InputKeyword.css";
+import KeywordPill from "./KeywordPill";
 
 const InputKeyword = () => {
 
@@ -43,7 +44,19 @@ const InputKeyword = () => {
         value={current}
         onChange={(e) => { setCurrent(e.target.value); }}
         onKeyDown={handleKeyDown}
-        disabled={isDisabled}></input>
+        disabled={isDisabled}>
+      </input>
+      {/* 예외 메시지 동적 UI 들어가야 할 곳 */}
+      <div className="flex">
+        {
+          keyword.map((a, i) => {
+            return (
+              // a의 타입은 String
+              <KeywordPill key={i} info={a} />
+            )
+          })
+        }
+      </div>
     </div>
   )
 }
