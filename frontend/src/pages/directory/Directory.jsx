@@ -12,9 +12,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Directory = () => {
-  // url Parameter 이름과 동일하게 'id'를 사용해야 한다.
   const { id } = useParams();
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const [directoryName, setDirectoryName] = useState("");
   const [category, setCategory] = useState("");
@@ -45,9 +44,24 @@ const Directory = () => {
     draggable: true,
   };
 
+  // 클릭과 드래그 구분을 위한 상태 변수
+  let mouseDownX = 0;
+  let mouseUpX = 0;
+
+  const handleMouseDown = (e) => {
+    mouseDownX = e.clientX;
+  };
+
+  const handleMouseUp = (boardId) => (e) => {
+    mouseUpX = e.clientX;
+    if (mouseDownX === mouseUpX) {
+      // 마우스 다운과 업의 X 좌표가 동일하면 클릭으로 간주
+      nav(`/boards/${boardId}`);
+    }
+  };
+
   return (
     <div className="w-full h-full flex flex-wrap relative">
-      {/* {modal ? <BoardModalFrame /> : null} */}
       <div className="directory-header">
         <MainHeader
           title={directoryName}
@@ -77,8 +91,14 @@ const Directory = () => {
             category={category}
           />
         </div>
-        <div style={{width: '230px', margin: 'auto', 
-          display: 'flex', justifyContent: 'flex-end'}}>
+        <div
+          style={{
+            width: "300px",
+            margin: "auto",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
           <div className="directory-create-board">
             <span className="board-plus">퍼즐 추가</span>
             <img
@@ -92,8 +112,13 @@ const Directory = () => {
           {boardList.length > 0 ? (
             <Slider {...settings}>
               {boardList.map((board, index) => (
-                <div key={index}>
+                <div
+                  key={index}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp(board.boardId)}
+                >
                   <DirectoryCanvas boardSize={board.boardSize} />
+                  <div>{board.boardName}</div>
                 </div>
               ))}
             </Slider>
