@@ -7,6 +7,7 @@ let createBoard = createSlice({
     keyword: [],
     guide: [],
     directoryId: '',
+    
   },
   reducers: {
     setBoardSize(state, action) {

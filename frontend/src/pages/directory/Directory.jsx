@@ -22,6 +22,7 @@ const Directory = () => {
   const [category, setCategory] = useState("");
   const [boardList, setBoardList] = useState([]);
   const [memberList, setMemberList] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const fetchDirectory = async () => {
