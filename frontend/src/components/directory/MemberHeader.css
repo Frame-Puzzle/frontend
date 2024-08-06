@@ -1,0 +1,46 @@
+.member-header {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-bottom: lightgray 1px solid;
+}
+
+/* ******************************************* */
+
+.member-header-left {
+  width: 20%;
+  height: 100%;
+
+  border-right: lightgray 1px solid;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.member-header-logo {
+  width: 30%;
+  margin: 1vh 1vw;
+}
+
+.member-header-comment {
+  padding-bottom: 1vh;
+}
+
+.member-header-middle {
+  width: 60%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.member-header-right {
+  width: 20%;
+  height: 100%;
+  border-left: lightgray 1px solid;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

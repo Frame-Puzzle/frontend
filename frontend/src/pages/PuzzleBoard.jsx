@@ -42,7 +42,7 @@ const PuzzleBoard = () => {
     };
 
     fetchPuzzleData();
-  }, [piece.pieceId]);
+  }, [piece.pieceId]); 
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제

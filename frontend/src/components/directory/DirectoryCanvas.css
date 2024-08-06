@@ -1,0 +1,17 @@
+ .directory-canvas-container {
+  width: 100%;
+  height: 60%;
+  position: relative;
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+} 
+.directory-canvas {
+  display: block;
+   
+  width: 250px;
+  height: 60vh;
+  box-sizing: border-box;
+} 
