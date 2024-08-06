@@ -31,6 +31,7 @@
 .member-header-middle {
   width: 60%;
   box-sizing: border-box;
+  display: flex;
 }
 
 .member-header-right {

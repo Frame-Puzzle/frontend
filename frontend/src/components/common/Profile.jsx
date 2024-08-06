@@ -1,5 +1,6 @@
 import "./Profile.css";
 import React, { useRef, useState, useEffect } from "react";
+import makeNickNameShort from "../../utils/makeNickNameShort";
 
 const Profile = ({ imgUrl, userName }) => {
   const [profileImgUrl, setProfileImgUrl] = useState(
@@ -11,7 +12,7 @@ const Profile = ({ imgUrl, userName }) => {
 
   useEffect(() => {
     if(imgUrl !== null) setProfileImgUrl(imgUrl);
-    setProfileName(userName);
+    setProfileName(makeNickNameShort(userName));
   }, [imgUrl, userName]);
 
   return (

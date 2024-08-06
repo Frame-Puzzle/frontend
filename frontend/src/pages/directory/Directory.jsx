@@ -77,16 +77,28 @@ const Directory = () => {
             category={category}
           />
         </div>
-
-        {boardList.length > 0 ? (
-          <Slider {...settings}>
-            {boardList.map((board, index) => (
-              <div key={index}>
-                <DirectoryCanvas boardSize={board.boardSize} />
-              </div>
-            ))}
-          </Slider>
-        ) : null}
+        <div style={{width: '230px', margin: 'auto', 
+          display: 'flex', justifyContent: 'flex-end'}}>
+          <div className="directory-create-board">
+            <span className="board-plus">퍼즐 추가</span>
+            <img
+              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/plus.png"
+              alt="board-plus"
+              className="board-plus-logo"
+            />
+          </div>
+        </div>
+        <div className="directory-slider">
+          {boardList.length > 0 ? (
+            <Slider {...settings}>
+              {boardList.map((board, index) => (
+                <div key={index}>
+                  <DirectoryCanvas boardSize={board.boardSize} />
+                </div>
+              ))}
+            </Slider>
+          ) : null}
+        </div>
       </div>
 
       <div className="directory-footer">

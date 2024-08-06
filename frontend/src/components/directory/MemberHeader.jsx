@@ -14,14 +14,14 @@ const MemberHeader = ({ memberList }) => {
   }, [memberList]);
 
   return (
-    <div className="member-header flex">
+    <div className="member-header flex"> 
       <div className="member-header-left">
         <img
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/invite-member.png"
           alt="invite-member"
           className="member-header-logo"
         />
-        <span className="member-header-comment">친구 초대</span>
+        <span className="member-header-comment">멤버</span>
       </div>
       <div className="member-header-middle">
         {members.map((member, index) => (
