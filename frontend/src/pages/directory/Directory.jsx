@@ -24,7 +24,9 @@ const Directory = () => {
     <span style={{cursor: "pointer"}} onClick={() => {
       navigate("/home");
     }}>홈으로 돌아가기</span>
-    <span style={{cursor: "pointer"}}>퍼즐판 추가</span>
+    <span style={{cursor: "pointer"}} onClick={() => {
+      navigate(`/create-board/select-size`);
+    }}>퍼즐판 추가</span>
     </>
   )
 }
