@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./InputKeyword.css";
 import KeywordPill from "./KeywordPill";
+import isValidKoreanNumeric from "../../utils/stringConfig/isValidKoreanNumeric";
 
 const InputKeyword = () => {
 
@@ -14,6 +15,17 @@ const InputKeyword = () => {
   // 사용자가 <input> 태그에서 Enter 또는 Spacebar를 눌렀을 때, 실행되어야 하는 작업들
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
+
+      // 한글과 숫자 합쳐서 공백없이 6자 이내인지 판별하는 조건식
+      if (!isValidKoreanNumeric(current)) {
+        return;
+      }
+
+      // 이미 keyword 저장 공간에 존재하는 키워드를 입력했는지를 판별하는 조건식
+      if (keyword.includes(current)) {
+        return;
+      }
+
       // 사용자가 입력하는 기본 동작을 먼저 막고
       e.preventDefault();
       // 현재 <input>에 있는 값을 keyword 저장 공간에 추가하고
