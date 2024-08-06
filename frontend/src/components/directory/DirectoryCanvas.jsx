@@ -42,8 +42,8 @@ const DirectoryCanvas = ({ boardSize }) => {
   }, [boardSize]);
 
   return (
-    <div className="canvas-container">
-      <canvas ref={canvasRef} className="canvas"></canvas>
+    <div className="directory-canvas-container">
+      <canvas ref={canvasRef} className="directory-canvas"></canvas>
     </div>
   );
 };
