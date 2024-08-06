@@ -4,7 +4,7 @@ import KeywordPill from "./KeywordPill";
 import isValidKoreanNumeric from "../../utils/stringConfig/isValidKoreanNumeric";
 import KeywordExceptionMessage from "./KeywordExceptionMessage";
 import { useDispatch } from "react-redux";
-import { setKeyword } from "../../stores/createBoardSlice";
+import { setKeyWord } from "../../stores/createBoardSlice";
 import { useNavigate } from "react-router-dom";
 
 const InputKeyword = () => {
@@ -108,7 +108,7 @@ const InputKeyword = () => {
         { activate ? <span id="input-keyword-next-activate" onClick={() => {
           // 우선, keyword State에 있던 값들 전부 Redux로 옮기기
           let deepcopy = [...keyword];
-          dispatch(setKeyword(deepcopy));
+          dispatch(setKeyWord(deepcopy));
           // BoardSelectMission.jsx로 라우팅하기
           navigate(`/create-board/select-mission`);
         }}>미션 생성하기</span> : null }

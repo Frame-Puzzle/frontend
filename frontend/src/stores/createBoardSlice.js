@@ -4,7 +4,7 @@ let createBoard = createSlice({
   name: 'createBoard',
   initialState: {
     boardSize: 0,
-    keyword: [],
+    keyWord: [],
     guide: [],
     directoryId: '',
   },
@@ -12,8 +12,8 @@ let createBoard = createSlice({
     setBoardSize(state, action) {
       state.boardSize = action.payload;
     },
-    setKeyword(state, action) {
-      state.keyword = action.payload;
+    setKeyWord(state, action) {
+      state.keyWord = action.payload;
     },
     setGuide(state, action) {
       state.guide = action.payload;
@@ -25,7 +25,7 @@ let createBoard = createSlice({
 });
 
 // 이건 실제로 변경함수를 사용하고자 하는 파일에서 import하기
-export let { setBoardSize, setKeyword, setGuide, setDirectoryId } = createBoard.actions;
+export let { setBoardSize, setKeyWord, setGuide, setDirectoryId } = createBoard.actions;
 
 // 이건 store.js에서 import하기
 export default createBoard;
