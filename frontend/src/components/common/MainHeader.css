@@ -9,7 +9,7 @@
 /* ******************************************* */
 
 .header-left {
-  width: 85%;
+  width: 80%;
   height: 100%;
 }
 
@@ -24,17 +24,21 @@
 }
 
 .header-title {
-  font-size: 5vw;
+  font-size: 5.2vw;
   font-weight: 900;
-  margin-right: 3vw;
+  margin-right: 2.8vw;
+  margin-left: -1vw;
 }
 
 .header-category {
   background-color: #F1BDEC;
   color: #FFFFFF;
-  padding: 1.5vw;
-  border-radius: 20px;
-  font-size: 3vw;
+  padding: 1.2vw;
+  border-radius: 15px;
+  font-size: 3.4vw;
+  width: 70px;
+  text-align: center;
+  margin-top: 0.5vw;
 }
 
 /* ******************************************* */
