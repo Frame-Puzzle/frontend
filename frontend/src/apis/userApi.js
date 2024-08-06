@@ -1,5 +1,6 @@
 import axios from "axios";
-import { store } from "./../stores/store"; 
+import { store } from "./../stores/store";
+import { setAccessToken } from "../stores/userSlice";
 
 // axios 객체 만들기
 const userApi = axios.create({
@@ -34,6 +35,7 @@ userApi.interceptors.response.use(
 
     // 사용자 인증이 실패한 경우, 로그인 페이지로 리다이렉트
     if (status === 401) {
+      store.dispatch(setAccessToken(''));
       window.location.href = "/";
     }
     // 요청이 만들어졌지만 서버로부터 응답이 없을 때, error.request에 요청 정보가 들어간다.
