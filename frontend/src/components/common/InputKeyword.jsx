@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./InputKeyword.css";
 import KeywordPill from "./KeywordPill";
 import isValidKoreanNumeric from "../../utils/stringConfig/isValidKoreanNumeric";
+import KeywordExceptionMessage from "./KeywordExceptionMessage";
 
 const InputKeyword = () => {
 
@@ -11,6 +12,8 @@ const InputKeyword = () => {
   let [keyword, setKeyword] = useState([]);
   // <input> 태그에 입력할 수 있도록 하는 장치
   let [isDisabled, setIsDisabled] = useState(false);
+  // 예외 동적 메시지 UI를 조작하는 스위치 (0이면 null, 1이면 형식문제, 2면 중복문제, 3이면 OK)
+  let [exceptionMessage, setExceptionMessage] = useState(0);
 
   // 사용자가 <input> 태그에서 Enter 또는 Spacebar를 눌렀을 때, 실행되어야 하는 작업들
   const handleKeyDown = (e) => {
@@ -48,6 +51,20 @@ const InputKeyword = () => {
     }
   }, [keyword]);
 
+  useEffect(() => {
+
+    if (current === '') {
+      setExceptionMessage(0);
+    } else if (!isValidKoreanNumeric(current)) { // 사용자가 실시간으로 <input>에 입력하고 있는 값이 형식에 맞지 않으면
+      setExceptionMessage(1);
+    } else if (keyword.includes(current)) { // 이미 keyword 저장 공간에 존재하는 키워드라면
+      setExceptionMessage(2);
+    } else { // 어디에도 해당되지 않으면 OK Sign
+      setExceptionMessage(3);
+    }
+
+  }, [current, keyword]);
+
   return (
     <div className="input-keyword">
       <span>키워드 입력 (최대 3개)</span>
@@ -58,7 +75,8 @@ const InputKeyword = () => {
         onKeyDown={handleKeyDown}
         disabled={isDisabled}>
       </input>
-      {/* 예외 메시지 동적 UI 들어가야 할 곳 */}
+      {/* 예외 메시지 동적 UI */}
+      <KeywordExceptionMessage exceptionMessage={exceptionMessage} />
       <div className="flex">
         {
           keyword.map((a, i) => {
