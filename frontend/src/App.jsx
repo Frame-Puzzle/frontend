@@ -69,7 +69,6 @@ function App() {
           <Route path="select-size" element={<BoardSelectSize />} />
           <Route path="mission-on" element={<BoardMissionOn />} />
           <Route path="select-mission" element={<BoardSelectMission />} />
-          <Route />
         </Route>
 
         {/* 퍼즐판 상세페이지 */}

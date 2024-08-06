@@ -3,8 +3,14 @@ import "./InputKeyword.css";
 import KeywordPill from "./KeywordPill";
 import isValidKoreanNumeric from "../../utils/stringConfig/isValidKoreanNumeric";
 import KeywordExceptionMessage from "./KeywordExceptionMessage";
+import { useDispatch } from "react-redux";
+import { setKeyword } from "../../stores/createBoardSlice";
+import { useNavigate } from "react-router-dom";
 
 const InputKeyword = () => {
+
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   // <input>과의 양방향 연결을 위한 State
   let [current, setCurrent] = useState('');
@@ -99,7 +105,13 @@ const InputKeyword = () => {
       </div>
       {/* '미션 생성하기' 버튼 활성화 or 비활성화 */}
       <div className="input-keyword-next">
-        { activate ? <span id="input-keyword-next-activate">미션 생성하기</span> : null }
+        { activate ? <span id="input-keyword-next-activate" onClick={() => {
+          // 우선, keyword State에 있던 값들 전부 Redux로 옮기기
+          let deepcopy = [...keyword];
+          dispatch(setKeyword(deepcopy));
+          // BoardSelectMission.jsx로 라우팅하기
+          navigate(`/create-board/select-mission`);
+        }}>미션 생성하기</span> : null }
         <span>미션 생성하기</span>
       </div>
     </div>
