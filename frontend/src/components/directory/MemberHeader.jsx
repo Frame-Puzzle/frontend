@@ -19,7 +19,7 @@ const MemberHeader = ({ memberList }) => {
         <img
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/invite-member.png"
           alt="invite-member"
-          className="member-header-logo"
+          className="member-header-left-logo"
         />
         <span className="member-header-comment">멤버</span>
       </div>
@@ -37,7 +37,7 @@ const MemberHeader = ({ memberList }) => {
         <img
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/exit.png"
           alt="exit-directory"
-          className="member-header-logo"
+          className="member-header-right-logo"
         />
         <span className="member-header-comment">탈퇴하기</span>
       </div>
