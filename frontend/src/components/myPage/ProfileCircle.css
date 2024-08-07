@@ -1,8 +1,13 @@
 .profile-circle {
-  width: 150px;
-  height: 150px;
+  background-size: "cover";
+  background-position: "center";
   border-radius: 50%;
-  border: 1.5px #f1bdec solid;
-  margin: auto;
+  border: 2px #f1bdec solid;
   overflow: hidden; /* 나중에 이미지 넣을 때 넘치는 부분 숨기기*/
+}
+
+.profile-icon{
+  margin: auto;
+  padding-left: 25vw;
+  margin-top: -5vh;
 }

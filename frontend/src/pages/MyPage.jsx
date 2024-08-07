@@ -60,29 +60,32 @@ const MyPage = () => {
         {/* <MainHeader />에 icon props로 건네주는 img의 width는 항상 120%로 고정하는 것으로 약속한다. */}
         <MainHeader
           title="My Page"
-          icon={<img src={TempIcon} alt="thirdIcon" className="icon-header" />}
+          icon={<img
+            src={TempIcon} alt="thirdIcon"
+            className="icon-header"
+            style={{ width: "40%", marginLeft: "7vw" }} />}
         />
       </div>
       <div className="mypage-main-content">
-        <ProfileCircle />
+        <div className="profile"><ProfileCircle /></div>
         <div className="nickname">{userData.nickname}</div>
         <div className="email">{userData.email}</div>
-        <div style={{ height: "10%" }}>
+        <div>
           <ChangeNickButton
             onClick={() => nav("/mypage/edit")}
             text="닉네임 변경"
             nickname={userData.nickname}
           />
         </div>
-        <div>{/* 라인 */}</div>
-        <div style={{ height: "10%" }}>
+        <hr className="mypage-line"></hr>
+        <div >
           <RectangularButton
             onClick={logout} // logout modal
-            text={"로그 아웃"}
+            text={"로그아웃"}
             type={"purple"}
           />
         </div>
-        <div style={{ height: "10%" }}>
+        <div>
           <RectangularButton
             onClick={() => nav("/home")} // logout modal
             text={"회원 탈퇴"}
