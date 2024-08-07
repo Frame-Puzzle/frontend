@@ -3,14 +3,16 @@ import "./InputKeyword.css";
 import KeywordPill from "./KeywordPill";
 import isValidKoreanNumeric from "../../utils/stringConfig/isValidKoreanNumeric";
 import KeywordExceptionMessage from "./KeywordExceptionMessage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setKeyWord } from "../../stores/createBoardSlice";
 import { useNavigate } from "react-router-dom";
+import { setMissionCnt } from "../../stores/createBoardSlice";
 
 const InputKeyword = () => {
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  let boardSize = useSelector(state => state.createBoard.boardSize);
 
   // <input>과의 양방향 연결을 위한 State
   let [current, setCurrent] = useState('');
@@ -109,6 +111,17 @@ const InputKeyword = () => {
           // 우선, keyword State에 있던 값들 전부 Redux로 옮기기
           let deepcopy = [...keyword];
           dispatch(setKeyWord(deepcopy));
+          // boardSize가 무엇이냐에 따라서 Redux에 존재하는 missionCnt 값을 변화시켜 저장
+          if (boardSize === 12) {
+            // missionCnt의 값을 3으로 변경
+            dispatch(setMissionCnt(3));
+          } else if (boardSize === 20) {
+            // missionCnt의 값을 4로 변경
+            dispatch(setMissionCnt(4));
+          } else if (boardSize === 30) {
+            // missionCnt의 값을 5로 변경
+            dispatch(setMissionCnt(5));
+          }
           // BoardSelectMission.jsx로 라우팅하기
           navigate(`/create-board/select-mission`);
         }}>미션 생성하기</span> : null }
