@@ -12,6 +12,8 @@ const BoardSelectMission = () => {
   let [missions, setMissions] = useState([]);
   // 이전 Mission들을 전부 담아두는 Array (재생성 응답시 추가)
   let [prevMissions, setPrevMissions] = useState([]);
+  // 리로드 아이콘 동적 UI를 위한 스위치
+  let [reloadActive, setReloadActive] = useState(true);
 
   // 이 퍼즐판이 어느 디렉토리에 속해 있는지
   let directoryId = useSelector(state => state.createBoard.directoryId);
@@ -53,11 +55,35 @@ const BoardSelectMission = () => {
     uePostGuides(keywordList, num, prevMissions, directoryId);
   }, []);
 
+  useEffect(() => {
+    // 1. 3X4 Size에서는 prevMissions 길이가 8이면 리로드를 5번 한 것으로 간주하고, 리로드 아이콘을 비활성화 시킨다.
+    if (num == 3 && prevMissions.length == 8) {
+      // Switch On !
+      setReloadActive(false);
+    } else if (num == 4 && prevMissions.length == 9) {
+      // Switch On !
+      setReloadActive(false);
+    } else if (num == 5 && prevMissions.length == 10) {
+      // Switch On !
+      setReloadActive(false);
+    }
+  }, [prevMissions]);
+
   return (
     <div>
       {
         missions.map((a, i) => {
-          return (<Mission info={a} />)
+          return (<Mission
+            info={a}
+            key={i}
+            postGuides={postGuides}
+            keywordList={keywordList}
+            prevMissions={prevMissions}
+            directoryId={directoryId}
+            missions={missions}
+            setMissions={setMissions}
+            setPrevMissions={setPrevMissions}
+            reloadActive={reloadActive} />)
         })
       }
     </div>
