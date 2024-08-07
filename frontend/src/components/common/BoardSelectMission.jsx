@@ -4,9 +4,13 @@ import "./BoardSelectMission.css";
 import directoryApi from "../../apis/directoryApi";
 import { useSelector } from "react-redux";
 import Mission from "./Mission";
+import { useNavigate } from "react-router-dom";
 
 // Create Board의 세 번째 전환 컴포넌트
 const BoardSelectMission = () => {
+
+  // 퍼즐판 상세페이지로 라우팅 하기 위한 훅
+  let navigate = useNavigate();
 
   // map 반복문을 돌면서 Guide(Mission) 보여질 Array (재생성 응답시 교체)
   let [missions, setMissions] = useState([]);
@@ -21,6 +25,8 @@ const BoardSelectMission = () => {
   let keywordList = useSelector(state => state.createBoard.keyWord);
   // 퍼즐판 크기에 따른 미션 수령 개수는 몇 개인지
   let num = useSelector(state => state.createBoard.missionCnt);
+  // 퍼즐판 생성 요청 시 필요한 BOARD SIZE
+  let boardSize = useSelector(state => state.createBoard.boardSize);
 
   // 백에게 가이드(미션) 생성 요청을 하고, 가이드를 받아오는 함수 정의
   const postGuides = async (keywordList, num, preMission, directoryId) => {
@@ -37,6 +43,25 @@ const BoardSelectMission = () => {
       return response.data.data.guideList;
     } catch (error) {
       console.error('Error posting guides', error);
+      throw error;
+    }
+  }
+
+  // 백에게 퍼즐판(Board) 생성 요청을 하고, 퍼즐판 고유 번호를 받아오는 함수 정의
+  const postBoards = async (missions, keywordList, boardSize, directoryId) => {
+    try {
+      // Request Body 데이터 가공
+      const requestData = {
+        guide: missions,
+        keyword: keywordList,
+        boardSize: boardSize
+      };
+      // 백엔드에 POST 요청을 보내기
+      const response = await directoryApi.post(`/${directoryId}/boards`, requestData);
+      // 응답 데이터에서 퍼즐판 고유 번호를 반환
+      return response.data.data.boardId;
+    } catch (error) {
+      console.error('Error posting boards', error);
       throw error;
     }
   }
@@ -86,6 +111,16 @@ const BoardSelectMission = () => {
             reloadActive={reloadActive} />)
         })
       }
+      <span className="create-board-with-mission" onClick={() => {
+        // 퍼즐판 생성 API
+        const asyncPostBoards = async (missions, keywordList, boardSize, directoryId) => {
+          const boardId = await postBoards(missions, keywordList, boardSize, directoryId);
+          // 퍼즐판 고유 번호를 이용하여 퍼즐판 상세 페이지로 라우팅하기
+          navigate(`/boards/${boardId}`);
+        }
+        // 실제로 호출하기
+        asyncPostBoards(missions, keywordList, boardSize, directoryId);
+      }}>퍼즐판 생성하기</span>
     </div>
   )
 }
