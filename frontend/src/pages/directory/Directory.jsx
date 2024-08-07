@@ -24,7 +24,7 @@ const Directory = () => {
   const [directoryName, setDirectoryName] = useState("");
   const [category, setCategory] = useState("");
   const [boardList, setBoardList] = useState([]);
-  const [memberList, setMemberList] = useState([]);
+  const [memberList, setMemberListState] = useState([]);
   const [modal, setModal] = useState(false);
 
   const directory = useSelector((state) => state.directory);
@@ -37,11 +37,11 @@ const Directory = () => {
       setDirectoryName(data.directoryName);
       setCategory(data.category);
       setBoardList(data.boardList);
-      setMemberList(data.memberList);
+      setMemberListState(data.memberList);
       dispatch(setMemberList(data.memberList));
     };
     fetchDirectory();
-  }, [id]);
+  }, [id,directory.modalId]);
 
   /* 디렉토리 상세페이지에 존재하는 퍼즐판 추가 버튼을 누르면 동률의 위치로
   페이지 라우팅되는 것이므로 고유 디렉토리 번호는 props로 전송 불가하다.
@@ -50,6 +50,7 @@ const Directory = () => {
     // 주의 : id는 Number가 아닌 String Type
     dispatch(setDirectoryId(id));
   }, []);
+
 
   // 슬라이드 설정
   const settings = {

@@ -4,9 +4,14 @@ import EmptyIcon from "../assets/icon/notification-empty.svg";
 import MainHeader from "../components/common/MainHeader";
 import MainNav from "../components/common/MainNav";
 import "./Notification.css";
+import { useEffect } from "react";
 
 const Notification = () => {
   const nav = useNavigate();
+
+  useEffect(() => {
+    console.log("useEffect Test");
+  }, []);
   return (
     <>
       <div className="w-full h-full">

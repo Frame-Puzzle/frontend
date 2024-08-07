@@ -1,17 +1,71 @@
 import "./InviteDirectory.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalId } from "../../../stores/directorySlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import directoryApi from "../../../apis/directoryApi";
+
+import InvitedMember from "./InvitedMember";
+import createBoard from "../../../stores/createBoardSlice";
 
 const InviteDirectory = () => {
   const dispatch = useDispatch();
   const directory = useSelector((state) => state.directory);
+  const createBoard = useSelector((state) => state.createBoard);
+
   const [memberList, setMemberList] = useState([]);
+  const [inputEmail, setInputEmail] = useState("");
+  const [userList, setUserList] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
+  const [inviteMember, setInviteMember] = useState({});
+  const inputRef = useRef(null);
 
   useEffect(() => {
     setMemberList(directory.memberList);
   }, [directory.memberList]);
 
+  useEffect(() => {
+    if (!isFocused) {
+      setUserList([]);
+      return;
+    }
+
+    const fetchUsers = async () => {
+      if (!inputEmail) return;
+      try {
+        const response = await directoryApi.get(
+          `${createBoard.directoryId}/users/find?email=${inputEmail}`
+        );
+
+        const data = response.data.data.memberList;
+        setUserList(data.length > 3 ? data.slice(0, 3) : data);
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
+    };
+
+    const interval = setInterval(() => {
+      fetchUsers();
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [inputEmail, isFocused, createBoard.directoryId]);
+
+  const fetchInvitedMember = async () => {
+    console.log(inviteMember);
+    const data = {
+      userId: inviteMember.userId,
+    };
+    try {
+      const response = await directoryApi.post(
+        `/${createBoard.directoryId}/user`,
+        data
+      );
+
+      dispatch(setModalId(0));
+    } catch (error) {
+      console.error("Error fetching invited member:", error);
+    }
+  };
   return (
     <div className="invite-directory-modal flex flex-wrap">
       <div className="invite-directory-modal-header flex">
@@ -33,13 +87,81 @@ const InviteDirectory = () => {
       <div className="invite-directory-modal-body">
         <div className="email-input-container">
           <span>초대하고 싶은 멤버의 이메일을 입력하세요</span>
-          <div>
-            <input type="email" />
-            <button>초대</button>
+          <div className="email-submit">
+            {Object.keys(inviteMember).length === 0 ? (
+              <input
+                className="email-input"
+                type="email"
+                ref={inputRef}
+                value={inputEmail}
+                onChange={(e) => setInputEmail(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() =>
+                  setTimeout(() => {
+                    setInputEmail("");
+                    setIsFocused(false);
+                  }, 200)
+                }
+              />
+            ) : (
+              <div className="invite-member-detail-container">
+                <div className="invite-member-detail">
+                  <span>{inviteMember.nickname}</span>
+                  <span>({inviteMember.email})</span>
+                  <img
+                    style={{ width: "10px", height: "10px" }}
+                    src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
+                    alt=""
+                    onClick={() => setInviteMember([])}
+                  />
+                </div>
+              </div>
+            )}
+            <button
+              disabled={Object.keys(inviteMember).length === 0}
+              onClick={fetchInvitedMember}
+            >
+              초대
+            </button>
           </div>
         </div>
+        {isFocused && userList.length !== 0 ? (
+          <div className="user-list-container">
+            {userList.map((user, index) => (
+              <div
+                key={index}
+                className="user-item"
+                onClick={() => {
+                  setInviteMember(user);
+                }}
+              >
+                <div
+                  className="invited-member-circle"
+                  style={{
+                    backgroundImage: user.profileUrl
+                      ? `url(${user.profileUrl})`
+                      : `url('https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/profile-default.png')`,
+                  }}
+                ></div>
+                <div className="user-details">
+                  <span>{user.nickname}</span>
+                  <span className="user-email">{user.email}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : null}
+        {isFocused && userList.length == 0 ? (
+          <div className="user-list-container">
+            <div className="user-item" style={{ border: "none" }}>
+              사용자가 존재하지 않습니다.
+            </div>
+          </div>
+        ) : null}
         <div className="members-container">
-          <span>멤버</span>
+          {memberList.map((member, index) => (
+            <InvitedMember key={index} member={member} />
+          ))}
         </div>
       </div>
     </div>
