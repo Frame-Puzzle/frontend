@@ -1,0 +1,17 @@
+.keyword-pill {
+  background-color: #B0B0B0;
+  color: #FFFFFF;
+  padding: 1.3vw;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.keyword-pill span {
+  font-size: 1rem;
+  margin-right: 1vw;
+}
+
+.x-icon-container {
+  width: 1em;
+  aspect-ratio: 1 / 1;
+}
