@@ -39,6 +39,7 @@
   width: 60%;
   box-sizing: border-box;
   display: flex;
+  overflow: hidden;
 }
 
 .member-header-right {
