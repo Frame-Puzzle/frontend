@@ -10,6 +10,9 @@
 .notification-main-content {
   width: 100%;
   height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .notification-footer {
@@ -18,10 +21,21 @@
 }
 
 .alarm-empty-space {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 30%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
+
+.alarm-empty-text {
+  color: var(--Black-200, #d1d1d1);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
 .alarm-empty-icon {
-  width: 120%;
-  height: 10%;
+  width: 7%; /* 아이콘 크기를 키움 */
+  margin-bottom: 5%; /* 아이콘과 텍스트 사이의 간격 */
 }
