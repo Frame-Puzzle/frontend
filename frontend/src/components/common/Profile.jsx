@@ -24,7 +24,7 @@ const Profile = ({ imgUrl, userName }) => {
             backgroundImage: `url(${profileImgUrl})`,
           }}
         ></div>
-        <span>{profileName}</span>
+        <span className="profile-name">{profileName}</span>
       </div>
     </>
   );
