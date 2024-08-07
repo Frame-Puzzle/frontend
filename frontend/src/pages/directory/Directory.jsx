@@ -70,7 +70,7 @@ const Directory = () => {
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit.png"
               alt="thirdIcon"
               className="header-icon"
-              style={{ width: "40%" }}
+              style={{ width: "38%", marginLeft: "7vw" }}
             />
           }
           category={category}
@@ -92,12 +92,7 @@ const Directory = () => {
           />
         </div>
         <div
-          style={{
-            width: "300px",
-            margin: "auto",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
+          className="directory-middle-container"
         >
           <div className="directory-create-board">
             <span className="board-plus">퍼즐 추가</span>
@@ -118,7 +113,8 @@ const Directory = () => {
                   onMouseUp={handleMouseUp(board.boardId)}
                 >
                   <DirectoryCanvas boardSize={board.boardSize} />
-                  <div>{board.boardName}</div>
+                  <div className="direoctory-board-name">
+                    {directoryName}#{board.boardName}</div>
                 </div>
               ))}
             </Slider>
