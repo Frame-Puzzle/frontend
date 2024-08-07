@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./BoardMissionOn.css";
 import InputKeyword from "./InputKeyword";
+import CreateBoardWithoutMission from "./CreateBoardWithoutMission";
 
 // Create Board의 두 번째 전환 컴포넌트
 const BoardMissionOn = () => {
@@ -42,11 +43,7 @@ const BoardMissionOn = () => {
         </div>
       </div>
       {/* 동적 UI가 들어가는 곳 */}
-      {isChecked ?
-        <InputKeyword /> :
-        <div>
-          <span>미션 없이 퍼즐판 생성하기 버튼</span>
-        </div>}
+      { isChecked ? <InputKeyword /> : <CreateBoardWithoutMission /> }
     </div>
   )
 }
