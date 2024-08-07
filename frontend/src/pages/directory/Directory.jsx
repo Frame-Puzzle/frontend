@@ -10,8 +10,11 @@ import DirectoryCanvas from "../../components/directory/DirectoryCanvas";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useDispatch } from "react-redux";
-import { setDirectoryId } from "../../stores/createBoard";
+import { useDispatch, useSelector } from "react-redux";
+import { setDirectoryId } from "../../stores/createBoardSlice";
+
+import DirectoryModalFrame from "../modalFrame/DirectoryModalFrame";
+import { setMemberList } from "../../stores/directorySlice";
 
 const Directory = () => {
   const { id } = useParams();
@@ -24,6 +27,8 @@ const Directory = () => {
   const [memberList, setMemberList] = useState([]);
   const [modal, setModal] = useState(false);
 
+  const directory = useSelector((state) => state.directory);
+
   useEffect(() => {
     const fetchDirectory = async () => {
       const response = await directoryApi.get(`/${id}`);
@@ -33,6 +38,7 @@ const Directory = () => {
       setCategory(data.category);
       setBoardList(data.boardList);
       setMemberList(data.memberList);
+      dispatch(setMemberList(data.memberList));
     };
     fetchDirectory();
   }, [id]);
@@ -74,6 +80,7 @@ const Directory = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
+      {directory.modalId !== 0 ? <DirectoryModalFrame /> : null}
       <div className="directory-header">
         <MainHeader
           title={directoryName}
