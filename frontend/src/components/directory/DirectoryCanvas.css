@@ -10,8 +10,7 @@
 } 
 .directory-canvas {
   display: block;
-   
-  width: 250px;
-  height: 60vh;
+   width: 285px;
+   height: 55vh;
   box-sizing: border-box;
 } 
