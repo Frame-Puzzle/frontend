@@ -2,6 +2,7 @@ import "./InvitedMember.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalId } from "../../../stores/directorySlice";
 import { useEffect, useState } from "react";
+
 import directoryApi from "../../../apis/directoryApi";
 import { setMemberList } from "../../../stores/directorySlice";
 

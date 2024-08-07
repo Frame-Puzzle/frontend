@@ -3,14 +3,15 @@
   height: 100%;
   background-color: #ffffff;
   border-bottom: lightgray 1px solid;
+  border-top: lightgray 1px solid;
 }
 
 /* ******************************************* */
 
 .member-header-left {
-  width: 20%;
+  width: 22%;
   height: 100%;
-
+  padding: 1.2vh 0vw;
   border-right: lightgray 1px solid;
   box-sizing: border-box;
   display: flex;
@@ -19,9 +20,14 @@
   flex-direction: column;
 }
 
-.member-header-logo {
+.member-header-left-logo {
   width: 30%;
   margin: 1vh 1vw;
+}
+
+.member-header-right-logo {
+  width: 40%;
+  margin: 0.46vh 1vw;
 }
 
 .member-header-comment {
@@ -29,13 +35,16 @@
 }
 
 .member-header-middle {
+  padding-top: 1vh;
   width: 60%;
   box-sizing: border-box;
   display: flex;
+  overflow: hidden;
 }
 
 .member-header-right {
-  width: 20%;
+  padding: 1.2vh 0vw;
+  width: 22%;
   height: 100%;
   border-left: lightgray 1px solid;
   box-sizing: border-box;

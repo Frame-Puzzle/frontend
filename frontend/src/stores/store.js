@@ -20,8 +20,12 @@ const rootReducer = combineReducers({
   // cart: cart.reducer
   user: user.reducer,
   createBoard: createBoard.reducer,
+<<<<<<< HEAD
   piece: piece.reducer,
   directory: directory.reducer
+=======
+  piece: piece.reducer
+>>>>>>> 667c9ba31e36d6f9466697dfc1bc5e9a96e7ffb0
 });
 
 const persistConfig = {

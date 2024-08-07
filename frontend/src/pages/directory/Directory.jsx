@@ -3,6 +3,7 @@ import MainNav from "../../components/common/MainNav";
 import MainHeader from "../../components/common/MainHeader";
 import MemberHeader from "../../components/directory/MemberHeader";
 import "./Directory.css";
+
 import { useEffect, useState } from "react";
 import directoryApi from "../../apis/directoryApi";
 import DirectoryCanvas from "../../components/directory/DirectoryCanvas";
@@ -16,7 +17,9 @@ import { setDirectoryId } from "../../stores/createBoardSlice";
 import DirectoryModalFrame from "../modalFrame/DirectoryModalFrame";
 import { setMemberList } from "../../stores/directorySlice";
 
+
 const Directory = () => {
+  // url Parameter 이름과 동일하게 'id'를 사용해야 한다.
   const { id } = useParams();
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +31,14 @@ const Directory = () => {
   const [modal, setModal] = useState(false);
 
   const directory = useSelector((state) => state.directory);
+
+  /* 디렉토리 상세페이지에 존재하는 퍼즐판 추가 버튼을 누르면 동률의 위치로
+  페이지 라우팅되는 것이므로 고유 디렉토리 번호는 props로 전송 불가하다.
+  따라서 디렉토리 상세페이지가 처음으로 mount될 때, Rudex에 고유 디렉토리 번호를 저장해야 한다. */
+  useEffect(() => {
+    // 주의 : id는 Number가 아닌 String Type
+    dispatch(setDirectoryId(id));
+  }, []);
 
   useEffect(() => {
     const fetchDirectory = async () => {
@@ -90,7 +101,7 @@ const Directory = () => {
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit.png"
               alt="thirdIcon"
               className="header-icon"
-              style={{ width: "40%" }}
+              style={{ width: "38%", marginLeft: "7vw" }}
             />
           }
           category={category}
@@ -111,20 +122,16 @@ const Directory = () => {
             category={category}
           />
         </div>
-        <div
-          style={{
-            width: "300px",
-            margin: "auto",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
+        <div className="directory-middle-container">
           <div className="directory-create-board">
             <span className="board-plus">퍼즐 추가</span>
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/plus.png"
               alt="board-plus"
               className="board-plus-logo"
+              onClick={() => {
+                nav(`/create-board/select-size`);
+              }}
             />
           </div>
         </div>
@@ -138,7 +145,9 @@ const Directory = () => {
                   onMouseUp={handleMouseUp(board.boardId)}
                 >
                   <DirectoryCanvas boardSize={board.boardSize} />
-                  <div>{board.boardName}</div>
+                  <div className="direoctory-board-name">
+                    {directoryName}#{board.boardName}
+                  </div>
                 </div>
               ))}
             </Slider>
