@@ -5,14 +5,14 @@ import { useEffect, useState, useRef } from "react";
 import directoryApi from "../../../apis/directoryApi";
 
 import InvitedMember from "./InvitedMember";
-import createBoard from "../../../stores/createBoardSlice";
+import { setMemberList } from "../../../stores/directorySlice";
 
 const InviteDirectory = () => {
   const dispatch = useDispatch();
   const directory = useSelector((state) => state.directory);
   const createBoard = useSelector((state) => state.createBoard);
 
-  const [memberList, setMemberList] = useState([]);
+  const [memberStateList, setMemberStateList] = useState([]);
   const [inputEmail, setInputEmail] = useState("");
   const [userList, setUserList] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
@@ -20,7 +20,7 @@ const InviteDirectory = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    setMemberList(directory.memberList);
+    setMemberStateList(directory.memberList);
   }, [directory.memberList]);
 
   useEffect(() => {
@@ -51,7 +51,6 @@ const InviteDirectory = () => {
   }, [inputEmail, isFocused, createBoard.directoryId]);
 
   const fetchInvitedMember = async () => {
-    console.log(inviteMember);
     const data = {
       userId: inviteMember.userId,
     };
@@ -61,11 +60,24 @@ const InviteDirectory = () => {
         data
       );
 
-      dispatch(setModalId(0));
+      fetchDirectory();
+      setInviteMember({});
     } catch (error) {
       console.error("Error fetching invited member:", error);
     }
   };
+
+  const fetchDirectory = async () => {
+    const response = await directoryApi.get(`/${createBoard.directoryId}`);
+    const data = response.data.data;
+
+    setMemberStateList(data.memberList);
+  };
+
+  useEffect(() => {
+    dispatch(setMemberList(memberStateList));
+  }, [memberStateList]);
+
   return (
     <div className="invite-directory-modal flex flex-wrap">
       <div className="invite-directory-modal-header flex">
@@ -79,16 +91,15 @@ const InviteDirectory = () => {
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
           alt="x-symbol"
           className="x-symbol"
-          onClick={() => {
-            dispatch(setModalId(0));
-          }}
+          onClick={() => dispatch(setModalId(0))}
         />
       </div>
       <div className="invite-directory-modal-body">
         <div className="email-input-container">
           <span>초대하고 싶은 멤버의 이메일을 입력하세요</span>
           <div className="email-submit">
-            {Object.keys(inviteMember).length === 0 ? (
+            {Object.keys(inviteMember).length === 0 &&
+            memberStateList.length < 6 ? (
               <input
                 className="email-input"
                 type="email"
@@ -105,24 +116,35 @@ const InviteDirectory = () => {
               />
             ) : (
               <div className="invite-member-detail-container">
-                <div className="invite-member-detail">
-                  <span>{inviteMember.nickname}</span>
-                  <span>({inviteMember.email})</span>
-                  <img
-                    style={{ width: "10px", height: "10px" }}
-                    src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
-                    alt=""
-                    onClick={() => setInviteMember([])}
-                  />
-                </div>
+                {inviteMember.email ? (
+                  <div className="invite-member-detail">
+                    <span>{inviteMember.nickname}</span>
+                    <span>({inviteMember.email})</span>
+                    <img
+                      style={{ width: "10px", height: "10px" }}
+                      src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
+                      alt=""
+                      onClick={() => setInviteMember({})}
+                    />
+                  </div>
+                ) :  <div className="invite-member-detail" style={{backgroundColor :" transparent"}}></div>}
               </div>
             )}
             <button
-              disabled={Object.keys(inviteMember).length === 0}
+              disabled={
+                (Object.keys(inviteMember).length === 0 &&
+                  memberStateList.length < 6) ||
+                memberStateList.length >= 6
+              }
               onClick={fetchInvitedMember}
             >
               초대
             </button>
+          </div>
+          <div>
+            {memberStateList.length === 6 ? (
+              <span>최대 6명만 가능합니다.</span>
+            ) : null}
           </div>
         </div>
         {isFocused && userList.length !== 0 ? (
@@ -159,7 +181,7 @@ const InviteDirectory = () => {
           </div>
         ) : null}
         <div className="members-container">
-          {memberList.map((member, index) => (
+          {memberStateList.map((member, index) => (
             <InvitedMember key={index} member={member} />
           ))}
         </div>

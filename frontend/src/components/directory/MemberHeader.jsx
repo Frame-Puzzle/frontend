@@ -12,7 +12,6 @@ const MemberHeader = ({ memberList }) => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
-    console.log(memberList);
     if (memberList.length !== 0) setMembers(memberList);
     else setMembers([]);
   }, [memberList]);
@@ -32,13 +31,15 @@ const MemberHeader = ({ memberList }) => {
         <span className="member-header-comment">멤버</span>
       </div>
       <div className="member-header-middle">
-        {members.map((member, index) => (
-          <Profile
-            key={index}
-            imgUrl={member.profileUrl}
-            userName={member.nickname}
-          />
-        ))}
+        {members.map((member, index) =>
+          member.accept ? (
+            <Profile
+              key={index}
+              imgUrl={member.profileUrl}
+              userName={member.nickname}
+            />
+          ) : null
+        )}
       </div>
 
       <div className="member-header-right">
