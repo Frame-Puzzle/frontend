@@ -16,10 +16,7 @@ const Notification = () => {
     const fetchAlarmData = async () => {
       try {
         const response = await NotificationApi.get("");
-        console.log("response get ", response);
-        console.log("response data: ", response.data);
         const data = response.data.data.notificationList || []; // 전체 데이터, 없으면 빈 배열
-        console.log("get 데이터", data);
         setAlarmData(data);
       } catch (error) {
         console.error("Error fetching alarm data: ", error);
