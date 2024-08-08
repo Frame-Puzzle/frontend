@@ -6,6 +6,16 @@ import MainNav from "../components/common/MainNav";
 import NotificationApi from "../apis/NotificationApi";
 import NotificationList from "../components/notification/NotificationList";
 import "./Notification.css";
+<<<<<<< HEAD
+import { useEffect } from "react";
+
+const Notification = () => {
+  const nav = useNavigate();
+
+  useEffect(() => {
+    console.log("useEffect Test");
+  }, []);
+=======
 import { useEffect, useState } from "react";
 
 // 날짜 형식을 "2024년 8월 7일"로 변환하는 함수
@@ -32,6 +42,7 @@ const Notification = () => {
     fetchAlarmData();
   }, []);
 
+>>>>>>> 667c9ba31e36d6f9466697dfc1bc5e9a96e7ffb0
   return (
     <div className="w-full h-full">
       <div className="notification-header">

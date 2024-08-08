@@ -18,7 +18,6 @@ const DirectoryCanvas = ({ boardSize }) => {
     // paper.js 초기화
     paper.setup(canvasRef.current);
 
-    console.log(boardSize);
 
     // 퍼즐 크기 지정
     let boardConfig;

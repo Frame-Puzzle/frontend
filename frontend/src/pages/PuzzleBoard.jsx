@@ -30,7 +30,6 @@ const PuzzleBoard = () => {
       const response = await boardApi.get(`/${boardID}`);
       const data = response.data.data;
 
-
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
