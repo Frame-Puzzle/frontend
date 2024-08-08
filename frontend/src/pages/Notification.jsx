@@ -6,6 +6,7 @@ import MainNav from "../components/common/MainNav";
 import NotificationApi from "../apis/NotificationApi";
 import NotificationList from "../components/notification/NotificationList";
 import "./Notification.css";
+
 import { useEffect, useState } from "react";
 
 // 날짜 형식을 "2024년 8월 7일"로 변환하는 함수
