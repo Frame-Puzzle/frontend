@@ -13,12 +13,12 @@
   font-family: "pretendard-bold";
 }
 
-.button_purple {
+.button-purple {
   background-color: #c3c7f4;
   color: white;
 }
 
-.button_reverse_purple {
+.button-reverse-purple {
   border-radius: 21px;
   border: 2px solid var(--Color3, #c3c7f4);
   background: var(--White, #fff);

@@ -1,6 +1,9 @@
 .notification-header {
   width: 100%;
   height: 10%;
+  /* position: fixed; */
+  /* z-index: 1000; */
+  /* 다른 화면 보다 위에 있게! */
 }
 
 .icon-header {
@@ -13,11 +16,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto; /* 세로 스크롤 활성화 */
 }
 
 .notification-footer {
   width: 100%;
   height: 10%;
+  /* position: fixed; */
+  /* z-index: 1000; */
+  /* 다른 화면 보다 위에 있게! */
 }
 
 .alarm-empty-space {

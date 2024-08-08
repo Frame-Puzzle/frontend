@@ -1,0 +1,62 @@
+.notification-item {
+  height: 15%;
+  width: 100%;
+}
+.notification-item-img {
+  /* 좌측 프로필 이미지 */
+  width: 100%;
+}
+
+.notification-item-header {
+  display: flex;
+  align-items: center;
+}
+.read-indicator {
+  /* 날짜 옆 점 */
+  width: 5px;
+  height: 5px;
+}
+
+.notification-item-date {
+  /* 본문 위 상단 */
+  color: #b0b0b0;
+  font-size: 10px;
+  margin-right: 10%;
+}
+
+.read-indicator {
+  /* 날짜 옆 점 */
+  width: 5px; /* 원하는 크기로 설정하세요 */
+  height: 5px; /* 원하는 크기로 설정하세요 */
+}
+.notification-item-content {
+  /* 날짜 아래 본문 */
+}
+.notification-item-button-align {
+  /* 배치만 나타내기  */
+  display: flex;
+  align-items: center;
+}
+
+.notification-into-puzzle {
+  cursor: pointer;
+  border-radius: 21px;
+  border: 2px solid var(--Color3, #c3c7f4);
+  background: var(--White, #fff);
+  color: #c3c7f4;
+}
+
+.notification-positive {
+  cursor: pointer;
+  border-radius: 21px;
+  text-align: center;
+  background-color: #c3c7f4;
+  color: white;
+}
+.notification-negative {
+  cursor: pointer;
+  border-radius: 21px;
+  border: 2px solid var(--Color3, #c3c7f4);
+  background: var(--White, #fff);
+  color: #c3c7f4;
+}
