@@ -88,9 +88,9 @@ const ChooseImg = () => {
         {mission ? (
           <div className="mission-container">
             <span className="mission-title">Mission</span>
-            <span>{mission}</span>
+            <span className="mission">{mission}</span>
           </div>
-        ) : null}
+        ) : (null)}
         <div className="uploading-img" onClick={handleClick}>
           {imgUrl ? (
             <img src={imgUrl} alt="new-img" className="uploaded-img" />
@@ -114,8 +114,8 @@ const ChooseImg = () => {
           onChange={handleFileChange}
         />
         <div className="image-description">
-          <span>덧붙이고 싶은 설명을 적어주세요.</span>
-          <input type="text" value={comment} onChange={handleImgText} />
+          <span className="image-description-span">덧붙이고 싶은 설명을 적어주세요.</span>
+          <input className="image-description-input" type="text" value={comment} onChange={handleImgText} />
         </div>
       </div>
 

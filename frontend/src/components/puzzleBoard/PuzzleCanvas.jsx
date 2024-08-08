@@ -9,7 +9,7 @@ import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
 
 import {
   setPieceId,
-  setComment, 
+  setComment,
   setImgUrl,
   setMission,
 } from "../../stores/pieceSlice";
@@ -23,17 +23,18 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
   const dispatch = useDispatch();
   const piece = useSelector((state) => state.piece);
 
-  const resetCanvas = () => {
-    paper.project.clear();
-    paper.view.update();
-  };
-
   useEffect(() => {
     // paper.js 초기화
-    paper.setup(canvasRef.current);
+    const canvas = canvasRef.current;
+    paper.setup(canvas);
+
+    // const dpr = window.devicePixelRatio || 1 *1.15;
+    // canvas.width = canvas.clientWidth * dpr;
+    // canvas.height = canvas.clientHeight * dpr;
+    // paper.setup(canvas);
+    // paper.view.zoom = 1 / dpr * 1.15;
 
     if (pieceData.length === 0) return;
-    resetCanvas();
 
     // 퍼즐 크기 지정
     let boardConfig;
@@ -65,7 +66,7 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
             console.log(response);
             const imgUrl = response.data.data.imgUrl;
             dispatch(setImgUrl(imgUrl));
-            
+
             const comment = response.data.data.comment;
             if (comment) dispatch(setComment(comment));
             else dispatch(setComment(""));
@@ -89,8 +90,8 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
   });
 
   return (
-    <div className="canvas-container">
-      <canvas ref={canvasRef} className="canvas"></canvas>
+    <div className="puzzle-canvas-container">
+      <canvas ref={canvasRef} className="puzzle-canvas"></canvas>
     </div>
   );
 };

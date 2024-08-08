@@ -6,7 +6,7 @@
 
 .board-main-content {
   width: 100%;
-  height: 80%;
+  height: 75%;
   overflow: hidden;
   justify-content: center;
   align-items: center;
@@ -14,15 +14,17 @@
 
 .board-keywords {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .board-keyword {
   border: #c3c7f4 2px solid;
-  padding: 5px 10px;
-  margin: 2px 0px;
-  border-radius: 10px;
+  padding: 5px 15px;
+  margin: 2vw -5vw;
+  border-radius: 20px;
+  font-size: 2vh;
+  font-family: "Pretendard-Medium";
 }
 
 .board-footer {
@@ -33,17 +35,19 @@
 .game-room-button {
   background-color: #c3c7f4;
   border: #c3c7f4;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 1.3vh 20vw;
+  border-radius: 20px;
   color: white;
+  font-family: "pretendard-bold";
 }
 
 .game-room-button:disabled {
-  background-color: lightgray;
-  border: lightgray;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
+  background-color: #E7E7E7;
+  border: #E7E7E7;
+  padding: 1.3vh 20vw;
+  border-radius: 20px;
+  color: #888888;
+  font-family: "pretendard-bold";
 }
 
 .game-room-container {

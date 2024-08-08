@@ -4,6 +4,7 @@ import MainNav from "../components/common/MainNav";
 import NotificationApi from "../apis/NotificationApi";
 import NotificationList from "../components/notification/NotificationList";
 import "./Notification.css";
+
 import { useEffect, useState } from "react";
 
 const Notification = () => {

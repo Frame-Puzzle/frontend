@@ -1,0 +1,21 @@
+.input-keyword-input {
+  width: 80%;
+  height: 4.5vh;
+  padding: 0 4vw;
+  border: 2px solid #E5E7EB;
+  border-radius: 9999px;
+  font-size: 2.5vw;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-keyword-next span {
+  position: absolute;
+  z-index: 2;
+}
+
+#input-keyword-next-activate {
+  cursor: pointer;
+  z-index: 3;
+}

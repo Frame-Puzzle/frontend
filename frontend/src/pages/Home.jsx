@@ -4,7 +4,7 @@ import MainSwipe from "./../components/common/MainSwipe";
 import HomeModalFrame from "./modalFrame/HomeModalFrame";
 import DirectoryList from "./../components/common/DirectoryList";
 import "./Home.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { useSelector } from "react-redux";
 import userApi from "../apis/userApi";
 import { useDispatch } from "react-redux";

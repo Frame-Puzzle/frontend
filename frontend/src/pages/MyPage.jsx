@@ -7,7 +7,11 @@ import MainNav from "../components/common/MainNav";
 import "./MyPage.css";
 import ProfileCircle from "../components/myPage/ProfileCircle";
 import userApi from "../apis/userApi";
-import { setNickName, setProfileImg } from "../stores/userSlice";
+import {
+  setAccessToken,
+  setNickName,
+  setProfileImg,
+} from "../stores/userSlice";
 import { useDispatch } from "react-redux";
 
 // 1. 가운데 동그란 프로필 사진
@@ -44,6 +48,11 @@ const MyPage = () => {
     fetchUserData();
   }, []);
 
+  const logout = () => {
+    dispatch(setAccessToken(""));
+    nav("/");
+  };
+
   return (
     <div className="w-full h-full">
       <div className="mypage-header">
@@ -51,25 +60,27 @@ const MyPage = () => {
         <MainHeader title="My Page" />
       </div>
       <div className="mypage-main-content">
-        <ProfileCircle />
+        <div className="profile">
+          <ProfileCircle />
+        </div>
         <div className="nickname">{userData.nickname}</div>
         <div className="email">{userData.email}</div>
-        <div style={{ height: "10%" }}>
+        <div>
           <ChangeNickButton
             onClick={() => nav("/mypage/edit")}
             text="닉네임 변경"
             nickname={userData.nickname}
           />
         </div>
-        <div>{/* 라인 */}</div>
-        <div style={{ height: "10%" }}>
+        <hr className="mypage-line"></hr>
+        <div>
           <RectangularButton
-            onClick={() => nav("/home")} // logout modal
-            text={"로그 아웃"}
+            onClick={logout} // logout modal
+            text={"로그아웃"}
             type={"purple"}
           />
         </div>
-        <div style={{ height: "10%" }}>
+        <div>
           <RectangularButton
             onClick={() => nav("/home")} // logout modal
             text={"회원 탈퇴"}

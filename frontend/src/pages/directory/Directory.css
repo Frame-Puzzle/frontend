@@ -1,0 +1,63 @@
+.directory-header {
+  width: 100%;
+  height: 10%;
+}
+
+directory-member-header {
+  width: 100%;
+  height: 10%;
+  overflow: hidden;
+}
+
+.directory-main-content {
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.directory-middle-container{
+  /* canvas의 width와 동일*/
+  width: '230px';
+  display: flex;
+  justify-content: flex-end;
+}
+
+.directory-create-board {
+  display: flex;
+  height: 10%;
+  padding-top: 3vh;
+  margin: 0vw 14vw;
+}
+
+.board-plus{
+  font-size: 4vw;
+  font-family: "pretendard-medium";
+  color: #B0B0B0;
+}
+
+.board-plus-logo {
+  margin-left: 1.5vw;
+  padding-top: 0.3vw;
+  width: 20%;
+  height: 50%;
+}
+
+.direoctory-board-name{
+  display: flex;
+  justify-content: center;
+  margin: 0 30vw;
+  margin-top: -2vh;
+  border: #F1BDEC 2.1px solid;
+  padding: 0.8vh 4vw;
+  font-size: 4vw;
+  color: #F1BDEC;
+  font-family: "pretendard-bold";
+  border-radius: 20px;
+}
+
+.directory-footer {
+  width: 100%;
+  height: 10%;
+}

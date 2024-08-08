@@ -30,8 +30,6 @@ const PuzzleBoard = () => {
       const response = await boardApi.get(`/${boardID}`);
       const data = response.data.data;
 
-      console.log("data", data);
-
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
@@ -42,7 +40,7 @@ const PuzzleBoard = () => {
     };
 
     fetchPuzzleData();
-  }, [piece.pieceId]);
+  }, [piece.pieceId]); 
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
@@ -67,7 +65,7 @@ const PuzzleBoard = () => {
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
               alt="thirdIcon"
               className="header-icon"
-              style={{ width: "30%" }}
+              style={{ width: "40%", marginLeft: "7vw" }}
             />
           }
           category={category}
