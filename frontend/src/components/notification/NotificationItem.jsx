@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "./NotificationItem.css";
 import { useNavigate } from "react-router-dom";
 import NotificationApi from "../../apis/NotificationApi";
-import RedDot from "../../assets/icon/red-dot.svg";
 
 // 눌렀을 때 routing은 없고, 읽음 여부 바꿔줘야함.
 // type
@@ -145,7 +144,7 @@ const NotificationItem = ({ item }) => {
           <span
             className="notification-into-puzzle"
             onClick={() => {
-              nav(`/game/${item.boardId}`); // 추후 주소 설정 필요
+              nav(`/boards/${item.boardId}`);
               setRead(true);
             }}
           >
@@ -167,7 +166,12 @@ const NotificationItem = ({ item }) => {
           {formatDate(item.createTime)}
         </div>
         <div className="read-indicator">
-          {!read && <img src={RedDot} alt="Red Dot" />}
+          {!read && (
+            <img
+              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/red-dot.png"
+              alt="Red Dot"
+            />
+          )}
         </div>
       </div>
       <div className="notification-item-content">{getContent()}</div>
