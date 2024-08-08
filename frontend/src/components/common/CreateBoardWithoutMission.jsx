@@ -32,7 +32,7 @@ const CreateBoardWithoutMission = () => {
   }
 
   return (
-    <div className="create-board-without-mission">
+    <div className="create-board-without-mission w-full flex">
       <span onClick={() => {
         // 퍼즐판 생성 API
         const asyncPostBoards = async (boardSize, directoryId) => {
