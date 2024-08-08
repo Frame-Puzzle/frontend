@@ -63,9 +63,12 @@ const ChangeNickName = () => {
   return (
     <div className="w-full h-full">
       <div className="change-nick-name-header">
-        <MainHeader title={"닉네임 변경"} category={"친구"} /> {/* category는 test */}
+        <MainHeader title={"닉네임 변경"}/> {/* category는 test */}
       </div>
       <div className="change-nick-name-main-content">
+        <div className="change-nickname-text">
+          새로운 닉네임을 입력해 주세요
+        </div>
         <input
           type="text"
           value={newNickName}
@@ -75,34 +78,40 @@ const ChangeNickName = () => {
           placeholder={user.nickName}
           className="nickname-input"
         />
-        {!isDuplicated &&
-          isAvailableWord &&
-          isAvailableLength &&
-          newNickName !== "" && (
-            <div>
-              <p>사용 가능한 닉네임입니다.</p>
-            </div>
-          )}
         {newNickName === "" && (
-          <div>
+          <div className="bad-nickname">
             <p>닉네임을 입력해주세요</p>
           </div>
         )}
-        {isDuplicated && (
-          <div>
+        {newNickName !== "" && isDuplicated && (
+          <div className="bad-nickname">
             <p>이미 존재하는 닉네임입니다.</p>
           </div>
         )}
-        {!isAvailableWord && newNickName !== "" && (
-          <div>
-            <p> 입력 형식이 올바르지 않습니다. </p>
+        {newNickName !== "" &&
+          !isDuplicated &&
+          !isAvailableWord &&
+          isAvailableLength && (
+          <div className="bad-nickname">
+            <p>입력 형식이 올바르지 않습니다.</p>
           </div>
         )}
-        {!isAvailableLength && newNickName !== "" && (
-          <div>
-            <p>한글 10자 영어 20자 이내만 가능합니다. </p>
+        {newNickName !== "" &&
+          !isDuplicated &&
+          !isAvailableLength && (
+          <div className="bad-nickname">
+            <p>한글 10자 영어 20자 이내만 가능합니다.</p>
           </div>
         )}
+        {newNickName !== "" &&
+          !isDuplicated &&
+          isAvailableWord &&
+          isAvailableLength && (
+          <div className="good-nickname">
+            <p>사용 가능한 닉네임입니다.</p>
+          </div>
+        )}
+
         <button
           className="nickname-confirm"
           onClick={submitNewNickName}
