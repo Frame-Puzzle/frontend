@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import AlarmIcon from "../assets/icon/alarm-bell.svg";
-import EmptyIcon from "../assets/icon/notification-empty.svg";
 import MainHeader from "../components/common/MainHeader";
 import MainNav from "../components/common/MainNav";
 import NotificationApi from "../apis/NotificationApi";
@@ -33,7 +31,7 @@ const Notification = () => {
           title="Notification"
           icon={
             <img
-              src={AlarmIcon}
+              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/notification-alarm-bell.png"
               alt="thirdIcon"
               className="icon-header"
               onClick={() => nav("/testrtc")}
@@ -44,7 +42,11 @@ const Notification = () => {
       <div className="notification-main-content">
         {alarmData.length === 0 ? (
           <div className="alarm-empty-space">
-            <img src={EmptyIcon} alt="empty" className="alarm-empty-icon" />
+            <img
+              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/notification-empty.png"
+              alt="empty"
+              className="alarm-empty-icon"
+            />
             <div className="alarm-empty-text">아직 알림이 없네요!</div>
           </div>
         ) : (

@@ -2,7 +2,6 @@ import MainHeader from "../components/common/MainHeader";
 import RectangularButton from "../components/common/buttons/RectangularButton";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import TempIcon from "../assets/icon/navh-directoryRename.svg";
 import ChangeNickButton from "../components/myPage/ChangeNickButton";
 import MainNav from "../components/common/MainNav";
 import "./MyPage.css";
@@ -49,18 +48,13 @@ const MyPage = () => {
     <div className="w-full h-full">
       <div className="mypage-header">
         {/* <MainHeader />에 icon props로 건네주는 img의 width는 항상 120%로 고정하는 것으로 약속한다. */}
-        <MainHeader
-          title="My Page"
-          icon={
-            <img src={TempIcon} alt="thirdIcon" className="icon-header" />
-          }
-        />
+        <MainHeader title="My Page" />
       </div>
       <div className="mypage-main-content">
         <ProfileCircle />
         <div className="nickname">{userData.nickname}</div>
         <div className="email">{userData.email}</div>
-        <div style={{height: "10%"}}>
+        <div style={{ height: "10%" }}>
           <ChangeNickButton
             onClick={() => nav("/mypage/edit")}
             text="닉네임 변경"
@@ -68,18 +62,18 @@ const MyPage = () => {
           />
         </div>
         <div>{/* 라인 */}</div>
-        <div style={{height: "10%"}}>
+        <div style={{ height: "10%" }}>
           <RectangularButton
             onClick={() => nav("/home")} // logout modal
             text={"로그 아웃"}
             type={"purple"}
           />
         </div>
-        <div style={{height: "10%"}}>
+        <div style={{ height: "10%" }}>
           <RectangularButton
             onClick={() => nav("/home")} // logout modal
             text={"회원 탈퇴"}
-            type={"reverse_purple"}
+            type={"reverse-purple"}
           />
         </div>
       </div>
