@@ -1,7 +1,13 @@
 .keyword-exception-message-red {
+  font-size: 2.2vw;
   color: #E65B5B;
+  margin-left: 14vw;
+  margin-bottom: 1vh;
 }
 
 .keyword-exception-message-green {
+  font-size: 2.2vw;
   color: #27C28A;
+  margin-left: 14vw;
+  margin-bottom: 1vh;
 }

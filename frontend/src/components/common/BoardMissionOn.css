@@ -69,5 +69,83 @@
   right: 0px;
 }
 
-/* ************************************************ */
+/* *************** 여기까지 Toggle Design **************** */
 
+.board-mission-on-progress {
+  width: 100%;
+  height: 20%;
+  border-top: 1px solid lightslategray;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 3vw;
+  padding-left: 9vw;
+}
+
+.board-mission-on-progress span {
+  text-align: center;
+  width: 8vw;
+  padding: 0.8vh 0;
+  border-radius: 9999px;
+  margin: 0 2vw;
+}
+
+.board-mission-on-progress span:nth-child(1) {
+  background-color: #FFFFFF;
+  color: #C3C7F4;
+  border: 1px solid #C3C7F4;
+}
+
+.board-mission-on-progress span:nth-child(2) {
+  background-color: #C3C7F4;
+  color: #FFFFFF;
+  border: none;
+}
+
+.board-mission-on-title {
+  width: 100%;
+  padding: 3vw;
+  padding-left: 9vw;
+}
+
+.board-mission-on-title span {
+  font-size: 5vw;
+  font-weight: 600;
+  margin-left: 1vw;
+}
+
+.board-mission-on-title span:nth-child(1) {
+  margin-bottom: 1vh;
+}
+
+.board-mission-on-toggle-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2vh 0;
+}
+
+.board-mission-on-toggle-line {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #F1BDEC;
+  border-radius: 7vw;
+  padding: 1.5vh 5vw;
+}
+
+/* 토글 버튼 내에도 <span>이 있기 때문 */
+.board-mission-on-toggle-line span:nth-child(1) {
+  font-size: 5vw;
+  font-weight: 700;
+}
+
+.board-mission-on-toggle-switch {
+  margin-left: 7vw;
+}
+
+.board-mission-on-dynamic-ui {
+  width: 100%;
+  height: 40%; /* 構わない */
+}

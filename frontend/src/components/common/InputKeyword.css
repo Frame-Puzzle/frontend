@@ -1,21 +1,58 @@
+.input-keyword-main-container {
+  width: 100%;
+  height: 60%;
+  padding: 2vw;
+  padding-top: 3vw;
+}
+
+.input-keyword-main-container span:nth-child(1) {
+  font-size: 4.2vw;
+  font-weight: 600;
+  margin-left: 14vw;
+  margin-bottom: 1vh;
+}
+
 .input-keyword-input {
-  width: 80%;
+  width: 70%;
   height: 4.5vh;
   padding: 0 4vw;
   border: 2px solid #E5E7EB;
   border-radius: 9999px;
-  font-size: 2.5vw;
+  font-size: 3vw;
   outline: none;
-  transition: border-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-bottom: 1vh;
+}
+
+.pill-container {
+  padding-left: 10vw;
+}
+
+.input-keyword-next {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
 }
 
 .input-keyword-next span {
   position: absolute;
   z-index: 2;
+  background-color: #E7E7E7;
+  color: #888888;
+  font-size: 4.2vw;
+  font-weight: 600;
+  width: 40vw;
+  text-align: center;
+  padding: 2vh 0;
+  border-radius: 9999px;
 }
 
 #input-keyword-next-activate {
   cursor: pointer;
   z-index: 3;
+  background-color: #C3C7F4;
+  color: #FFFFFF;
+  border: none;
 }
