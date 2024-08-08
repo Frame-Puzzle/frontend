@@ -8,12 +8,6 @@ import NotificationList from "../components/notification/NotificationList";
 import "./Notification.css";
 import { useEffect, useState } from "react";
 
-// 날짜 형식을 "2024년 8월 7일"로 변환하는 함수
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
-};
-
 const Notification = () => {
   const nav = useNavigate();
   const [alarmData, setAlarmData] = useState([]);
@@ -22,15 +16,18 @@ const Notification = () => {
     const fetchAlarmData = async () => {
       try {
         const response = await NotificationApi.get("");
-        const data = response.data.notifications || []; // 전체 데이터, 없으면 빈 배열
+        console.log("response get ", response);
+        console.log("response data: ", response.data);
+        const data = response.data.data.notificationList || []; // 전체 데이터, 없으면 빈 배열
+        console.log("get 데이터", data);
         setAlarmData(data);
       } catch (error) {
-        console.error(error);
-        alert("데이터를 불러오는 중 오류가 발생했습니다.");
+        console.error("Error fetching alarm data: ", error);
+        alert("알림 데이터를 불러오는 중 오류가 발생했습니다.");
       }
     };
     fetchAlarmData();
-  }, []);
+  }, []); // 빈 배열을 의존성 배열로 전달하여 컴포넌트 마운트 시 한 번만 실행되도록 함
 
   return (
     <div className="w-full h-full">
