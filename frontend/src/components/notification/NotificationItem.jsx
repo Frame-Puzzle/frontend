@@ -16,24 +16,46 @@ import NotificationApi from "../../apis/NotificationApi";
 // 2. 알림 날짜
 // 3. 안읽음 표시 빨간등 isread
 // 4. 퍼즐 게임 하러가기
+
+// 대전제: 수락 여부가 0인 경우면 버튼이 필요한 경우!
+// 추가: acceptStatus가 3이면 type 0, type 1은 버튼말고 text로 존재하지 않는 초대, 요청입니다. 가 띄워져야 함
 const NotificationItem = ({ item }) => {
   const nav = useNavigate();
-  const [isRead, setIsRead] = useState(item.isread); // 버튼 눌렀을 때 읽음 바로 확인해주기 위해
+  const [read, setRead] = useState(item.isRead); // 버튼 눌렀을 때 읽음 바로 확인해주기 위해
   const [showButtons, setShowButtons] = useState(true);
+
+  // 날짜 형식을 "2024년 8월 7일 시간까지"로 변환하는 함수
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
+  };
 
   // 빨간 점 표시
   useEffect(() => {
-    setIsRead(item.isread);
-  }, [item.isread]);
+    setRead(item.isRead);
+    // 버튼이 안보이는 경우: type 2,3은 항상 보임
+    // acceptStatus가 0이 아닌 경우!(type 0, 1)에만 해당하는 버튼 숨기기
+    if (item.acceptStatus === 3) {
+      setRead(true); // 3번인 경우 내가 읽지 않았더라도 이미 삭제나, 초대 취소가 됐다면 읽음 표시 진행!(예외 사항)
+    }
 
-  const handleAcceptedToggle = async (acceptValue) => {
+    if (item.acceptStatus !== 0) {
+      setShowButtons(false);
+    }
+  }, [item]);
+
+  const handleAcceptedToggle = async (type, acceptValue) => {
     try {
       await NotificationApi.put(`/${item.notificationId}`, {
         notificationId: item.notificationId,
-        isRead: true,
+        read: true,
         accept: acceptValue,
       });
-      setIsRead(true);
+      setRead(true);
+
       setShowButtons(false);
     } catch (error) {
       console.error("알림 업데이트 실패", error);
@@ -58,61 +80,76 @@ const NotificationItem = ({ item }) => {
   };
 
   const getButton = () => {
-    if (!showButtons) return null;
+    if (item.acceptStatus === 3) {
+      // acceptStatus 먼저 처리하게 설정
+      return (
+        <div className="notification-noAction">
+          {item.type === 0 && "존재하지 않는 초대입니다"}
+          {item.type === 1 && "삭제 투표가 완료되었습니다."}
+        </div>
+      );
+    } else if (!showButtons) {
+      return null;
+    }
     switch (item.type) {
       case 0: // 유저 초대
         return (
           <>
-            <button
+            <span
               onClick={() => {
-                handleAcceptedToggle();
+                handleAcceptedToggle(1);
                 setShowButtons(false);
               }}
+              className="notification-positive"
             >
               참여
-            </button>
-            <button
+            </span>
+            <span
               onClick={() => {
-                handleAcceptedToggle();
+                handleAcceptedToggle(2);
                 setShowButtons(false);
               }}
+              className="notification-negative"
             >
               거절
-            </button>
+            </span>
           </>
         );
       case 1: // 퍼즐판 board 삭제 투표
         return (
           <>
-            <button
+            <span
               onClick={() => {
-                handleAcceptedToggle();
+                handleAcceptedToggle(1);
                 setShowButtons(false);
               }}
+              className="notification-positive"
             >
               수락
-            </button>
-            <button
+            </span>
+            <span
               onClick={() => {
-                handleAcceptedToggle();
+                handleAcceptedToggle(2);
                 setShowButtons(false);
               }}
+              className="notification-negative"
             >
               거절
-            </button>
+            </span>
           </>
         );
       case 2: // 퍼즐판 완성
       case 3: // 게임방 생성
         return (
-          <button
+          <span
+            className="notification-into-puzzle"
             onClick={() => {
-              nav(`/game/${item.boardId}`);
-              setIsRead(true);
+              nav(`/boards/${item.boardId}`);
+              setRead(true);
             }}
           >
             퍼즐 게임 하러가기
-          </button>
+          </span>
         );
       default:
         return null;
@@ -124,12 +161,21 @@ const NotificationItem = ({ item }) => {
       <div className="notification-item-img">
         <img src={item.imgUrl} alt="프로필 이미지" />
       </div>
-      <div className="notification-item-isRead">
-        <div className={isRead ? "read-indicator" : "unread-indicator"}></div>
+      <div className="notification-item-header">
+        <div className="notification-item-date">
+          {formatDate(item.createTime)}
+        </div>
+        <div className="read-indicator">
+          {!read && (
+            <img
+              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/red-dot.png"
+              alt="Red Dot"
+            />
+          )}
+        </div>
       </div>
       <div className="notification-item-content">{getContent()}</div>
-      <div className="notification-item-date">{item.createdDate}</div>
-      <div className="notification-item-buttons">{getButton()}</div>
+      <div className="notification-item-button-align">{getButton()}</div>
     </div>
   );
 };
