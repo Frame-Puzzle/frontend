@@ -165,6 +165,7 @@ const NotificationItem = ({ item }) => {
             className="notification-into-puzzle"
             onClick={() => {
               nav(`/boards/${item.boardId}`);
+              handleAcceptedToggle(0);
               setRead(true);
             }}
           >
