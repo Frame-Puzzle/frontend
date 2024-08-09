@@ -1,3 +1,19 @@
+.create-board-without-mission {
+  flex-direction: row;
+  justify-content: center;
+  /* padding-top으로 원하는만큼 간격 내릴 것 */
+  padding-top: 10vh;
+}
+
 .create-board-without-mission span {
   cursor: pointer;
+  background-color: #C3C7F4;
+  color: #FFFFFF;
+  border: none;
+  font-size: 4.2vw;
+  font-weight: 600;
+  width: 40vw;
+  text-align: center;
+  padding: 2vh 0;
+  border-radius: 9999px;
 }

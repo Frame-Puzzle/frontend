@@ -10,7 +10,7 @@ const KeywordPill = (props) => {
       // Event Bubbling 예방
       e.stopPropagation();
     }}>
-      <span>#{props.info}</span>
+      <span id="keyword-pill-content">#{props.info}</span>
       <div className="x-icon-container">
         <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png" alt="x-icon" />
       </div>

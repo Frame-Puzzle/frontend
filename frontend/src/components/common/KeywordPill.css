@@ -1,17 +1,24 @@
 .keyword-pill {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   background-color: #B0B0B0;
   color: #FFFFFF;
-  padding: 1.3vw;
+  padding: 1.5vw;
   border-radius: 9999px;
-  cursor: pointer;
+  /* margin-right 속성을 줘서 알약끼리 떨어뜨려야 함 */
+  margin-right: 2vw;
 }
 
-.keyword-pill span {
-  font-size: 1rem;
+#keyword-pill-content {
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 3vw;
   margin-right: 1vw;
 }
 
 .x-icon-container {
-  width: 1em;
-  aspect-ratio: 1 / 1;
+  width: 2vw;
 }
