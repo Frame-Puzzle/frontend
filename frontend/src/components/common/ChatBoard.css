@@ -1,0 +1,11 @@
+.chat-board-container {
+  width: 80%;
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.message{
+  margin: 10px;
+}

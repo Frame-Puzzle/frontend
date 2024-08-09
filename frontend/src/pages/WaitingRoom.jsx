@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MainHeader from "../components/common/MainHeader";
+import GameWaitingRoomHeader from "../components/common/GameWaitingRoomHeader";
 import { useSelector } from "react-redux";
 import socketApi from "../apis/socketApi";
 import "./WaitingRoom.css";
+import ChatBoard from "../components/common/ChatBoard";
+import MainNav from "../components/common/MainNav";
 
 const WaitingRoom = () => {
   const [inputMessage, setInputMessage] = useState("");
@@ -11,9 +14,15 @@ const WaitingRoom = () => {
   const [robyData, setRobyData] = useState(null);
   const [timer, setTimer] = useState(0);
 
+  const [robyKing, setRobyKing] = useState("");
+  const [robyUserList, setRobyUserList] = useState([]);
+  const [activateButton, setActivateButton] = useState([false]);
+  const [showGameImg, setShowGameImg] = useState(false);
+
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
 
   const waitingRoom = useSelector((state) => state.waitingRoom);
+  const user = useSelector((state) => state.user);
 
   // socket 연결
   useEffect(() => {
@@ -30,7 +39,7 @@ const WaitingRoom = () => {
       disconnectSocket();
       setIsConnected(false);
     };
-  }, [waitingRoom.boardId]); // useEffect의 의존성 배열에 waitingRoom.boardId 추가
+  }, []); // useEffect의 의존성 배열에 waitingRoom.boardId 추가
 
   // 소켓 연결 후 방 입장
   useEffect(() => {
@@ -40,64 +49,107 @@ const WaitingRoom = () => {
   }, [isConnected]);
 
   const joinRoom = () => {
-    const message = {
+    const data = {
       boardId: waitingRoom.boardId,
       userId: 0, // 불필요하다면 삭제 가능
       message: "유저 닉네임이 입장하였습니다.",
     };
 
-    sendMessage(`/pub/roby/entry/${waitingRoom.boardId}`, message);
+    sendMessage(`/pub/roby/entry/${waitingRoom.boardId}`, data);
+  };
+
+  // 데이터 불러온 후
+  useEffect(() => {
+
+    console.log(waitingRoom.directoryName)
+    if (!robyData) {
+      return;
+    }
+
+    console.log("robyData:", robyData);
+    setRobyKing(robyData.king);
+    setRobyUserList(robyData.robyUserList);
+
+    setActivateButton(robyData.maxPeople / 2 <= robyData.robyUserList.size);
+  }, [robyData]);
+
+  const handleInputMessage = (event) => {
+    setInputMessage(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key !== "Enter") {
+      return;
+    }
+
+    sendInputMessage();
+  };
+
+  const sendInputMessage = () => {
+    if (inputMessage === "") return;
+    const data = {
+      boardId: waitingRoom.boardId,
+      userId: 0, // 불필요한 정보
+      nickname: user.nickName,
+      message: inputMessage,
+    };
+
+    sendMessage(`/pub/message/${waitingRoom.boardId}`, data);
+    setInputMessage("");
   };
 
   return (
     <>
       <div className="w-full h-full flex flex-wrap relative">
         <div className="waiting-room-header">
-          <MainHeader title={"PUZZLE"} />
+          <MainHeader title={"PUZZLE"} directoryName={waitingRoom.directoryName} />
+        </div>
+        <div className="waiting-room-participation">
+          <GameWaitingRoomHeader
+            robyKing={robyKing}
+            robyUserList={robyUserList}
+          />
         </div>
 
         <div className="waiting-room-body">
-          {/* 메시지 목록 표시 */}
-          <div>
-            <h2>Messages:</h2>
-            <ul>
-              {messages.map((msg, index) => (
-                <li key={index}>
-                  <strong>{msg.nickname ? `${msg.nickname}:` : ''}</strong> {msg.message}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {showGameImg ? (
+            <img
+              className="show-waiting-room-game-img"
+              src={robyData.imgUrl}
+              alt="show-img"
+            />
+          ) : (
+            <ChatBoard messages={messages} />
+          )}
 
-          {/* Roby 정보 표시 */}
-          <div>
-            <h2>Roby Details:</h2>
-            {robyData ? (
-              <div>
-                <p>Roby ID: {robyData.robyId}</p>
-                <p>Max People: {robyData.maxPeople}</p>
-                <p>Start Time: {new Date(robyData.startTime).toLocaleString()}</p>
-                <p>End Time: {new Date(robyData.endTime).toLocaleString()}</p>
-                <p>Host: {robyData.king.nickname}</p>
-                <h3>Connected Users ({robyData.robyUserList?.length || 0}):</h3>
-                <ul>
-                  {robyData.robyUserList?.map((user, index) => (
-                    <li key={index}>
-                      <strong>{user.nickname}</strong> - <img src={user.profileImg} alt={user.nickname} width="30" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <p>Loading roby details...</p>
-            )}
+          <div className="chat-input-container">
+            <input
+              className="chat-input"
+              type="text"
+              value={inputMessage}
+              onChange={handleInputMessage}
+              onKeyDown={handleKeyDown}
+              placeholder="내용을 입력해주세요"
+            />
+            <button className="chat-input-button" onClick={sendInputMessage} />
           </div>
-
-          {/* 타이머 표시 */}
-          <div>
-            <h2>Timer:</h2>
-            <p>{timer}</p>
+        </div>
+        <div className="enter-game-room-container">
+          <button className="enter-game-room-button" disabled={activateButton}>
+            준비
+          </button>
+          <div
+            className="show-game-img"
+            onClick={() => setShowGameImg(!showGameImg)}
+          >
+            <img
+              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit-image-photo.png"
+              alt="show-img"
+            />
           </div>
+        </div>
+        <div className="waiting-room-footer">
+          <MainNav />
         </div>
       </div>
     </>
