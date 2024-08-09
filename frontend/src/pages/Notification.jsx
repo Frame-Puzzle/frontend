@@ -35,6 +35,7 @@ const Notification = () => {
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/notification-alarm-bell.png"
               alt="thirdIcon"
               className="icon-header"
+              style={{ width: "40%", marginLeft: "7vw" }}
               onClick={() => nav("/testrtc")}
             />
           }
