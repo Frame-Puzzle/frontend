@@ -18,6 +18,8 @@ const BoardSelectMission = () => {
   let [prevMissions, setPrevMissions] = useState([]);
   // 리로드 아이콘 동적 UI를 위한 스위치
   let [reloadActive, setReloadActive] = useState(true);
+  // 남은 미션 리로드 횟수
+  let [canReload, setCanReload] = useState(5);
 
   // 이 퍼즐판이 어느 디렉토리에 속해 있는지
   let directoryId = useSelector(state => state.createBoard.directoryId);
@@ -102,7 +104,7 @@ const BoardSelectMission = () => {
       </div>
       <div className="board-select-mission-title">
         <span>Our Mission</span>
-        <span>미션은 5회 재생성 가능합니다. 남은 횟수 : 1</span>
+        <span>미션은 5회 재생성 가능합니다. 남은 횟수 : {canReload}</span>
       </div>
       <div className="board-select-mission-main-container flex">
         {
@@ -117,7 +119,9 @@ const BoardSelectMission = () => {
               missions={missions}
               setMissions={setMissions}
               setPrevMissions={setPrevMissions}
-              reloadActive={reloadActive} />)
+              reloadActive={reloadActive}
+              setCanReload={setCanReload}
+              canReload={canReload} />)
           })
         }
       </div>

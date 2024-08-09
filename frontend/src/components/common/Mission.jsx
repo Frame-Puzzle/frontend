@@ -1,6 +1,7 @@
+import { useState } from "react";
 import "./Mission.css";
 
-const Mission = ({ info, postGuides, keywordList, prevMissions, directoryId, setMissions, missions, setPrevMissions, reloadActive }) => {
+const Mission = ({ info, postGuides, keywordList, prevMissions, directoryId, setMissions, missions, setPrevMissions, reloadActive, setCanReload, canReload }) => {
   return (
     <div className="mission flex">
       <span>{info}</span>
@@ -18,6 +19,9 @@ const Mission = ({ info, postGuides, keywordList, prevMissions, directoryId, set
             let deepcopy = [...prevMissions];
             deepcopy.push(guideList[0]);
             setPrevMissions(deepcopy);
+            // 남은 리로드 횟수 반영
+            let remain = canReload - 1;
+            setCanReload(remain);
           }
           asyncPostGuides(keywordList, prevMissions, directoryId);
         }} /> : null
