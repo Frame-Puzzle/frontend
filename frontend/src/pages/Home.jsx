@@ -2,9 +2,9 @@
 import MainNav from "../components/common/MainNav";
 import MainSwipe from "./../components/common/MainSwipe";
 import HomeModalFrame from "./modalFrame/HomeModalFrame";
-import DirectoryList from "./../components/common/DirectoryList";
+import DirectoryList from "./../components/home/DirectoryList";
 import "./Home.css";
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import userApi from "../apis/userApi";
 import { useDispatch } from "react-redux";
@@ -13,7 +13,7 @@ const Home = () => {
   let [modal, setModal] = useState(false);
   const [userNickName, showUserNickName] = useState("");
 
-  // JWT Token Test 
+  // JWT Token Test
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -40,23 +40,15 @@ const Home = () => {
       <div className="home-main-content bg-color1">
         <div className="top-title">HOME</div>
         <div className="user-info">
-          {/* JWT Token이 잘 저장되어 있는지 확인해보기, 없어지고 다시 생성되는 것을 확인하고 싶다면
-          localStorage에 저장되도록 만들지 말고, sessionStorage에 저장되도록 설정 파일을 수정하기 */}
-          <p
-            onClick={() => {
-              console.log("홈에서의 accessToken", user.accessToken);
-              console.log(typeof user.accessToken);
-            }}
-          >
-            안녕하세요
-          </p>
-          {/* use Redux */}
-          <p>{userNickName} 님</p>
+          {" "}
+          안녕하세요
+          <br />
+          {userNickName} 님
         </div>
-        <div>
+        <div className="home-swipe-content">
           <MainSwipe />
         </div>
-        <div>
+        <div className="makr-dir-container">
           <span
             className="make-dir"
             onClick={() => {
@@ -66,7 +58,7 @@ const Home = () => {
             새 디렉토리 만들기
           </span>
         </div>
-        <div>
+        <div className="home-under-white-bg">
           <DirectoryList />
         </div>
       </div>
