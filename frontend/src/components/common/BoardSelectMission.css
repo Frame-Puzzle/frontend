@@ -1,3 +1,74 @@
+.board-select-mission-progress {
+  width: 100%;
+  height: 15%; /* should modify */
+  border-top: 1px solid lightslategray;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 3vw;
+  padding-left: 9vw;
+}
+
+.board-select-mission-progress span {
+  text-align: center;
+  width: 8vw;
+  padding: 0.8vh 0;
+  border-radius: 9999px;
+  margin: 0 2vw;
+}
+
+.board-select-mission-progress span:nth-child(1) {
+  background-color: #FFFFFF;
+  color: #C3C7F4;
+  border: 1px solid #C3C7F4;
+}
+
+.board-select-mission-progress span:nth-child(2) {
+  background-color: #C3C7F4;
+  color: #FFFFFF;
+  border: none;
+}
+
+.board-select-mission-title {
+  width: 100%;
+  padding: 3vw;
+  padding-left: 5vw;
+}
+
+.board-select-mission-title span {
+  font-size: 5vw;
+  font-weight: 600;
+  margin-left: 1vw;
+}
+
+.board-select-mission-title span:nth-child(1) {
+  margin-bottom: 1vh;
+}
+
+.board-select-mission-main-container {
+  width: 100%;
+  height: 55%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* should insert padding */
+  padding-left: 5vw;
+}
+
+.create-board-with-mission-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .create-board-with-mission {
   cursor: pointer;
+  font-size: 4.2vw;
+  font-weight: 600;
+  width: 40vw;
+  text-align: center;
+  padding: 2vh 0;
+  border-radius: 9999px;
+  background-color: #C3C7F4;
+  color: #FFFFFF;
+  border: none;
 }

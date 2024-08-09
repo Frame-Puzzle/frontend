@@ -95,32 +95,46 @@ const BoardSelectMission = () => {
   }, [prevMissions]);
 
   return (
-    <div>
-      {
-        missions.map((a, i) => {
-          return (<Mission
-            info={a}
-            key={i}
-            postGuides={postGuides}
-            keywordList={keywordList}
-            prevMissions={prevMissions}
-            directoryId={directoryId}
-            missions={missions}
-            setMissions={setMissions}
-            setPrevMissions={setPrevMissions}
-            reloadActive={reloadActive} />)
-        })
-      }
-      <span className="create-board-with-mission" onClick={() => {
-        // 퍼즐판 생성 API
-        const asyncPostBoards = async (missions, keywordList, boardSize, directoryId) => {
-          const boardId = await postBoards(missions, keywordList, boardSize, directoryId);
-          // 퍼즐판 고유 번호를 이용하여 퍼즐판 상세 페이지로 라우팅하기
-          navigate(`/boards/${boardId}`);
+    <div className="board-select-mission w-full h-full">
+      <div className="board-select-mission-progress flex">
+        <span>1</span>
+        <span>2</span>
+      </div>
+      <div className="board-select-mission-title">
+        <span>Our Mission</span>
+        <span>미션은 5회 재생성 가능합니다. 남은 횟수 : 1</span>
+      </div>
+      <div className="board-select-mission-main-container flex">
+        {
+          missions.map((a, i) => {
+            return (<Mission
+              info={a}
+              key={i}
+              postGuides={postGuides}
+              keywordList={keywordList}
+              prevMissions={prevMissions}
+              directoryId={directoryId}
+              missions={missions}
+              setMissions={setMissions}
+              setPrevMissions={setPrevMissions}
+              reloadActive={reloadActive} />)
+          })
         }
-        // 실제로 호출하기
-        asyncPostBoards(missions, keywordList, boardSize, directoryId);
-      }}>퍼즐판 생성하기</span>
+      </div>
+      <div className="create-board-with-mission-container">
+        <span className="create-board-with-mission" onClick={(e) => {
+          // 이벤트 버블링 방지
+          e.stopPropagation();
+          // 퍼즐판 생성 API
+          const asyncPostBoards = async (missions, keywordList, boardSize, directoryId) => {
+            const boardId = await postBoards(missions, keywordList, boardSize, directoryId);
+            // 퍼즐판 고유 번호를 이용하여 퍼즐판 상세 페이지로 라우팅하기
+            navigate(`/boards/${boardId}`);
+          }
+          // 실제로 호출하기
+          asyncPostBoards(missions, keywordList, boardSize, directoryId);
+        }}>퍼즐판 생성하기</span>
+      </div>
     </div>
   )
 }

@@ -33,7 +33,7 @@ const PuzzleBoard = () => {
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
-      setKeywords(data.keyword);
+      if (data.keyword) { setKeywords(data.keyword); }
       setBoardSize(data.boardSize);
       setPieceId(data.pieceList[0].pieceId);
       setPieceData(data.pieceList);
