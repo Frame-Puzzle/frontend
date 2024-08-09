@@ -45,7 +45,7 @@ const InvitedMember = ({ member }) => {
       ></div>
 
       <div className="member-details">
-        <span>{member.nickname}</span>
+        <span className="member-nickname">{member.nickname}</span>
         <span className="member-email">{member.email}</span>
       </div>
       {member.accept ? (
@@ -54,7 +54,7 @@ const InvitedMember = ({ member }) => {
         </button>
       ) : null}
       {!member.accept ? (
-        <button onClick={deleteMember}>초대 취소</button>
+        <button className="cancel-button" onClick={deleteMember}>초대 취소</button>
       ) : null}
     </div>
   );

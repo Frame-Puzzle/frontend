@@ -3,25 +3,40 @@
   height: 20%;
   display: flex;
   align-items: center;
-  padding: 0.5vh 0vw 0vh 0.5vw;
+  padding: 0.5vh 1vw 1.2vh 4vw;
 }
 
 .invited-member-circle {
   background-size: cover;
   background-position: center;
-  width: 50px;
-  height: 50px;
+  width: 4.5vh;
+  height: 4.5vh;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 2vw;
+  border: 2px solid #c3c7f4;
 }
 
 .member-button {
   background-color: #c3c7f4;
   color: white;
-  padding: 2px 10px;
-  border-color: #c3c7f4;
+  padding: 0.9vh 0;
+  border: 2px solid #c3c7f4;
   border-radius: 10px;
+  font-family: "pretendard-medium";
+  width: 15vw;
+  font-size: 3vw;
+}
+
+.cancel-button{
+  background-color: white;
+  color: #c3c7f4;
+  padding: 0.9vh 0;
+  border: 2px solid #c3c7f4;
+  border-radius: 10px;
+  font-family: "pretendard-medium";
+  width: 15vw;
+  font-size: 3vw;
 }
 
 .member-details{
@@ -29,7 +44,14 @@
 }
 
 .member-email {
-  color: gray;
+  color: #D1D1D1;
+  font-size: 3vw;
+  font-family: "pretendard-regular";
+}
+
+.member-nickname {
+  font-size: 3.2vw;
+  font-family: "pretendard-medium";
 }
 
 .user-list-container {
