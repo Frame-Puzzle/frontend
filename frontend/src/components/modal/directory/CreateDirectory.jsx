@@ -46,10 +46,10 @@ const CreateDirectory = (props) => {
 
     if (directoryName === '') {
       setExceptionMessage(0);
-    } else if (!checkAvailableWord(directoryName)) {
-      setExceptionMessage(1);
     } else if (!chekcWordLength(directoryName, 32)) {
       setExceptionMessage(2);
+    } else if (!checkAvailableWord(directoryName)) {
+      setExceptionMessage(1);
     } else {
       setExceptionMessage(3);
     }
@@ -93,7 +93,11 @@ const CreateDirectory = (props) => {
   return (
     <div className="create-directory-modal flex flex-wrap">
       <div className="create-directory-modal-header flex"> {/* 1. 20% */}
-        <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/folder.png" alt="folder-icon" className="folder-icon" />
+        <img
+          src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/folder.png"
+          alt="folder-icon"
+          className="folder-icon"
+        />
         <span className="create-directory-modal-title">디렉토리 만들기</span>
         <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png" alt="x-symbol" className="x-symbol" onClick={() => {
           props.setModal(false);
