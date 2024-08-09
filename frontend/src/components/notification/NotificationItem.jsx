@@ -164,9 +164,10 @@ const NotificationItem = ({ item }) => {
           <span
             className="notification-into-puzzle"
             onClick={() => {
-              nav(`/boards/${item.boardId}`);
-              handleAcceptedToggle(0);
               setRead(true);
+              // 0으로 보내서 isRead true와 관계없이 항상 버튼이 보이도록 설계 (type 2,3 모두 퍼즐 게임 대기방 입장 버튼이 있는 화면으로 보내기)
+              handleAcceptedToggle(0);
+              nav(`/boards/${item.boardId}`);
             }}
           >
             퍼즐 게임 하러가기
