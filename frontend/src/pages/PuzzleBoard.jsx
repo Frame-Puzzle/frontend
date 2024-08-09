@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 const PuzzleBoard = () => {
   // 모달 창
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(0);
   const [boardName, setBoardName] = useState("");
   const [category, setCategory] = useState("");
   const [keywords, setKeywords] = useState([]);
@@ -30,34 +30,38 @@ const PuzzleBoard = () => {
       const response = await boardApi.get(`/${boardID}`);
       const data = response.data.data;
 
-
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
-      setKeywords(data.keyword);
+      if (data.keyword) {
+        setKeywords(data.keyword);
+      }
       setBoardSize(data.boardSize);
       setPieceId(data.pieceList[0].pieceId);
       setPieceData(data.pieceList);
+      setActivateGameRoom(data.boardClearType);
     };
 
     fetchPuzzleData();
-  }, [piece.pieceId]); 
+  }, [piece.pieceId]);
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
     if (piece.pieceId !== 0) {
       // DB에서 정보 불러오는 시간
       setTimeout(() => {
-        setModal(true);
+        setModal(1);
       }, 500);
     } else {
-      setModal(false);
+      setModal(0);
     }
   }, [piece.pieceId]);
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
-      {modal ? <BoardModalFrame /> : null}
+      {modal !== 0 ? (
+        <BoardModalFrame modalType={modal} setModal={setModal} />
+      ) : null}
       <div className="board-header">
         <MainHeader
           title={boardName}
@@ -90,13 +94,16 @@ const PuzzleBoard = () => {
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}
+              onClick={() => setModal(2)}
             >
               게임 방 만들기
             </button>
           ) : null}
 
           {activateGameRoom === 2 ? (
-            <button className="game-room-button">게임 방 참여하기</button>
+            <button className="game-room-button" onClick={() => setModal(3)}>
+              게임 방 참여하기
+            </button>
           ) : null}
         </div>
       </div>
