@@ -3,23 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 let waitingRoom = createSlice({
   name: 'waitingRoom',
   initialState: {
-    accessToken: '',
-    refreshToken: '',
-    nickName: '',
-    profileImg: '',
+    boardId: 0,
+    boardNum: 0,
+    directoryName: "",
+    gameImgUrl: "",
   }, // token 정보로 수정할 수 있도록 상태 변경 함수 정의하기
   reducers: {
-    setAccessToken(state, action) {
-      state.accessToken = action.payload;
+    setBoardId(state, action) {
+      state.boardId = action.payload
     },
-    setRefreshToken(state, action) {
-      state.refreshToken = action.payload;
+    setGameImgUrl(state, action) {
+      state.gameImgUrl = action.payload
     },
-    setNickName(state, action) {
-      state.nickName = action.payload;
+    setdirectoryName(state, action) {
+      state.directoryName = action.directoryName
     },
-    setProfileImg(state, action) {
-      state.profileImg = action.payload
-    }
+    
   }
 });
+
+export let { setBoardId ,setGameImgUrl,setdirectoryName} = waitingRoom.actions
+
+export default waitingRoom;

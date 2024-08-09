@@ -12,6 +12,7 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import directory from './directorySlice';
+import waitingRoom from './waitingRoomSlice';
 
 // reducer 추가하는 곳
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   user: user.reducer,
   createBoard: createBoard.reducer,
   piece: piece.reducer,
-  directory: directory.reducer
+  directory: directory.reducer,
+  waitingRoom: waitingRoom.reducer
 
 });
 

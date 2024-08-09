@@ -1,9 +1,7 @@
 import React from "react";
 
 const EnterWaitingRoom = () => {
-
-  return <>
-  </>
-}
+  return <></>;
+};
 
 export default EnterWaitingRoom;

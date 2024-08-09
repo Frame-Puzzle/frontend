@@ -6,9 +6,10 @@ import "./PuzzleBoard.css";
 
 import boardApi from "../apis/boardApi";
 import BoardModalFrame from "./modalFrame/BoardModalFrame";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { setBoardId } from "../stores/waitingRoomSlice";
 
 const PuzzleBoard = () => {
   // 모달 창
@@ -20,6 +21,8 @@ const PuzzleBoard = () => {
   const [pieceId, setPieceId] = useState(0);
   const [pieceData, setPieceData] = useState([]);
   const [activateGameRoom, setActivateGameRoom] = useState(0);
+
+  const dispatch = useDispatch();
 
   const { boardID } = useParams();
 
@@ -94,14 +97,23 @@ const PuzzleBoard = () => {
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}
-              onClick={() => setModal(2)}
+              onClick={() => {
+                dispatch(setBoardId(boardID));
+                setModal(2);
+              }}
             >
               게임 방 만들기
             </button>
           ) : null}
 
           {activateGameRoom === 2 ? (
-            <button className="game-room-button" onClick={() => setModal(3)}>
+            <button
+              className="game-room-button"
+              onClick={() => {
+                dispatch(setBoardId(boardID));
+                setModal(3);
+              }}
+            >
               게임 방 참여하기
             </button>
           ) : null}
