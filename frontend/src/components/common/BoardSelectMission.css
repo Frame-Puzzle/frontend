@@ -45,6 +45,10 @@
   margin-bottom: 1vh;
 }
 
+.board-select-mission-title span:nth-child(2) {
+  font-size: 4vw;
+}
+
 .board-select-mission-main-container {
   width: 100%;
   height: 55%;
