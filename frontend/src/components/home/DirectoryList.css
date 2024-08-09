@@ -1,0 +1,20 @@
+.category-index {
+  /* should modify width & height using persentage */
+  color: var(--Black-300, #b0b0b0);
+}
+
+.category-index span {
+  font-size: 18px;
+  margin: 2vh 1vw;
+  margin-bottom: 10%;
+}
+
+/* active인 버튼만 색깔 다르게 */
+.category-index span.active {
+  color: #c3c7f4; /* 선택된 항목의 텍스트 색상 */
+  font-weight: 700;
+}
+
+.category-content {
+  /* should modify width & height using persentage */
+}
