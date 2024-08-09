@@ -1,0 +1,47 @@
+.directory-item {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 50%;
+}
+
+.directory-icon {
+  width: 50%;
+}
+
+.directory-category-box {
+  text-align: center;
+  margin: 10% 0;
+}
+
+.directory-category {
+  width: 39px;
+  height: 100%;
+  /* Detail design */
+  background-color: white;
+  color: #f1bdec;
+  border: 1px #f1bdec solid;
+  padding: 3px;
+  border-radius: 24.4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.directory-name-box {
+  text-align: center;
+}
+
+.directory-name {
+  color: #000;
+  font-size: 12px;
+}
+
+.category-content {
+  justify-content: space-evenly;
+}

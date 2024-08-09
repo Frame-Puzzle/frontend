@@ -96,7 +96,7 @@ const InviteDirectory = () => {
       </div>
       <div className="invite-directory-modal-body">
         <div className="email-input-container">
-          <span>초대하고 싶은 멤버의 이메일을 입력하세요</span>
+          <span className="email-text">초대하고 싶은 멤버의 이메일을 입력하세요</span>
           <div className="email-submit">
             {Object.keys(inviteMember).length === 0 &&
             memberStateList.length < 6 ? (
@@ -117,11 +117,13 @@ const InviteDirectory = () => {
             ) : (
               <div className="invite-member-detail-container">
                 {inviteMember.email ? (
-                  <div className="invite-member-detail">
-                    <span>{inviteMember.nickname}</span>
-                    <span>({inviteMember.email})</span>
+                    <div className="invite-member-detail">
+                      <div className="invite-member-detail-text">
+                        <span className="invite-member-nickname">{inviteMember.nickname}</span>
+                        <span className="invite-member-email">{inviteMember.email}</span>
+                      </div>
                     <img
-                      style={{ width: "10px", height: "10px" }}
+                      style={{ width: "6px", height: "6px", marginLeft: "2.5vw" }}
                       src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
                       alt=""
                       onClick={() => setInviteMember({})}
@@ -130,7 +132,7 @@ const InviteDirectory = () => {
                 ) :  <div className="invite-member-detail" style={{backgroundColor :" transparent"}}></div>}
               </div>
             )}
-            <button
+            <button className="email-button"
               disabled={
                 (Object.keys(inviteMember).length === 0 &&
                   memberStateList.length < 6) ||
@@ -143,12 +145,12 @@ const InviteDirectory = () => {
           </div>
           <div>
             {memberStateList.length === 6 ? (
-              <span>최대 6명만 가능합니다.</span>
+              <span className="max-member">최대 6명만 가능합니다.</span>
             ) : null}
           </div>
         </div>
         {isFocused && userList.length !== 0 ? (
-          <div className="user-list-container">
+          <div className="user-list-container-before">
             {userList.map((user, index) => (
               <div
                 key={index}
@@ -158,7 +160,7 @@ const InviteDirectory = () => {
                 }}
               >
                 <div
-                  className="invited-member-circle"
+                  className="invited-member-circle-before"
                   style={{
                     backgroundImage: user.profileUrl
                       ? `url(${user.profileUrl})`
@@ -166,7 +168,7 @@ const InviteDirectory = () => {
                   }}
                 ></div>
                 <div className="user-details">
-                  <span>{user.nickname}</span>
+                  <span className="user-nickname">{user.nickname}</span>
                   <span className="user-email">{user.email}</span>
                 </div>
               </div>
@@ -174,9 +176,9 @@ const InviteDirectory = () => {
           </div>
         ) : null}
         {isFocused && userList.length == 0 ? (
-          <div className="user-list-container">
-            <div className="user-item" style={{ border: "none" }}>
-              사용자가 존재하지 않습니다.
+          <div className="user-list-container-not">
+            <div className="user-item">
+              사용자가 존재하지 않습니다
             </div>
           </div>
         ) : null}

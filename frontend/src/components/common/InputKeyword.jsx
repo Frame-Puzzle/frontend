@@ -84,30 +84,32 @@ const InputKeyword = () => {
   }, [current, keyword]);
 
   return (
-    <div className="input-keyword">
-      <span>키워드 입력 (최대 3개)</span>
-      <input
-        className="input-keyword-input"
-        value={current}
-        onChange={(e) => { setCurrent(e.target.value); }}
-        onKeyDown={handleKeyDown}
-        disabled={isDisabled}>
-      </input>
-      {/* 예외 메시지 동적 UI */}
-      <KeywordExceptionMessage exceptionMessage={exceptionMessage} />
-      <div className="flex">
-        {
-          keyword.map((a, i) => {
-            return (
-              // a의 타입은 String
-              <KeywordPill key={i} info={a} setKeyword={setKeyword} keyword={keyword} />
-            )
-          })
-        }
+    <div className="input-keyword w-full h-full">
+      <div className="input-keyword-main-container">
+        <span>키워드 입력 (최대 3개)</span>
+        <input
+          className="input-keyword-input block"
+          value={current}
+          onChange={(e) => { setCurrent(e.target.value); }}
+          onKeyDown={handleKeyDown}
+          disabled={isDisabled}>
+        </input>
+        {/* 예외 메시지 동적 UI */}
+        <KeywordExceptionMessage exceptionMessage={exceptionMessage} />
+        <div className="pill-container flex">
+          {
+            keyword.map((a, i) => {
+              return (
+                // a의 타입은 String
+                <KeywordPill key={i} info={a} setKeyword={setKeyword} keyword={keyword} />
+              )
+            })
+          }
+        </div>
       </div>
       {/* '미션 생성하기' 버튼 활성화 or 비활성화 */}
       <div className="input-keyword-next">
-        { activate ? <span id="input-keyword-next-activate" onClick={() => {
+        {activate ? <span id="input-keyword-next-activate" onClick={() => {
           // 우선, keyword State에 있던 값들 전부 Redux로 옮기기
           let deepcopy = [...keyword];
           dispatch(setKeyWord(deepcopy));
@@ -124,7 +126,7 @@ const InputKeyword = () => {
           }
           // BoardSelectMission.jsx로 라우팅하기
           navigate(`/create-board/select-mission`);
-        }}>미션 생성하기</span> : null }
+        }}>미션 생성하기</span> : null}
         <span>미션 생성하기</span>
       </div>
     </div>

@@ -39,6 +39,7 @@ const PuzzleBoard = () => {
       if (data.keyword) {
         setKeywords(data.keyword);
       }
+
       setBoardSize(data.boardSize);
       setPieceId(data.pieceList[0].pieceId);
       setPieceData(data.pieceList);

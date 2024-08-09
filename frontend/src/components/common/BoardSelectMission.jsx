@@ -18,6 +18,8 @@ const BoardSelectMission = () => {
   let [prevMissions, setPrevMissions] = useState([]);
   // 리로드 아이콘 동적 UI를 위한 스위치
   let [reloadActive, setReloadActive] = useState(true);
+  // 남은 미션 리로드 횟수
+  let [canReload, setCanReload] = useState(5);
 
   // 이 퍼즐판이 어느 디렉토리에 속해 있는지
   let directoryId = useSelector(state => state.createBoard.directoryId);
@@ -95,32 +97,48 @@ const BoardSelectMission = () => {
   }, [prevMissions]);
 
   return (
-    <div>
-      {
-        missions.map((a, i) => {
-          return (<Mission
-            info={a}
-            key={i}
-            postGuides={postGuides}
-            keywordList={keywordList}
-            prevMissions={prevMissions}
-            directoryId={directoryId}
-            missions={missions}
-            setMissions={setMissions}
-            setPrevMissions={setPrevMissions}
-            reloadActive={reloadActive} />)
-        })
-      }
-      <span className="create-board-with-mission" onClick={() => {
-        // 퍼즐판 생성 API
-        const asyncPostBoards = async (missions, keywordList, boardSize, directoryId) => {
-          const boardId = await postBoards(missions, keywordList, boardSize, directoryId);
-          // 퍼즐판 고유 번호를 이용하여 퍼즐판 상세 페이지로 라우팅하기
-          navigate(`/boards/${boardId}`);
+    <div className="board-select-mission w-full h-full">
+      <div className="board-select-mission-progress flex">
+        <span>1</span>
+        <span>2</span>
+      </div>
+      <div className="board-select-mission-title">
+        <span>Our Mission</span>
+        <span>미션은 5회 재생성 가능합니다. 남은 횟수 : {canReload}</span>
+      </div>
+      <div className="board-select-mission-main-container flex">
+        {
+          missions.map((a, i) => {
+            return (<Mission
+              info={a}
+              key={i}
+              postGuides={postGuides}
+              keywordList={keywordList}
+              prevMissions={prevMissions}
+              directoryId={directoryId}
+              missions={missions}
+              setMissions={setMissions}
+              setPrevMissions={setPrevMissions}
+              reloadActive={reloadActive}
+              setCanReload={setCanReload}
+              canReload={canReload} />)
+          })
         }
-        // 실제로 호출하기
-        asyncPostBoards(missions, keywordList, boardSize, directoryId);
-      }}>퍼즐판 생성하기</span>
+      </div>
+      <div className="create-board-with-mission-container">
+        <span className="create-board-with-mission" onClick={(e) => {
+          // 이벤트 버블링 방지
+          e.stopPropagation();
+          // 퍼즐판 생성 API
+          const asyncPostBoards = async (missions, keywordList, boardSize, directoryId) => {
+            const boardId = await postBoards(missions, keywordList, boardSize, directoryId);
+            // 퍼즐판 고유 번호를 이용하여 퍼즐판 상세 페이지로 라우팅하기
+            navigate(`/boards/${boardId}`);
+          }
+          // 실제로 호출하기
+          asyncPostBoards(missions, keywordList, boardSize, directoryId);
+        }}>퍼즐판 생성하기</span>
+      </div>
     </div>
   )
 }

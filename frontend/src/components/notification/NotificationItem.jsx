@@ -65,19 +65,34 @@ const NotificationItem = ({ item }) => {
   const getContent = () => {
     switch (item.type) {
       case 0: // 유저 초대
-        return `${item.createUserName}님이 ${item.category} 모임 ${item.directoryName}에 초대를 보냈습니다`;
+        return (
+          <>
+            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임 <b>[{item.directoryName}]</b>에 초대를 보냈습니다
+          </>
+        );
       case 1: // 퍼즐판 board 삭제 투표
-        return `${item.createUserName}님이 ${item.category} 모임 ${
-          item.directoryName
-        }의 ${`#${item.boardNum}`}의 삭제 투표를 시작했어요!`;
+        return (
+          <>
+            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임 <b>{item.directoryName}</b> <b>#{item.boardNum}</b> 삭제 투표를 시작했어요!
+          </>
+        );
       case 2: // 퍼즐판 완성
-        return `${item.createUserName}님의 ${item.category} 모임 ${item.directoryName} 퍼즐 조각이 모두 모였어요!`;
+        return (
+          <>
+            <b>{item.createUserName}</b>님의 <b>{item.category}</b> 모임 <b>{item.directoryName}</b><b>#{item.boardNum}</b> 퍼즐 조각이 모두 모였어요!
+          </>
+        );
       case 3: // 게임방 생성
-        return `${item.createUserName}님이 ${item.category} 모임 ${item.directoryName} 퍼즐 게임을 시작했습니다`;
+        return (
+          <>
+            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임 <b>{item.directoryName}</b><b>#{item.boardNum}</b> 퍼즐 게임을 시작했습니다
+          </>
+        );
       default:
         return "알 수 없는 알림 유형입니다.";
     }
   };
+  
 
   const getButton = () => {
     if (item.acceptStatus === 3) {
@@ -85,7 +100,7 @@ const NotificationItem = ({ item }) => {
       return (
         <div className="notification-noAction">
           {item.type === 0 && "존재하지 않는 초대입니다"}
-          {item.type === 1 && "삭제 투표가 완료되었습니다."}
+          {item.type === 1 && "삭제 투표가 종료되었습니다."}
         </div>
       );
     } else if (!showButtons) {
@@ -159,23 +174,25 @@ const NotificationItem = ({ item }) => {
   return (
     <div className="notification-item">
       <div className="notification-item-img">
-        <img src={item.imgUrl} alt="프로필 이미지" />
+        <img src={item.profileImg} alt="프로필 이미지" className="notification-profile-img" />
       </div>
-      <div className="notification-item-header">
-        <div className="notification-item-date">
-          {formatDate(item.createTime)}
+      <div className="notification-container">
+        <div className="notification-item-header">
+          <div className="notification-item-date">
+            {formatDate(item.createTime)}
+          </div>
+          <div className="read-indicator">
+            {!read && (
+              <img
+                src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/red-dot.png"
+                alt="Red Dot"
+              />
+            )}
+          </div>
         </div>
-        <div className="read-indicator">
-          {!read && (
-            <img
-              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/red-dot.png"
-              alt="Red Dot"
-            />
-          )}
-        </div>
+        <div className="notification-item-content">{getContent()}</div>
+        <div className="notification-item-button-align">{getButton()}</div>
       </div>
-      <div className="notification-item-content">{getContent()}</div>
-      <div className="notification-item-button-align">{getButton()}</div>
     </div>
   );
 };
