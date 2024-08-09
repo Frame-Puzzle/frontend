@@ -2,17 +2,15 @@
   cursor: pointer;
   width: fit-content;
   height: 100%;
-  background-color: white;
-  color: black;
-  border: 1px #6d6d6d solid;
-  border-radius: 15px;
-  font-size: 1.2vh;
-  padding: 7px;
+  background-color: #f1bdec;
+  color: white;
+  /* border: 0.2vh #888888 solid; */
+  border-radius: 21px;
+  font-size: 1.5vh;
+  padding: 0.9vh 5.5vw;
   text-align: center;
-  white-space: nowrap;
-  margin: auto;
-  margin-bottom: 20%;
-  margin-top: 10%;
+  margin: 3vh auto 4vh;
+  font-family: "pretendard-medium";
 }
 
 /* height: 25, border: */

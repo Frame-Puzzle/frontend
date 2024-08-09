@@ -1,23 +1,24 @@
 .rectangular-button {
   cursor: pointer;
-  width: 319px;
+  width: 70%;
   height: 100%;
   background-color: var(--White, #fff);
+  border: 2px solid var(--White, #fff);
   color: white;
-  padding: 7px;
+  padding: 1.3vh;
   border-radius: 21px;
   text-align: center;
-  white-space: nowrap;
   margin: auto;
-  margin-bottom: 5%;
+  margin-bottom: 3.8vw;
+  font-family: "pretendard-bold";
 }
 
-.button_purple {
+.button-purple {
   background-color: #c3c7f4;
   color: white;
 }
 
-.button_reverse_purple {
+.button-reverse-purple {
   border-radius: 21px;
   border: 2px solid var(--Color3, #c3c7f4);
   background: var(--White, #fff);

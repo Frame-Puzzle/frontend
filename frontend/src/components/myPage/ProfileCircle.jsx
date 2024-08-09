@@ -50,8 +50,6 @@ const ProfileCircle = () => {
         className="profile-circle"
         style={{
           backgroundImage: profileSrc ? `url(${profileSrc})` : "none",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
       >
         {profileSrc ? "" : "동그라미"}
@@ -60,7 +58,8 @@ const ProfileCircle = () => {
         src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/camera-logo.png"
         alt="camera-logo"
         onClick={handleClick}
-        style={{ cursor: "pointer", width: "5%" }}
+        className="profile-icon"
+        style={{ cursor: "pointer", width: "5vh" }}
       />
       {!availableSize ? <span>10MB 미만의 사진만 가능합니다. </span> : null}
 
