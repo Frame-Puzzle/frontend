@@ -47,7 +47,7 @@ const NotificationItem = ({ item }) => {
     }
   }, [item]);
 
-  const handleAcceptedToggle = async (type, acceptValue) => {
+  const handleAcceptedToggle = async (acceptValue) => {
     try {
       await NotificationApi.put(`/${item.notificationId}`, {
         notificationId: item.notificationId,
@@ -55,7 +55,6 @@ const NotificationItem = ({ item }) => {
         accept: acceptValue,
       });
       setRead(true);
-
       setShowButtons(false);
     } catch (error) {
       console.error("알림 업데이트 실패", error);
@@ -67,32 +66,38 @@ const NotificationItem = ({ item }) => {
       case 0: // 유저 초대
         return (
           <>
-            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임 <b>[{item.directoryName}]</b>에 초대를 보냈습니다
+            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임{" "}
+            <b>[{item.directoryName}]</b>에 초대를 보냈습니다
           </>
         );
       case 1: // 퍼즐판 board 삭제 투표
         return (
           <>
-            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임 <b>{item.directoryName}</b> <b>#{item.boardNum}</b> 삭제 투표를 시작했어요!
+            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임{" "}
+            <b>{item.directoryName}</b> <b>#{item.boardNum}</b> 삭제 투표를
+            시작했어요!
           </>
         );
       case 2: // 퍼즐판 완성
         return (
           <>
-            <b>{item.createUserName}</b>님의 <b>{item.category}</b> 모임 <b>{item.directoryName}</b><b>#{item.boardNum}</b> 퍼즐 조각이 모두 모였어요!
+            <b>{item.createUserName}</b>님의 <b>{item.category}</b> 모임{" "}
+            <b>{item.directoryName}</b>
+            <b>#{item.boardNum}</b> 퍼즐 조각이 모두 모였어요!
           </>
         );
       case 3: // 게임방 생성
         return (
           <>
-            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임 <b>{item.directoryName}</b><b>#{item.boardNum}</b> 퍼즐 게임을 시작했습니다
+            <b>{item.createUserName}</b>님이 <b>{item.category}</b> 모임{" "}
+            <b>{item.directoryName}</b>
+            <b>#{item.boardNum}</b> 퍼즐 게임을 시작했습니다
           </>
         );
       default:
         return "알 수 없는 알림 유형입니다.";
     }
   };
-  
 
   const getButton = () => {
     if (item.acceptStatus === 3) {
@@ -174,7 +179,11 @@ const NotificationItem = ({ item }) => {
   return (
     <div className="notification-item">
       <div className="notification-item-img">
-        <img src={item.profileImg} alt="프로필 이미지" className="notification-profile-img" />
+        <img
+          src={item.profileImg}
+          alt="프로필 이미지"
+          className="notification-profile-img"
+        />
       </div>
       <div className="notification-container">
         <div className="notification-item-header">
