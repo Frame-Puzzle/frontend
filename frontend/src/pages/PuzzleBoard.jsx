@@ -78,6 +78,8 @@ const PuzzleBoard = () => {
             />
           }
           category={category}
+          page="퍼즐판"
+          boardID = {boardID}
         />
       </div>
       <div className="board-main-content">

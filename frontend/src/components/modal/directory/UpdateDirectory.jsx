@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 const UpdateDirectory = () => {
   const dispatch = useDispatch();
   const directory = useSelector((state) => state.directory);
-  const id = useParams("id");
+  const id = useParams();
 
   // 사용자의 input 저장
   const [inputDirectoryName, setInputDirectoryName] = useState("");
@@ -34,7 +34,7 @@ const UpdateDirectory = () => {
     const data = {
       directoryName: inputDirectoryName,
     };
-    const response = await directoryApi.put(`/${id.id}`, data);
+    const response = await directoryApi.put(`/${id}`, data);
     dispatch(setModalId(0));
   };
 
