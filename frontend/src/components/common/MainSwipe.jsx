@@ -1,14 +1,27 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import Emotion1 from "../../assets/emotion1.png";
-import Emotion2 from "../../assets/emotion2.png";
-import Emotion3 from "../../assets/emotion3.png";
-import Emotion4 from "../../assets/emotion4.png";
 import "swiper/css";
 
 import "./MainSwipe.css";
 
 const MainSwipe = () => {
-  const images = [Emotion1, Emotion2, Emotion3, Emotion4];
+  const images = [
+    {
+      src: "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/MainPage-pet.png",
+      caption: "with Pet",
+    },
+    {
+      src: "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/MainPage-family.png",
+      caption: "with Family",
+    },
+    {
+      src: "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/MainPage-couple.png",
+      caption: "lovers",
+    },
+    {
+      src: "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/MainPage-friend.png",
+      caption: "with Friends",
+    },
+  ];
   return (
     <Swiper
       spaceBetween={30}
@@ -31,7 +44,8 @@ const MainSwipe = () => {
         <SwiperSlide key={index}>
           <div className="home-photo-frame">
             <div className="home-photo">
-              <img src={image} alt={`slide ${index + 1}`} />
+              <img src={image.src} alt={`slide ${index + 1}`} />
+              <div className="photo-name">{image.caption}</div>
             </div>
           </div>
         </SwiperSlide>
