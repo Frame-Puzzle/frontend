@@ -13,7 +13,7 @@ const MemberHeader = ({ memberList }) => {
 
   useEffect(() => {
     if (memberList.length !== 0) setMembers(memberList);
-    else setMembers([]);
+    else setMembers([]); 
   }, [memberList]);
 
   const openInviteModal = () => {

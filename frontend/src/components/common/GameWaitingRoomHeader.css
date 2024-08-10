@@ -1,0 +1,33 @@
+.game-waiting-room-header {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.game-profile-circle {
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.game-profile-name {
+  padding: 0.5vh 1vw 1vh 1vw;
+  font-size: 1.6vb;
+}
+
+.game-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.king-icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50px;
+}

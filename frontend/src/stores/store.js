@@ -24,7 +24,6 @@ const rootReducer = combineReducers({
   piece: piece.reducer,
   directory: directory.reducer,
   waitingRoom: waitingRoom.reducer
-
 });
 
 const persistConfig = {
@@ -33,7 +32,7 @@ const persistConfig = {
   // user Reducer만 persist 적용하려면 whitelist 사용하세요.
   // whitelist 외에도 blacklist 등 여러 option이 존재합니다.
   // whitelist: ['user']
-  whitelist: ['user', 'createBoard']
+  whitelist: ['user', 'createBoard', 'waitingRoom']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

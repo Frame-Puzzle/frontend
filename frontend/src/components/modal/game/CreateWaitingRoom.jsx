@@ -6,10 +6,12 @@ import {
   setGameImgUrl,
   setdirectoryName,
 } from "../../../stores/waitingRoomSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreateWaitingRoom = ({ setModal }) => {
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const [level, setLevel] = useState(0);
 
@@ -24,6 +26,11 @@ const CreateWaitingRoom = ({ setModal }) => {
 
     fetchGetGameImage();
   }, []);
+
+  const moveWaitingRoom = () => {
+    if (level === 0) return;
+    nav(`/waiting-room/${waitingRoom.boardId}`);
+  };
   return (
     <>
       <div className="create-waiting-modal">
@@ -42,13 +49,13 @@ const CreateWaitingRoom = ({ setModal }) => {
             alt=""
           />
           <div className="set-game-level-container">
-            <span>Level</span>
+            <span className="level-text">Level</span>
             <div className="select-levels">
               <button
                 onClick={() => setLevel(1)}
                 className={level !== 1 ? "select-level" : "selected-level"}
               >
-                easy
+                <b>easy</b>
                 <br />
                 6X6
               </button>
@@ -56,7 +63,7 @@ const CreateWaitingRoom = ({ setModal }) => {
                 onClick={() => setLevel(2)}
                 className={level !== 2 ? "select-level" : "selected-level"}
               >
-                normal
+                <b>normal</b>
                 <br />
                 9X9
               </button>
@@ -64,7 +71,7 @@ const CreateWaitingRoom = ({ setModal }) => {
                 onClick={() => setLevel(3)}
                 className={level !== 3 ? "select-level" : "selected-level"}
               >
-                hard
+                <b>hard</b>
                 <br />
                 12X12
               </button>
@@ -79,7 +86,12 @@ const CreateWaitingRoom = ({ setModal }) => {
             </span>
           </div>
         </div>
-        <div className="create-room-button">
+        <div
+          className={
+            level === 0 ? "create-room-button" : "create-room-button-not"
+          }
+          onClick={moveWaitingRoom}
+        >
           게임 방 만들기
         </div>
       </div>

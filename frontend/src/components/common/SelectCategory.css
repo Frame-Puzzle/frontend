@@ -8,7 +8,7 @@
   background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/friend01.png");
   background-size: cover;
   border-radius: 100%;
-  width: 60%;
+  width: 68%;
   aspect-ratio: 1 / 1;
   /* height: 60%라고 하면 width와 길이가 같아지는 것이 아니다. */
   margin: auto;
@@ -20,7 +20,7 @@
   background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/family01.png");
   background-size: cover;
   border-radius: 100%;
-  width: 60%;
+  width: 68%;
   aspect-ratio: 1 / 1;
   margin: auto;
   margin-top: 1vh;
@@ -31,7 +31,7 @@
   background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/lover01.png");
   background-size: cover;
   border-radius: 100%;
-  width: 60%;
+  width: 68%;
   aspect-ratio: 1 / 1;
   margin: auto;
   margin-top: 1vh;
@@ -42,7 +42,7 @@
   background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/pet01.png");
   background-size: cover;
   border-radius: 100%;
-  width: 60%;
+  width: 68%;
   aspect-ratio: 1 / 1;
   margin: auto;
   margin-top: 1vh;
@@ -50,9 +50,10 @@
 }
 
 .select-category-component-container span {
-  font-size: 2vw;
+  font-size: 3vw;
   color: #888888;
   text-align: center;
+  font-family: "pretendard-regular";
 }
 
 .select-effect {

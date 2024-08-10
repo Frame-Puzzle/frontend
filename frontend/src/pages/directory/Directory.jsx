@@ -61,7 +61,6 @@ const Directory = () => {
     dispatch(setDirectoryId(id));
   }, []);
 
-
   // 슬라이드 설정
   const settings = {
     dots: false,
