@@ -6,10 +6,12 @@ import {
   setGameImgUrl,
   setdirectoryName,
 } from "../../../stores/waitingRoomSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreateWaitingRoom = ({ setModal }) => {
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const [level, setLevel] = useState(0);
 
@@ -24,6 +26,11 @@ const CreateWaitingRoom = ({ setModal }) => {
 
     fetchGetGameImage();
   }, []);
+
+  const moveWaitingRoom = () => {
+    if (level === 0) return;
+    nav(`/waiting-room/${waitingRoom.boardId}`);
+  };
   return (
     <>
       <div className="create-waiting-modal">
@@ -79,7 +86,12 @@ const CreateWaitingRoom = ({ setModal }) => {
             </span>
           </div>
         </div>
-        <div className="create-room-button">
+        <div
+          className={
+            level === 0 ? "create-room-button" : "create-room-button-not"
+          }
+          onClick={moveWaitingRoom}
+        >
           게임 방 만들기
         </div>
       </div>

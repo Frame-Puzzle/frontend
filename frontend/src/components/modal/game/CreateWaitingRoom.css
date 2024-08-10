@@ -80,11 +80,22 @@
 
 .create-room-button {
   color: white;
-  background-color: #c3c7f4;
+  background-color: lightgray;
   border-radius: 10px;
   text-align: center;
   
   padding: 10px 15px;
   width: 70%;
   margin: 2.5vh auto 0.5vh auto;
+}
+
+.create-room-button-not{
+  color: white;
+  background-color: #c3c7f4;
+  border-radius: 10px;
+  text-align: center;
+  
+  padding: 10px 15px;
+  width: 70%;
+  margin: auto;
 }
