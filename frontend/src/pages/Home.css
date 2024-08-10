@@ -29,7 +29,7 @@
 }
 
 .swiper {
-  height: 80%; /* Swiper의 높이를 부모 요소의 높이보다 10% 작게 */
+  height: 90%; /* Swiper의 높이를 부모 요소의 높이보다 10% 작게 */
 }
 
 .swiper-slide {
@@ -59,13 +59,11 @@
 .make-dir {
   cursor: pointer;
   width: 75%;
-  height: 100%;
   background-color: #c3c7f4;
   color: white;
-  padding: 7px;
+  padding: 1vh 3vw;
   border-radius: 21px;
   text-align: center;
-  align-content: center;
   font-size: 19px;
   line-height: 100%;
 }
