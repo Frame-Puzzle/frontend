@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { setModalId } from "../../stores/directorySlice";
 import { useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
+import directoryApi from "../../apis/directoryApi";
 
 // 3요소: 해당 페이지 이름, 해당 페이지 카테고리, 아이콘 (없을 수도 있음)
-const MemberHeader = ({ memberList }) => {
+const MemberHeader = ({ memberList, id }) => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const [members, setMembers] = useState([]);
 
@@ -19,6 +21,11 @@ const MemberHeader = ({ memberList }) => {
 
   const openInviteModal = () => {
     dispatch(setModalId(1));
+  };
+
+  const exitDirectory = async () => {
+    const response = await directoryApi.delete(`/${id}`);
+    nav("/home");
   };
 
   return (
@@ -53,7 +60,7 @@ const MemberHeader = ({ memberList }) => {
         </Swiper>
       </div>
 
-      <div className="member-header-right">
+      <div className="member-header-right" onClick={exitDirectory}>
         <img
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/exit.png"
           alt="exit-directory"

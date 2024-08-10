@@ -1,0 +1,78 @@
+import { useState, react, useEffect } from "react";
+import "./UpdateDirectory.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setModalId } from "../../../stores/directorySlice";
+import ExceptionMessage from "../../common/ExceptionMessage";
+import checkAvailableWord from "../../../utils/stringConfig/checkAvailableWord";
+import chekcWordLength from "../../../utils/stringConfig/checkWordLength";
+import directoryApi from "../../../apis/directoryApi";
+import { useParams } from "react-router-dom";
+
+const UpdateDirectory = () => {
+  const dispatch = useDispatch();
+  const directory = useSelector((state) => state.directory);
+  const id = useParams("id");
+
+  // 사용자의 input 저장
+  const [inputDirectoryName, setInputDirectoryName] = useState("");
+  // 1(유효하지 않은 형식), 2(길이 초과), 3(사용 가능). => 예외 동적 UI를 위한 state
+  const [exceptionMessage, setExceptionMessage] = useState(0);
+
+  useEffect(() => {
+    if (inputDirectoryName === "") {
+      setExceptionMessage(0);
+    } else if (!chekcWordLength(inputDirectoryName, 32)) {
+      setExceptionMessage(2);
+    } else if (!checkAvailableWord(inputDirectoryName)) {
+      setExceptionMessage(1);
+    } else {
+      setExceptionMessage(3);
+    }
+  }, [inputDirectoryName]);
+
+  const updateDirectoryName = async () => {
+    const data = {
+      directoryName: inputDirectoryName,
+    };
+    const response = await directoryApi.put(`/${id.id}`, data);
+    dispatch(setModalId(0));
+  };
+
+  return (
+    <div className="update-directory-modal flex flex-wrap">
+      <div className="update-directory-modal-header flex">
+        <img
+          src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit.png"
+          alt="folder-icon"
+          className="folder-icon"
+        />
+        <span className="create-directory-modal-title">디렉토리 이름 수정</span>
+        <img
+          src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
+          alt="x-symbol"
+          className="x-symbol"
+          onClick={() => dispatch(setModalId(0))}
+        />
+      </div>
+      <div className="update-directory-modal-body">
+        <span>디렉토리 이름을 수정해주세요.</span>
+        <input
+          type="text"
+          className="update-directory-input"
+          placeholder={directory.directoryName}
+          onChange={(e) => setInputDirectoryName(e.target.value)}
+        />
+        <ExceptionMessage exceptionMessage={exceptionMessage} />
+        <button
+          className="update-directory-button"
+          disabled={exceptionMessage !== 3}
+          onClick={updateDirectoryName}
+        >
+          만들기
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default UpdateDirectory;
