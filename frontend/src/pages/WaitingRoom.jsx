@@ -6,13 +6,14 @@ import socketApi from "../apis/socketApi";
 import "./WaitingRoom.css";
 import ChatBoard from "../components/common/ChatBoard";
 import MainNav from "../components/common/MainNav";
+import { useNavigate } from "react-router-dom";
 
 const WaitingRoom = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [robyData, setRobyData] = useState(null);
-  const [timer, setTimer] = useState(0);
+  const [timer, setTimer] = useState(100);
 
   const [robyKing, setRobyKing] = useState("");
   const [robyUserList, setRobyUserList] = useState([]);
@@ -23,6 +24,8 @@ const WaitingRoom = () => {
 
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const user = useSelector((state) => state.user);
+
+  const nav = useNavigate();
 
   // socket 연결
   useEffect(() => {
@@ -96,6 +99,14 @@ const WaitingRoom = () => {
     sendMessage(`/pub/message/${waitingRoom.boardId}`, data);
     setInputMessage("");
   };
+
+  useEffect(() => {
+    if (timer !== 0) {
+      return;
+    }
+
+    nav(`/boards/${waitingRoom.boardId}`);
+  }, [timer]);
 
   return (
     <>
