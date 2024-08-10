@@ -2,6 +2,7 @@
   width: 100%;
   height: 100%;
   background-color: #ffffff;
+  padding: 0.8vh 2vw 0vh 2vw;
 }
 
 .game-profile-circle {
@@ -23,11 +24,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin:1.2vh 1.5vw 0 1.5vw;
 }
 
 .king-icon {
-  width: 30px;
-  height: 30px;
+  width: 6vw;
+  height: 6vw;
   position: absolute;
-  top: 50px;
+  top: 82px;
 }
