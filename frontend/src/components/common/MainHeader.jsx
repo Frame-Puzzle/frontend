@@ -3,12 +3,27 @@ import "./MainHeader.css";
 import { useNavigate } from "react-router-dom";
 import { setModalId } from "../../stores/directorySlice";
 import { useDispatch } from "react-redux";
+import boardApi from "../../apis/boardApi";
 
 // 3요소: 해당 페이지 이름, 해당 페이지 카테고리, 아이콘 (없을 수도 있음)
-const MainHeader = ({ title, category, icon, directoryName, page }) => {
+const MainHeader = ({
+  title,
+  category,
+  icon,
+  directoryName,
+  page,
+  boardID,
+}) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
+  const deleteBoardVote = async () => {
+    const data = {
+      accept: true,
+    };
+
+    const response = await boardApi.put(`/${boardID}/vote`, data);
+  };
   return (
     <div className="header flex">
       <div className="header-left flex align-items-center">
@@ -29,9 +44,11 @@ const MainHeader = ({ title, category, icon, directoryName, page }) => {
       <div className="header-icon flex justify-content-center align-items-center">
         {page === "디렉토리" && icon ? (
           <div onClick={() => dispatch(setModalId(2))}>{icon}</div>
-        ) : (
-          icon && <div>{icon}</div>
-        )}
+        ) : null}
+        {page === "퍼즐판" && icon ? (
+          <div onClick={deleteBoardVote}>{icon}</div>
+        ) : null}
+        {!page && icon && <div>{icon}</div>}
         {directoryName && <span>[{directoryName}]</span>}
       </div>
     </div>
