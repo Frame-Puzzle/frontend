@@ -22,6 +22,8 @@ const PuzzleBoard = () => {
   const [pieceData, setPieceData] = useState([]);
   const [activateGameRoom, setActivateGameRoom] = useState(0);
 
+  const [startDelete, setStateDelete] = useState(true);
+
   const dispatch = useDispatch();
 
   const { boardID } = useParams();
@@ -44,6 +46,7 @@ const PuzzleBoard = () => {
       setPieceId(data.pieceList[0].pieceId);
       setPieceData(data.pieceList);
       setActivateGameRoom(data.boardClearType);
+      setStateDelete(data.voteStatus);
     };
 
     fetchPuzzleData();
@@ -70,16 +73,19 @@ const PuzzleBoard = () => {
         <MainHeader
           title={boardName}
           icon={
-            <img
-              src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
-              alt="thirdIcon"
-              className="header-icon"
-              style={{ width: "40%", marginLeft: "7vw" }}
-            />
+            !startDelete && (
+              <img
+                src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
+                alt="thirdIcon"
+                className="header-icon"
+                style={{ width: "40%", marginLeft: "7vw" }}
+              />
+            )
           }
           category={category}
           page="퍼즐판"
-          boardID = {boardID}
+          boardID={boardID}
+          setStateDelete={setStateDelete}
         />
       </div>
       <div className="board-main-content">
@@ -107,9 +113,7 @@ const PuzzleBoard = () => {
             >
               게임 방 만들기
             </button>
-          ) : null}
-
-          {activateGameRoom === 2 ? (
+          ) : (
             <button
               className="game-room-button"
               onClick={() => {
@@ -119,7 +123,7 @@ const PuzzleBoard = () => {
             >
               게임 방 참여하기
             </button>
-          ) : null}
+          )}
         </div>
       </div>
 

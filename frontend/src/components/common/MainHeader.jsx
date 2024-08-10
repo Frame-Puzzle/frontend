@@ -13,6 +13,7 @@ const MainHeader = ({
   directoryName,
   page,
   boardID,
+  setStateDelete,
 }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const MainHeader = ({
     };
 
     const response = await boardApi.put(`/${boardID}/vote`, data);
+    setStateDelete(true);
   };
   return (
     <div className="header flex">
