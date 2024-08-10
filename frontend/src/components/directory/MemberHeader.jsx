@@ -38,6 +38,7 @@ const MemberHeader = ({ memberList }) => {
           slidesPerView={3}
           centeredSlides={false}
           loop={false}>
+
           {members.map((member, index) =>
 
             member.accept ? <SwiperSlide key={index}>
