@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setDirectoryId } from "../../stores/createBoardSlice";
-
+import { setDirectoryName } from "../../stores/directorySlice";
 import DirectoryModalFrame from "../modalFrame/DirectoryModalFrame";
 import { setMemberList } from "../../stores/directorySlice";
 
@@ -23,7 +23,6 @@ const Directory = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  const [directoryName, setDirectoryName] = useState("");
   const [category, setCategory] = useState("");
   const [boardList, setBoardList] = useState([]);
   const [memberList, setMemberListState] = useState([]);
@@ -44,11 +43,11 @@ const Directory = () => {
       const response = await directoryApi.get(`/${id}`);
       const data = response.data.data;
 
-      setDirectoryName(data.directoryName);
       setCategory(data.category);
       setBoardList(data.boardList);
       setMemberListState(data.memberList);
       dispatch(setMemberList(data.memberList));
+      dispatch(setDirectoryName(data.directoryName));
     };
     fetchDirectory();
   }, [id, directory.modalId]);
@@ -85,7 +84,7 @@ const Directory = () => {
       {directory.modalId !== 0 ? <DirectoryModalFrame /> : null}
       <div className="directory-header">
         <MainHeader
-          title={directoryName}
+          title={directory.directoryName}
           icon={
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit.png"
@@ -95,6 +94,7 @@ const Directory = () => {
             />
           }
           category={category}
+          page={"디렉토리"}
         />
       </div>
       <div className="directory-main-content">
@@ -136,7 +136,7 @@ const Directory = () => {
                 >
                   <DirectoryCanvas boardSize={board.boardSize} />
                   <div className="direoctory-board-name">
-                    {directoryName}#{board.boardName}
+                    {directory.directoryName}#{board.boardName}
                   </div>
                 </div>
               ))}

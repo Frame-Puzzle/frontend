@@ -7,20 +7,24 @@ let directory = createSlice({
        1 : 멤버 초대
        2 : 디렉토리 명 수정*/
     modalId: 0,
-    memberList: []
+    memberList: [],
+    directoryName: "",
   },
   reducers: {
     setModalId(state, action) {
-      state.modalId = action.payload;
+      state.modalId = action.payload; 
     },
     setMemberList(state, action) {
       state.memberList = action.payload;
+    },
+    setDirectoryName(state, action) {
+      state.directoryName = action.payload;
     }
   }
 });
 
 // 이건 실제로 변경함수를 사용하고자 하는 파일에서 import하기
-export let { setModalId, setMemberList } = directory.actions;
+export let { setModalId, setMemberList, setDirectoryName } = directory.actions;
 
 // 이건 store.js에서 import하기
 export default directory;
