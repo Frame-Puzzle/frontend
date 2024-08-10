@@ -65,6 +65,8 @@ const createPieces = (boardConfig, pieceId, pieceData) => {
       piece.shape = shape;
 
       piece.data.id = pieceId + count++;
+      // 권한 알려주기
+      piece.data.authority = authority;
 
       pieces.push(piece);
       pieceIndexes.push(pieces.length - 1);
