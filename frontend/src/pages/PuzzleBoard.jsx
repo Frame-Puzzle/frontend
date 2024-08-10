@@ -10,7 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { setBoardId } from "../stores/waitingRoomSlice";
-import { setVote, setModalId } from "../stores/boardSlice";
+import {
+  setVote,
+  setModalId,
+  setBoardCategory,
+  setBoardKeywords,
+} from "../stores/boardSlice";
 
 const PuzzleBoard = () => {
   // 모달 창
@@ -21,6 +26,7 @@ const PuzzleBoard = () => {
   const [pieceId, setPieceId] = useState(0);
   const [pieceData, setPieceData] = useState([]);
   const [activateGameRoom, setActivateGameRoom] = useState(0);
+  const [createRoom, setCreateRoom] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,8 +43,10 @@ const PuzzleBoard = () => {
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
+      dispatch(setBoardCategory(data.category));
       if (data.keyword) {
         setKeywords(data.keyword);
+        dispatch(setBoardKeywords(data.keyword));
       }
 
       setBoardSize(data.boardSize);
@@ -49,7 +57,14 @@ const PuzzleBoard = () => {
       dispatch(setVote(data.voteStatus));
     };
 
+    const fetchCreateGameRoom = async () => {
+      const response = await boardApi.get(`/${boardID}/rooms`);
+      const data = response.data.data;
+      setCreateRoom(data.exist);
+    };
+
     fetchPuzzleData();
+    fetchCreateGameRoom();
   }, []);
 
   useEffect(() => {
@@ -99,7 +114,7 @@ const PuzzleBoard = () => {
           pieceData={pieceData}
         />
         <div className="game-room-container">
-          {activateGameRoom !== 2 ? (
+          {!createRoom ? (
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}
