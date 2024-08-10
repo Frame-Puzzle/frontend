@@ -4,13 +4,17 @@ import "./ChooseImg.css";
 import pieceApi from "../../../apis/pieceApi";
 import { useSelector, useDispatch } from "react-redux";
 import compressImage from "../../../utils/compressImg";
+import ImgExceptionMessage from "../../common/ImgExceptionMessage";
 
 const ChooseImg = () => {
   const piece = useSelector((state) => state.piece);
   const dispatch = useDispatch();
 
   const [imgUrl, setImgUrl] = useState(null);
+  // 사용자의 input 저장
   const [comment, setComment] = useState("");
+  // 0(아무것도 입력 X), 1(공백 포함 문자 20자 이내일 때), 2(그 외 길이가 너무 길 때)
+  const [exceptionMessage, setExceptionMessage] = useState(0);
   const [imgFile, setImgFile] = useState(null);
   const [mission, setMission] = useState("");
   const fileInputRef = useRef(null);
@@ -20,6 +24,7 @@ const ChooseImg = () => {
   };
 
   const handleFileChange = async (event) => {
+
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -37,7 +42,6 @@ const ChooseImg = () => {
   const handleImgText = (e) => {
     const value = e.target.value;
     setComment(value);
-    // 255 byte이상 입력 경우 제한
   };
 
   useEffect(() => {
@@ -51,6 +55,18 @@ const ChooseImg = () => {
       setMission(piece.mission);
     }
   }, [piece.pieceId, piece.comment, piece.imgUrl]);
+
+  useEffect(() => {
+    
+    if (comment === "") {
+      setExceptionMessage(0);
+    } else if (comment.length <= 20) {
+      setExceptionMessage(1);
+    } else {
+      setExceptionMessage(2);
+    }
+
+  }, [comment]);
 
   const fetchSaveImg = async () => {
     // 사진이 없을 경우 에러 메시지 출력
@@ -116,6 +132,7 @@ const ChooseImg = () => {
         <div className="image-description">
           <span className="image-description-span">덧붙이고 싶은 설명을 적어주세요.</span>
           <input className="image-description-input" type="text" value={comment} onChange={handleImgText} />
+          <ImgExceptionMessage exceptionMessage={exceptionMessage} />
         </div>
       </div>
 
