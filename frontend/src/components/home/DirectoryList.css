@@ -16,5 +16,25 @@
 }
 
 .category-content {
-  /* should modify width & height using persentage */
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ===== swiper 설정 ====== */
+
+/* .swiper-slide {
+  box-sizing: border-box;
+}
+
+.swiper-container {
+  width: 100%;
+}*/
+
+.category-content .swiper-slide-active,
+.category-content .swiper-slide-prev,
+.category-content .swiper-slide-next {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }

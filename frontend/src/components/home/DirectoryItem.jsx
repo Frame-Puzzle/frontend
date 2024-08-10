@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "./DirectoryItem.css";
+import makeHomeDirNameShort from "../../utils/makeHomeDirNameShort";
 
-const Directory = (props) => {
+const DirectoryItem = (props) => {
   let navigate = useNavigate();
 
   return (
@@ -24,11 +25,15 @@ const Directory = (props) => {
       </div>
       <div className="directory-name-box">
         <span className="directory-name">
-          {/* directory name data binding */ props.info.directoryName}
+          {
+            /* directory name data binding */ makeHomeDirNameShort(
+              props.info.directoryName
+            )
+          }
         </span>
       </div>
     </div>
   );
 };
 
-export default Directory;
+export default DirectoryItem;

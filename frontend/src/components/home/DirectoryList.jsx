@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./DirectoryList.css";
 import directoryApi from "../../apis/directoryApi";
 import DirectoryItem from "./DirectoryItem";
+//swiper 기능 추가
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const DirectoryList = () => {
   // 백에게 카테고리별로 디렉토리 정보를 요청해서 데이터를 가져오는 함수 정의하기
@@ -66,13 +68,22 @@ const DirectoryList = () => {
         ))}
       </div>
       <div className="category-content flex">
-        {
-          categoryList.map((a, i) => {
-            return <DirectoryItem key={i} info={a} />;
+        {/* 조건부 렌더링써서 4개 보다 많아질 때 swipe 동작하기 */}
+        {categoryList.length > 4 ? (
+          <Swiper spaceBetween={5} slidesPerView={4.5}>
+            {categoryList.map((a, index) => (
+              <SwiperSlide key={index}>
+                <DirectoryItem key={index} info={a} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          categoryList.map((a, index) => {
+            return <DirectoryItem key={index} info={a} />;
           })
           /* create Component to use map function */
           /* <components/common/Directory /> 여러 개에 각각 정보 넘겨주기 */
-        }
+        )}
       </div>
     </div>
   );
