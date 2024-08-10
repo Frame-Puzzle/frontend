@@ -23,9 +23,8 @@ const MemberHeader = ({ memberList, id }) => {
     dispatch(setModalId(1));
   };
 
-  const exitDirectory = async () => {
-    const response = await directoryApi.delete(`/${id}`);
-    nav("/home");
+  const openLeaveModal = () => {
+    dispatch(setModalId(3));
   };
 
   return (
@@ -44,24 +43,23 @@ const MemberHeader = ({ memberList, id }) => {
           spaceBetween={30}
           slidesPerView={3}
           centeredSlides={false}
-          loop={false}>
-
+          loop={false}
+        >
           {members.map((member, index) =>
-
-            member.accept ? <SwiperSlide key={index}>
-
-              <Profile
-                key={index}
-                imgUrl={member.profileUrl}
-                userName={member.nickname}
-              />
-
-            </SwiperSlide> : null
+            member.accept ? (
+              <SwiperSlide key={index}>
+                <Profile
+                  key={index}
+                  imgUrl={member.profileUrl}
+                  userName={member.nickname}
+                />
+              </SwiperSlide>
+            ) : null
           )}
         </Swiper>
       </div>
 
-      <div className="member-header-right" onClick={exitDirectory}>
+      <div className="member-header-right" onClick={openLeaveModal}>
         <img
           src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/exit.png"
           alt="exit-directory"
