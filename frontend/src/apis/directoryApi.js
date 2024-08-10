@@ -14,7 +14,7 @@ directoryApi.interceptors.request.use(
     const state = store.getState();
     const accessToken = state.user.accessToken;
 
-    if (accessToken) {
+    if (accessToken && accessToken !== "") {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
