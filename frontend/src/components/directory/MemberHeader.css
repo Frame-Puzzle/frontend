@@ -53,3 +53,7 @@
   align-items: center;
   flex-direction: column;
 }
+
+.swiper-slide-active, .swiper-slide-prev, .swiper-slide-next {
+  opacity: 1;
+}
