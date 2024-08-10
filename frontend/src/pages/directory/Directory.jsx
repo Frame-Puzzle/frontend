@@ -17,7 +17,6 @@ import { setDirectoryId } from "../../stores/createBoardSlice";
 import DirectoryModalFrame from "../modalFrame/DirectoryModalFrame";
 import { setMemberList } from "../../stores/directorySlice";
 
-
 const Directory = () => {
   // url Parameter 이름과 동일하게 'id'를 사용해야 한다.
   const { id } = useParams();
@@ -52,7 +51,7 @@ const Directory = () => {
       dispatch(setMemberList(data.memberList));
     };
     fetchDirectory();
-  }, [id,directory.modalId]);
+  }, [id, directory.modalId]);
 
   /* 디렉토리 상세페이지에 존재하는 퍼즐판 추가 버튼을 누르면 동률의 위치로
   페이지 라우팅되는 것이므로 고유 디렉토리 번호는 props로 전송 불가하다.
