@@ -22,7 +22,6 @@ boardApi.interceptors.request.use(
     return config;
   },
   (error) => {
-    window.location.href = "/";
     return Promise.reject(error);
   }
 );

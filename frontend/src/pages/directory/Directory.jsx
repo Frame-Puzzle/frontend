@@ -26,7 +26,7 @@ const Directory = () => {
   const [category, setCategory] = useState("");
   const [boardList, setBoardList] = useState([]);
   const [memberList, setMemberListState] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [addBoard, setAddBoard] = useState(true);
 
   const directory = useSelector((state) => state.directory);
 
@@ -46,6 +46,8 @@ const Directory = () => {
       setCategory(data.category);
       setBoardList(data.boardList);
       setMemberListState(data.memberList);
+      setAddBoard(data.currentBoard);
+
       dispatch(setMemberList(data.memberList));
       dispatch(setDirectoryName(data.directoryName));
     };
@@ -102,7 +104,10 @@ const Directory = () => {
           <MemberHeader memberList={memberList} id={id} />
         </div>
         <div className="directory-middle-container">
-          <div className="directory-create-board">
+          <div
+            className="directory-create-board"
+            style={{ visibility: addBoard ? "hidden" : "visible" }}
+          >
             <span className="board-plus">퍼즐 추가</span>
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/plus.png"
