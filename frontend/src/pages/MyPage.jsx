@@ -53,6 +53,13 @@ const MyPage = () => {
     nav("/");
   };
 
+  const exitFrazzle = async () => {
+    const response = await userApi.delete();
+    localStorage.clear();
+
+    nav("/");
+  };
+
   return (
     <div className="w-full h-full">
       <div className="mypage-header">
@@ -82,7 +89,7 @@ const MyPage = () => {
         </div>
         <div>
           <RectangularButton
-            onClick={() => nav("/home")} // logout modal
+            onClick={exitFrazzle} // logout modal
             text={"회원 탈퇴"}
             type={"reverse-purple"}
           />
