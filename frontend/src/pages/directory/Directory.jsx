@@ -52,6 +52,14 @@ const Directory = () => {
     fetchDirectory();
   }, [id, directory.modalId]);
 
+  /* 디렉토리 상세페이지에 존재하는 퍼즐판 추가 버튼을 누르면 동률의 위치로
+  페이지 라우팅되는 것이므로 고유 디렉토리 번호는 props로 전송 불가하다.
+  따라서 디렉토리 상세페이지가 처음으로 mount될 때, Rudex에 고유 디렉토리 번호를 저장해야 한다. */
+  useEffect(() => {
+    // 주의 : id는 Number가 아닌 String Type
+    dispatch(setDirectoryId(id));
+  }, []);
+
   // 슬라이드 설정
   const settings = {
     dots: false,

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { setModalId } from "../../stores/directorySlice";
 import { useDispatch } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
 import directoryApi from "../../apis/directoryApi";
 
 // 3요소: 해당 페이지 이름, 해당 페이지 카테고리, 아이콘 (없을 수도 있음)
@@ -38,15 +39,25 @@ const MemberHeader = ({ memberList, id }) => {
         <span className="member-header-comment">멤버</span>
       </div>
       <div className="member-header-middle">
-        {members.map((member, index) =>
-          member.accept ? (
-            <Profile
-              key={index}
-              imgUrl={member.profileUrl}
-              userName={member.nickname}
-            />
-          ) : null
-        )}
+        {/* 멤버 스와이퍼 구현 */}
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={3}
+          centeredSlides={false}
+          loop={false}>
+          {members.map((member, index) =>
+
+            member.accept ? <SwiperSlide key={index}>
+
+              <Profile
+                key={index}
+                imgUrl={member.profileUrl}
+                userName={member.nickname}
+              />
+
+            </SwiperSlide> : null
+          )}
+        </Swiper>
       </div>
 
       <div className="member-header-right" onClick={exitDirectory}>
