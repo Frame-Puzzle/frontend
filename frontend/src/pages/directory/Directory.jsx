@@ -99,18 +99,7 @@ const Directory = () => {
       </div>
       <div className="directory-main-content">
         <div className="directory-member-header">
-          <MemberHeader
-            memberList={memberList}
-            icon={
-              <img
-                src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit.png"
-                alt="thirdIcon"
-                className="header-icon"
-                style={{ width: "40%" }}
-              />
-            }
-            category={category}
-          />
+          <MemberHeader memberList={memberList} id={id} />
         </div>
         <div className="directory-middle-container">
           <div className="directory-create-board">
