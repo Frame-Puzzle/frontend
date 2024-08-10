@@ -42,7 +42,7 @@ const MemberHeader = ({ memberList, id }) => {
         {/* 멤버 스와이퍼 구현 */}
         <Swiper
           spaceBetween={30}
-          slidesPerView={3}
+          slidesPerView={Math.min(3, members.length)}
           centeredSlides={false}
           loop={false}>
 
