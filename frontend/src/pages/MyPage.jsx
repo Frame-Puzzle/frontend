@@ -64,7 +64,7 @@ const MyPage = () => {
     <div className="w-full h-full">
       <div className="mypage-header">
         {/* <MainHeader />에 icon props로 건네주는 img의 width는 항상 120%로 고정하는 것으로 약속한다. */}
-        <MainHeader title="My Page" />
+        <MainHeader title="My Page" path="/home" />
       </div>
       <div className="mypage-main-content">
         <div className="profile">
