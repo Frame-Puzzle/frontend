@@ -60,8 +60,7 @@ const WaitingRoom = () => {
 
   // 데이터 불러온 후
   useEffect(() => {
-
-    console.log(waitingRoom.directoryName)
+    console.log(waitingRoom.directoryName);
     if (!robyData) {
       return;
     }
@@ -102,7 +101,10 @@ const WaitingRoom = () => {
     <>
       <div className="w-full h-full flex flex-wrap relative">
         <div className="waiting-room-header">
-          <MainHeader title={"PUZZLE"} directoryName={waitingRoom.directoryName} />
+          <MainHeader
+            title={"PUZZLE"}
+            directoryName={waitingRoom.directoryName}
+          />
         </div>
         <div className="waiting-room-participation">
           <GameWaitingRoomHeader
@@ -136,7 +138,10 @@ const WaitingRoom = () => {
         </div>
         <div className="enter-game-room-container">
           <button className="enter-game-room-button" disabled={activateButton}>
-            준비
+            {activateButton
+              ? `${timer}초 후에 방이 폭파됩니다.`
+              : `준비
+              (${timer}초 후에 방이 폭파됩니다.)`}
           </button>
           <div
             className="show-game-img"

@@ -17,7 +17,7 @@ let waitingRoom = createSlice({
       state.gameImgUrl = action.payload
     },
     setdirectoryName(state, action) {
-      state.directoryName = action.directoryName
+      state.directoryName = action.payload
     },
   }
 });

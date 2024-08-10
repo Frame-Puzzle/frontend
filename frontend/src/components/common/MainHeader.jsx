@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import "./MainHeader.css";
 import { useNavigate } from "react-router-dom";
 
 // 3요소: 해당 페이지 이름, 해당 페이지 카테고리, 아이콘 (없을 수도 있음)
 const MainHeader = ({ title, category, icon, directoryName }) => {
   const nav = useNavigate();
+
   return (
     <div className="header flex">
       <div className="header-left flex align-items-center">
