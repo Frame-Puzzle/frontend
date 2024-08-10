@@ -1,7 +1,6 @@
 .create-board-modal {
   /* 크기와 색상만 지정해주면 된다. */
   width: 80vw;
-  height: pull; /* 기존에는 40vh */
   padding: 3.5vh 0vw;
   background: #ffffff;
   border: none;
@@ -107,6 +106,7 @@
 }
 
 .mission{
+  width: 50vw;
   font-size: 2.6vh;
   margin-top: 0.5vh;
   margin-bottom: 1.2vh;
