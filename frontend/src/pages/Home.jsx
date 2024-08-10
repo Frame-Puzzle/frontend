@@ -48,7 +48,7 @@ const Home = () => {
         <div className="home-swipe-content">
           <MainSwipe />
         </div>
-        <div className="makr-dir-container">
+        <div className="make-dir-container">
           <span
             className="make-dir"
             onClick={() => {
