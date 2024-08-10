@@ -57,7 +57,10 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
     fitPieces(pieces, boardConfig);
 
     // 클릭 이벤트 생성
-    pieces.forEach((piece, index) => {
+    pieces.forEach((piece, index) => { 
+      if(piece.data.authority === 4){
+        return;
+      }
       piece.onMouseDown = (event) => {
         const fetchPiece = async () => {
           try {
