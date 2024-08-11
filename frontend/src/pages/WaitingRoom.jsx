@@ -39,6 +39,7 @@ const WaitingRoom = () => {
     );
 
     return () => {
+      exitRoom();
       disconnectSocket();
       setIsConnected(false);
     };
@@ -61,6 +62,16 @@ const WaitingRoom = () => {
     sendMessage(`/pub/roby/entry/${waitingRoom.boardId}`, data);
   };
 
+  const exitRoom = () => {
+    const data = {
+      boardId: waitingRoom.boardId,
+      userId: 0, // 불필요하다면 삭제 가능
+      message: "유저 닉네임이 퇴장하셨습니다.",
+    };
+
+    sendMessage(`/pub/roby/exit/${waitingRoom.boardId}`, data);
+  };
+
   // 데이터 불러온 후
   useEffect(() => {
     console.log(waitingRoom.directoryName);
@@ -68,7 +79,6 @@ const WaitingRoom = () => {
       return;
     }
 
-    console.log("robyData:", robyData);
     setRobyKing(robyData.king);
     setRobyUserList(robyData.robyUserList);
 

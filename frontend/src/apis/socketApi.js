@@ -9,7 +9,7 @@ let stompClient = null;
 const connectSocket = (onConnectedCallback, onMessageCallback,
   onRobyCallback, onTimerCallback, id) => {
 
-  console.log(id);
+  
   const state = store.getState();
   const accessToken = state.user.accessToken;
 
