@@ -104,7 +104,7 @@ const ChooseImg = () => {
         {mission ? (
           <div className="mission-container">
             <span className="mission-title">Mission</span>
-            <span className="mission">{mission}</span>
+            <span className="mission-context">{mission}</span>
           </div>
         ) : (null)}
         <div className="uploading-img" onClick={handleClick}>
