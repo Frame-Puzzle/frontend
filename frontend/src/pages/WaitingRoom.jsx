@@ -13,11 +13,11 @@ const WaitingRoom = () => {
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [robyData, setRobyData] = useState(null);
-  const [timer, setTimer] = useState(100);
+  const [timer, setTimer] = useState(-1);
 
   const [robyKing, setRobyKing] = useState("");
   const [robyUserList, setRobyUserList] = useState([]);
-  const [activateButton, setActivateButton] = useState([false]);
+  const [activateButton, setActivateButton] = useState(false);
   const [showGameImg, setShowGameImg] = useState(false);
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
@@ -74,7 +74,6 @@ const WaitingRoom = () => {
 
   // 데이터 불러온 후
   useEffect(() => {
-    console.log(waitingRoom.directoryName);
     if (!robyData) {
       return;
     }
@@ -82,7 +81,15 @@ const WaitingRoom = () => {
     setRobyKing(robyData.king);
     setRobyUserList(robyData.robyUserList);
 
-    setActivateButton(robyData.maxPeople / 2 <= robyData.robyUserList.size);
+    console.log(
+      robyData.maxPeople / 2 <= robyData.robyUserList.size &&
+        robyData.king.nickname === user.nickName
+    );
+
+    setActivateButton(
+      robyData.maxPeople / 2 <= robyData.robyUserList.length &&
+        robyData.king.nickname === user.nickName
+    );
   }, [robyData]);
 
   const handleInputMessage = (event) => {
@@ -158,11 +165,11 @@ const WaitingRoom = () => {
           </div>
         </div>
         <div className="enter-game-room-container">
-          <button className="enter-game-room-button" disabled={activateButton}>
+          <button className="enter-game-room-button" disabled={!activateButton}>
             {activateButton
-              ? `${timer}초 후에 방이 폭파됩니다.`
-              : `준비
-              (${timer}초 후에 방이 폭파됩니다.)`}
+              ? `준비 완료
+              (${timer}초 후에 방이 폭파됩니다.)`
+              : `${timer}초 후에 방이 폭파됩니다.`}
           </button>
           <div
             className="show-game-img"

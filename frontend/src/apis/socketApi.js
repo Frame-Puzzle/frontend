@@ -1,4 +1,3 @@
-import axios from "axios";
 // useSelector 사용 못하니까 직접 스토어 가져오기
 import { store } from "./../stores/store";
 import * as Stomp from '@stomp/stompjs';

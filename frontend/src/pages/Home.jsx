@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import userApi from "../apis/userApi";
 import { useDispatch } from "react-redux";
+import { setNickName } from "../stores/userSlice";
 
 const Home = () => {
   let [modal, setModal] = useState(false);
@@ -24,6 +25,7 @@ const Home = () => {
         const data = response.data.data;
 
         showUserNickName(data.nickname);
+        dispatch(setNickName(data.nickname));
       } catch (error) {
         console.error(error);
         alert("데이터를 불러오는 중 오류가 발생했습니다.");
@@ -31,7 +33,7 @@ const Home = () => {
     };
 
     fetchUserData();
-  }, [dispatch]);
+  }, []);
 
   return (
     // Page 단위의 Component의 최상위 요소에는 반드시 width: 100%와 height: 100% 속성이 필요하다.*/
