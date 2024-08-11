@@ -18,6 +18,7 @@ import BoardMissionOn from "./components/common/BoardMissionOn";
 import BoardSelectMission from "./components/common/BoardSelectMission";
 import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 import WaitingRoom from "./pages/WaitingRoom";
+import GameRoom from "./pages/GameRoom";
 
 function App() {
   const setScreenSize = () => {
@@ -76,7 +77,10 @@ function App() {
         <Route path="/boards/:boardID" element={<PuzzleBoard />} />
 
         {/* 게임방 대기 페이지 */}
-        <Route path="/waiting-room/:roomID" element={<WaitingRoom/>}></Route>
+        <Route path="/waiting-room/:roomID" element={<WaitingRoom />}></Route>
+
+        {/* 게임 방 페이지 */}
+        <Route path="/game-room/:roomID" element={<GameRoom />}></Route>
       </Routes>
     </div>
   );
