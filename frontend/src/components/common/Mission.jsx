@@ -1,7 +1,12 @@
 import { useState } from "react";
 import "./Mission.css";
+import { useDispatch } from "react-redux";
+import { setGptLoading } from "../../stores/loadingSlice";
 
 const Mission = ({ info, postGuides, keywordList, prevMissions, directoryId, setMissions, missions, setPrevMissions, reloadActive, setCanReload, canReload }) => {
+
+  let dispatch = useDispatch();
+
   return (
     <div className="mission flex">
       <span>{info}</span>
@@ -11,6 +16,7 @@ const Mission = ({ info, postGuides, keywordList, prevMissions, directoryId, set
           e.stopPropagation();
           // 2. num 인자를 1로 고정한 axios POST 요청 (Cannot use keyword 'await' outside an async function)
           const asyncPostGuides = async (keywordList, prevMissions, directoryId) => {
+            dispatch(setGptLoading(true));
             const guideList = await postGuides(keywordList, 1, prevMissions, directoryId);
             // guideList[0]이 실제 미션 문자열  // missions에서는 기존의 응답을 교체하기
             let newArr = missions.map(item => item === info ? guideList[0] : item);
@@ -22,6 +28,7 @@ const Mission = ({ info, postGuides, keywordList, prevMissions, directoryId, set
             // 남은 리로드 횟수 반영
             let remain = canReload - 1;
             setCanReload(remain);
+            dispatch(setGptLoading(false));
           }
           asyncPostGuides(keywordList, prevMissions, directoryId);
         }} /> : null
