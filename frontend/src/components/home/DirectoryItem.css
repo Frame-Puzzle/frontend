@@ -25,17 +25,15 @@
 
 .directory-category {
   width: 10vw;
-  height: 100%;
-  /* Detail design */
   background-color: white;
   color: #f1bdec;
   border: 1px #f1bdec solid;
-  padding: 3%;
+  padding: 0.2vh 0.2vw;
   border-radius: 24.4px;
   font-size: 10px;
   font-weight: 600;
   text-align: center;
-  align-content: center;
+  white-space: nowrap;
 }
 
 .directory-name-box {
