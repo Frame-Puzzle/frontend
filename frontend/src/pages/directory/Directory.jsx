@@ -116,15 +116,13 @@ const Directory = () => {
           <div
             className="directory-create-board"
             style={{ visibility: addBoard ? "hidden" : "visible" }}
+            onClick={(e) => { e.stopPropagation(); nav(`/create-board/select-size`); }}
           >
             <span className="board-plus">퍼즐 추가</span>
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/plus.png"
               alt="board-plus"
               className="board-plus-logo"
-              onClick={() => {
-                nav(`/create-board/select-size`);
-              }}
             />
           </div>
         </div>
