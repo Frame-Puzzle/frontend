@@ -1,7 +1,7 @@
 .board-select-mission-progress {
   width: 100%;
   height: 15%; /* should modify */
-  border-top: 1px solid lightslategray;
+  border-top: 1px solid rgba(238, 238, 238, 0.5);
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
@@ -11,42 +11,45 @@
 
 .board-select-mission-progress span {
   text-align: center;
-  width: 8vw;
-  padding: 0.8vh 0;
-  border-radius: 9999px;
-  margin: 0 2vw;
+  width: 6.5vw;
+  height: 6.5vw; 
+  line-height: 6.5vw;
+  border-radius: 50%; 
+  margin: 0 1vw 0 2vw;
+  font-family: "pretendard-medium";
 }
 
 .board-select-mission-progress span:nth-child(1) {
   background-color: #FFFFFF;
   color: #C3C7F4;
-  border: 1px solid #C3C7F4;
+  border: 2px solid #C3C7F4;
 }
 
 .board-select-mission-progress span:nth-child(2) {
   background-color: #C3C7F4;
   color: #FFFFFF;
-  border: none;
+  border: 2px solid #C3C7F4;
 }
 
 .board-select-mission-title {
   width: 100%;
   padding: 3vw;
-  padding-left: 5vw;
+  padding-left: 9vw;
 }
 
 .board-select-mission-title span {
   font-size: 5vw;
-  font-weight: 600;
   margin-left: 1vw;
 }
 
 .board-select-mission-title span:nth-child(1) {
   margin-bottom: 1vh;
+  font-weight: 600;
 }
 
 .board-select-mission-title span:nth-child(2) {
   font-size: 4vw;
+  font-family: "pretendard-medium";
 }
 
 .board-select-mission-main-container {
