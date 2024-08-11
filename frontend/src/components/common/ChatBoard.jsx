@@ -14,7 +14,7 @@ const ChatBoard = ({ messages }) => {
     <div className="chat-board-container">
       {messages.map((msg, index) => (
         <div key={index} className="message">
-          [{msg.nickname}]: {msg.message}
+          <b>[{msg.nickname}]</b>: {msg.message}
         </div>
       ))}
       <div ref={chatEndRef} />

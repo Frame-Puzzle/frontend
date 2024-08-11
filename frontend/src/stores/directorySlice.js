@@ -12,7 +12,7 @@ let directory = createSlice({
   },
   reducers: {
     setModalId(state, action) {
-      state.modalId = action.payload; 
+      state.modalId = action.payload;
     },
     setMemberList(state, action) {
       state.memberList = action.payload;

@@ -7,8 +7,9 @@ import {
   setdirectoryName,
 } from "../../../stores/waitingRoomSlice";
 import { useNavigate } from "react-router-dom";
+import { setModalId } from "../../../stores/boardSlice";
 
-const CreateWaitingRoom = ({ setModal }) => {
+const CreateWaitingRoom = () => {
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -29,6 +30,7 @@ const CreateWaitingRoom = ({ setModal }) => {
 
   const moveWaitingRoom = () => {
     if (level === 0) return;
+
     nav(`/waiting-room/${waitingRoom.boardId}`);
   };
   return (
@@ -39,7 +41,7 @@ const CreateWaitingRoom = ({ setModal }) => {
             src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/x-symbol.png"
             alt="x-symbol"
             className="x-symbol"
-            onClick={() => setModal(0)}
+            onClick={() => dispatch(setModalId(0))}
           />
         </div>
         <div className="create-waiting-modal-body">

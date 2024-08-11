@@ -54,6 +54,8 @@
   flex-direction: column;
 }
 
-.swiper-slide-active, .swiper-slide-prev, .swiper-slide-next {
+.member-header-middle .swiper-slide-active,
+.member-header-middle .swiper-slide-prev,
+.member-header-middle .swiper-slide-next {
   opacity: 1;
 }

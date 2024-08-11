@@ -10,10 +10,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { setBoardId } from "../stores/waitingRoomSlice";
+import {
+  setVote,
+  setModalId,
+  setBoardCategory,
+  setBoardKeywords,
+} from "../stores/boardSlice";
 
 const PuzzleBoard = () => {
   // 모달 창
-  const [modal, setModal] = useState(0);
   const [boardName, setBoardName] = useState("");
   const [category, setCategory] = useState("");
   const [keywords, setKeywords] = useState([]);
@@ -21,14 +26,14 @@ const PuzzleBoard = () => {
   const [pieceId, setPieceId] = useState(0);
   const [pieceData, setPieceData] = useState([]);
   const [activateGameRoom, setActivateGameRoom] = useState(0);
-
-  const [startDelete, setStateDelete] = useState(true);
+  const [createRoom, setCreateRoom] = useState(false);
 
   const dispatch = useDispatch();
 
   const { boardID } = useParams();
 
   const piece = useSelector((state) => state.piece);
+  const board = useSelector((state) => state.board);
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
@@ -38,42 +43,50 @@ const PuzzleBoard = () => {
       // 퍼즐판 정보 세팅
       setBoardName(data.directoryName + "#" + data.boardNum);
       setCategory(data.category);
+      dispatch(setBoardCategory(data.category));
       if (data.keyword) {
         setKeywords(data.keyword);
+        dispatch(setBoardKeywords(data.keyword));
       }
 
       setBoardSize(data.boardSize);
       setPieceId(data.pieceList[0].pieceId);
       setPieceData(data.pieceList);
       setActivateGameRoom(data.boardClearType);
-      setStateDelete(data.voteStatus);
+
+      dispatch(setVote(data.voteStatus));
+    };
+
+    const fetchCreateGameRoom = async () => {
+      const response = await boardApi.get(`/${boardID}/rooms`);
+      const data = response.data.data;
+      setCreateRoom(data.exist);
     };
 
     fetchPuzzleData();
-  }, [piece.pieceId]);
+    fetchCreateGameRoom();
+  }, []);
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
     if (piece.pieceId !== 0) {
       // DB에서 정보 불러오는 시간
       setTimeout(() => {
-        setModal(1);
+        dispatch(setModalId(1));
       }, 500);
     } else {
-      setModal(0);
+      dispatch(setModalId(0));
     }
   }, [piece.pieceId]);
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
-      {modal !== 0 ? (
-        <BoardModalFrame modalType={modal} setModal={setModal} />
-      ) : null}
+      {board.modalId !== 0 ? <BoardModalFrame /> : null}
       <div className="board-header">
         <MainHeader
           title={boardName}
           icon={
-            !startDelete && (
+            !board.vote && (
               <img
                 src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
                 alt="thirdIcon"
@@ -85,7 +98,6 @@ const PuzzleBoard = () => {
           category={category}
           page="퍼즐판"
           boardID={boardID}
-          setStateDelete={setStateDelete}
         />
       </div>
       <div className="board-main-content">
@@ -102,13 +114,13 @@ const PuzzleBoard = () => {
           pieceData={pieceData}
         />
         <div className="game-room-container">
-          {activateGameRoom !== 2 ? (
+          {!createRoom ? (
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}
               onClick={() => {
                 dispatch(setBoardId(boardID));
-                setModal(2);
+                dispatch(setModalId(2));
               }}
             >
               게임 방 만들기
@@ -118,7 +130,7 @@ const PuzzleBoard = () => {
               className="game-room-button"
               onClick={() => {
                 dispatch(setBoardId(boardID));
-                setModal(3);
+                dispatch(setModalId(3));
               }}
             >
               게임 방 참여하기
