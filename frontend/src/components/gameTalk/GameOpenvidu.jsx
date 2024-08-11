@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import gameOpenViduApi from "../../apis/gameOpenViduApi";
 import { detectVoice } from "./detectVoice";
 import AudioDeviceSelector from "./AudioDeviceSelector";
+import OvAudioComponent from "./OvAudioComponent";
 
 // 아래 코드는 session, token 값 변경에 따라 마이크 설정 및 입장과 관련된 openvidu testcode입니다.
 const GameOpenVidu = () => {
@@ -89,29 +90,19 @@ const GameOpenVidu = () => {
         const connectionData = JSON.parse(event.stream.connection.data);
         console.log("Received connection data:", connectionData); // 디버그를 위한 로그 추가
         const nickname = connectionData.clientData; // 각각 client에 대한 정보
+
+        // subscriber를 이용해서 진행
+        // 스트림을 구독하여 streamManager를 얻습니다.
+        const subscriber = mySession.subscribe(event.stream, undefined);
         setUsers((users) => [
           ...users,
           {
             id: event.stream.connection.connectionId,
             name: nickname,
             isSpeaking: false,
+            streamManager: subscriber, // streamManager를 추가하여 OpenViduAudiocomponent에 전달
           },
         ]);
-        // 스트림을 구독하고 송신을 건네 받을 수신자들 설정하기
-        const subscriber = mySession.subscribe(event.stream, undefined);
-
-        // 오디오 요소 추가하기
-        const audioElement = document.createElement("audio");
-        audioElement.setAttribute("autoplay", "true");
-        audioElement.setAttribute("controls", "true");
-
-        // 스트림이 오디오 출력 장치로 전달되도록 설정하기
-        audioElement.srcObject = subscriber.stream.getMediaStream();
-        console.log("오디오 요소 생성 및 스트림 연결!", audioElement); // 오디오 요소 생성 및 스트림 연결 로그 출력
-
-        // 오디오 요소를 DOM에 추가해 브라우저에서 스트림 재생하기
-        document.body.appendChild(audioElement);
-        console.log("오디오 요소가 DOM에 추가되었음을 로그로 출력");
       });
 
       mySession.on("streamDestroyed", (event) => {
@@ -144,6 +135,7 @@ const GameOpenVidu = () => {
           id: publisherOV.stream.connection.connectionId,
           name: nickname,
           isSpeaking: false,
+          streamManager: undefined,
         },
       ]);
 
@@ -201,6 +193,9 @@ const GameOpenVidu = () => {
               {`${user.name}`}{" "}
               {user.isSpeaking && " 음성이 들어왔네요 말하고 있군요"}
             </div>
+            {user.streamManager && (
+              <OvAudioComponent streamManager={user.streamManager} />
+            )}
           </div>
         ))}
       </div>
