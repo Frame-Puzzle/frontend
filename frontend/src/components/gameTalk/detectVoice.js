@@ -6,7 +6,7 @@
 // stopSpeaking
 
 // 발언 진행자, 발언자들
-export const detectVoice = (publisher, setUsers, usersRef) => {
+export const detectVoice = (publisher, session, setUsers, usersRef) => {
   // user의 말하기 상태를 저장
   // connection : speaking을 시작한 connectionId와 userId 매칭
 
@@ -21,6 +21,21 @@ export const detectVoice = (publisher, setUsers, usersRef) => {
       usersRef.current = updateSayUsers;
       return updateSayUsers;
     });
+
+    // 드디어 찾았다.. signal
+    // data 보낼 때 일반으로 보내면 unsupportedOpeationException 에러 발생
+    // 문자열 변환 후 전달
+    try {
+      session.signal({
+        type: "isSpeaking",
+        data: JSON.stringify({
+          userId: event.connection.connectionId,
+          isSpeaking: true,
+        }),
+      });
+    } catch (error) {
+      console.error("음성 받을 때 에러 발생 :", error);
+    }
   };
 
   // 발언 중지 이벤트 false로 isSpeaking 설정
@@ -34,6 +49,18 @@ export const detectVoice = (publisher, setUsers, usersRef) => {
       usersRef.current = updateUnSayUsers;
       return updateUnSayUsers;
     });
+
+    try {
+      session.signal({
+        type: "isSpeaking",
+        data: JSON.stringify({
+          userId: event.connection.connectionId,
+          isSpeaking: false,
+        }),
+      });
+    } catch (error) {
+      console.error("음성 멈췄을 때 에러 발생 :", error);
+    }
   };
 
   if (publisher) {
