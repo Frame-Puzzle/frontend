@@ -104,7 +104,7 @@ const BoardSelectMission = () => {
       </div>
       <div className="board-select-mission-title">
         <span>Our Mission</span>
-        <span>미션은 5회 재생성 가능합니다. 남은 횟수 : {canReload}</span>
+        <span>미션은 5회 재생성 가능합니다. (남은 횟수: {canReload})</span>
       </div>
       <div className="board-select-mission-main-container flex">
         {

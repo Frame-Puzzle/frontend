@@ -5,20 +5,21 @@
   cursor: pointer;
   background-color: #B0B0B0;
   color: #FFFFFF;
-  padding: 1.5vw;
+  padding: 1.5vw 1.6vw;
   border-radius: 9999px;
   /* margin-right 속성을 줘서 알약끼리 떨어뜨려야 함 */
-  margin-right: 2vw;
+  margin: 0 1vw;
 }
 
 #keyword-pill-content {
   padding: 0;
   margin: 0;
   font-weight: 500;
-  font-size: 3vw;
+  font-size: 2.9vw;
   margin-right: 1vw;
 }
 
 .x-icon-container {
-  width: 2vw;
+  width: 1.7vw;
+  margin-left: 0.4vw;
 }
