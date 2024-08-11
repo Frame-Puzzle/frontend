@@ -9,7 +9,9 @@
   margin-right: 2vw;
   border: 2px solid #C3C7F4;
   border-radius: 9999px;
-  padding: 1vh 5vw;
+  padding: 1vh 4vw 1vh 5vw;
+  white-space: normal;
+  word-break: keep-all;
 }
 
 .mission img {
