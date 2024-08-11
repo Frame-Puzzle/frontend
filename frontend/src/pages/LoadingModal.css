@@ -1,0 +1,16 @@
+.loading-modal-frame {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-modal-frame span {
+  color: #FFFFFF;
+  font-size: 5vw;
+  margin-bottom: 5vh;
+}

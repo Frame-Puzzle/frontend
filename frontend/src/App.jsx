@@ -19,6 +19,7 @@ import BoardSelectMission from "./components/common/BoardSelectMission";
 import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 import WaitingRoom from "./pages/WaitingRoom";
 import GameRoom from "./pages/GameRoom";
+import LoadingModal from "./pages/LoadingModal";
 
 function App() {
   const setScreenSize = () => {
@@ -81,6 +82,10 @@ function App() {
 
         {/* 게임 방 페이지 */}
         <Route path="/game-room/:roomID" element={<GameRoom />}></Route>
+
+        {/* 로딩 모달 테스트 */}
+        <Route path="/loading-test" element={<LoadingModal />}></Route>
+
       </Routes>
     </div>
   );
