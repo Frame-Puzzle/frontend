@@ -11,7 +11,7 @@ const DeleteBoard = () => {
 
   const deleteBoard = async () => {
     const data = {
-      accept: true,
+      accept: true, 
     };
 
     const response = await boardApi.put(`/${boardID}/vote`, data);
