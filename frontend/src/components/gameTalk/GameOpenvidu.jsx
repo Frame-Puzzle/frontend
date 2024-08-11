@@ -12,7 +12,7 @@ const GameOpenVidu = () => {
   const nickname = useSelector((state) => state.user.nickName);
   const [sessionId, setSessionId] = useState(null);
   const [tokenId, setTokenId] = useState(null);
-  const [myUserName, setMyUserName] = useState(null);
+  const [myUserName, setMyUserName] = useState(nickname);
   const [session, setSession] = useState(null);
   // 다른 유저들이 방에 들어온 list 확인하기 위함, 들어올 때마다 update
   const [users, setUsers] = useState([]);
@@ -28,6 +28,8 @@ const GameOpenVidu = () => {
   const [isJoining, setIsJoining] = useState(false);
 
   const boardId = useRef(1);
+
+  // 브라우저 탭을 닫거나, 페이지를 새로 고침하거나, 앱을 종료할 때 leaveSession()을 호출하여 명시적으로 세션
   useEffect(() => {
     const onbeforeunload = () => {
       leaveSession();
@@ -73,14 +75,43 @@ const GameOpenVidu = () => {
       const OV = new OpenVidu();
       const mySession = OV.initSession();
 
+      // 상대방 음성 감지 상태 수신 설정
+      mySession.on("signal:isSpeaking", (event) => {
+        const { userId, isSpeaking } = JSON.parse(event.data);
+        setUsers((users) =>
+          users.map((user) =>
+            user.id === userId ? { ...user, isSpeaking } : user
+          )
+        );
+      });
+
       mySession.on("streamCreated", (event) => {
-        const nickname = JSON.parse(event.stream.connection.data).clientData; //각각 client에 대한 정보
+        const connectionData = JSON.parse(event.stream.connection.data);
+        console.log("Received connection data:", connectionData); // 디버그를 위한 로그 추가
+        const nickname = connectionData.clientData; // 각각 client에 대한 정보
         setUsers((users) => [
           ...users,
-          { id: event.stream.streamId, name: nickname },
+          {
+            id: event.stream.connection.connectionId,
+            name: nickname,
+            isSpeaking: false,
+          },
         ]);
-        // 말하기 감지(current로 보냄)
-        detectVoice(publisher.current, setUsers, usersRef);
+        // 스트림을 구독하고 송신을 건네 받을 수신자들 설정하기
+        const subscriber = mySession.subscribe(event.stream, undefined);
+
+        // 오디오 요소 추가하기
+        const audioElement = document.createElement("audio");
+        audioElement.setAttribute("autoplay", "true");
+        audioElement.setAttribute("controls", "true");
+
+        // 스트림이 오디오 출력 장치로 전달되도록 설정하기
+        audioElement.srcObject = subscriber.stream.getMediaStream();
+        console.log("오디오 요소 생성 및 스트림 연결!", audioElement); // 오디오 요소 생성 및 스트림 연결 로그 출력
+
+        // 오디오 요소를 DOM에 추가해 브라우저에서 스트림 재생하기
+        document.body.appendChild(audioElement);
+        console.log("오디오 요소가 DOM에 추가되었음을 로그로 출력");
       });
 
       mySession.on("streamDestroyed", (event) => {
@@ -96,12 +127,10 @@ const GameOpenVidu = () => {
       await mySession.connect(tokenId, { clientData: myUserName });
 
       const publisherOV = await OV.initPublisherAsync(undefined, {
-        audioSource: selectedAudio, // 디바이스 내 감지된 마이크로 설정 가능
+        audioSource: selectedAudio || undefined, // 유효한 오디오 소스가 없으면 undefined 사용, 디바이스 내 감지된 마이크로 설정 가능
         videoSource: false,
         publishAudio: isUnMuted,
         publishVideo: false,
-        resolution: "640x480",
-        frameRate: 30,
         insertMode: "APPEND",
         mirror: false,
       });
@@ -117,7 +146,9 @@ const GameOpenVidu = () => {
           isSpeaking: false,
         },
       ]);
-      detectVoice(publisherOV, setUsers, usersRef);
+
+      // ov 설정 후 마지막에 detectvoice 추가
+      detectVoice(publisherOV, mySession, setUsers, usersRef);
     } catch (error) {
       console.log(
         "There was an error connecting to the session:",
