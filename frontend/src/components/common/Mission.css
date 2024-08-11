@@ -1,6 +1,5 @@
 .mission {
   font-size: 3.5vw;
-  font-weight: 500;
   flex-direction: row;
   align-items: center;
 }
@@ -8,7 +7,7 @@
 .mission span {
   width: 70vw;
   margin-right: 2vw;
-  border: 1px solid #888888;
+  border: 2px solid #C3C7F4;
   border-radius: 9999px;
   padding: 1vh 5vw;
 }
