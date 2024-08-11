@@ -21,8 +21,9 @@ const LeaveDirectory = () => {
       </div>
       <div className="leave-directory-modal-body">
         <span>
-          확인 버튼 클릭 시 디렉토리에서 나가게 되며 다시 초대받기 전까지 접근할
-          수 없습니다.
+          {/* 확인 버튼 클릭 시 디렉토리에서 나가게 되며 다시 초대받기 전까지 접근할
+          수 없습니다. */}
+          디렉토리 탈퇴 시 올린 퍼즐 조각은 자동으로 삭제되지 않습니다. 정말 탈퇴하시겠습니까? 
         </span>
       </div>
       <div className="leave-directory-modal-footer">

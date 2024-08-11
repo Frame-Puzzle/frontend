@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 const UpdateDirectory = () => {
   const dispatch = useDispatch();
   const directory = useSelector((state) => state.directory);
-  const id = useParams();
+  const { id } = useParams();
 
   // 사용자의 input 저장
   const [inputDirectoryName, setInputDirectoryName] = useState("");
@@ -55,20 +55,22 @@ const UpdateDirectory = () => {
         />
       </div>
       <div className="update-directory-modal-body">
-        <span>디렉토리 이름을 수정해주세요.</span>
-        <input
-          type="text"
-          className="update-directory-input"
-          placeholder={directory.directoryName}
-          onChange={(e) => setInputDirectoryName(e.target.value)}
-        />
-        <ExceptionMessage exceptionMessage={exceptionMessage} />
+        <div className="input-update-directory-name">
+          <span>디렉토리 이름을 수정해주세요.</span>
+          <input
+            type="text"
+            className="update-directory-input"
+            placeholder={directory.directoryName}
+            onChange={(e) => setInputDirectoryName(e.target.value)}
+          />
+          <ExceptionMessage exceptionMessage={exceptionMessage}/>
+        </div>
         <button
           className="update-directory-button"
           disabled={exceptionMessage !== 3}
           onClick={updateDirectoryName}
         >
-          만들기
+          수정하기
         </button>
       </div>
     </div>
