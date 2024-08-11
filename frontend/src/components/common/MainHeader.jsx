@@ -45,6 +45,7 @@ const MainHeader = ({
         ) : null}
         {!page && icon && <div>{icon}</div>}
         {directoryName && <span>[{directoryName}]</span>}
+        {directoryName && <span>[{directoryName}]</span>}
       </div>
     </div>
   );
