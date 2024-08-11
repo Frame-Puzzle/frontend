@@ -136,7 +136,7 @@ const Directory = () => {
                   onMouseUp={handleMouseUp(board.boardId)}
                 >
                   <DirectoryCanvas boardSize={board.boardSize} />
-                  <div className="direoctory-board-name">
+                  <div className="directory-board-name">
                     {directory.directoryName}#{board.boardName}
                   </div>
                 </div>

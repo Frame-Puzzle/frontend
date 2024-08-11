@@ -34,6 +34,7 @@ const PuzzleBoard = () => {
 
   const piece = useSelector((state) => state.piece);
   const board = useSelector((state) => state.board);
+  let directoryId = useSelector(state => state.createBoard.directoryId);
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
@@ -95,6 +96,7 @@ const PuzzleBoard = () => {
               />
             )
           }
+          path={`/directories/${directoryId}`}
           category={category}
           page="퍼즐판"
           boardID={boardID}
