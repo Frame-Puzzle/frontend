@@ -39,6 +39,7 @@ const Notification = () => {
               onClick={() => nav("/testrtc")}
             />
           }
+          path="/home"
         />
       </div>
       <div className="notification-main-content">

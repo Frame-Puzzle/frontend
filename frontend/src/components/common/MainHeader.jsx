@@ -13,6 +13,8 @@ const MainHeader = ({
   directoryName,
   page,
   boardID,
+  setStateDelete,
+  path = -1, // 기본값을 -1로 설정
 }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const MainHeader = ({
         {/* 85% */}
         <div
           className="header-prev flex justify-content-center align-items-center"
-          onClick={() => nav(-1)}
+          onClick={() => nav(path)}
         >
           <div>&lt;</div>
         </div>

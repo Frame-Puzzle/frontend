@@ -74,7 +74,7 @@
 .board-mission-on-progress {
   width: 100%;
   height: 20%;
-  border-top: 1px solid lightslategray;
+  border-top: 1px solid rgba(238, 238, 238, 0.5);
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
@@ -84,22 +84,24 @@
 
 .board-mission-on-progress span {
   text-align: center;
-  width: 8vw;
-  padding: 0.8vh 0;
-  border-radius: 9999px;
-  margin: 0 2vw;
+  width: 6.5vw;
+  height: 6.5vw; 
+  line-height: 6.5vw;
+  border-radius: 50%; 
+  margin: 0 1vw 0 2vw;
+  font-family: "pretendard-medium";
 }
 
 .board-mission-on-progress span:nth-child(1) {
   background-color: #FFFFFF;
   color: #C3C7F4;
-  border: 1px solid #C3C7F4;
+  border: 2px solid #C3C7F4;
 }
 
 .board-mission-on-progress span:nth-child(2) {
   background-color: #C3C7F4;
   color: #FFFFFF;
-  border: none;
+  border: 2px solid #C3C7F4;
 }
 
 .board-mission-on-title {
@@ -111,7 +113,7 @@
 .board-mission-on-title span {
   font-size: 5vw;
   font-weight: 600;
-  margin-left: 1vw;
+  margin-left: 2vw;
 }
 
 .board-mission-on-title span:nth-child(1) {

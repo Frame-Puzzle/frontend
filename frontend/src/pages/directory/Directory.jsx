@@ -103,6 +103,7 @@ const Directory = () => {
               style={{ width: "38%", marginLeft: "7vw" }}
             />
           }
+          path="/home"
           category={category}
           page={"디렉토리"}
         />
@@ -115,15 +116,13 @@ const Directory = () => {
           <div
             className="directory-create-board"
             style={{ visibility: addBoard ? "hidden" : "visible" }}
+            onClick={(e) => { e.stopPropagation(); nav(`/create-board/select-size`); }}
           >
             <span className="board-plus">퍼즐 추가</span>
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/plus.png"
               alt="board-plus"
               className="board-plus-logo"
-              onClick={() => {
-                nav(`/create-board/select-size`);
-              }}
             />
           </div>
         </div>
@@ -137,7 +136,7 @@ const Directory = () => {
                   onMouseUp={handleMouseUp(board.boardId)}
                 >
                   <DirectoryCanvas boardSize={board.boardSize} />
-                  <div className="direoctory-board-name">
+                  <div className="directory-board-name">
                     {directory.directoryName}#{board.boardName}
                   </div>
                 </div>

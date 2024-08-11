@@ -4,7 +4,6 @@ let waitingRoom = createSlice({
   name: 'waitingRoom',
   initialState: {
     boardId: 0,
-    boardNum: 0,
     directoryName: "",
     gameImgUrl: "",
     level: 0
