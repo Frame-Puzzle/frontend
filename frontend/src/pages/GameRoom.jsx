@@ -5,7 +5,7 @@ import GameBoard from "../components/game/GameBoard";
 import socketApi from "../apis/socketApi";
 
 const GameRoom = () => {
-  const id = useParams();
+  const id = useParams("roomID");
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
 
@@ -25,14 +25,14 @@ const GameRoom = () => {
       null,
       null,
       (gameData) => setGameData(gameData),
-      id
+      id.roomID
     );
 
     return () => {
       disconnectSocket();
       setIsConnected(false);
     };
-  }, [connectSocket, disconnectSocket, id]);
+  }, []);
 
   useEffect(() => {
     console.log("카운트다운");
