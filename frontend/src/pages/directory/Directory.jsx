@@ -103,6 +103,7 @@ const Directory = () => {
               style={{ width: "38%", marginLeft: "7vw" }}
             />
           }
+          path="/home"
           category={category}
           page={"디렉토리"}
         />
