@@ -8,7 +8,7 @@
 .input-keyword-main-container span:nth-child(1) {
   font-size: 4.2vw;
   font-weight: 600;
-  margin-left: 14vw;
+  margin-left: 11vw;
   margin-bottom: 1vh;
 }
 
@@ -23,6 +23,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: auto;
   margin-bottom: 1vh;
+  font-family: "pretendard-regular";
 }
 
 .pill-container {
