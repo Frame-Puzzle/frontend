@@ -13,7 +13,6 @@ let createBoard = createSlice({
     setBoardSize(state, action) {
       state.boardSize = action.payload;
     },
-
     setKeyWord(state, action) {
       state.keyWord = action.payload;
     },
