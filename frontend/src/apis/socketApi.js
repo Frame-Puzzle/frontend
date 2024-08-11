@@ -1,14 +1,14 @@
 // useSelector 사용 못하니까 직접 스토어 가져오기
-import { store } from "./../stores/store";
+import { store } from "../stores/store";
 import * as Stomp from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 let stompClient = null;
 
 const connectSocket = (onConnectedCallback, onMessageCallback,
-  onRobyCallback, onTimerCallback, id) => {
+  onRobyCallback, onTimerCallback, onGameStartCallback, id) => {
 
-  
+
   const state = store.getState();
   const accessToken = state.user.accessToken;
 
@@ -16,7 +16,7 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
   stompClient = Stomp.Stomp.over(socket);
 
   const headers = { Authorization: `Bearer ${accessToken}` };
-  
+
   stompClient.connect(
     headers,
     () => {
@@ -46,6 +46,14 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
           onTimerCallback(response);
         }
       });
+
+      // 게임 시작 정보 구독
+      stompClient.subscribe(`/sub/start/${id}`, (message) => {
+        console.log("게임 시작 정보 구독")
+        const response = JSON.parse(message.body);
+        onGameStartCallback(response.flag);
+
+      })
     }
   );
 }

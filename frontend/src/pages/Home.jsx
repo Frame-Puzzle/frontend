@@ -42,7 +42,6 @@ const Home = () => {
       <div className="home-main-content bg-color1">
         <div className="top-title">HOME</div>
         <div className="user-info">
-          {" "}
           안녕하세요
           <br />
           {userNickName} 님

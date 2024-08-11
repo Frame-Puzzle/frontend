@@ -11,6 +11,7 @@ const LeaveDirectory = () => {
 
   const leaveDirectory = async () => {
     const response = await directoryApi.delete(`/${id}`);
+    dispatch(setModalId(0));
     nav("/home");
   };
   return (

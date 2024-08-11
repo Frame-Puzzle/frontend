@@ -7,6 +7,7 @@ let waitingRoom = createSlice({
     boardNum: 0,
     directoryName: "",
     gameImgUrl: "",
+    level: 0
     // gameLevel:
   }, // token 정보로 수정할 수 있도록 상태 변경 함수 정의하기
   reducers: {
@@ -19,9 +20,13 @@ let waitingRoom = createSlice({
     setdirectoryName(state, action) {
       state.directoryName = action.payload
     },
+
+    setLevel(state, action) {
+      state.level = action.level;
+    }
   }
 });
 
-export let { setBoardId, setGameImgUrl, setdirectoryName } = waitingRoom.actions
+export let { setBoardId, setGameImgUrl, setdirectoryName, state } = waitingRoom.actions
 
 export default waitingRoom;

@@ -55,8 +55,9 @@ const MyPage = () => {
 
   const exitFrazzle = async () => {
     const response = await userApi.delete();
-    localStorage.clear();
 
+    dispatch(setAccessToken(""));
+    localStorage.clear();
     nav("/");
   };
 
