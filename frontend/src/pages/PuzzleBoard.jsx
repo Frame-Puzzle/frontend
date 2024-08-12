@@ -16,6 +16,7 @@ import {
   setBoardCategory,
   setBoardKeywords,
 } from "../stores/boardSlice";
+import LoadingModal from "./LoadingModal";
 
 const PuzzleBoard = () => {
   // 모달 창
@@ -35,6 +36,7 @@ const PuzzleBoard = () => {
   const piece = useSelector((state) => state.piece);
   const board = useSelector((state) => state.board);
   let directoryId = useSelector(state => state.createBoard.directoryId);
+  let imgLoading = useSelector(state => state.loading.imgLoading);
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
@@ -66,7 +68,7 @@ const PuzzleBoard = () => {
 
     fetchPuzzleData();
     fetchCreateGameRoom();
-  }, []);
+  }, [piece.pieceId]);
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
@@ -82,6 +84,7 @@ const PuzzleBoard = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
+      { imgLoading ? <LoadingModal /> : null }
       {board.modalId !== 0 ? <BoardModalFrame /> : null}
       <div className="board-header">
         <MainHeader

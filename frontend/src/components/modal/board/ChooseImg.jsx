@@ -5,8 +5,10 @@ import pieceApi from "../../../apis/pieceApi";
 import { useSelector, useDispatch } from "react-redux";
 import compressImage from "../../../utils/compressImg";
 import ImgExceptionMessage from "../../common/ImgExceptionMessage";
+import { setImgLoading } from "../../../stores/loadingSlice";
 
 const ChooseImg = () => {
+
   const piece = useSelector((state) => state.piece);
   const dispatch = useDispatch();
 
@@ -70,9 +72,9 @@ const ChooseImg = () => {
 
   const fetchSaveImg = async () => {
     // 사진이 없을 경우 에러 메시지 출력
-
     if (imgFile === null && imgUrl === null) return;
     try {
+      dispatch(setImgLoading(true));
       const formData = new FormData();
       formData.append("imgFile", imgFile);
       formData.append("comment", comment);
@@ -85,6 +87,7 @@ const ChooseImg = () => {
 
       console.log("퍼즐 조각 등록:", response);
       dispatch(setPieceId(0));
+      dispatch(setImgLoading(false));
     } catch (error) {
       console.error("이미지 저장에 실패했습니다:", error);
     }
