@@ -40,6 +40,7 @@ const WaitingRoom = () => {
       () => setGameStart(true),
       null, // 게임 info
       null, // 게임 방 timer
+      null, // 퍼즐 조각 이동
       roomID // 방 번호
     );
 

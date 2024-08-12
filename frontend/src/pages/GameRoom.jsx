@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const GameRoom = () => {
   const { roomID } = useParams();
   const user = useSelector((state) => state.user);
+  const waitingRoom = useSelector((state) => state.waitingRoom);
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
 
@@ -18,6 +19,7 @@ const GameRoom = () => {
   const [gameData, setGameData] = useState(null);
   const [gameInfo, setGameInfo] = useState({});
   const [timer, setTimer] = useState(-1);
+  const [moveData, setMoveData] = useState(null);
 
   //게임 소켓 연결
   // socket 연결
@@ -32,9 +34,9 @@ const GameRoom = () => {
       null, // 게임 시작 확인
       (gameInfo) => setGameInfo(gameInfo), // 게임 정보 받기
       (timerData) => setTimer(timerData), // 게임 방 timer
+      (moveData) => setMoveData(moveData), // 퍼즐 조각 이동
       roomID // 방 번호
     );
-
 
     return () => {
       exitRoom();
@@ -86,6 +88,8 @@ const GameRoom = () => {
           messages={messages}
           sendMessage={sendMessage}
           isConnected={isConnected}
+          moveData={moveData}
+          image={waitingRoom.gameImgUrl}
         />
       </div>
       <div className="game-room-footer">footer</div>
