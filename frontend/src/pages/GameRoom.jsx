@@ -7,6 +7,7 @@ import MainHeader from "../components/common/MainHeader";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ChatBoard from "../components/common/ChatBoard";
+import GameModalFrame from "./modalFrame/GameModalFrame";
 
 const GameRoom = () => {
   const { roomID } = useParams();
@@ -20,8 +21,8 @@ const GameRoom = () => {
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [timer, setTimer] = useState(-1); // 화면에 표시할 timer 상태
-  const [endGame, setEndGame] = useState({});
   const [showWindow, setShowWindow] = useState(0);
+  const [winner, setWinner] = useState({});
 
   const timerRef = useRef(timer); // 최신 timer 값을 추적하기 위한 ref
 
@@ -41,7 +42,7 @@ const GameRoom = () => {
         setTimer(timerData); // 화면에 표시할 timer 업데이트
         timerRef.current = timerData; // ref에도 최신값 저장
       }, // 게임 방 timer
-      (endGameData) => setEndGame(endGameData), // 게임 완료
+      (endGameData) => setWinner(endGameData), // 게임 완료
       roomID // 방 번호
     );
 
@@ -60,16 +61,14 @@ const GameRoom = () => {
   }, [isConnected]);
 
   useEffect(() => {
-    if (Object.keys(endGame).length === 0) return;
-
-    // 결과 모달 창에 들어가야 할 내용
-    console.log(endGame);
-
-    // 10초 후 완료된 퍼즐판 화면으로 이동
+    if (Object.keys(winner).length === 0) return;
+    
+    // 5초 후 완료된 퍼즐판 화면으로 이동
     setTimeout(() => {
+      setWinner({});
       nav(`/boards/${roomID}`);
-    }, 10000); // 10,000ms = 10초
-  }, [endGame]);
+    }, 5000); 
+  }, [winner]);
 
   const joinRoom = () => {
     const data = {
@@ -135,6 +134,9 @@ const GameRoom = () => {
 
   return (
     <div className="w-full h-full">
+      {Object.keys(winner).length !== 0 ? (
+        <GameModalFrame winner={winner} />
+      ) : null}
       <div className="game-room-header">
         <MainHeader title="PUZZLE" timer={timer} path={0} />
       </div>

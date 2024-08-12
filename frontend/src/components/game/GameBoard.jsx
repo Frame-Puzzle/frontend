@@ -17,7 +17,6 @@ const GameBoard = ({ id, sendEndGame }) => {
     gameImg.src = waitingRoom.gameImgUrl;
 
     const level = waitingRoom.level;
-    console.log(level);
 
     let config;
     switch (level) {
@@ -60,15 +59,13 @@ const GameBoard = ({ id, sendEndGame }) => {
         horizontalPiecesCount: config.row,
         verticalPiecesCount: config.col,
       });
-      canvas.shuffle(0.8);
+      //canvas.shuffle(0.8);
 
       // 이미지 그리기
       canvas.draw();
 
       canvas.attachSolvedValidator();
       canvas.onValid(() => {
-        console.log("성공");
-
         sendEndGame();
       });
     };

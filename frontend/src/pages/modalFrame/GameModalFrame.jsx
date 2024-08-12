@@ -1,10 +1,10 @@
 import "./GameModalFrame.css";
+import ResultGame from "../../components/modal/game/ResultGame";
 
-const GameModalFrame = ({ isModal,setModal}) => {
-
+const GameModalFrame = ({ winner }) => {
   return (
     <div className="game-modal-frame flex justify-content-center align-items-center">
-      {isModal ? <EndGame /> : null}
+      {winner ? <ResultGame winner={winner} /> : null}
     </div>
   );
 };
