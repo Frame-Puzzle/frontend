@@ -1,0 +1,56 @@
+.result-game-modal {
+  width: 80vw;
+  height: pull; /* 기존에는 40vh */
+  padding: 2vh 1vw;
+  background: #ffffff;
+  border: none;
+  border-radius: 4vw; /* 15.6px in iphone14pro */
+}
+
+.result-game-modal-header {
+  width: 100%;
+  height: 20%;
+  padding: 2vw 2vw 4vw 2vw; /* 7.8px in iphone14pro */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-game-header-sub {
+  color: rgb(166, 165, 165);
+  font-size: 15px;
+}
+
+.result-game-header-title {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.result-game-modal-body {
+  width: 100%;
+  height: 80%;
+  padding: 2vw; /*7.8px in iphone14pro*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-game-winner-timer {
+  color: rgb(166, 165, 165);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.result-game-winner-nickname {
+  background-color: #c3c7f4;
+  color: white;
+  border-radius: 20px;
+  padding: 1vh 4vw;
+}
+
+.result-game-winner-sub{
+  color: rgb(166, 165, 165);
+  font-size: 15px;
+}
