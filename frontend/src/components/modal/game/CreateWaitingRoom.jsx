@@ -15,7 +15,7 @@ const CreateWaitingRoom = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
-  const levelConfig = [0, 6, 9, 12]
+  const levelConfig = [0, 4, 6, 8];
 
   const [level, setLevel] = useState(0);
 
@@ -63,7 +63,7 @@ const CreateWaitingRoom = () => {
               >
                 <b>easy</b>
                 <br />
-                6X6
+                4X4
               </button>
               <button
                 onClick={() => setLevel(2)}
@@ -71,7 +71,7 @@ const CreateWaitingRoom = () => {
               >
                 <b>normal</b>
                 <br />
-                9X9
+                6X6
               </button>
               <button
                 onClick={() => setLevel(3)}
@@ -79,7 +79,7 @@ const CreateWaitingRoom = () => {
               >
                 <b>hard</b>
                 <br />
-                12X12
+                8X8
               </button>
             </div>
           </div>
