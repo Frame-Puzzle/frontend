@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Canvas, painters, outline } from "headbreaker";
+import { Canvas, painters, outline, generators } from "headbreaker";
 import "./GameBoard.css";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import game4X4Config from "../../utils/gameBoard/game4X4Config";
+import game8X8Config from "../../utils/gameBoard/game8X8Config";
+import game6X6Config from "../../utils/gameBoard/game6X6Config";
 
 const GameBoard = ({ id, sendEndGame }) => {
   const boardRef = useRef(null);
@@ -14,23 +16,39 @@ const GameBoard = ({ id, sendEndGame }) => {
     const gameImg = new Image();
     gameImg.src = waitingRoom.gameImgUrl;
 
-    const row = 2;
-    const col = 2;
+    const level = waitingRoom.level;
+    console.log(level);
+
+    let config;
+    switch (level) {
+      case 4:
+        config = game4X4Config;
+        break;
+      case 6:
+        config = game6X6Config;
+        break;
+      case 8:
+        config = game8X8Config;
+        break;
+      default:
+        return;
+    }
 
     gameImg.onload = () => {
       // 퍼즐 세팅
       const canvas = new Canvas(boardElement.id, {
         outline: new outline.Rounded(),
-        width: 280,
-        height: 350,
+        width: config.boardWidth,
+        height: config.boardHeight,
+        pieceSize: config.pieceSize,
 
-        pieceSize: 40,
         borderFill: 10,
         strokeWidth: 2,
         lineSoftness: 0.12,
         painter: new painters.Konva(),
         image: gameImg,
-        maxPiecesCount: { x: row, y: col },
+
+        maxPiecesCount: { x: config.row, y: config.col },
         fixed: true,
         preventOffstageDrag: true,
       });
@@ -38,13 +56,12 @@ const GameBoard = ({ id, sendEndGame }) => {
       // 이미지 높이 맞추기
       canvas.adjustImagesToPuzzleHeight();
 
-      // 퍼즐 자동 생성
       canvas.autogenerate({
-        horizontalPiecesCount: row,
-        verticalPiecesCount: col,
+        horizontalPiecesCount: config.row,
+        verticalPiecesCount: config.col,
+        insertsGenerator: generators.flipflop,
       });
-
-      canvas.shuffleGrid();
+      // canvas.shuffle(0.8);
 
       // 이미지 그리기
       canvas.draw();
