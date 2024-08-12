@@ -4,10 +4,9 @@ import "./GameBoard.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const GameBoard = ({ id, sendEndGame}) => {
+const GameBoard = ({ id, sendEndGame }) => {
   const boardRef = useRef(null);
   const waitingRoom = useSelector((state) => state.waitingRoom);
-  const nav = useNavigate();
 
   useEffect(() => {
     const boardElement = boardRef.current;
@@ -53,7 +52,7 @@ const GameBoard = ({ id, sendEndGame}) => {
       canvas.attachSolvedValidator();
       canvas.onValid(() => {
         console.log("성공");
-        // nav(`/boards/${id}`);
+
         sendEndGame();
       });
     };

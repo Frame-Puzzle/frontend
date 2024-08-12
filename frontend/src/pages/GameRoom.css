@@ -33,9 +33,43 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-
 }
 
 .game-room-footer-button {
   width: 30px;
+}
+
+.game-chat-input-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.game-chat-input {
+  border: none;
+  background-color: #f6f6f6;
+  border: 1px solid #e7e7e7;
+  margin-top: 2vh;
+  border-radius: 10px;
+  padding: 1.2vh 9vw 1.2vh 5vw;
+  color: #888888;
+  font-family: "pretendard-regular";
+  width: 100%;
+}
+
+.game-chat-input-button {
+  position: absolute;
+  right: 3.5vw;
+  top: 63%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url("https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/arrows.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: transparent; /* 배경색 투명으로 설정 */
 }
