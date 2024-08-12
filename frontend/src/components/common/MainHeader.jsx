@@ -12,9 +12,8 @@ const MainHeader = ({
   icon,
   directoryName,
   page,
-  boardID,
-  setStateDelete,
   path = -1, // 기본값을 -1로 설정
+  timer,
 }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ const MainHeader = ({
         ) : null}
         {!page && icon && <div>{icon}</div>}
         {directoryName && <span>[{directoryName}]</span>}
-        {directoryName && <span>[{directoryName}]</span>}
+        {timer && <span>{timer}</span>}
       </div>
     </div>
   );
