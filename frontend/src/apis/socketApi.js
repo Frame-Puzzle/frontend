@@ -7,14 +7,14 @@ let stompClient = null;
 
 const connectSocket = (onConnectedCallback, onMessageCallback,
   onRobyCallback, onWaitingTimerCallback, onGameStartCallback,
-  onGameInfoCallback, onGameTimerCallback, id) => {
+  onGameInfoCallback, onGameTimerCallback, onMoveCallback, id) => {
 
 
   const state = store.getState();
   const accessToken = state.user.accessToken;
 
   const socket = new SockJS(`${import.meta.env.VITE_BACK_URL}/api/v1/ws`);
-  stompClient = Stomp.Stomp.over(socket);
+  stompClient = Stomp.Stomp.over(() => socket);
 
   const headers = { Authorization: `Bearer ${accessToken}` };
 
@@ -55,6 +55,14 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
           onGameStartCallback(response.flag);
         });
       }
+
+      if (onMoveCallback) {
+        stompClient.subscribe(`/sub/game/${id}/puzzle/move`, (message) => {
+          const res = JSON.parse(message.body)
+          onMoveCallback(res);
+        });
+      }
+
 
       // 게임 정보 받기
       if (onGameInfoCallback) {
