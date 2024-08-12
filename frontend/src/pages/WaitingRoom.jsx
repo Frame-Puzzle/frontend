@@ -6,7 +6,9 @@ import GameWaitingRoomHeader from "../components/common/GameWaitingRoomHeader";
 import ChatBoard from "../components/common/ChatBoard";
 import MainNav from "../components/common/MainNav";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./WaitingRoom.css";
+import { setGameInfo } from "../stores/waitingRoomSlice";
 
 const WaitingRoom = () => {
   const [inputMessage, setInputMessage] = useState("");
@@ -22,6 +24,7 @@ const WaitingRoom = () => {
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
   const nav = useNavigate();
+  const dispatch = useDispatch();
 
   const state = store.getState(); // Redux 상태 직접 가져오기
   const waitingRoom = state.waitingRoom;
@@ -33,14 +36,15 @@ const WaitingRoom = () => {
     console.log(roomID);
     connectSocket(
       () => setIsConnected(true), // 연결 확인
-      (receivedMessage) => // 메시지
-        setMessages((prevMessage) => [...prevMessage, receivedMessage]),
+      (
+        receivedMessage // 메시지
+      ) => setMessages((prevMessage) => [...prevMessage, receivedMessage]),
       (robyData) => setRobyData(robyData), // 게임 대기 방 정보
       (timerData) => setTimer(timerData), // 게임 대기 방 timer
       () => setGameStart(true),
-      null, // 게임 info
+      (gameInfo) => dispatch(setGameInfo(gameInfo)), // 게임 정보 받기
       null, // 게임 방 timer
-      null, // 퍼즐 조각 이동
+      null, // 게임 종료
       roomID // 방 번호
     );
 
@@ -53,11 +57,10 @@ const WaitingRoom = () => {
 
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
-    console.log("게임 시작 시 게임 룸으로 이동");
     if (gameStart) {
       nav(`/game-room/${roomID}`);
     }
-  }, [gameStart]);
+  }, [gameStart, roomID, nav]);
 
   // 소켓 연결 후 방 입장
   useEffect(() => {
