@@ -1,0 +1,7 @@
+.mypage-modal-frame {
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

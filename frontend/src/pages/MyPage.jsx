@@ -13,6 +13,7 @@ import {
   setProfileImg,
 } from "../stores/userSlice";
 import { useDispatch } from "react-redux";
+import MypageModalFrame from "./modalFrame/MypageModalFrame";
 
 // 1. 가운데 동그란 프로필 사진
 // 1-1. 동그란 사진 아래에 버튼 누르면 (사진 보관함 연결 버튼 보이게 클릭)
@@ -25,6 +26,8 @@ import { useDispatch } from "react-redux";
 const MyPage = () => {
   const nav = useNavigate();
   const [userData, setuserData] = useState({});
+  const [modalFrame, setModalFrame] = useState(false);
+  const [modal, setModal] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,20 +52,26 @@ const MyPage = () => {
   }, []);
 
   const logout = () => {
-    dispatch(setAccessToken(""));
-    nav("/");
+    setModalFrame(true);
+    setModal(1);
+    // 아래 두 줄은 로그아웃 컴포넌트에서 확인 버튼을 눌렀을 때 활성화 시켜야 한다.
+    // dispatch(setAccessToken(""));
+    // nav("/");
   };
 
   const exitFrazzle = async () => {
-    const response = await userApi.delete();
-    dispatch(setAccessToken(""));
-    localStorage.clear();
-
-    nav("/");
+    setModalFrame(true);
+    setModal(2);
+    // 아래 네 줄은 회원탈퇴 컴포넌트에서 확인 버튼을 눌렀을 때 활성화 시켜야 한다.
+    // const response = await userApi.delete();
+    // dispatch(setAccessToken(""));
+    // localStorage.clear();
+    // nav("/");
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full relative">
+      { modalFrame ? <MypageModalFrame modal={modal} setModalFrame={setModalFrame} /> : null }
       <div className="mypage-header">
         {/* <MainHeader />에 icon props로 건네주는 img의 width는 항상 120%로 고정하는 것으로 약속한다. */}
         {/* <MainHeader />에 path를 "/home"으로 해야하는 이유는 닉네임 변경 후 자동으로 마이페이지로 라우팅 된 후에 마이페이지에서 뒤로 가기를 누르면
