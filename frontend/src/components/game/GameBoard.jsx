@@ -59,7 +59,9 @@ const GameBoard = ({ id, sendEndGame }) => {
         horizontalPiecesCount: config.row,
         verticalPiecesCount: config.col,
       });
-      //canvas.shuffle(0.8);
+
+      canvas.shuffle(0.8);
+
 
       // 이미지 그리기
       canvas.draw();
