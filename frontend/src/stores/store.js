@@ -14,6 +14,7 @@ import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist
 import directory from './directorySlice';
 import waitingRoom from './waitingRoomSlice';
 import board from './boardSlice';
+import loading from './loadingSlice';
 
 // reducer 추가하는 곳
 const rootReducer = combineReducers({
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   piece: piece.reducer,
   directory: directory.reducer,
   waitingRoom: waitingRoom.reducer,
-  board: board.reducer
+  board: board.reducer,
+  loading: loading.reducer
 });
 
 const persistConfig = {
@@ -34,7 +36,7 @@ const persistConfig = {
   // user Reducer만 persist 적용하려면 whitelist 사용하세요.
   // whitelist 외에도 blacklist 등 여러 option이 존재합니다.
   // whitelist: ['user']
-  whitelist: ['user', 'createBoard', 'waitingRoom']
+  whitelist: ['user', 'createBoard', 'waitingRoom', 'loading']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

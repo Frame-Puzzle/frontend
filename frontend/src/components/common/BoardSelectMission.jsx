@@ -2,15 +2,17 @@
 import { useEffect, useState } from "react";
 import "./BoardSelectMission.css";
 import directoryApi from "../../apis/directoryApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Mission from "./Mission";
 import { useNavigate } from "react-router-dom";
+import { setGptLoading } from "../../stores/loadingSlice";
 
 // Create Board의 세 번째 전환 컴포넌트
 const BoardSelectMission = () => {
 
   // 퍼즐판 상세페이지로 라우팅 하기 위한 훅
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   // map 반복문을 돌면서 Guide(Mission) 보여질 Array (재생성 응답시 교체)
   let [missions, setMissions] = useState([]);
@@ -72,11 +74,13 @@ const BoardSelectMission = () => {
     // mount 되자마자 가이드 생성 API 호출..을 위한 재료 준비를 위에서..
     // useEffect에서 비동기 함수 호출하려면 이 안에서 정의가 선행되어야 한다.
     const uePostGuides = async (keywordList, num, preMission, directoryId) => {
+      dispatch(setGptLoading(true)); // Loading Switch ON
       const guideList = await postGuides(keywordList, num, preMission, directoryId);
       let deepcopy1 = [...guideList];
       setMissions(deepcopy1);
       let deepcopy2 = [...guideList];
       setPrevMissions(deepcopy2);
+      dispatch(setGptLoading(false)); // Loading Switch OFF
     }
     // 이제 호출 가능
     uePostGuides(keywordList, num, prevMissions, directoryId);

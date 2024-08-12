@@ -24,7 +24,6 @@ let createBoard = createSlice({
     },
     setMissionCnt(state, action) {
       state.missionCnt = action.payload;
-
     }
   }
 });

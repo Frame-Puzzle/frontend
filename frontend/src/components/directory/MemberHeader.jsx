@@ -13,11 +13,22 @@ const MemberHeader = ({ memberList, id }) => {
   const nav = useNavigate();
 
   const [members, setMembers] = useState([]);
+  const [memberAccept, setMemberAccept] = useState(0);
 
   useEffect(() => {
     if (memberList.length !== 0) setMembers(memberList);
     else setMembers([]);
   }, [memberList]);
+
+  useEffect(() => {
+    let temp = 0;
+    for (let i = 0; i < members.length; i++) {
+      if (members[i].accept) {
+        temp++;
+      }
+    }
+    setMemberAccept(temp);
+  }, [members]);
 
   const openInviteModal = () => {
     dispatch(setModalId(1));
@@ -41,7 +52,7 @@ const MemberHeader = ({ memberList, id }) => {
         {/* 멤버 스와이퍼 구현 */}
         <Swiper
           spaceBetween={30}
-          slidesPerView={Math.min(3, members.length)}
+          slidesPerView={Math.min(3, memberAccept)}
           centeredSlides={false}
           loop={false}
         >
