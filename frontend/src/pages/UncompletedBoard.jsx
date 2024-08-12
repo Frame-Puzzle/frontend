@@ -3,7 +3,7 @@ import "./UncompletedBoard.css";
 import { useDispatch, useSelector } from "react-redux";
 import boardApi from "../apis/boardApi";
 import { setBoardCategory, setBoardKeywords, setVote } from "../stores/boardSlice";
-import { setModalId } from "../stores/directorySlice";
+import { setModalId } from "../stores/boardSlice";
 import LoadingModal from "./LoadingModal";
 import BoardModalFrame from "./modalFrame/BoardModalFrame";
 import MainHeader from "../components/common/MainHeader";
