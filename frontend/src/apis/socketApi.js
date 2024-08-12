@@ -6,7 +6,8 @@ import SockJS from 'sockjs-client';
 let stompClient = null;
 
 const connectSocket = (onConnectedCallback, onMessageCallback,
-  onRobyCallback, onTimerCallback, onGameStartCallback, id) => {
+  onRobyCallback, onWaitingTimerCallback, onGameStartCallback,
+  onGameInfoCallback, onGameTimerCallback, id) => {
 
 
   const state = store.getState();
@@ -25,35 +26,51 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
       }
 
       // 메시지 구독
-      stompClient.subscribe(`/sub/message/${id}`, (message) => {
-        if (onMessageCallback) {
+      if (onMessageCallback) {
+        stompClient.subscribe(`/sub/message/${id}`, (message) => {
           onMessageCallback(JSON.parse(message.body));
-        }
-      });
+        });
+      }
 
       // Roby 정보 구독
-      stompClient.subscribe(`/sub/roby/${id}`, (message) => {
-        if (onRobyCallback) {
+      if (onRobyCallback) {
+        stompClient.subscribe(`/sub/roby/${id}`, (message) => {
           const response = JSON.parse(message.body);
           onRobyCallback(response.roby);
-        }
-      });
+        });
+      }
 
       // 타이머 정보 구독
-      stompClient.subscribe(`/sub/roby/timer/${id}`, (message) => {
-        if (onTimerCallback) {
+      if (onWaitingTimerCallback) {
+        stompClient.subscribe(`/sub/roby/timer/${id}`, (message) => {
           const response = JSON.parse(message.body);
-          onTimerCallback(response);
-        }
-      });
+          onWaitingTimerCallback(response);
+        });
+      }
 
       // 게임 시작 정보 구독
-      stompClient.subscribe(`/sub/start/${id}`, (message) => {
-        console.log("게임 시작 정보 구독")
-        const response = JSON.parse(message.body);
-        onGameStartCallback(response.flag);
+      if (onGameStartCallback) {
+        stompClient.subscribe(`/sub/start/${id}`, (message) => {
+          const response = JSON.parse(message.body);
+          onGameStartCallback(response.flag);
+        });
+      }
 
-      })
+      // 게임 정보 받기
+      if (onGameInfoCallback) {
+        stompClient.subscribe(`/sub/game/info/${id}`, (message) => {
+          const response = JSON.parse(message.body);
+          onGameInfoCallback(response);
+        });
+      }
+
+      // 게임 방 타이머
+      if (onGameTimerCallback) {
+        stompClient.subscribe(`/sub/game/timer/${id}`, (message) => {
+          const response = JSON.parse(message.body);
+          onGameTimerCallback(response);
+        })
+      }
     }
   );
 }

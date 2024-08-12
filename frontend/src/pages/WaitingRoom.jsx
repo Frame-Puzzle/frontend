@@ -5,7 +5,7 @@ import MainHeader from "../components/common/MainHeader";
 import GameWaitingRoomHeader from "../components/common/GameWaitingRoomHeader";
 import ChatBoard from "../components/common/ChatBoard";
 import MainNav from "../components/common/MainNav";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./WaitingRoom.css";
 
 const WaitingRoom = () => {
@@ -26,19 +26,21 @@ const WaitingRoom = () => {
   const state = store.getState(); // Redux 상태 직접 가져오기
   const waitingRoom = state.waitingRoom;
   const user = state.user;
+  const { roomID } = useParams();
 
   // socket 연결
   useEffect(() => {
-    if (!waitingRoom.boardId) return;
-
+    console.log(roomID);
     connectSocket(
-      () => setIsConnected(true),
-      (receivedMessage) =>
+      () => setIsConnected(true), // 연결 확인
+      (receivedMessage) => // 메시지
         setMessages((prevMessage) => [...prevMessage, receivedMessage]),
-      (robyData) => setRobyData(robyData),
-      (timerData) => setTimer(timerData),
+      (robyData) => setRobyData(robyData), // 게임 대기 방 정보
+      (timerData) => setTimer(timerData), // 게임 대기 방 timer
       () => setGameStart(true),
-      waitingRoom.boardId
+      null, // 게임 info
+      null, // 게임 방 timer
+      roomID // 방 번호
     );
 
     return () => {
@@ -46,13 +48,13 @@ const WaitingRoom = () => {
       disconnectSocket();
       setIsConnected(false);
     };
-  }, [waitingRoom.boardId]); // 의존성 배열에 boardId 추가
+  }, [roomID]);
 
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     console.log("게임 시작 시 게임 룸으로 이동");
     if (gameStart) {
-      nav(`/game-room/${waitingRoom.boardId}`);
+      nav(`/game-room/${roomID}`);
     }
   }, [gameStart]);
 
@@ -61,26 +63,26 @@ const WaitingRoom = () => {
     if (isConnected) {
       joinRoom();
     }
-  }, [isConnected, waitingRoom.boardId]);
+  }, [isConnected, roomID]);
 
   const joinRoom = () => {
     const data = {
-      boardId: waitingRoom.boardId,
+      boardId: roomID,
       userId: 0,
       message: `${user.nickName}이 입장하였습니다.`,
     };
 
-    sendMessage(`/pub/roby/entry/${waitingRoom.boardId}`, data);
+    sendMessage(`/pub/roby/entry/${roomID}`, data);
   };
 
   const exitRoom = () => {
     const data = {
-      boardId: waitingRoom.boardId,
+      boardId: roomID,
       userId: 0,
       message: `${user.nickName}이 퇴장하셨습니다.`,
     };
 
-    sendMessage(`/pub/roby/exit/${waitingRoom.boardId}`, data);
+    sendMessage(`/pub/roby/exit/${roomID}`, data);
   };
 
   // Roby 데이터에 대한 처리
@@ -109,31 +111,31 @@ const WaitingRoom = () => {
     if (inputMessage.trim() === "") return;
 
     const data = {
-      boardId: waitingRoom.boardId,
+      boardId: roomID,
       userId: 0,
       nickname: user.nickName,
       message: inputMessage,
     };
 
-    sendMessage(`/pub/message/${waitingRoom.boardId}`, data);
+    sendMessage(`/pub/message/${roomID}`, data);
     setInputMessage("");
   };
 
   // 타이머 종료 시 처리
   useEffect(() => {
     if (timer === 0) {
-      nav(`/boards/${waitingRoom.boardId}`);
+      nav(`/boards/${roomID}`);
     }
-  }, [timer, nav, waitingRoom.boardId]);
+  }, [timer, nav, roomID]);
 
   const moveGameRoom = () => {
     const data = {
-      boardId: waitingRoom.boardId,
+      boardId: roomID,
       start: true,
       size: waitingRoom.level,
     };
 
-    sendMessage(`/pub/start/${waitingRoom.boardId}`, data);
+    sendMessage(`/pub/start/${roomID}`, data);
   };
 
   return (
