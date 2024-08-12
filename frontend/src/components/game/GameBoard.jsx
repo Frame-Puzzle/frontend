@@ -59,9 +59,8 @@ const GameBoard = ({ id, sendEndGame }) => {
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
         verticalPiecesCount: config.col,
-        insertsGenerator: generators.flipflop,
       });
-      // canvas.shuffle(0.8);
+      canvas.shuffle(0.8);
 
       // 이미지 그리기
       canvas.draw();
