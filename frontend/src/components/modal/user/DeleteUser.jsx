@@ -11,8 +11,10 @@ const DeleteUser = ({ setModalFrame }) => {
 
   return (
     <div className="delete-user-modal">
-      <div className="delete-user-modal-body">
+      <div className="delete-user-modal-header flex">
         <span>정말 탈퇴하시겠습니까?</span>
+      </div>
+      <div className="delete-user-modal-body">
         <span>탈퇴하면 기존의 데이터가</span>
         <span>모두 사라지며 복구되지 않습니다.</span>
       </div>
