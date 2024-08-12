@@ -5,21 +5,21 @@ import GameBoard from "../components/game/GameBoard";
 import socketApi from "../apis/socketApi";
 import MainHeader from "../components/common/MainHeader";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const GameRoom = () => {
   const { roomID } = useParams();
   const user = useSelector((state) => state.user);
   const waitingRoom = useSelector((state) => state.waitingRoom);
+  const nav = useNavigate();
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
 
-  //const [inputMessage, setInputMessage] = useState("");
+  const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
-  const [gameData, setGameData] = useState(null);
-  const [gameInfo, setGameInfo] = useState({});
   const [timer, setTimer] = useState(-1);
-  const [moveData, setMoveData] = useState(null);
+  const [endGame, setEndGame] = useState({});
 
   //게임 소켓 연결
   // socket 연결
@@ -32,9 +32,9 @@ const GameRoom = () => {
       null, //게임 대기 방 정보
       null, // 게임 대기 방 timer
       null, // 게임 시작 확인
-      (gameInfo) => setGameInfo(gameInfo), // 게임 정보 받기
+      null, // 게임 정보 받기
       (timerData) => setTimer(timerData), // 게임 방 timer
-      (moveData) => setMoveData(moveData), // 퍼즐 조각 이동
+      (endGameData) => setEndGame(endGameData), // 게임 와
       roomID // 방 번호
     );
 
@@ -48,10 +48,20 @@ const GameRoom = () => {
   useEffect(() => {
     if (isConnected) {
       joinRoom();
-      console.log("gameInfo", gameInfo);
     }
     //소켓 연결 후 게임 시작되게 하기
   }, [isConnected]);
+
+  useEffect(() => {
+
+    // 결과 모달 창에 들어가야 할 내용
+    console.log(endGame);
+
+    // 10초 후 완료된 퍼즐판 화면으로 이동
+    setTimeout(() => {
+      nav(`/boards/${roomID}`);
+    }, 10000); // 10,000ms = 10초
+  }, [endGame]);
 
   const joinRoom = () => {
     const data = {
@@ -73,6 +83,13 @@ const GameRoom = () => {
     sendMessage(`/pub/roby/exit/${roomID}`, data);
   };
 
+  const sendEndGame = () => {
+    const data = {
+      time: timer,
+    };
+    sendMessage(`/pub/end/puzzle/${roomID}`, data);
+  };
+
   return (
     <div className="w-full h-full">
       <div className="game-room-header">
@@ -83,16 +100,34 @@ const GameRoom = () => {
       </div>
       <div className="game-room-member-header">멤버 헤더</div>
       <div className="game-room-game-board">
-        <GameBoard
-          id={roomID}
-          messages={messages}
-          sendMessage={sendMessage}
-          isConnected={isConnected}
-          moveData={moveData}
-          image={waitingRoom.gameImgUrl}
-        />
+        <GameBoard id={roomID} sendEndGame={sendEndGame} />
       </div>
-      <div className="game-room-footer">footer</div>
+      <div className="game-room-footer">
+        <div className="game-room-footer-button">
+          <img
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/headset.png"
+            alt="show-img"
+          />
+        </div>
+        <div className="game-room-footer-button">
+          <img
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/voice.png"
+            alt="show-img"
+          />
+        </div>
+        <div className="game-room-footer-button">
+          <img
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/chat.png"
+            alt="show-img"
+          />
+        </div>
+        <div className="game-room-footer-button">
+          <img
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/img-white.png"
+            alt="show-img"
+          />
+        </div>
+      </div>
     </div>
   );
 };
