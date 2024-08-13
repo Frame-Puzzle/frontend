@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setGameImgUrl,
   setdirectoryName,
+  setGameLevel,
 } from "../../../stores/waitingRoomSlice";
 import { useNavigate } from "react-router-dom";
 import { setModalId } from "../../../stores/boardSlice";
@@ -13,6 +14,8 @@ const CreateWaitingRoom = () => {
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const dispatch = useDispatch();
   const nav = useNavigate();
+
+  const levelConfig = [0, 4, 6, 8];
 
   const [level, setLevel] = useState(0);
 
@@ -31,6 +34,7 @@ const CreateWaitingRoom = () => {
   const moveWaitingRoom = () => {
     if (level === 0) return;
 
+    dispatch(setGameLevel(levelConfig[level]));
     nav(`/waiting-room/${waitingRoom.boardId}`);
   };
   return (
@@ -59,7 +63,7 @@ const CreateWaitingRoom = () => {
               >
                 <b>easy</b>
                 <br />
-                6X6
+                4X4
               </button>
               <button
                 onClick={() => setLevel(2)}
@@ -67,7 +71,7 @@ const CreateWaitingRoom = () => {
               >
                 <b>normal</b>
                 <br />
-                9X9
+                6X6
               </button>
               <button
                 onClick={() => setLevel(3)}
@@ -75,7 +79,7 @@ const CreateWaitingRoom = () => {
               >
                 <b>hard</b>
                 <br />
-                12X12
+                8X8
               </button>
             </div>
           </div>

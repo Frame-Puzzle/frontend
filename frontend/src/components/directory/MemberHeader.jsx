@@ -50,12 +50,13 @@ const MemberHeader = ({ memberList, id }) => {
       </div>
       <div className="member-header-middle">
         {/* 멤버 스와이퍼 구현 */}
-        <Swiper
-          spaceBetween={30}
-          slidesPerView={Math.min(3, memberAccept)}
+        {memberList.length > 4 ? (
+          <Swiper
+          spaceBetween={10}
+          slidesPerView={Math.min(3.7, memberAccept)}
           centeredSlides={false}
-          loop={false}
-        >
+            loop={false}
+          >
           {members.map((member, index) =>
             member.accept ? (
               <SwiperSlide key={index}>
@@ -68,6 +69,16 @@ const MemberHeader = ({ memberList, id }) => {
             ) : null
           )}
         </Swiper>
+        ): (members.map((member, index) =>
+          member.accept ? (
+              <Profile
+                key={index}
+                imgUrl={member.profileUrl}
+                userName={member.nickname}
+              />
+          ) : null
+        ))}
+        
       </div>
 
       <div className="member-header-right" onClick={openLeaveModal}>
@@ -76,7 +87,7 @@ const MemberHeader = ({ memberList, id }) => {
           alt="exit-directory"
           className="member-header-right-logo"
         />
-        <span className="member-header-comment">탈퇴하기</span>
+        <span className="member-header-comment">탈퇴</span>
       </div>
     </div>
   );

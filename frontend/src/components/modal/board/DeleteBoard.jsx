@@ -1,22 +1,26 @@
 import "./DeleteBoard.css";
 import boardApi from "../../../apis/boardApi";
 import { setVote } from "../../../stores/boardSlice";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { setModalId } from "../../../stores/boardSlice";
 
 const DeleteBoard = () => {
   const dispatch = useDispatch();
   const { boardID } = useParams();
+  const createBoard = useSelector((state) => state.createBoard);
+
+  const nav = useNavigate();
 
   const deleteBoard = async () => {
     const data = {
-      accept: true, 
+      accept: true,
     };
 
     const response = await boardApi.put(`/${boardID}/vote`, data);
     dispatch(setVote(true));
     dispatch(setModalId(0));
+    nav(`/directories/${createBoard.directoryId}`);
   };
   return (
     <div className="delete-board-modal flex flex-wrap">

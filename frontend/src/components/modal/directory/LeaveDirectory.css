@@ -14,14 +14,15 @@
   display: flex;
   justify-content: center;
   align-items: centers;
+  font-size: 2.1vh;
   font-family: "pretendard-bold";
 }
 
 .leave-directory-modal-body {
   width: 100%;
   height: 60%;
-  padding: 1vh 5vw 3vh 5vw; /*7.8px in iphone14pro*/
-  font-size: 1.8vh;
+  padding: 1vh 5vw 3.5vh 5vw; /*7.8px in iphone14pro*/
+  font-size: 1.9vh;
   text-align: center;
   white-space: normal;
   word-break: keep-all;

@@ -5,10 +5,11 @@ import SockJS from 'sockjs-client';
 
 let stompClient = null;
 
+
+
 const connectSocket = (onConnectedCallback, onMessageCallback,
   onRobyCallback, onWaitingTimerCallback, onGameStartCallback,
-  onGameInfoCallback, onGameTimerCallback, onMoveCallback, id) => {
-
+  onGameInfoCallback, onGameTimerCallback, onGameEndCallback,id) => {
 
   const state = store.getState();
   const accessToken = state.user.accessToken;
@@ -56,13 +57,6 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
         });
       }
 
-      if (onMoveCallback) {
-        stompClient.subscribe(`/sub/game/${id}/puzzle/move`, (message) => {
-          const res = JSON.parse(message.body)
-          onMoveCallback(res);
-        });
-      }
-
 
       // 게임 정보 받기
       if (onGameInfoCallback) {
@@ -77,6 +71,14 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
         stompClient.subscribe(`/sub/game/timer/${id}`, (message) => {
           const response = JSON.parse(message.body);
           onGameTimerCallback(response);
+        })
+      }
+
+      // 게임 종료
+      if(onGameEndCallback){
+        stompClient.subscribe(`/sub/game/${id}/puzzle/end`, (message) => {
+          const response = JSON.parse(message.body);
+          onGameEndCallback(response);
         })
       }
     }

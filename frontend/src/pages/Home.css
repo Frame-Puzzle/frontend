@@ -10,22 +10,24 @@
 }
 
 .top-title {
-  color: #000;
-  font-size: 24px;
-  font-weight: 900;
-  margin: 5% 10%;
+  color: white;
+  font-size: 3.3vh;
+  font-family: "pretendard-bold";
+  margin: 0% 10%;
+  padding-top: 4vh;
 }
 
 .user-info {
-  color: #000;
-  font-size: 20px;
+  color: #212121;
+  font-size: 2.3vh;
   font-weight: 600;
   line-height: 150%;
   margin: 5% 10%;
 }
 
 .home-swipe-content {
-  height: 40%; /*전체 화면의 40% 차지하게 설정*/
+  height: 50%; /*전체 화면의 40% 차지하게 설정*/
+  padding-top: 1vh;
 }
 
 .swiper {
@@ -41,8 +43,8 @@
 .home-under-white-bg {
   margin-top: 5%;
   background-color: #ffffff;
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 25px;
+  padding: 2.2vh 7.5vw;
   width: 100%;
   height: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -51,19 +53,20 @@
 .make-dir-container {
   display: flex;
   justify-content: center;
-  height: 5%;
+  height: 1%;
   align-items: center;
-  margin-bottom: 10%;
+  margin-bottom: 13%;
 }
 
 .make-dir {
   cursor: pointer;
-  width: 75%;
-  background-color: #c3c7f4;
-  color: white;
-  padding: 1vh 3vw;
+  width: 60%;
+  background-color: #ffffff;
+  color: #c3c7f4;
+  padding: 1.2vh 1vw;
   border-radius: 21px;
   text-align: center;
-  font-size: 19px;
+  font-size: 2.3vh;
   line-height: 100%;
+  font-family: "pretendard-bold";
 }
