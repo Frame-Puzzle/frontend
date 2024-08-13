@@ -5,13 +5,13 @@
 
 .directory-member-header {
   width: 100%;
-  height: 10%;
+  height: 12%;
   overflow: hidden;
 }
 
 .directory-main-content {
   width: 100%;
-  height: 80%;
+  height: 78%;
   overflow: hidden;
   justify-content: center;
   align-items: center;
