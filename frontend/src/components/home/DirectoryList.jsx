@@ -70,7 +70,7 @@ const DirectoryList = () => {
       <div className="category-content flex">
         {/* 조건부 렌더링써서 4개 보다 많아질 때 swipe 동작하기 */}
         {categoryList.length > 4 ? (
-          <Swiper spaceBetween={5} slidesPerView={4.5}>
+          <Swiper spaceBetween={4.2} slidesPerView={4.5}>
             {categoryList.map((a, index) => (
               <SwiperSlide key={index}>
                 <DirectoryItem key={index} info={a} />
