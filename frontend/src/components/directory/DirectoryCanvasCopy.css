@@ -1,15 +1,15 @@
-.directory-canvas-container {
+.directory-canvas-container-copy {
   width: 100%;
-  height: 60%;
+  height: 100%;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.directory-canvas {
+.directory-canvas-copy {
   display: block;
   width: 285px;
   height: 55vh;

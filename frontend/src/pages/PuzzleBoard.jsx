@@ -16,7 +16,6 @@ const PuzzleBoard = () => {
     try {
       const response = await boardApi.get(`/${boardID}`);
       // 0은 아직 사진이 전부 채워지지 않은 상태, 1은 사진은 다 채워진 상태, 2는 게임까지 완료한 상태
-      // (아직 게임을 완료한 상태를 만들 수 없으므로 임시적으로 1을 2라고 생각하고 코드를 작성할 것)
       const boardClearType = response.data.data.boardClearType;
       // Test
       console.log(boardClearType);
@@ -34,7 +33,7 @@ const PuzzleBoard = () => {
   // 완료된 퍼즐판이라면 <CompletedBoard boardID={boardID} />로 전달할 것
   if (boardClearType == 0) {
     return ( <UncompletedBoard boardID={boardID} /> )
-  } else if (boardClearType == 1) { // 이건 테스트용 분기이며, 나중에 퍼즐게임이 구현되고 나면 이 분기도 고쳐야 한다.
+  } else if (boardClearType == 1) { // should modify
     return ( <CompletedBoard boardID={boardID} /> )
   }
 

@@ -101,7 +101,7 @@ const UncompletedBoard = ({ boardID }) => {
         <div className="board-keywords">
           {keywords.map((keyword, index) => (
             <div key={index} className="board-keyword">
-              {keyword}
+              #{keyword}
             </div>
           ))}
         </div>
