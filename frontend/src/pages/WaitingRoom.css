@@ -73,7 +73,7 @@
   background-color: #E7E7E7;
   color: #888888;
   border-radius: 10px;
-  padding: 1.2vh 11vw;
+  padding: 1.2vh 15vw;
   margin-right: 2vw;
   font-family: "pretendard-medium";
 }
@@ -83,7 +83,7 @@
   background-color: #c3c7f4;
   color: white;
   border-radius: 10px;
-  padding: 1.2vh 11vw;
+  padding: 1.2vh 7vw;
   margin-right: 2vw;
   font-family: "pretendard-medium";
 }
@@ -107,5 +107,7 @@
 .show-waiting-room-game-img {
   width: 80%;
   height: 90%;
-  border-radius: 10px;
+  border-radius: 20px;
+  object-fit: contain; 
+  object-position: center; 
 }

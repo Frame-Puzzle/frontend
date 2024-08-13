@@ -100,7 +100,7 @@ const Directory = () => {
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/edit.png"
               alt="thirdIcon"
               className="header-icon"
-              style={{ width: "38%", marginLeft: "7vw" }}
+              style={{ width: "32%", marginLeft: "7vw" }}
             />
           }
           path="/home"

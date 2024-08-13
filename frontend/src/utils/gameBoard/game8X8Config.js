@@ -1,8 +1,8 @@
 const game8X8Config = {
   row: 8,
   col: 8,
-  pieceSize: 35,
-  boardWidth:300,
+  pieceSize: 40,
+  boardWidth:350,
   boardHeight:400,
 }
 

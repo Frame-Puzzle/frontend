@@ -33,12 +33,15 @@ const GameBoard = ({ id, sendEndGame }) => {
         return;
     }
 
+    console.log(window.innerWidth);
+    console.log(window.innerHeight);
+
     gameImg.onload = () => {
       // 퍼즐 세팅
       const canvas = new Canvas(boardElement.id, {
         outline: new outline.Rounded(),
-        width: config.boardWidth,
-        height: config.boardHeight,
+        width: window.innerWidth * 0.95,
+        height: window.innerHeight * 0.65,
         pieceSize: config.pieceSize,
 
         borderFill: 10,
@@ -61,7 +64,6 @@ const GameBoard = ({ id, sendEndGame }) => {
       });
 
       canvas.shuffle(0.8);
-
 
       // 이미지 그리기
       canvas.draw();

@@ -2,13 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 90%;
-  width: 100%;
-  background-color: white;
+  height: 80%;
+  width: 80%;
   border-radius: 10px;
   /* box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease;
-  padding-top: 5%;
+  padding-top: 10%;
 }
 
 

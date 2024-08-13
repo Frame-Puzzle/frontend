@@ -15,7 +15,7 @@ const GameRoom = () => {
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const nav = useNavigate();
 
-  const { connectSocket, sendMessage, disconnectSocket } = socketApi;
+  const { connectSocket, sendMessage, disconnectSocket, exitGameRoom, exitRobyRoom } = socketApi;
 
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -27,7 +27,6 @@ const GameRoom = () => {
   const timerRef = useRef(timer); // 최신 timer 값을 추적하기 위한 ref
 
   //게임 소켓 연결
-  // socket 연결
   useEffect(() => {
     connectSocket(
       () => setIsConnected(true), // 연결 확인
@@ -46,12 +45,25 @@ const GameRoom = () => {
       roomID // 방 번호
     );
 
+    // visibilitychange 이벤트 리스너 추가
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        exitRoom();
+        exitGameRoom(`/pub/exit/puzzle/${roomID}`);
+        disconnectSocket();
+        setIsConnected(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       exitRoom();
       disconnectSocket();
       setIsConnected(false);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [roomID, connectSocket, disconnectSocket]);
 
   useEffect(() => {
     if (isConnected) {
@@ -68,7 +80,7 @@ const GameRoom = () => {
       setWinner({});
       nav(`/boards/${roomID}`);
     }, 5000); 
-  }, [winner]);
+  }, [winner, nav, roomID]);
 
   const joinRoom = () => {
     const data = {
@@ -84,10 +96,11 @@ const GameRoom = () => {
     const data = {
       boardId: roomID,
       userId: 0,
+      nickName : user.nickName,
       message: `${user.nickName}이 퇴장하셨습니다.`,
     };
 
-    sendMessage(`/pub/roby/exit/${roomID}`, data);
+    exitRobyRoom(`/pub/roby/exit/${roomID}`, data);
   };
 
   const sendEndGame = () => {
@@ -99,12 +112,12 @@ const GameRoom = () => {
   };
 
   const showWindowImg = () => {
-    if (showWindow != 2) setShowWindow(2);
+    if (showWindow !== 2) setShowWindow(2);
     else setShowWindow(0);
   };
 
   const showWindowChat = () => {
-    if (showWindow != 1) setShowWindow(1);
+    if (showWindow !== 1) setShowWindow(1);
     else setShowWindow(0);
   };
 
@@ -140,12 +153,14 @@ const GameRoom = () => {
       <div className="game-room-header">
         <MainHeader title="PUZZLE" timer={timer} path={0} />
       </div>
-      <div className="game-room-member-header">멤버 헤더</div>
-      <div className="game-room-game-board">
-        {showWindow === 0 ? (
-          <GameBoard id={roomID} sendEndGame={sendEndGame} />
-        ) : null}
 
+      <div className="game-room-member-header">멤버 헤더</div>
+
+      <div className="game-room-game-board">
+        <div className = {showWindow === 0 ? "visible" : "hidden"}>
+          <GameBoard id={roomID} sendEndGame={sendEndGame} />
+      </div>
+      
         {showWindow === 1 ? (
           <>
             <ChatBoard messages={messages} />
@@ -171,8 +186,10 @@ const GameRoom = () => {
             src={waitingRoom.gameImgUrl || ""}
             alt="show-img"
           />
-        ) : null}
+          ) : null}
+         
       </div>
+      
       <div className="game-room-footer">
         <div className="game-room-footer-button">
           <img

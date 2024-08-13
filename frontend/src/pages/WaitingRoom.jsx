@@ -175,6 +175,7 @@ const WaitingRoom = () => {
             value={inputMessage}
             onChange={handleInputMessage}
             onKeyDown={handleKeyDown}
+            onClick={() => setShowGameImg(false)}
             placeholder="내용을 입력해주세요"
           />
           <button className="chat-input-button" onClick={sendInputMessage} />
