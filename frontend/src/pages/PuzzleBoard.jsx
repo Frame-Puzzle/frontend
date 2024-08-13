@@ -95,7 +95,7 @@ const PuzzleBoard = () => {
                 src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
                 alt="thirdIcon"
                 className="header-icon"
-                style={{ width: "40%", marginLeft: "7vw" }}
+                style={{ width: "35%", marginLeft: "7vw" }}
               />
             )
           }
