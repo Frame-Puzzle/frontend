@@ -7,6 +7,7 @@ import MainNav from "../components/common/MainNav";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DirectoryCanvasCopy from "../components/directory/DirectoryCanvasCopy";
+import PhotoFrameModalFrame from "./modalFrame/PhotoFrameModalFrame";
 
 const CompletedBoard = ({ boardID }) => {
 
@@ -24,6 +25,10 @@ const CompletedBoard = ({ boardID }) => {
   let [userNickname, setUserNickname] = useState('');
   // 썸네일 아이콘 클릭 시 모달창 띄우는 스위치
   let [thumbnailModal, setThumbnailModal] = useState(false);
+  // 썸네일 이미지 수정 트리거
+  let [tnTrigger, setTnTrigger] = useState(0);
+  // 썸네일 URL 저장소 (null이 저장될 수 있다.)
+  let [thumbnailURL, setThumbnailURL] = useState('');
 
   // 넘겨받은 boardID를 이용해서 화면에 보여줄 정보를 State로 저장 (접속한 유저 정보도 포함)
   const setInfo = async (boardID) => {
@@ -57,14 +62,45 @@ const CompletedBoard = ({ boardID }) => {
     }
   };
 
+  // 썸네일 URL 조회
+  const getThumbnail = async () => {
+    // boardID로 썸네일 URL 조회하는 GET 요청
+    try {
+      // 백엔드에 바로 GET 요청을 보내기
+      const response = await boardApi.get(`/${boardID}/thumbnails`);
+      // 응답 체크하기
+      console.log(response);
+      // 우선 변수에 담기 (URL은 null일 수 있음)
+      const URL = response.data.data.url;
+      // 이어서 State에 담기
+      setThumbnailURL(URL);
+    } catch (error) {
+      console.error('Error getting thumbnail URL', error);
+      throw error;
+    }
+  }
+
   // 넘겨받은 boardID를 이용해서 화면에 보여줄 정보를 State로 저장 (접속한 유저 정보도 포함)
   useEffect(() => {
     setInfo(boardID);
   }, []);
 
+  // SelectPhoto Component의 Trigger로 useEffect 발동
+  // 썸네일 사진 GET 요청 불러와서 그 URL 이미지로 캔버스 덮기
+  /* DirectoryCanvasCopy Component에서 직접 Thumnail Image를 조회하지 않고 이 컴포넌트에서 조회하여 props로 건네주는 이유는
+  전자의 경우에도 boardID를 props로 건네주어야 하며, axios 요청 로딩 로직을 이 컴포넌트 상에서 적용시키려면 이 컴포넌트에서 axios 요청을 하는 것이 좋기 때문이다. */
+  useEffect(() => {
+    getThumbnail();
+  }, [tnTrigger])
+
   return (
     <div className="completed-board w-full h-full relative">
-      { thumbnailModal ? <></> : null }
+      {thumbnailModal ?
+        <PhotoFrameModalFrame
+          id={boardID}
+          setThumbnailModal={setThumbnailModal}
+          setTnTrigger={setTnTrigger}
+          /> : null}
       <div className="completed-board-header">
         <MainHeader
           path={`/directories/${directoryId}`}
@@ -127,7 +163,7 @@ const CompletedBoard = ({ boardID }) => {
           </div>
           <div className="completed-board-body-bottom-canvas-container">
             {/* 퍼즐판 캔버스 삽입 */}
-            <DirectoryCanvasCopy boardSize={boardSize} />
+            <DirectoryCanvasCopy boardSize={boardSize} thumbnailURL={thumbnailURL} />
           </div>
         </div>
       </div>

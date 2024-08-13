@@ -8,16 +8,31 @@ const PhotoFrameModalFrame = ({
   setImgUrls,
   slotNum,
   imgUrls,
+  setThumbnailModal,
+  setTnTrigger,
 }) => {
+
+  useEffect(() => {
+    setTnTrigger(0);
+  }, []);
+
   return (
     <div className="photo-frame-modal-frame flex justify-content-center align-items-center">
-      <SelectPhoto
-        id={id}
-        setSlotNum={setSlotNum}
-        setImgUrls={setImgUrls}
-        slotNum={slotNum}
-        imgUrls={imgUrls}
-      />
+      {setSlotNum && setImgUrls && slotNum && imgUrls ?
+        <SelectPhoto
+          id={id}
+          setSlotNum={setSlotNum}
+          setImgUrls={setImgUrls}
+          slotNum={slotNum}
+          imgUrls={imgUrls}
+          setThumbnailModal={setThumbnailModal}
+        /> :
+        <SelectPhoto
+          id={id}
+          setThumbnailModal={setThumbnailModal}
+          setTnTrigger={setTnTrigger}
+        />}
+
     </div>
   );
 };
