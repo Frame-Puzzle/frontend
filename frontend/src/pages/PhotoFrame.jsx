@@ -18,7 +18,6 @@ const PhotoFrame = () => {
     "https://frazzle208.s3.ap-northeast-2.amazonaws.com/202306070834291810_1.jpg",
   ]);
 
-
   const [slotNum, setSlotNum] = useState(0);
   const inputFrameImgRef = useRef(null);
 
@@ -77,18 +76,20 @@ const PhotoFrame = () => {
         />
       </div>
 
-      <div className="photo-frame-body" ref={inputFrameImgRef}>
-        <img
-          className="selected-frame"
-          src={frames[selectFrame].src}
-          alt={frames[selectFrame].type}
-        />
-        <InputFrameImg
-          imageUrls={imgUrls}
-          setImgUrls={setImgUrls}
-          slotNum={slotNum}
-          setSlotNum={setSlotNum}
-        />
+      <div className="photo-frame-body">
+        <div className="photo-capture" ref={inputFrameImgRef}>
+          <img
+            className="selected-frame"
+            src={frames[selectFrame].src}
+            alt={frames[selectFrame].type}
+          />
+          <InputFrameImg
+            imageUrls={imgUrls}
+            setImgUrls={setImgUrls}
+            slotNum={slotNum}
+            setSlotNum={setSlotNum}
+          />
+        </div>
       </div>
       <div className="photo-frame-footer">
         <FrameSwipe frames={frames} setSelectFrame={setSelectFrame} />
