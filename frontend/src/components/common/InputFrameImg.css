@@ -1,0 +1,63 @@
+.input-frame-container {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  padding-top: 120%; /* 비율을 유지하면서 높이를 조정 */
+  background: url("/path/to/your/template.png") no-repeat center/contain;
+}
+
+.frame-slot {
+  position: absolute;
+  overflow: hidden;
+}
+
+.frame-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+/* 숨겨진 이미지를 위한 클래스 */
+.hidden-img {
+  visibility: hidden;
+}
+
+/* 각 슬롯의 위치와 크기를 퍼센트로 지정 */
+.top-left {
+  top: 15%;
+  left: 20%;
+  width: 30%;
+  height: 35%;
+}
+
+.top-right {
+  top: 15%;
+  right: 20%;
+  width: 30%;
+  height: 35%;
+}
+
+.bottom-left {
+  bottom: 15%;
+  left: 20%;
+  width: 30%;
+  height: 35%;
+}
+
+.bottom-right {
+  bottom: 15%;
+  right: 20%;
+  width: 30%;
+  height: 35%;
+}
+
+.click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20; /* 높은 z-index를 설정하여 클릭 가능하게 */
+  background-color: transparent; /* 투명하게 설정 */
+}
