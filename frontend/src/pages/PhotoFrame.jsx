@@ -90,6 +90,7 @@ const PhotoFrame = () => {
             setSlotNum={setSlotNum}
           />
         </div>
+
       </div>
       <div className="photo-frame-footer">
         <FrameSwipe frames={frames} setSelectFrame={setSelectFrame} />

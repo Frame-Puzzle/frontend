@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import "./UncompletedBoard.css";
 import { useDispatch, useSelector } from "react-redux";
 import boardApi from "../apis/boardApi";
-import { setBoardCategory, setBoardKeywords, setVote } from "../stores/boardSlice";
+import {
+  setBoardCategory,
+  setBoardKeywords,
+  setVote,
+} from "../stores/boardSlice";
 import { setModalId } from "../stores/boardSlice";
 import LoadingModal from "./LoadingModal";
 import BoardModalFrame from "./modalFrame/BoardModalFrame";
@@ -12,7 +16,6 @@ import { setBoardId } from "../stores/waitingRoomSlice";
 import MainNav from "../components/common/MainNav";
 
 const UncompletedBoard = ({ boardID }) => {
-
   // 모달 창
   const [boardName, setBoardName] = useState("");
   const [category, setCategory] = useState("");
@@ -22,13 +25,14 @@ const UncompletedBoard = ({ boardID }) => {
   const [pieceData, setPieceData] = useState([]);
   const [activateGameRoom, setActivateGameRoom] = useState(0);
   const [createRoom, setCreateRoom] = useState(false);
+  const [existGame, setExistRoom] = useState(false);
 
   const dispatch = useDispatch();
 
   const piece = useSelector((state) => state.piece);
   const board = useSelector((state) => state.board);
-  let directoryId = useSelector(state => state.createBoard.directoryId);
-  let imgLoading = useSelector(state => state.loading.imgLoading);
+  let directoryId = useSelector((state) => state.createBoard.directoryId);
+  let imgLoading = useSelector((state) => state.loading.imgLoading);
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
@@ -61,6 +65,21 @@ const UncompletedBoard = ({ boardID }) => {
     fetchPuzzleData();
     fetchCreateGameRoom();
   }, [piece.pieceId]);
+
+  useEffect(() => {
+    if (activateGameRoom === 0) {
+      // 게임 방 생성 안 됨
+      return;
+    }
+
+    const fetchExistGameRoom = async () => {
+      const response = await boardApi.get(`${boardID}/games/in-game`);
+      console.log(response);
+      setExistRoom(response.data.data.exist);
+    };
+
+    fetchExistGameRoom();
+  }, [activateGameRoom]);
 
   useEffect(() => {
     // 퍼즐 조각 클릭 여부 조회 후 모달 창 생성 혹은 삭제
@@ -111,6 +130,8 @@ const UncompletedBoard = ({ boardID }) => {
           pieceData={pieceData}
         />
         <div className="game-room-container">
+          {/* 대기 방이 생성되어 있지 않은 경우 */}
+          {/* 대기 방 생성 조건에 맞지 않을 경우 */}
           {!createRoom ? (
             <button
               className="game-room-button"
@@ -122,7 +143,10 @@ const UncompletedBoard = ({ boardID }) => {
             >
               게임 방 만들기
             </button>
-          ) : (
+          ) : null}
+          {/* 대기 방이 생성되어 있지만 게임이 시작되지 않은 경우 */}
+          {/* 게임이 시작된 경우*/}
+          {createRoom && !existGame ? (
             <button
               className="game-room-button"
               onClick={() => {
@@ -132,7 +156,12 @@ const UncompletedBoard = ({ boardID }) => {
             >
               게임 방 참여하기
             </button>
-          )}
+          ) : null}
+          {existGame ? (
+            <button className="game-room-button" disabled>
+              게임이 이미 시작되었습니다.
+            </button>
+          ) : null}
         </div>
       </div>
 
@@ -140,7 +169,7 @@ const UncompletedBoard = ({ boardID }) => {
         <MainNav />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default UncompletedBoard;

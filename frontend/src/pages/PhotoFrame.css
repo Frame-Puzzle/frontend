@@ -4,12 +4,13 @@
 }
 
 .photo-frame-body {
-  width: 100%;
+  width: auto;
   height: 65%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
 .photo-capture {
@@ -24,7 +25,7 @@
 .selected-frame {
   width: 306.5px;
   height: 457px;
-  z-index: 10;
+  z-index: 11;
   border: 1px solid rgba(231, 231, 231, 0.5);
   box-shadow: rgba(231, 231, 231, 0.3) 3px 3px;
 }
