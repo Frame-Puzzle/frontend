@@ -19,7 +19,7 @@
 .selected-frame {
   width: auto;
   height: 100%;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .photo-frame-footer {

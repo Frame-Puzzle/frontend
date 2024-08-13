@@ -3,9 +3,13 @@ import MainHeader from "../components/common/MainHeader";
 import FrameSwipe from "../components/frame/FrameSwipe";
 import { useState } from "react";
 import InputFrameImg from "../components/common/InputFrameImg";
+import PhotoFrameModalFrame from "./modalFrame/PhotoFrameModalFrame";
+import { useParams } from "react-router-dom";
 
 const PhotoFrame = () => {
   const [selectFrame, setSelectFrame] = useState(0);
+  const { boardID } = useParams();
+
   const [imgUrls, setImgUrls] = useState([
     "https://frazzle208.s3.ap-northeast-2.amazonaws.com/download.jpg",
     "https://frazzle208.s3.ap-northeast-2.amazonaws.com/bCmE_8XrnEYeEKlbme2ZS8rsG6dcB1vGD-UJtxvGncvXuYL9fiBqL8Fk_6cQ58EKJYTyyw9mA0LWK3yIaRYQow.webp",
@@ -16,6 +20,15 @@ const PhotoFrame = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
+      {slotNum !== 0 ? (
+        <PhotoFrameModalFrame
+          id={boardID}
+          slotNum={slotNum}
+          setSlotNum={setSlotNum}
+          setImgUrls={setImgUrls}
+          imgUrls={imgUrls}
+        />
+      ) : null}
       <div className="photo-frame-header">
         <MainHeader
           title={"PhotoFrame"}
