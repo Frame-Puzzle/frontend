@@ -33,8 +33,6 @@ const GameBoard = ({ id, sendEndGame }) => {
         return;
     }
 
-    console.log()
-
     gameImg.onload = () => {
       // 퍼즐 세팅
       const canvas = new Canvas(boardElement.id, {
@@ -58,7 +56,7 @@ const GameBoard = ({ id, sendEndGame }) => {
       canvasElement.style.backgroundColor = '#f0f0f0';
 
       // 이미지 높이 맞추기
-      canvas.adjustImagesToPuzzleHeight();
+      //canvas.adjustImagesToPuzzleHeight();
       //canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
