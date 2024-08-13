@@ -44,15 +44,7 @@ const MainHeader = ({
           <div onClick={() => dispatch(setModalBoardId(4))}>{icon}</div>
         ) : null}
         {page === "포토프레임" && icon ? (
-<<<<<<< HEAD
-          <div
-            onClick={() => {
-              downloadPhotoFrame();
-            }}
-          >
-=======
           <div onClick={() => downloadPhotoFrame()} style={{ zIndex: 1000 }}>
->>>>>>> c239d91 ([FEAT][FE][아영] 캡쳐 기능 구현)
             {icon}
           </div>
         ) : null}
