@@ -5,7 +5,7 @@ import "swiper/css";
 const FrameSwipe = ({ frames, setSelectFrame }) => {
   return (
     <Swiper
-      spaceBetween={30}
+      spaceBetween={10}
       slidesPerView={2}
       centeredSlides={true}
       loop={true}
