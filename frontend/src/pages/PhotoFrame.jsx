@@ -1,10 +1,11 @@
 import "./PhotoFrame.css";
 import MainHeader from "../components/common/MainHeader";
 import FrameSwipe from "../components/frame/FrameSwipe";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import InputFrameImg from "../components/common/InputFrameImg";
 import PhotoFrameModalFrame from "./modalFrame/PhotoFrameModalFrame";
 import { useParams } from "react-router-dom";
+import domtoimage from "dom-to-image";
 
 const PhotoFrame = () => {
   const [selectFrame, setSelectFrame] = useState(0);
@@ -17,6 +18,29 @@ const PhotoFrame = () => {
     "https://frazzle208.s3.ap-northeast-2.amazonaws.com/202306070834291810_1.jpg",
   ]);
   const [slotNum, setSlotNum] = useState(0);
+  const inputFrameImgRef = useRef(null);
+  const [capturedCanvas, setCapturedCanvas] = useState(null);
+
+  const downloadPhotoFrame = () => {
+    console.log("downloadPhotoFrame");
+    if (inputFrameImgRef.current) {
+      domtoimage.toPng(inputFrameImgRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "photo-frame.png";
+          link.click();
+
+          // 캡처된 이미지 데이터를 상태로 저장하여 화면에 표시
+          const img = new Image();
+          img.src = dataUrl;
+          setCapturedCanvas(img);
+        })
+        .catch((error) => {
+          console.error("oops, something went wrong!", error);
+        });
+    }
+  };
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
@@ -40,9 +64,12 @@ const PhotoFrame = () => {
               style={{ width: "38%", marginLeft: "7vw" }}
             />
           }
+          page="포토프레임"
+          // downloadPhotoFrame={downloadPhotoFrame}
         />
       </div>
-      <div className="photo-frame-body">
+
+      <div className="photo-frame-body" ref={inputFrameImgRef}>
         <InputFrameImg
           imageUrls={imgUrls}
           setImgUrls={setImgUrls}
@@ -58,6 +85,14 @@ const PhotoFrame = () => {
       <div className="photo-frame-footer">
         <FrameSwipe frames={frames} setSelectFrame={setSelectFrame} />
       </div>
+
+      {/* 캡처된 이미지 데이터를 화면에 보여주기 */}
+      {capturedCanvas && (
+        <div className="captured-canvas-container">
+          <h3>Captured Image</h3>
+          <div ref={(node) => node && node.appendChild(capturedCanvas)} />
+        </div>
+      )}
     </div>
   );
 };
