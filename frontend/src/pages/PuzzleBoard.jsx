@@ -33,10 +33,25 @@ const PuzzleBoard = () => {
 
   const { boardID } = useParams();
 
+<<<<<<< HEAD
   const piece = useSelector((state) => state.piece);
   const board = useSelector((state) => state.board);
   let directoryId = useSelector(state => state.createBoard.directoryId);
   let imgLoading = useSelector(state => state.loading.imgLoading);
+=======
+  // 우선 boardID Parameter를 이용해서 해당 퍼즐판이 완료된 퍼즐판인지, 완료되지 않은 퍼즐판인지 판단하는 작업이 필요하다.
+  const isCompleted = async (boardID) => {
+    try {
+      const response = await boardApi.get(`/${boardID}`);
+      // 0은 아직 사진이 전부 채워지지 않은 상태, 1은 사진은 다 채워진 상태, 2는 게임까지 완료한 상태
+      const boardClearType = response.data.data.boardClearType;
+      // Test
+      setBoardClearType(boardClearType);
+    } catch (error) {
+      console.error("Error fetching board clear type:", error);
+    }
+  };
+>>>>>>> c239d91 ([FEAT][FE][아영] 캡쳐 기능 구현)
 
   useEffect(() => {
     const fetchPuzzleData = async () => {
