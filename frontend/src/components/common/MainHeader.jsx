@@ -19,18 +19,10 @@ const MainHeader = ({
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (downloadPhotoFrame) {
-      console.log("downloadPhotoFrame function is present");
-    } else {
-      console.log("downloadPhotoFrame function is missing");
-    }
-  }, [downloadPhotoFrame]);
 
   return (
     <div className="header flex">
       <div className="header-left flex align-items-center">
-        {" "}
         {/* 85% */}
         <div
           className="header-prev flex justify-content-center align-items-center"

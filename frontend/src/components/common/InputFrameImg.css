@@ -2,7 +2,6 @@
   position: absolute;
   width: 306.5px; /* 포토 프레임의 고정 크기 */
   height: 457px; /* 포토 프레임의 고정 크기 */
-  padding-top: 120%; /* 비율을 유지하면서 높이를 조정 */
   top: 50%; /* 수직 중앙 */
   left: 50%; /* 수평 중앙 */
   margin-top: -228.5px; /* 높이의 절반 (457px / 2) */

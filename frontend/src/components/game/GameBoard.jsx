@@ -33,9 +33,6 @@ const GameBoard = ({ id, sendEndGame }) => {
         return;
     }
 
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
-
     gameImg.onload = () => {
       // 퍼즐 세팅
       const canvas = new Canvas(boardElement.id, {
@@ -54,9 +51,13 @@ const GameBoard = ({ id, sendEndGame }) => {
         fixed: true,
         preventOffstageDrag: true,
       });
+      
+      const canvasElement = document.getElementById(boardElement.id);
+      canvasElement.style.backgroundColor = '#f0f0f0';
 
       // 이미지 높이 맞추기
-      canvas.adjustImagesToPuzzleHeight();
+      //canvas.adjustImagesToPuzzleHeight();
+      //canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
