@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 import game4X4Config from "../../utils/gameBoard/game4X4Config";
 import game8X8Config from "../../utils/gameBoard/game8X8Config";
 import game6X6Config from "../../utils/gameBoard/game6X6Config";
+import puzzleClickSound from './puzzleClick.wav';
 
 const GameBoard = ({ id, sendEndGame }) => {
   const boardRef = useRef(null);
   const waitingRoom = useSelector((state) => state.waitingRoom);
+  const audioRef = useRef(new Audio(puzzleClickSound));
 
   useEffect(() => {
     const boardElement = boardRef.current;
@@ -17,7 +19,7 @@ const GameBoard = ({ id, sendEndGame }) => {
     gameImg.src = waitingRoom.gameImgUrl;
 
     const level = waitingRoom.level;
-
+    
     let config;
     switch (level) {
       case 4:
@@ -42,8 +44,8 @@ const GameBoard = ({ id, sendEndGame }) => {
         pieceSize: config.pieceSize,
 
         borderFill: 10,
-        strokeWidth: 2,
-        lineSoftness: 0.12,
+        strokeWidth: 0.8,
+        lineSoftness: 0.18,
         painter: new painters.Konva(),
         image: gameImg,
 
@@ -73,6 +75,28 @@ const GameBoard = ({ id, sendEndGame }) => {
       canvas.onValid(() => {
         sendEndGame();
       });
+
+      canvas.onConnect((_piece, figure, _target, targetFigure) => {
+        console.log("gd");
+
+        audioRef.current.play();  
+
+        figure.shape.stroke('#C3C7F4');
+        targetFigure.shape.stroke('#C3C7F4');
+        canvas.redraw();
+
+        setTimeout(() => {
+          figure.shape.stroke('black');
+          targetFigure.shape.stroke('black');
+          canvas.redraw();
+        }, 200);
+        
+      });
+
+      // canvas.onDisconnect((it) => {
+      //   audioRef.current.play();
+      // });
+
     };
   }, []);
 
