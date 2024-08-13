@@ -31,9 +31,9 @@ const PuzzleBoard = () => {
 
   // 완료되지 않은 퍼즐판이라면 <UncompletedBoard boardID={boardID} />로 전달할 것
   // 완료된 퍼즐판이라면 <CompletedBoard boardID={boardID} />로 전달할 것
-  if (boardClearType == 0) {
+  if (boardClearType == 0 || boardClearType == 1) {
     return ( <UncompletedBoard boardID={boardID} /> )
-  } else if (boardClearType == 1) { // should modify
+  } else if (boardClearType == 2) { // should modify
     return ( <CompletedBoard boardID={boardID} /> )
   }
 

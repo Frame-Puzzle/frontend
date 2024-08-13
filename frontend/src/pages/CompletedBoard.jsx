@@ -22,6 +22,8 @@ const CompletedBoard = ({ boardID }) => {
   let [thumbnailer, setThumbnailer] = useState('');
   let [boardClearType, setBoardClearType] = useState('');
   let [userNickname, setUserNickname] = useState('');
+  // 썸네일 아이콘 클릭 시 모달창 띄우는 스위치
+  let [thumbnailModal, setThumbnailModal] = useState(false);
 
   // 넘겨받은 boardID를 이용해서 화면에 보여줄 정보를 State로 저장 (접속한 유저 정보도 포함)
   const setInfo = async (boardID) => {
@@ -61,7 +63,8 @@ const CompletedBoard = ({ boardID }) => {
   }, []);
 
   return (
-    <div className="completed-board w-full h-full">
+    <div className="completed-board w-full h-full relative">
+      { thumbnailModal ? <></> : null }
       <div className="completed-board-header">
         <MainHeader
           path={`/directories/${directoryId}`}
@@ -100,7 +103,10 @@ const CompletedBoard = ({ boardID }) => {
         <div className="completed-board-body-bottom">
           <div className="completed-board-body-bottom-feature-container">
             {userNickname == thumbnailer ?
-              <div className="completed-board-body-bottom-icon-container">
+              <div className="completed-board-body-bottom-icon-container" onClick={(e) => {
+                e.stopPropagation();
+                setThumbnailModal(true);
+              }}>
                 <span>썸네일</span>
                 <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/thumbnail.gif" />
               </div> : null}
