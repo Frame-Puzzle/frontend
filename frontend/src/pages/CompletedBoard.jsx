@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DirectoryCanvasCopy from "../components/directory/DirectoryCanvasCopy";
 import PhotoFrameModalFrame from "./modalFrame/PhotoFrameModalFrame";
+import BoardDeleteModalFrame from "./../pages/modalFrame/BoardDeleteModalFrame";
 
 const CompletedBoard = ({ boardID }) => {
 
@@ -29,6 +30,8 @@ const CompletedBoard = ({ boardID }) => {
   let [tnTrigger, setTnTrigger] = useState(0);
   // 썸네일 URL 저장소 (null이 저장될 수 있다.)
   let [thumbnailURL, setThumbnailURL] = useState('');
+  // 휴지통 아이콘 클릭 시 모달창 띄우는 스위치
+  let [deleteModal, setDeleteModal] = useState(false);
 
   // 넘겨받은 boardID를 이용해서 화면에 보여줄 정보를 State로 저장 (접속한 유저 정보도 포함)
   const setInfo = async (boardID) => {
@@ -95,6 +98,8 @@ const CompletedBoard = ({ boardID }) => {
 
   return (
     <div className="completed-board w-full h-full relative">
+      {deleteModal ?
+        <BoardDeleteModalFrame setDeleteModal={setDeleteModal} /> : null }
       {thumbnailModal ?
         <PhotoFrameModalFrame
           id={boardID}
@@ -112,6 +117,7 @@ const CompletedBoard = ({ boardID }) => {
               alt="trashIcon"
               className="header-icon"
               style={{ width: "40%", marginLeft: "7vw" }}
+              onClick={(e) => { e.stopPropagation(); setDeleteModal(true); }}
             />
           }
         />
