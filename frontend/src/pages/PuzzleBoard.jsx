@@ -18,7 +18,6 @@ const PuzzleBoard = () => {
       // 0은 아직 사진이 전부 채워지지 않은 상태, 1은 사진은 다 채워진 상태, 2는 게임까지 완료한 상태
       const boardClearType = response.data.data.boardClearType;
       // Test
-      console.log(boardClearType);
       setBoardClearType(boardClearType);
     } catch (error) {
       console.error("Error fetching board clear type:", error);

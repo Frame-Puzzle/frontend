@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import InputFrameImg from "../components/common/InputFrameImg";
 import PhotoFrameModalFrame from "./modalFrame/PhotoFrameModalFrame";
 import { useParams } from "react-router-dom";
-import domtoimage from "dom-to-image";
+import html2canvas from "html2canvas-pro";
 
 const PhotoFrame = () => {
   const [selectFrame, setSelectFrame] = useState(0);
@@ -19,22 +19,28 @@ const PhotoFrame = () => {
   ]);
   const [slotNum, setSlotNum] = useState(0);
   const inputFrameImgRef = useRef(null);
-  const [capturedCanvas, setCapturedCanvas] = useState(null);
 
   const downloadPhotoFrame = () => {
-    console.log("downloadPhotoFrame");
     if (inputFrameImgRef.current) {
-      domtoimage.toPng(inputFrameImgRef.current)
-        .then((dataUrl) => {
+      const selectedFrameElement = document.querySelector(".selected-frame");
+      if (selectedFrameElement) {
+        selectedFrameElement.style.position = "relative";
+      }
+      html2canvas(inputFrameImgRef.current, {
+        useCORS: true,
+        backgroundColor: "white", // 투명 배경으로 설정
+        scale: 4,
+      })
+        .then((canvas) => {
+          if (selectedFrameElement) {
+            selectedFrameElement.style.position = "";
+          }
+
+          const dataUrl = canvas.toDataURL("image/png");
           const link = document.createElement("a");
           link.href = dataUrl;
           link.download = "photo-frame.png";
           link.click();
-
-          // 캡처된 이미지 데이터를 상태로 저장하여 화면에 표시
-          const img = new Image();
-          img.src = dataUrl;
-          setCapturedCanvas(img);
         })
         .catch((error) => {
           console.error("oops, something went wrong!", error);
@@ -65,34 +71,26 @@ const PhotoFrame = () => {
             />
           }
           page="포토프레임"
-          // downloadPhotoFrame={downloadPhotoFrame}
+          downloadPhotoFrame={downloadPhotoFrame}
         />
       </div>
 
       <div className="photo-frame-body" ref={inputFrameImgRef}>
+        <img
+          className="selected-frame"
+          src={frames[selectFrame].src}
+          alt={frames[selectFrame].type}
+        />
         <InputFrameImg
           imageUrls={imgUrls}
           setImgUrls={setImgUrls}
           slotNum={slotNum}
           setSlotNum={setSlotNum}
         />
-        <img
-          className="selected-frame"
-          src={frames[selectFrame].src}
-          alt={frames[selectFrame].type}
-        />
       </div>
       <div className="photo-frame-footer">
         <FrameSwipe frames={frames} setSelectFrame={setSelectFrame} />
       </div>
-
-      {/* 캡처된 이미지 데이터를 화면에 보여주기 */}
-      {capturedCanvas && (
-        <div className="captured-canvas-container">
-          <h3>Captured Image</h3>
-          <div ref={(node) => node && node.appendChild(capturedCanvas)} />
-        </div>
-      )}
     </div>
   );
 };

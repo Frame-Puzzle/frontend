@@ -52,7 +52,9 @@ const MainHeader = ({
           <div onClick={() => dispatch(setModalBoardId(4))}>{icon}</div>
         ) : null}
         {page === "포토프레임" && icon ? (
-          <div onClick={() => downloadPhotoFrame()}>{icon}</div>
+          <div onClick={() => downloadPhotoFrame()} style={{ zIndex: 1000 }}>
+            {icon}
+          </div>
         ) : null}
         {!page && icon && <div>{icon}</div>}
         {directoryName && <span>[{directoryName}]</span>}
