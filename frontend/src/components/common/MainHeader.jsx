@@ -19,18 +19,10 @@ const MainHeader = ({
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (downloadPhotoFrame) {
-      console.log("downloadPhotoFrame function is present");
-    } else {
-      console.log("downloadPhotoFrame function is missing");
-    }
-  }, [downloadPhotoFrame]);
 
   return (
     <div className="header flex">
       <div className="header-left flex align-items-center">
-        {" "}
         {/* 85% */}
         <div
           className="header-prev flex justify-content-center align-items-center"
@@ -52,7 +44,13 @@ const MainHeader = ({
           <div onClick={() => dispatch(setModalBoardId(4))}>{icon}</div>
         ) : null}
         {page === "포토프레임" && icon ? (
-          <div onClick={() => downloadPhotoFrame()}>{icon}</div>
+          <div
+            onClick={() => {
+              downloadPhotoFrame();
+            }}
+          >
+            {icon}
+          </div>
         ) : null}
         {!page && icon && <div>{icon}</div>}
         {directoryName && <span>[{directoryName}]</span>}

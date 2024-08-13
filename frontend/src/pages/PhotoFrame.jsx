@@ -11,18 +11,25 @@ const PhotoFrame = () => {
   const [selectFrame, setSelectFrame] = useState(0);
   const { boardID } = useParams();
 
+  // const [imgUrls, setImgUrls] = useState([
+  //   "https://frazzle208.s3.ap-northeast-2.amazonaws.com/download.jpg",
+  //   "https://frazzle208.s3.ap-northeast-2.amazonaws.com/bCmE_8XrnEYeEKlbme2ZS8rsG6dcB1vGD-UJtxvGncvXuYL9fiBqL8Fk_6cQ58EKJYTyyw9mA0LWK3yIaRYQow.webp",
+  //   "https://frazzle208.s3.ap-northeast-2.amazonaws.com/70a62f92-5072-4605-bc37-d72817347a7d",
+  //   "https://frazzle208.s3.ap-northeast-2.amazonaws.com/202306070834291810_1.jpg",
+  // ]);
+
   const [imgUrls, setImgUrls] = useState([
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/download.jpg",
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/bCmE_8XrnEYeEKlbme2ZS8rsG6dcB1vGD-UJtxvGncvXuYL9fiBqL8Fk_6cQ58EKJYTyyw9mA0LWK3yIaRYQow.webp",
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/70a62f92-5072-4605-bc37-d72817347a7d",
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/202306070834291810_1.jpg",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/f1175004-39d1-4db4-b770-a124cc4e8651",
+   "https://frazzle208.s3.ap-northeast-2.amazonaws.com/f1175004-39d1-4db4-b770-a124cc4e8651",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/f1175004-39d1-4db4-b770-a124cc4e8651",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/f1175004-39d1-4db4-b770-a124cc4e8651",
   ]);
   const [slotNum, setSlotNum] = useState(0);
   const inputFrameImgRef = useRef(null);
   const [capturedCanvas, setCapturedCanvas] = useState(null);
+  
 
   const downloadPhotoFrame = () => {
-    console.log("downloadPhotoFrame");
     if (inputFrameImgRef.current) {
       domtoimage.toPng(inputFrameImgRef.current)
         .then((dataUrl) => {
@@ -65,7 +72,7 @@ const PhotoFrame = () => {
             />
           }
           page="포토프레임"
-          // downloadPhotoFrame={downloadPhotoFrame}
+          downloadPhotoFrame={downloadPhotoFrame}
         />
       </div>
 
