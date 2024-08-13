@@ -55,7 +55,6 @@ const GameBoard = ({ id, sendEndGame }) => {
         preventOffstageDrag: true,
       });
 
-      console.log(canvas);
       // 이미지 높이 맞추기
       canvas.adjustImagesToPuzzleHeight();
 
