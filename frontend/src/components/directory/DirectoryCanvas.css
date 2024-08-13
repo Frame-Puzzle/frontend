@@ -14,4 +14,6 @@
   width: 285px;
   height: 55vh;
   box-sizing: border-box;
+  background-size: cover;
+  background: center;
 } 
