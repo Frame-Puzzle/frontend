@@ -1,8 +1,8 @@
 const game4X4Config = {
   row: 4,
   col: 4,
-  pieceSize: 45,
-  boardWidth:300,
+  pieceSize: 80,
+  boardWidth:350,
   boardHeight:400,
 }
 

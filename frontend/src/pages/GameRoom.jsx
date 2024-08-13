@@ -148,20 +148,22 @@ const GameRoom = () => {
 
         {showWindow === 1 ? (
           <>
-            <ChatBoard messages={messages} />
-            <div className="game-chat-input-container">
-              <input
-                className="game-chat-input"
-                type="text"
-                value={inputMessage}
-                onChange={handleInputMessage}
-                onKeyDown={handleKeyDown}
-                placeholder="내용을 입력해주세요"
-              />
-              <button
-                className="game-chat-input-button"
-                onClick={sendInputMessage}
-              />
+            <div className="game-chat-container">
+              <ChatBoard messages={messages} />
+              <div className="game-chat-input-container">
+                <input
+                  className="game-chat-input"
+                  type="text"
+                  value={inputMessage}
+                  onChange={handleInputMessage}
+                  onKeyDown={handleKeyDown}
+                  placeholder="내용을 입력해주세요"
+                />
+                <button
+                  className="game-chat-input-button"
+                  onClick={sendInputMessage}
+                />
+              </div>
             </div>
           </>
         ) : null}
