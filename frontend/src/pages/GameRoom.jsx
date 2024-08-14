@@ -25,6 +25,7 @@ const GameRoom = () => {
   const gameImg = location.state?.cropGameImg;
 
   const nav = useNavigate();
+  const directoryId = useSelector(state => state.createBoard.directoryId);
 
   const {
     connectSocket,
@@ -343,7 +344,7 @@ const GameRoom = () => {
         <GameModalFrame winner={winner} />
       ) : null}
       <div className="game-room-header">
-        <MainHeader title="PUZZLE" timer={timer} path={0} />
+        <MainHeader title="PUZZLE" timer={timer} path={`/directories/${directoryId}`} />
       </div>
       <div className="game-room-member-header">
         <GameRoomMemberComponent users={users} />
