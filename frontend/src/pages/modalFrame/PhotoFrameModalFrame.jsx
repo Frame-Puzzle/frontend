@@ -13,7 +13,9 @@ const PhotoFrameModalFrame = ({
 }) => {
 
   useEffect(() => {
-    setTnTrigger(0);
+    if (setTnTrigger) {
+      setTnTrigger(0);
+    }
   }, []);
 
   return (
