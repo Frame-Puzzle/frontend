@@ -1,23 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import paper from "paper";
-
 import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
 import puzzle4X5Config from "../../utils/puzzleBoard/puzzle4X5Config";
 import puzzle5X6Config from "../../utils/puzzleBoard/puzzle5X6Config";
-
 import createPieces from "./createPieces";
 import fitPieces from "../puzzleBoard/fitPieces";
 import pieceApi from "../../apis/pieceApi";
-
 import "./DirectoryCanvasCopy.css";
 
-const DirectoryCanvasCopy = ({ boardSize }) => {
+const DirectoryCanvasCopy = ({ boardSize, thumbnailURL }) => {
   const canvasRef = useRef(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
 
   useEffect(() => {
     // paper.js 초기화
     paper.setup(canvasRef.current);
-
 
     // 퍼즐 크기 지정
     let boardConfig;
@@ -35,14 +32,21 @@ const DirectoryCanvasCopy = ({ boardSize }) => {
     // 퍼즐 조각 배치
     fitPieces(pieces, boardConfig);
 
+    // thumbnailURL이 null인 경우 빈 문자열로 바꾸기
+    if (thumbnailURL) {
+      setThumbnailUrl(thumbnailURL);
+    } else {
+      setThumbnailUrl('');
+    }
+
     return () => {
       //paper.project.clear();
     };
-  }, [boardSize]);
+  }, [boardSize, thumbnailURL]);
 
   return (
     <div className="directory-canvas-container-copy">
-      <canvas ref={canvasRef} className="directory-canvas-copy"></canvas>
+      <canvas ref={canvasRef} className="directory-canvas-copy" style={{backgroundImage: `url(${thumbnailUrl})`}}></canvas>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import paper from "paper";
 
 import puzzle3X4Config from "../../utils/puzzleBoard/puzzle3X4Config";
@@ -11,8 +11,9 @@ import pieceApi from "../../apis/pieceApi";
 
 import "./DirectoryCanvas.css";
 
-const DirectoryCanvas = ({ boardSize }) => {
+const DirectoryCanvas = ({ boardSize, thumbnailURL }) => {
   const canvasRef = useRef(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
 
   useEffect(() => {
     // paper.js 초기화
@@ -35,6 +36,13 @@ const DirectoryCanvas = ({ boardSize }) => {
     // 퍼즐 조각 배치
     fitPieces(pieces, boardConfig);
 
+    // thumbnailURL이 null인 경우 빈 문자열로 바꾸기
+    if (thumbnailURL) {
+      setThumbnailUrl(thumbnailURL);
+    } else {
+      setThumbnailUrl('');
+    }
+
     return () => {
       //paper.project.clear();
     };
@@ -42,7 +50,7 @@ const DirectoryCanvas = ({ boardSize }) => {
 
   return (
     <div className="directory-canvas-container">
-      <canvas ref={canvasRef} className="directory-canvas"></canvas>
+      <canvas ref={canvasRef} className="directory-canvas" style={{backgroundImage: `url(${thumbnailUrl})`}}></canvas>
     </div>
   );
 };

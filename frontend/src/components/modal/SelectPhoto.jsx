@@ -2,9 +2,32 @@ import "./SelectPhoto.css";
 import { useEffect, useState } from "react";
 import boardApi from "./../../apis/boardApi";
 
-const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum }) => {
+const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum, setThumbnailModal, setTnTrigger }) => {
   const [imgList, setImgList] = useState([]);
   const [selectImg, setSelectImg] = useState(-1);
+
+  // Thumbnail 수정
+  const putThumbnail = async () => {
+    // boardID(id)로 썸네일 수정하는 PUT 요청
+    try {
+      // Request Body 데이터 가공
+      const url = imgList[selectImg].imgUrl;
+      const requestData = {
+        thumbnailUrl: url
+      };
+      // 백엔드에 PUT 요청을 보내기
+      const response = await boardApi.put(`/${id}/thumbnails`, requestData);
+      // 응답 체크하기
+      console.log(response.data.message);
+      // 마지막은 모달창 닫기
+      setThumbnailModal(false);
+      // CompletedBoard Component에서 감지할 수 있게끔(useEffect를 사용할 수 있게끔) Trigger 발동시키기
+      setTnTrigger(1);
+    } catch (error) {
+      console.error('Error putting thumbnails', error);
+      throw error;
+    }
+  }
 
   useEffect(() => {
     const fetchAllImages = async () => {
@@ -43,7 +66,12 @@ const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum }) => {
           alt="x-symbol"
           className="x-symbol"
           onClick={() => {
-            setSlotNum(0);
+            if (setSlotNum) {
+              setSlotNum(0);
+            }
+            if (setThumbnailModal) {
+              setThumbnailModal(false);
+            }
           }}
         />
       </div>
@@ -75,7 +103,13 @@ const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum }) => {
       <button
         className="result-photo-button"
         disabled={selectImg === -1}
-        onClick={setImgFrame}
+        onClick={() => {
+          if (setSlotNum && imgUrls && setImgUrls && slotNum) {
+            setImgFrame();
+          } else {
+            putThumbnail();
+          }
+        }}
       >
         선택하기
       </button>
