@@ -7,6 +7,7 @@
 .album-body {
   width: 100%;
   height: 90%;
+  padding-top: 1.5vh;
 }
 
 .album-detail {
@@ -15,11 +16,11 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 1vh 0;
+  padding: 1.5vh 0;
 }
 
 .album-board-name {
-  font-size: 5vw;
+  font-size: 4.8vw;
   font-weight: 700;
 }
 
@@ -28,17 +29,23 @@
   color: #FFFFFF;
   border-radius: 9999px;
   padding: 0.5vh 4vw;
+  font-size: 3.6vw;
+  margin-top: 1vh;
+  font-family: "pretendard-medium";
 }
 
 .album-board-keywords-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
+  padding-top: 1.5vh;
+  gap: 10vw;
 }
 
 .album-board-keyword {
-  color: rgb(156, 155, 155);
+  color: #888888;
+  font-size: 3.6vw;
   font-family: "Pretendard-Medium";
 }
 
