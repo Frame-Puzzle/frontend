@@ -37,6 +37,23 @@ const CreateWaitingRoom = () => {
     dispatch(setGameLevel(levelConfig[level]));
     nav(`/waiting-room/${waitingRoom.boardId}`);
   };
+
+  const checkWaitingRoom = async () => {
+    const fetchcheckGameRoom = async () => {
+      const response = await boardApi.get(`/${waitingRoom.boardId}/rooms`);
+      const data = response.data.data;
+
+      if (data.exist) {
+        dispatch(setModalId(0));
+        alert("게임 대기 방이 존재합니다");
+      } else {
+        moveWaitingRoom();
+      }
+    };
+
+    fetchcheckGameRoom();
+  };
+
   return (
     <>
       <div className="create-waiting-modal">
@@ -96,7 +113,7 @@ const CreateWaitingRoom = () => {
           className={
             level === 0 ? "create-room-button" : "create-room-button-not"
           }
-          onClick={moveWaitingRoom}
+          onClick={checkWaitingRoom}
         >
           게임 방 만들기
         </div>
