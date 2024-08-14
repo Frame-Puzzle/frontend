@@ -6,21 +6,42 @@ import game4X4Config from "../../utils/gameBoard/game4X4Config";
 import game8X8Config from "../../utils/gameBoard/game8X8Config";
 import game6X6Config from "../../utils/gameBoard/game6X6Config";
 import puzzleClickSound from './puzzleClick.wav';
+import { cropImageToSquare } from "../../utils/cropImage";
 
 const GameBoard = ({ id, sendEndGame }) => {
   const boardRef = useRef(null);
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const audioRef = useRef(new Audio(puzzleClickSound));
 
+  const [cropData, setCropData] = useState(null);
+  
   useEffect(() => {
-    const boardElement = boardRef.current;
+    cropImageToSquare(waitingRoom.gameImgUrl, (croppedImageUrl, err) => {
+      if (err) {
+        console.error("크롭 이미지 생성 실패", err);
+        setCropData(waitingRoom.gameImgUrl);
+        return;
+      }
+      setCropData(croppedImageUrl);
+    });
+  }, []);
 
+  useEffect(() => {
+    if (cropData != null) {
+      init();      
+    } 
+  }, [cropData]);
+
+  const init = (() => {    
+    const boardElement = boardRef.current;
     const gameImg = new Image();
-    gameImg.src = waitingRoom.gameImgUrl;
+    gameImg.src = cropData != null ? cropData : waitingRoom.gameImgUrl;
+    //gameImg.src = cropData != null ? cropData : waitingRoom.gameImgUrl;
+
+    let config;
 
     const level = waitingRoom.level;
     
-    let config;
     switch (level) {
       case 4:
         config = game4X4Config;
@@ -42,7 +63,6 @@ const GameBoard = ({ id, sendEndGame }) => {
         width: window.innerWidth * 0.95,
         height: window.innerHeight * 0.65,
         pieceSize: config.pieceSize,
-
         borderFill: 10,
         strokeWidth: 0.8,
         lineSoftness: 0.18,
@@ -53,13 +73,13 @@ const GameBoard = ({ id, sendEndGame }) => {
         fixed: true,
         preventOffstageDrag: true,
       });
-      
+                  
       const canvasElement = document.getElementById(boardElement.id);
       canvasElement.style.backgroundColor = '#f0f0f0';
-
+      
       // 이미지 높이 맞추기
-      //canvas.adjustImagesToPuzzleHeight();
-      //canvas.adjustImagesToPuzzleWidth();
+      canvas.adjustImagesToPuzzleHeight();
+      canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
@@ -77,8 +97,6 @@ const GameBoard = ({ id, sendEndGame }) => {
       });
 
       canvas.onConnect((_piece, figure, _target, targetFigure) => {
-        console.log("gd");
-
         audioRef.current.play();  
 
         figure.shape.stroke('#C3C7F4');
@@ -92,13 +110,8 @@ const GameBoard = ({ id, sendEndGame }) => {
         }, 200);
         
       });
-
-      // canvas.onDisconnect((it) => {
-      //   audioRef.current.play();
-      // });
-
     };
-  }, []);
+  });
 
   return <div ref={boardRef} id={id}></div>;
 };
