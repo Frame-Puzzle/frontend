@@ -36,7 +36,6 @@ const GameBoard = ({ id, sendEndGame }) => {
     const boardElement = boardRef.current;
     const gameImg = new Image();
     gameImg.src = cropData != null ? cropData : waitingRoom.gameImgUrl;
-    //gameImg.src = cropData != null ? cropData : waitingRoom.gameImgUrl;
 
     let config;
 
@@ -62,7 +61,7 @@ const GameBoard = ({ id, sendEndGame }) => {
         outline: new outline.Rounded(),
         width: window.innerWidth * 0.95,
         height: window.innerHeight * 0.65,
-        pieceSize: config.pieceSize,
+        pieceSize: ((window.innerWidth * 0.8) / level) * 0.5,
         borderFill: 10,
         strokeWidth: 0.8,
         lineSoftness: 0.18,
@@ -78,8 +77,7 @@ const GameBoard = ({ id, sendEndGame }) => {
       canvasElement.style.backgroundColor = '#f0f0f0';
       
       // 이미지 높이 맞추기
-      canvas.adjustImagesToPuzzleHeight();
-      canvas.adjustImagesToPuzzleWidth();
+      gameImg.width >= gameImg.height ? canvas.adjustImagesToPuzzleHeight() : canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
