@@ -241,6 +241,7 @@ const GameRoom = () => {
 
     return () => {
       exitRoom();
+      exitGameRoom(`/pub/exit/puzzle/${roomID}`);
       disconnectSocket();
       setIsConnected(false);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
