@@ -153,21 +153,21 @@ const CompletedBoard = ({ boardID }) => {
                 e.stopPropagation();
                 setThumbnailModal(true);
               }}>
-                <span>썸네일</span>
+                <span style={{whiteSpace: 'nowrap'}}>썸네일</span>
                 <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/thumbnail-color.gif" />
               </div> : null}
             <div className="completed-board-body-bottom-icon-container" onClick={(e) => {
               e.stopPropagation();
               navigate(`/photo-frame/${boardID}`);
             }}>
-              <span>네컷사진</span>
+              <span style={{whiteSpace: 'nowrap'}}>네컷사진</span>
               <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/four-cut-color.gif" />
             </div>
             <div className="completed-board-body-bottom-icon-container" onClick={(e) => {
               e.stopPropagation();
               navigate(`/album/${boardID}`);
             }}>
-              <span>앨범</span>
+              <span style={{whiteSpace: 'nowrap'}}>앨범</span>
               <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/album-color.gif" />
             </div>
           </div>
