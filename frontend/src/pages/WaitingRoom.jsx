@@ -73,6 +73,7 @@ const WaitingRoom = () => {
     const data = {
       boardId: roomID,
       userId: 0,
+      size: waitingRoom.level,
       message: `${user.nickName}이 입장하였습니다.`,
     };
 
@@ -98,6 +99,8 @@ const WaitingRoom = () => {
         robyData.maxPeople / 2 <= robyData.robyUserList.length &&
           robyData.king.nickname === user.nickName
       );
+
+      console.log(robyData);
     }
   }, [robyData, user.nickName]);
 
