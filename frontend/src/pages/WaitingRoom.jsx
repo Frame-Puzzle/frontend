@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./WaitingRoom.css";
 import { setGameInfo } from "../stores/waitingRoomSlice";
+import { cropImageToSquare } from "../utils/cropImage";
 
 const WaitingRoom = () => {
   const [inputMessage, setInputMessage] = useState("");
@@ -21,6 +22,9 @@ const WaitingRoom = () => {
   const [robyUserList, setRobyUserList] = useState([]);
   const [activateButton, setActivateButton] = useState(false);
   const [showGameImg, setShowGameImg] = useState(false);
+
+  const [cropGameImg, setCropImage] = useState(null);
+  const [isCropped, setCropFlag] = useState(false);
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
   const nav = useNavigate();
@@ -58,9 +62,11 @@ const WaitingRoom = () => {
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     if (gameStart) {
-      nav(`/game-room/${roomID}`);
+      console.log("게임 시작");
+      console.log(cropGameImg);
+      nav(`/game-room/${roomID}`, {state: {cropGameImg}});
     }
-  }, [gameStart, roomID, nav]);
+  }, [gameStart, roomID, nav, cropGameImg]);
 
   // 소켓 연결 후 방 입장
   useEffect(() => {
@@ -68,6 +74,11 @@ const WaitingRoom = () => {
       joinRoom();
     }
   }, [isConnected, roomID]);
+  
+  useEffect(() => {
+    if(isCropped)
+      console.log("크롭 성공");
+  }, [isCropped]);
 
   const joinRoom = () => {
     const data = {
@@ -98,6 +109,18 @@ const WaitingRoom = () => {
         robyData.maxPeople / 2 <= robyData.robyUserList.length &&
           robyData.king.nickname === user.nickName
       );
+
+      //불러온 로비데이터의 이미지 크롭
+      cropImageToSquare(robyData?.imgUrl, (croppedImageUrl, err) => {
+        if (err) {
+          console.error("크롭 이미지 생성 실패", err);
+          setCropImage(robyData?.imgUrl);
+          return;
+        }
+        console.log("크롭 이미지 생성 성공");
+        setCropImage(croppedImageUrl);
+        setCropFlag(true);
+      });
     }
   }, [robyData, user.nickName]);
 
@@ -161,7 +184,7 @@ const WaitingRoom = () => {
         {showGameImg ? (
           <img
             className="show-waiting-room-game-img"
-            src={robyData?.imgUrl || ""}
+            src={cropGameImg || ""}
             alt="show-img"
           />
         ) : (
