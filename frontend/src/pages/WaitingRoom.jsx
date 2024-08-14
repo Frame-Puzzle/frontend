@@ -35,7 +35,7 @@ const WaitingRoom = () => {
 
   // socket 연결
   useEffect(() => {
-    console.log(roomID);
+    
     setLoading(true);
     connectSocket(
       () => setIsConnected(true), // 연결 확인
