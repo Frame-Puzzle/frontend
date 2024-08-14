@@ -12,10 +12,10 @@ const PhotoFrame = () => {
   const { boardID } = useParams();
 
   const [imgUrls, setImgUrls] = useState([
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/download.jpg",
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/bCmE_8XrnEYeEKlbme2ZS8rsG6dcB1vGD-UJtxvGncvXuYL9fiBqL8Fk_6cQ58EKJYTyyw9mA0LWK3yIaRYQow.webp",
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/70a62f92-5072-4605-bc37-d72817347a7d",
-    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/202306070834291810_1.jpg",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/Rectangle+6019.png",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/Rectangle+6019.png",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/Rectangle+6019.png",
+    "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/Rectangle+6019.png",
   ]);
 
   const [slotNum, setSlotNum] = useState(0);
