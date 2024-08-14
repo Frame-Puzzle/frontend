@@ -64,6 +64,7 @@ const WaitingRoom = () => {
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     if (gameStart) {
+
       nav(`/game-room/${roomID}`, { state: { cropGameImg } });
     }
   }, [gameStart, roomID, nav, cropGameImg]);
@@ -75,7 +76,7 @@ const WaitingRoom = () => {
       setLoading(false);
     }
   }, [isConnected, roomID]);
-  
+
 
 
   const joinRoom = () => {
@@ -106,7 +107,7 @@ const WaitingRoom = () => {
       setRobyUserList(robyData.robyUserList);
       setActivateButton(
         robyData.maxPeople / 2 <= robyData.robyUserList.length &&
-          robyData.king.nickname === user.nickName
+        robyData.king.nickname === user.nickName
       );
 
       //불러온 로비데이터의 이미지 크롭
