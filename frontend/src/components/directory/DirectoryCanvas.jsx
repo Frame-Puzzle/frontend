@@ -48,9 +48,21 @@ const DirectoryCanvas = ({ boardSize, thumbnailURL }) => {
     };
   }, [boardSize]);
 
+  const getCanvasHeight = () => {
+    if (boardSize === 12) return "380px";
+    if (boardSize === 20) return "370px";
+    if (boardSize === 30) return "360px";
+    return "380px"; // 기본값
+  };
+
   return (
     <div className="directory-canvas-container">
-      <canvas ref={canvasRef} className="directory-canvas" style={{backgroundImage: `url(${thumbnailUrl})`}}></canvas>
+      <canvas ref={canvasRef} className="directory-canvas"
+        style={{
+          backgroundImage: `url(${thumbnailUrl})`,
+          height: getCanvasHeight(),
+          backgroundSize: "cover"
+        }}></canvas>
     </div>
   );
 };
