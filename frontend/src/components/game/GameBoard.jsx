@@ -30,12 +30,10 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
     const gameImgUrl = new Image();
     gameImgUrl.src = gameImg != null ? gameImg : waitingRoom.gameImgUrl;
 
-    console.log(gameImg);
-    console.log(waitingRoom.gameImgUrl);
 
     let config;
 
-    const level = waitingRoom.gameInfo.size;
+    const level = waitingRoom.level;
 
     switch (level) {
       case 4:
