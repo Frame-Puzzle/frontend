@@ -14,6 +14,7 @@ import MainHeader from "../components/common/MainHeader";
 import PuzzleCanvas from "../components/puzzleBoard/PuzzleCanvas";
 import { setBoardId } from "../stores/waitingRoomSlice";
 import MainNav from "../components/common/MainNav";
+import { setGameLevel } from "../stores/waitingRoomSlice";
 
 const UncompletedBoard = ({ boardID }) => {
   // 모달 창
@@ -61,7 +62,9 @@ const UncompletedBoard = ({ boardID }) => {
       const response = await boardApi.get(`/${boardID}/rooms`);
       const data = response.data.data;
 
+      console.log(data);
       setCreateRoom(data.exist);
+      dispatch(setGameLevel(data.size));
     };
 
     fetchPuzzleData();
