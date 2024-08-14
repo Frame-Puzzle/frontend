@@ -56,10 +56,10 @@ const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum }) => {
                 className="photo-container"
                 onClick={() => setSelectImg(rowIndex * 2 + colIndex)}
                 style={{
-                  backgroundColor:
+                  borderColor:
                     selectImg === rowIndex * 2 + colIndex
                       ? "#c3c7f4"
-                      : "lightgray",
+                      : "#F6F6F6",
                 }}
               >
                 <img
