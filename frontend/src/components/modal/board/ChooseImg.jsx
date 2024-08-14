@@ -8,7 +8,6 @@ import ImgExceptionMessage from "../../common/ImgExceptionMessage";
 import { setImgLoading } from "../../../stores/loadingSlice";
 
 const ChooseImg = () => {
-
   const piece = useSelector((state) => state.piece);
   const dispatch = useDispatch();
 
@@ -26,7 +25,6 @@ const ChooseImg = () => {
   };
 
   const handleFileChange = async (event) => {
-
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -59,7 +57,6 @@ const ChooseImg = () => {
   }, [piece.pieceId, piece.comment, piece.imgUrl]);
 
   useEffect(() => {
-    
     if (comment === "") {
       setExceptionMessage(0);
     } else if (comment.length <= 20) {
@@ -67,7 +64,6 @@ const ChooseImg = () => {
     } else {
       setExceptionMessage(2);
     }
-
   }, [comment]);
 
   const fetchSaveImg = async () => {
@@ -90,6 +86,8 @@ const ChooseImg = () => {
       dispatch(setImgLoading(false));
     } catch (error) {
       dispatch(setImgLoading(false));
+      dispatch(setPieceId(0));
+      alert("다른 유저의 조각입니다. 다른 조각을 이용해 주세요");
       console.error("이미지 저장에 실패했습니다:", error);
     }
   };
@@ -110,7 +108,7 @@ const ChooseImg = () => {
             <span className="mission-title">Mission</span>
             <span className="mission-context">{mission}</span>
           </div>
-        ) : (null)}
+        ) : null}
         <div className="uploading-img" onClick={handleClick}>
           {imgUrl ? (
             <img src={imgUrl} alt="new-img" className="uploaded-img" />
@@ -134,8 +132,15 @@ const ChooseImg = () => {
           onChange={handleFileChange}
         />
         <div className="image-description">
-          <span className="image-description-span">덧붙이고 싶은 설명을 적어주세요.</span>
-          <input className="image-description-input" type="text" value={comment} onChange={handleImgText} />
+          <span className="image-description-span">
+            덧붙이고 싶은 설명을 적어주세요.
+          </span>
+          <input
+            className="image-description-input"
+            type="text"
+            value={comment}
+            onChange={handleImgText}
+          />
           <ImgExceptionMessage exceptionMessage={exceptionMessage} />
         </div>
       </div>
