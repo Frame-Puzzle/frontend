@@ -55,6 +55,9 @@
   color: #f1bdec;
   font-family: "pretendard-bold";
   border-radius: 20px;
+  position: relative;
+  z-index: 500;
+  background-color: #FFFFFF;
 }
 
 .directory-footer {
