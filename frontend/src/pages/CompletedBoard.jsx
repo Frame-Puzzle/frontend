@@ -32,6 +32,7 @@ const CompletedBoard = ({ boardID }) => {
   let [thumbnailURL, setThumbnailURL] = useState('');
   // 휴지통 아이콘 클릭 시 모달창 띄우는 스위치
   let [deleteModal, setDeleteModal] = useState(false);
+  let [voteStatus, setVoteStatus] = useState(true);
 
   // 넘겨받은 boardID를 이용해서 화면에 보여줄 정보를 State로 저장 (접속한 유저 정보도 포함)
   const setInfo = async (boardID) => {
@@ -57,6 +58,8 @@ const CompletedBoard = ({ boardID }) => {
       setThumbnailer(thumbnailer);
       const boardClearType = response.data.data.boardClearType;
       setBoardClearType(boardClearType);
+      const voteStatus = response.data.data.voteStatus;
+      setVoteStatus(voteStatus);
       const nickname = userResponse.data.data.nickname;
       setUserNickname(nickname);
 
@@ -112,13 +115,14 @@ const CompletedBoard = ({ boardID }) => {
           title={`${directoryName} #${boardNum}`}
           category={category}
           icon={
+            !voteStatus ?
             <img
               src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/trash.png"
               alt="trashIcon"
               className="header-icon"
               style={{ width: "40%", marginLeft: "7vw" }}
               onClick={(e) => { e.stopPropagation(); setDeleteModal(true); }}
-            />
+            /> : null
           }
         />
       </div>
@@ -149,21 +153,21 @@ const CompletedBoard = ({ boardID }) => {
                 e.stopPropagation();
                 setThumbnailModal(true);
               }}>
-                <span>썸네일</span>
+                <span style={{whiteSpace: 'nowrap'}}>썸네일</span>
                 <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/thumbnail-color.gif" />
               </div> : null}
             <div className="completed-board-body-bottom-icon-container" onClick={(e) => {
               e.stopPropagation();
               navigate(`/photo-frame/${boardID}`);
             }}>
-              <span>네컷사진</span>
+              <span style={{whiteSpace: 'nowrap'}}>네컷사진</span>
               <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/four-cut-color.gif" />
             </div>
             <div className="completed-board-body-bottom-icon-container" onClick={(e) => {
               e.stopPropagation();
               navigate(`/album/${boardID}`);
             }}>
-              <span>앨범</span>
+              <span style={{whiteSpace: 'nowrap'}}>앨범</span>
               <img src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/album-color.gif" />
             </div>
           </div>
