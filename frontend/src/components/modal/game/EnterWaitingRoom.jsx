@@ -16,7 +16,6 @@ const EnterWaitingRoom = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
-
   useEffect(() => {
     const fetchGetGameImage = async () => {
       const response = await boardApi.get(`/${waitingRoom.boardId}/games`);
@@ -24,9 +23,11 @@ const EnterWaitingRoom = () => {
 
       dispatch(setGameImgUrl(data.imgUrl));
       dispatch(setdirectoryName(data.directoryName));
+      console.log("gameData", data);
     };
 
     fetchGetGameImage();
+    console.log(waitingRoom.level);
   }, []);
 
   return (
@@ -64,7 +65,7 @@ const EnterWaitingRoom = () => {
                   : null}
               </div>
             </div>
-            <div className="game-info-detail">난이도:</div>
+            <div className="game-info-detail">난이도:{waitingRoom.level}</div>
           </div>
           <div className="enter-waiting-room-note">
             <span className="enter-note-title">유의 사항</span>

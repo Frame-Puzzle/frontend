@@ -14,6 +14,7 @@ import MainHeader from "../components/common/MainHeader";
 import PuzzleCanvas from "../components/puzzleBoard/PuzzleCanvas";
 import { setBoardId } from "../stores/waitingRoomSlice";
 import MainNav from "../components/common/MainNav";
+import { setGameLevel } from "../stores/waitingRoomSlice";
 
 const UncompletedBoard = ({ boardID }) => {
   // 모달 창
@@ -37,6 +38,7 @@ const UncompletedBoard = ({ boardID }) => {
   useEffect(() => {
     const fetchPuzzleData = async () => {
       const response = await boardApi.get(`/${boardID}`);
+
       const data = response.data.data;
 
       // 퍼즐판 정보 세팅
@@ -59,7 +61,10 @@ const UncompletedBoard = ({ boardID }) => {
     const fetchCreateGameRoom = async () => {
       const response = await boardApi.get(`/${boardID}/rooms`);
       const data = response.data.data;
+
+      console.log(data);
       setCreateRoom(data.exist);
+      dispatch(setGameLevel(data.size));
     };
 
     fetchPuzzleData();

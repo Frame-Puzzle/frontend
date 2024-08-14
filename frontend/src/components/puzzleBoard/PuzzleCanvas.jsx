@@ -28,12 +28,6 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
     const canvas = canvasRef.current;
     paper.setup(canvas);
 
-    // const dpr = window.devicePixelRatio || 1 *1.15;
-    // canvas.width = canvas.clientWidth * dpr;
-    // canvas.height = canvas.clientHeight * dpr;
-    // paper.setup(canvas);
-    // paper.view.zoom = 1 / dpr * 1.15;
-
     if (pieceData.length === 0) return;
 
     // 퍼즐 크기 지정
@@ -78,6 +72,7 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
             if (mission) dispatch(setMission(mission));
             else dispatch(setMission(""));
             dispatch(setPieceId(piece.data.id));
+
           } catch (error) {
             console.error("Error fetching piece:", error);
           }
