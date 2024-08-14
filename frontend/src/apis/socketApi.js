@@ -101,7 +101,34 @@ const disconnectSocket = () => {
     });
   }
 }
+const exitGameRoom = (destination, message = {}) => {
+  if (stompClient && stompClient.connected) {
+    try {
+      stompClient.send(destination, {}, JSON.stringify(message));
+      console.log(`Message sent to ${destination}:`, message);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  } else {
+    console.error('STOMP client is not connected. Cannot send message.');
+  }
+}
 
-const socketApi = { disconnectSocket, sendMessage, connectSocket }
+const exitRobyRoom = (destination, message = {}) => {
+  if (stompClient && stompClient.connected) {
+    try {
+      stompClient.send(destination, {}, JSON.stringify(message));
+      console.log(`Message sent to ${destination}:`, message);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  } else {
+    console.error('STOMP client is not connected. Cannot send message.');
+  }
+}
+
+
+
+const socketApi = { disconnectSocket, sendMessage, connectSocket, exitGameRoom, exitRobyRoom }
 
 export default socketApi;

@@ -9,7 +9,7 @@
 /* ******************************************* */
 
 .member-header-left {
-  width: 22%;
+  width: 20%;
   height: 100%;
   padding: 1.2vh 0vw;
   border-right: lightgray 1px solid;
@@ -21,21 +21,22 @@
 }
 
 .member-header-left-logo {
-  width: 30%;
-  margin: 1vh 1vw;
+  width: 26%;
+  margin: 0.6vh 1vw;
 }
 
 .member-header-right-logo {
-  width: 40%;
-  margin: 0.46vh 1vw;
+  width: 36%;
+  margin: 0.06vh 1vw;
+  padding-left: 1.5vw;
 }
 
 .member-header-comment {
-  padding-bottom: 1vh;
+  font-size: 1.9vh;
 }
 
 .member-header-middle {
-  padding: 1.5vh 3vw 0.5vh 3vw;
+  padding: 1.2vh 0vw 0.5vh 0vw;
   width: 60%;
   box-sizing: border-box;
   display: flex;
@@ -44,7 +45,7 @@
 
 .member-header-right {
   padding: 1.2vh 0vw;
-  width: 22%;
+  width: 20%;
   height: 100%;
   border-left: lightgray 1px solid;
   box-sizing: border-box;

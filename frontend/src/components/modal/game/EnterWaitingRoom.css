@@ -22,10 +22,17 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  font-size: 1.7vh;
 }
 
 .game-info {
   width: 80%;
+  margin-top: 2vh;
+}
+
+.game-title{
+  font-family: "pretendard-bold";
+  margin-bottom: 0.5vh;
 }
 
 .game-info-detail {
@@ -59,8 +66,8 @@
   background-color: #c3c7f4;
   border-radius: 10px;
   text-align: center;
-
+  
   padding: 10px 15px;
   width: 70%;
-  margin: auto;
+  margin: 2.5vh auto 0.5vh auto;
 }

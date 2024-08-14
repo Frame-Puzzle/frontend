@@ -46,10 +46,11 @@
 /* ******************************************* */
 
 .header-icon {
-  width: 15%;
+  width: 20%;
   height: 100%;
 }
 
 .header-icon span{
   color: #888888;
+  font-size: 1.8vh;
 }
