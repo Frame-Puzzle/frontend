@@ -1,0 +1,34 @@
+.game-room-member-header {
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 0.2px solid #d9d9d9;
+  border-bottom: 0.2px solid #d9d9d9;
+}
+
+.game-room-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.2vh 1vw;
+  height: 80%;
+}
+
+.game-room-member-profile {
+  width: 17%;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin: 1vh 0;
+  object-fit: cover;
+  /* transition: border-color 0.3s ease, border-width 0.3s ease; */
+}
+
+.game-room-member-nickname {
+  font-weight: bold;
+  font-size: 5%;
+  text-align: center;
+}
+
+.speaking .game-room-member-profile {
+  border-color: #c3c7f4;
+  border-width: 0.5vw;
+}
