@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ChatBoard from "../components/common/ChatBoard";
 import GameModalFrame from "./modalFrame/GameModalFrame";
-import { cropImageToSquare } from "../utils/cropImage";
 
 const GameRoom = () => {
   const { roomID } = useParams();
@@ -24,8 +23,6 @@ const GameRoom = () => {
   const [timer, setTimer] = useState(-1); // 화면에 표시할 timer 상태
   const [showWindow, setShowWindow] = useState(0);
   const [winner, setWinner] = useState({});
-
-  const [croppedImageUrl, setCropImageUrl] = useState(null);
 
   const timerRef = useRef(timer); // 최신 timer 값을 추적하기 위한 ref
 
@@ -84,21 +81,6 @@ const GameRoom = () => {
       nav(`/boards/${roomID}`);
     }, 5000); 
   }, [winner, nav, roomID]);
-
-  useEffect(() => {
-
-    waitingRoom.gameImgUrl
-
-    cropImageToSquare(waitingRoom.gameImgUrl, (croppedImageUrl, err) => {
-      if (err) {
-        console.error("크롭 이미지 생성 실패", err);
-        return;
-      }
-      console.log("생성 성공");
-      setCropImageUrl(croppedImageUrl);
-    });
-    
-  }, [waitingRoom]);
 
   const joinRoom = () => {
     const data = {
