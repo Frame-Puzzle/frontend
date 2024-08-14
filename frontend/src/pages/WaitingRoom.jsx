@@ -8,7 +8,7 @@ import MainNav from "../components/common/MainNav";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./WaitingRoom.css";
-import { setGameInfo } from "../stores/waitingRoomSlice";
+import { setGameUser, setGameInfo } from "../stores/waitingRoomSlice";
 import { cropImageToSquare } from "../utils/cropImage";
 import LoadingModal from "./LoadingModal";
 
@@ -51,6 +51,7 @@ const WaitingRoom = () => {
       (gameInfo) => dispatch(setGameInfo(gameInfo)), // 게임 정보 받기
       null, // 게임 방 timer
       null, // 게임 종료
+      null, // 게임 참여 유저 
       roomID // 방 번호
     );
 
@@ -75,8 +76,6 @@ const WaitingRoom = () => {
       setLoading(false);
     }
   }, [isConnected, roomID]);
-  
-
 
   const joinRoom = () => {
     const data = {
@@ -108,6 +107,8 @@ const WaitingRoom = () => {
         robyData.maxPeople / 2 <= robyData.robyUserList.length &&
           robyData.king.nickname === user.nickName
       );
+
+      dispatch(setGameUser(robyData.robyUserList));
 
       //불러온 로비데이터의 이미지 크롭
       cropImageToSquare(robyData?.imgUrl, (croppedImageUrl, err) => {

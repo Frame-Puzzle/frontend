@@ -19,12 +19,12 @@ const GameRoom = () => {
   const { roomID } = useParams();
   const user = useSelector((state) => state.user);
   const waitingRoom = useSelector((state) => state.waitingRoom);
-  
+
   const location = useLocation();
   const gameImg = location.state?.cropGameImg;
 
   const nav = useNavigate();
-  const directoryId = useSelector(state => state.createBoard.directoryId);
+  const directoryId = useSelector((state) => state.createBoard.directoryId);
 
   const {
     connectSocket,
@@ -41,6 +41,7 @@ const GameRoom = () => {
   const [timer, setTimer] = useState(-1); // 화면에 표시할 timer 상태
   const [showWindow, setShowWindow] = useState(0);
   const [winner, setWinner] = useState({});
+  const [gameUsers, setGameUsers] = useState([]);
 
   const timerRef = useRef(timer); // 최신 timer 값을 추적하기 위한 ref
 
@@ -224,12 +225,13 @@ const GameRoom = () => {
       null, //게임 대기 방 정보
       null, // 게임 대기 방 timer
       null, // 게임 시작 확인
-      null, // 게임 정보 받기
+      null, // 게임 정보 받아오기
       (timerData) => {
         setTimer(timerData); // 화면에 표시할 timer 업데이트
         timerRef.current = timerData; // ref에도 최신값 저장
       }, // 게임 방 timer
       (endGameData) => setWinner(endGameData), // 게임 완료
+      (userInfo) => setGameUsers(userInfo), // 게임 참여 유저 정보
       roomID // 방 번호
     );
 
@@ -256,8 +258,10 @@ const GameRoom = () => {
 
   useEffect(() => {
     if (isConnected) {
+      joinGame();
       joinRoom();
       setLoading(false);
+      console.log(waitingRoom.gameInfo);
     }
     //소켓 연결 후 게임 시작되게 하기
   }, [isConnected]);
@@ -271,6 +275,11 @@ const GameRoom = () => {
       nav(`/boards/${roomID}`);
     }, 5000);
   }, [winner, nav, roomID]);
+
+
+  const joinGame = () => {
+    sendMessage(`/pub/game/entry/${roomID}`);
+  };
 
   const joinRoom = () => {
     const data = {
@@ -346,10 +355,14 @@ const GameRoom = () => {
         <GameModalFrame winner={winner} />
       ) : null}
       <div className="game-room-header">
-        <MainHeader title="PUZZLE" timer={timer} path={`/directories/${directoryId}`} />
+        <MainHeader
+          title="PUZZLE"
+          timer={timer}
+          path={`/directories/${directoryId}`}
+        />
       </div>
       <div className="game-room-participations">
-        <GameRoomMemberComponent users={users} />
+        <GameRoomMemberComponent rtcUsers={users} gameUsers={gameUsers} />
       </div>
       <div className="game-room-game-board">
         <div className={showWindow === 0 ? "visible" : "hidden"}>
