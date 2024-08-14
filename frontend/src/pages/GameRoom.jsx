@@ -12,7 +12,6 @@ import { detectVoice } from "../components/gameTalk/detectVoice";
 import { OpenVidu } from "openvidu-browser";
 import gameOpenViduApi from "../apis/gameOpenViduApi";
 import GameRoomMemberComponent from "../components/gameTalk/GameRoomMemberComponent";
-import OvAudioComponent from "../components/gameTalk/OvAudioComponent";
 import AudioDeviceSelector from "../components/gameTalk/AudioDeviceSelector";
 
 const GameRoom = () => {
@@ -46,7 +45,7 @@ const GameRoom = () => {
   const [sessionId, setSessionId] = useState(null);
   const [tokenId, setTokenId] = useState(null);
   const [myUserName, setMyUserName] = useState(nickname);
-  const [MyProfileUrl, setMyProfileUrl] = useState(profileImg);
+  const [myProfileUrl, setMyProfileUrl] = useState(profileImg);
   const [session, setSession] = useState(null);
   // 다른 유저들이 방에 들어온 list 확인하기 위함, 들어올 때마다 update
   const [users, setUsers] = useState([]);
@@ -87,7 +86,6 @@ const GameRoom = () => {
       const requestData = { boardId: roomID };
       const response = await gameOpenViduApi.post("", requestData);
       const { sessionId, tokenId } = response.data.data;
-      console.log("Fetched sessionId and tokenId:", sessionId, tokenId);
       setSessionId(sessionId);
       setTokenId(tokenId);
       return { sessionId, tokenId };
@@ -119,7 +117,7 @@ const GameRoom = () => {
 
       mySession.on("streamCreated", (event) => {
         const connectionData = JSON.parse(event.stream.connection.data);
-        const nickname = connectionData.clientData; // 각각 client에 대한 정보
+        const { nickname, profileImg } = connectionData.clientData; // 각각 client에 대한 정보
 
         // subscriber를 이용해서 진행
         // 스트림을 구독하여 streamManager를 얻습니다.
@@ -146,7 +144,9 @@ const GameRoom = () => {
         console.warn(exception);
       });
 
-      await mySession.connect(tokenId, { clientData: myUserName });
+      await mySession.connect(tokenId, {
+        clientData: { nickname: myUserName, profileImg: myProfileUrl },
+      });
 
       const publisherOV = await OV.initPublisherAsync(undefined, {
         audioSource: selectedAudio || undefined, // 유효한 오디오 소스가 없으면 undefined 사용, 디바이스 내 감지된 마이크로 설정 가능
@@ -165,9 +165,9 @@ const GameRoom = () => {
         {
           id: publisherOV.stream.connection.connectionId,
           name: nickname,
+          profileUrl: profileImg,
           isSpeaking: false,
           streamManager: undefined,
-          profileUrl: profileImg,
         },
       ]);
 
@@ -335,14 +335,8 @@ const GameRoom = () => {
       <div className="game-room-header">
         <MainHeader title="PUZZLE" timer={timer} path={0} />
       </div>
-      <div className="game-room-member-header">
+      <div className="game-room-participations">
         <GameRoomMemberComponent users={users} />
-      </div>
-      <div>
-        {" "}
-        {user.streamManager && (
-          <OvAudioComponent streamManager={user.streamManager} />
-        )}
       </div>
       <div className="game-room-game-board">
         <div className={showWindow === 0 ? "visible" : "hidden"}>
@@ -380,14 +374,18 @@ const GameRoom = () => {
       <div className="game-room-footer">
         <div className="game-room-footer-button">
           <img
-            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/headset.png"
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/voice-talk.png"
             alt="show-img"
             onClick={handleJoinClick}
           />
         </div>
         <div className="game-room-footer-button">
           <img
-            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/voice.png"
+            src={
+              isUnMuted
+                ? "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/voice.png"
+                : "https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/voice-off.png"
+            }
             alt="show-img"
             onClick={toggleMute}
           />
