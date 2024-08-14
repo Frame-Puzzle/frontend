@@ -2,7 +2,17 @@ import "./SelectPhoto.css";
 import { useEffect, useState } from "react";
 import boardApi from "./../../apis/boardApi";
 
-const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum, setThumbnailModal, setTnTrigger }) => {
+const SelectPhoto = ({
+  id,
+  setSlotNum,
+  imgUrls,
+  setImgUrls,
+  slotNum,
+  setIsIconVisible,
+  setThumbnailModal,
+  setTnTrigger,
+  isIconVisible,
+}) => {
   const [imgList, setImgList] = useState([]);
   const [selectImg, setSelectImg] = useState(-1);
 
@@ -13,7 +23,7 @@ const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum, setThumbnai
       // Request Body 데이터 가공
       const url = imgList[selectImg].imgUrl;
       const requestData = {
-        thumbnailUrl: url
+        thumbnailUrl: url,
       };
       // 백엔드에 PUT 요청을 보내기
       const response = await boardApi.put(`/${id}/thumbnails`, requestData);
@@ -24,10 +34,10 @@ const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum, setThumbnai
       // CompletedBoard Component에서 감지할 수 있게끔(useEffect를 사용할 수 있게끔) Trigger 발동시키기
       setTnTrigger(1);
     } catch (error) {
-      console.error('Error putting thumbnails', error);
+      console.error("Error putting thumbnails", error);
       throw error;
     }
-  }
+  };
 
   useEffect(() => {
     const fetchAllImages = async () => {
@@ -48,6 +58,10 @@ const SelectPhoto = ({ id, setSlotNum, imgUrls, setImgUrls, slotNum, setThumbnai
   const setImgFrame = () => {
     const newImgUrl = [...imgUrls];
     newImgUrl[slotNum - 1] = imgList[selectImg].imgUrl;
+
+    const newIsIconVisible = [...isIconVisible];
+    newIsIconVisible[slotNum - 1] = false;
+    setIsIconVisible(newIsIconVisible);
     setImgUrls(newImgUrl);
     setSlotNum(0);
   };
