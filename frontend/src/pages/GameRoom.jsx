@@ -293,8 +293,7 @@ const GameRoom = () => {
     exitRobyRoom(`/pub/roby/exit/${roomID}`, data);
   };
 
-    const exitGame = () => {
-
+  const exitGame = () => {
     exitGameRoom(`/pub/exit/puzzle/${roomID}`);
   };
 
