@@ -51,7 +51,7 @@ const MainHeader = ({
           </div>
         ) : null}
         {!page && icon && <div>{icon}</div>}
-        {directoryName && <span>[{directoryName}]</span>}
+        {directoryName && <span style={{whiteSpace: 'nowrap'}}>[{directoryName}]</span>}
         {timer && <span>{timer}</span>}
       </div>
     </div>
