@@ -31,7 +31,7 @@ const Album = () => {
       const data = response.data.data;
 
       // 퍼즐판 정보 세팅
-      setBoardName(data.directoryName + "#" + data.boardNum);
+      setBoardName(data.directoryName + " #" + data.boardNum);
       setCategory(data.category);
       if (data.keyword) {
         setKeywords(data.keyword);
@@ -46,12 +46,10 @@ const Album = () => {
         <MainHeader title={"Album"} />
       </div>
       <div className="album-body">
-        <div className="album-detail">
+        <div className="album-detail flex">
           <div className="album-board-name">{boardName}</div>
-          <div className="album-board-category-container">
-            <span className="album-board-category">{category}</span>
-          </div>
-          <div className="album-board-keywords">
+          <span className="album-board-category">{category}</span>
+          <div className="album-board-keywords-container">
             {keywords.map((keyword, index) => (
               <div key={index} className="album-board-keyword">
                 #{keyword}
