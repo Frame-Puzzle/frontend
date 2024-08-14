@@ -134,7 +134,7 @@ const UncompletedBoard = ({ boardID }) => {
         <div className="game-room-container">
           {/* 대기 방이 생성되어 있지 않은 경우 */}
           {/* 대기 방 생성 조건에 맞지 않을 경우 */}
-          {!createRoom || createRoom ? (
+          {!createRoom && !existGame ? (
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}
