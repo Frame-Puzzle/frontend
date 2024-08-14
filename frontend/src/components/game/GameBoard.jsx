@@ -5,18 +5,27 @@ import { useSelector } from "react-redux";
 import game4X4Config from "../../utils/gameBoard/game4X4Config";
 import game8X8Config from "../../utils/gameBoard/game8X8Config";
 import game6X6Config from "../../utils/gameBoard/game6X6Config";
-import puzzleClickSound from './puzzleClick.wav';
+import puzzleClickSound from "./puzzleClick.wav";
+import { cropImageToSquare } from "../../utils/cropImage";
 
 const GameBoard = ({ id, gameImg, sendEndGame }) => {
   const boardRef = useRef(null);
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const audioRef = useRef(new Audio(puzzleClickSound));
-  
+
+  const [cropData, setCropData] = useState(null);
+
   useEffect(() => {
     init();
   }, []);
 
-  const init = (() => {    
+  useEffect(() => {
+    if (cropData != null) {
+      init();
+    }
+  }, [cropData]);
+
+  const init = () => {
     const boardElement = boardRef.current;
     const gameImgUrl = new Image();
     gameImgUrl.src = gameImg != null ? gameImg : waitingRoom.gameImgUrl;
@@ -26,8 +35,8 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
 
     let config;
 
-    const level = waitingRoom.level;
-    
+    const level = waitingRoom.gameInfo.size;
+
     switch (level) {
       case 4:
         config = game4X4Config;
@@ -59,13 +68,14 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
         fixed: true,
         preventOffstageDrag: true,
       });
-                  
-      const canvasElement = document.getElementById(boardElement.id);
-      canvasElement.style.backgroundColor = '#f0f0f0';
-      
-      // 이미지 높이 맞추기
 
-      gameImgUrl.width >= gameImgUrl.height ? canvas.adjustImagesToPuzzleHeight() : canvas.adjustImagesToPuzzleWidth();
+      const canvasElement = document.getElementById(boardElement.id);
+      canvasElement.style.backgroundColor = "#f0f0f0";
+
+      // 이미지 높이 맞추기
+      gameImg.width >= gameImg.height
+        ? canvas.adjustImagesToPuzzleHeight()
+        : canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
@@ -83,21 +93,20 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
       });
 
       canvas.onConnect((_piece, figure, _target, targetFigure) => {
-        audioRef.current.play();  
+        audioRef.current.play();
 
-        figure.shape.stroke('#C3C7F4');
-        targetFigure.shape.stroke('#C3C7F4');
+        figure.shape.stroke("#C3C7F4");
+        targetFigure.shape.stroke("#C3C7F4");
         canvas.redraw();
 
         setTimeout(() => {
-          figure.shape.stroke('black');
-          targetFigure.shape.stroke('black');
+          figure.shape.stroke("black");
+          targetFigure.shape.stroke("black");
           canvas.redraw();
         }, 200);
-        
       });
     };
-  });
+  };
 
   return <div ref={boardRef} id={id}></div>;
 };

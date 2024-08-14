@@ -64,8 +64,7 @@ const WaitingRoom = () => {
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     if (gameStart) {
- 
-      nav(`/game-room/${roomID}`, {state: {cropGameImg}});
+      nav(`/game-room/${roomID}`, { state: { cropGameImg } });
     }
   }, [gameStart, roomID, nav, cropGameImg]);
 
@@ -167,7 +166,7 @@ const WaitingRoom = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
-       { loading ? <LoadingModal /> : null }
+      {loading ? <LoadingModal /> : null}
       <div className="waiting-room-header">
         <MainHeader
           title={"PUZZLE"}
