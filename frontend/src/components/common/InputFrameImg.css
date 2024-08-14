@@ -1,0 +1,60 @@
+.input-frame-container {
+  position: absolute;
+  width: 306.5px; /* 포토 프레임의 고정 크기 */
+  height: 457px; /* 포토 프레임의 고정 크기 */
+  top: 50%; /* 수직 중앙 */
+  left: 50%; /* 수평 중앙 */
+  margin-top: -228.5px; /* 높이의 절반 (457px / 2) */
+  margin-left: -153.25px; /* 너비의 절반 (306.5px / 2) */
+  background-size: cover;
+}
+
+.frame-slot {
+  position: absolute;
+  overflow: hidden;
+  width: 129px; /* 각 사진 슬롯의 고정 크기 */
+  height: 178px; /* 각 사진 슬롯의 고정 크기 */
+}
+
+.frame-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+/* 숨겨진 이미지를 위한 클래스 */
+.hidden-img {
+  visibility: hidden;
+}
+
+/* 각 슬롯의 위치를 픽셀 단위로 고정 */
+.top-left {
+  top: -7px; /* 포토 프레임의 위쪽 가장자리 */
+  left: 15px; /* 포토 프레임의 왼쪽 가장자리 */
+}
+
+.top-right {
+  top: -7px; /* 포토 프레임의 위쪽 가장자리 */
+  left: 161.5px; /* 첫 번째 슬롯의 너비 + 여백 (306.5px - 129px) */
+}
+
+.bottom-left {
+  top: 170px; /* 첫 번째 줄의 높이 + 여백 (178px + 여백) */
+  left: 15px; /* 포토 프레임의 왼쪽 가장자리 */
+}
+
+.bottom-right {
+  top: 170px; /* 첫 번째 줄의 높이 + 여백 (178px + 여백) */
+  left: 161.5px; /* 첫 번째 슬롯의 너비 + 여백 (306.5px - 129px) */
+}
+
+.click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100; /* 높은 z-index를 설정하여 클릭 가능하게 */
+  background-color: transparent; /* 투명하게 설정 */
+}

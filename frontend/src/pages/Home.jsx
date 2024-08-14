@@ -39,13 +39,13 @@ const Home = () => {
     // Page 단위의 Component의 최상위 요소에는 반드시 width: 100%와 height: 100% 속성이 필요하다.*/
     <div className="w-full h-full flex flex-wrap relative">
       {modal ? <HomeModalFrame setModal={setModal} /> : null}
-      <div className="home-main-content bg-color1">
+      <div className="home-main-content bg-color3">
         <div className="top-title">HOME</div>
-        <div className="user-info">
+        {/* <div className="user-info">
           안녕하세요
           <br />
           {userNickName} 님
-        </div>
+        </div> */}
         <div className="home-swipe-content">
           <MainSwipe />
         </div>

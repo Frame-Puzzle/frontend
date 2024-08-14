@@ -37,8 +37,8 @@ const GameBoard = ({ id, sendEndGame }) => {
       // 퍼즐 세팅
       const canvas = new Canvas(boardElement.id, {
         outline: new outline.Rounded(),
-        width: config.boardWidth,
-        height: config.boardHeight,
+        width: window.innerWidth * 0.95,
+        height: window.innerHeight * 0.65,
         pieceSize: config.pieceSize,
 
         borderFill: 10,
@@ -51,9 +51,13 @@ const GameBoard = ({ id, sendEndGame }) => {
         fixed: true,
         preventOffstageDrag: true,
       });
+      
+      const canvasElement = document.getElementById(boardElement.id);
+      canvasElement.style.backgroundColor = '#f0f0f0';
 
       // 이미지 높이 맞추기
-      canvas.adjustImagesToPuzzleHeight();
+      //canvas.adjustImagesToPuzzleHeight();
+      //canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
@@ -61,7 +65,6 @@ const GameBoard = ({ id, sendEndGame }) => {
       });
 
       canvas.shuffle(0.8);
-
 
       // 이미지 그리기
       canvas.draw();

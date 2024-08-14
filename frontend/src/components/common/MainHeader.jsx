@@ -14,14 +14,15 @@ const MainHeader = ({
   page,
   path = -1, // 기본값을 -1로 설정
   timer,
+  downloadPhotoFrame,
 }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
+
   return (
     <div className="header flex">
       <div className="header-left flex align-items-center">
-        {" "}
         {/* 85% */}
         <div
           className="header-prev flex justify-content-center align-items-center"
@@ -41,6 +42,11 @@ const MainHeader = ({
         ) : null}
         {page === "퍼즐판" && icon ? (
           <div onClick={() => dispatch(setModalBoardId(4))}>{icon}</div>
+        ) : null}
+        {page === "포토프레임" && icon ? (
+          <div onClick={() => downloadPhotoFrame()} style={{ zIndex: 1000 }}>
+            {icon}
+          </div>
         ) : null}
         {!page && icon && <div>{icon}</div>}
         {directoryName && <span>[{directoryName}]</span>}

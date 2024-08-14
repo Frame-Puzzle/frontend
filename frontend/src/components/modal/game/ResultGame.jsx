@@ -20,7 +20,8 @@ const ResultGame = ({ winner }) => {
         <span className="result-game-winner-timer">{time}</span>
         <div className="result-game-winner-nickname">{winner.nickname}</div>
         <div className="result-game-winner-sub">
-          {winner.nickname}만 썸네일을 수정할 수 있습니다.
+          <span><b>{winner.nickname}</b>님만</span>
+          <span>썸네일을 수정할 수 있습니다.</span>
         </div>
       </div>
     </div>

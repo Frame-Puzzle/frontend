@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { setModalId } from "../../../stores/boardSlice";
 
-const DeleteBoard = () => {
+const DeleteBoard = ({ setDeleteModal }) => {
   const dispatch = useDispatch();
   const { boardID } = useParams();
   const createBoard = useSelector((state) => state.createBoard);
@@ -19,7 +19,11 @@ const DeleteBoard = () => {
 
     const response = await boardApi.put(`/${boardID}/vote`, data);
     dispatch(setVote(true));
-    dispatch(setModalId(0));
+    if (setDeleteModal) {
+      setDeleteModal(false);
+    } else {
+      dispatch(setModalId(0));
+    }
     nav(`/directories/${createBoard.directoryId}`);
   };
   return (
@@ -36,7 +40,13 @@ const DeleteBoard = () => {
       <div className="delete-board-modal-footer">
         <div
           className="delete-board-button"
-          onClick={() => dispatch(setModalId(0))}
+          onClick={() => {
+            if (setDeleteModal) {
+              setDeleteModal(false);
+            } else {
+              dispatch(setModalId(0))
+            }
+          }}
         >
           취소
         </div>

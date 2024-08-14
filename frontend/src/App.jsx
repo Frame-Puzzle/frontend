@@ -20,6 +20,7 @@ import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 import WaitingRoom from "./pages/WaitingRoom";
 import GameRoom from "./pages/GameRoom";
 import LoadingModal from "./pages/LoadingModal";
+import PhotoFrame from "./pages/PhotoFrame";
 
 function App() {
   const setScreenSize = () => {
@@ -86,6 +87,8 @@ function App() {
         {/* 로딩 모달 테스트 */}
         <Route path="/loading-test" element={<LoadingModal />}></Route>
 
+        {/* 네컷 사진 테스트 화면 */}
+        <Route path="/photo-frame/:boardID" element={<PhotoFrame />}></Route>
       </Routes>
     </div>
   );
