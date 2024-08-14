@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import "./WaitingRoom.css";
 import { setGameInfo } from "../stores/waitingRoomSlice";
 import { cropImageToSquare } from "../utils/cropImage";
+import LoadingModal from "./LoadingModal";
 
 const WaitingRoom = () => {
   const [inputMessage, setInputMessage] = useState("");
@@ -25,6 +26,7 @@ const WaitingRoom = () => {
 
   const [cropGameImg, setCropImage] = useState(null);
   const [isCropped, setCropFlag] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
   const nav = useNavigate();
@@ -37,7 +39,7 @@ const WaitingRoom = () => {
 
   // socket 연결
   useEffect(() => {
-    console.log(roomID);
+    setLoading(true);
     connectSocket(
       () => setIsConnected(true), // 연결 확인
       (
@@ -62,8 +64,7 @@ const WaitingRoom = () => {
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     if (gameStart) {
-      console.log("게임 시작");
-      console.log(cropGameImg);
+ 
       nav(`/game-room/${roomID}`, {state: {cropGameImg}});
     }
   }, [gameStart, roomID, nav, cropGameImg]);
@@ -72,13 +73,11 @@ const WaitingRoom = () => {
   useEffect(() => {
     if (isConnected) {
       joinRoom();
+      setLoading(false);
     }
   }, [isConnected, roomID]);
   
-  useEffect(() => {
-    if(isCropped)
-      console.log("크롭 성공");
-  }, [isCropped]);
+
 
   const joinRoom = () => {
     const data = {
@@ -111,9 +110,6 @@ const WaitingRoom = () => {
           robyData.king.nickname === user.nickName
       );
 
-<<<<<<< HEAD
-      console.log(robyData);
-=======
       //불러온 로비데이터의 이미지 크롭
       cropImageToSquare(robyData?.imgUrl, (croppedImageUrl, err) => {
         if (err) {
@@ -125,7 +121,6 @@ const WaitingRoom = () => {
         setCropImage(croppedImageUrl);
         setCropFlag(true);
       });
->>>>>>> 1cd5ef94a2f785561a16ca51b38a21f122ad439e
     }
   }, [robyData, user.nickName]);
 
@@ -172,6 +167,7 @@ const WaitingRoom = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
+       { loading ? <LoadingModal /> : null }
       <div className="waiting-room-header">
         <MainHeader
           title={"PUZZLE"}

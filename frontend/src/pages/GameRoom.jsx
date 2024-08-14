@@ -14,6 +14,7 @@ import gameOpenViduApi from "../apis/gameOpenViduApi";
 import GameRoomMemberComponent from "../components/gameTalk/GameRoomMemberComponent";
 import OvAudioComponent from "../components/gameTalk/OvAudioComponent";
 import AudioDeviceSelector from "../components/gameTalk/AudioDeviceSelector";
+import LoadingModal from "./LoadingModal";
 
 const GameRoom = () => {
   const { roomID } = useParams();
@@ -33,6 +34,7 @@ const GameRoom = () => {
     exitRobyRoom,
   } = socketApi;
 
+  const [loading, setLoading] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
@@ -214,6 +216,7 @@ const GameRoom = () => {
 
   //게임 소켓 연결
   useEffect(() => {
+    setLoading(true);
     connectSocket(
       () => setIsConnected(true), // 연결 확인
       (
@@ -255,6 +258,7 @@ const GameRoom = () => {
   useEffect(() => {
     if (isConnected) {
       joinRoom();
+      setLoading(false);
     }
     //소켓 연결 후 게임 시작되게 하기
   }, [isConnected]);
@@ -333,7 +337,8 @@ const GameRoom = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full relative">
+      {loading ? <LoadingModal /> : null}
       {Object.keys(winner).length !== 0 ? (
         <GameModalFrame winner={winner} />
       ) : null}

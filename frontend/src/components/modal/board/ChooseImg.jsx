@@ -89,6 +89,7 @@ const ChooseImg = () => {
       dispatch(setPieceId(0));
       dispatch(setImgLoading(false));
     } catch (error) {
+      dispatch(setImgLoading(false));
       console.error("이미지 저장에 실패했습니다:", error);
     }
   };
