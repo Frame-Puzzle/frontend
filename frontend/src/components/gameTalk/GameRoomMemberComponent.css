@@ -1,35 +1,36 @@
 .game-room-member-header {
-  justify-content: flex-start;
-  align-items: center;
-  border-top: 0.2px solid #d9d9d9;
-  border-bottom: 0.2px solid #d9d9d9;
-  height: 10%;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 0.8vh 2vw 0vh 2vw;
 }
 
-.game-room-member {
+.game-room-member-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1.2vh 1vw;
-  height: 80%;
+  justify-content: center;
+  margin: 1.2vh 1vw 0 1vw;
 }
 
-.game-room-member-profile {
-  width: 17%;
+.game-room-member-profile-circle {
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  border: 1px solid black;
-  margin: 1vh 0;
-  object-fit: cover;
+  overflow: hidden;
+  border: 1px solid #d9d9d9;
 }
 
 .game-room-member-nickname {
-  font-weight: bold;
-  font-size: 5%;
-  text-align: center;
+  padding: 0.5vh 1vw 1vh 1vw;
+  font-size: 1.6vb;
 }
 
-.speaking .game-room-member-profile {
-  /* 말할때 나오는 테두리 */
+.game-room-member-profile-circle.speaking {
+  /* 말할 때 나오는 테두리 */
   border-color: #c3c7f4;
   border-width: 0.5vw;
+  border-style: solid;
 }

@@ -75,6 +75,8 @@ const WaitingRoom = () => {
       setLoading(false);
     }
   }, [isConnected, roomID]);
+  
+
 
   const joinRoom = () => {
     const data = {

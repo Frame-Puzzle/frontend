@@ -8,7 +8,7 @@ import game6X6Config from "../../utils/gameBoard/game6X6Config";
 import puzzleClickSound from "./puzzleClick.wav";
 import { cropImageToSquare } from "../../utils/cropImage";
 
-const GameBoard = ({ id, sendEndGame }) => {
+const GameBoard = ({ id, gameImg, sendEndGame }) => {
   const boardRef = useRef(null);
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const audioRef = useRef(new Audio(puzzleClickSound));
@@ -16,14 +16,7 @@ const GameBoard = ({ id, sendEndGame }) => {
   const [cropData, setCropData] = useState(null);
 
   useEffect(() => {
-    cropImageToSquare(waitingRoom.gameImgUrl, (croppedImageUrl, err) => {
-      if (err) {
-        console.error("크롭 이미지 생성 실패", err);
-        setCropData(waitingRoom.gameImgUrl);
-        return;
-      }
-      setCropData(croppedImageUrl);
-    });
+    init();
   }, []);
 
   useEffect(() => {
@@ -34,8 +27,11 @@ const GameBoard = ({ id, sendEndGame }) => {
 
   const init = () => {
     const boardElement = boardRef.current;
-    const gameImg = new Image();
-    gameImg.src = cropData != null ? cropData : waitingRoom.gameImgUrl;
+    const gameImgUrl = new Image();
+    gameImgUrl.src = gameImg != null ? gameImg : waitingRoom.gameImgUrl;
+
+    console.log(gameImg);
+    console.log(waitingRoom.gameImgUrl);
 
     let config;
 
@@ -55,18 +51,18 @@ const GameBoard = ({ id, sendEndGame }) => {
         return;
     }
 
-    gameImg.onload = () => {
+    gameImgUrl.onload = () => {
       // 퍼즐 세팅
       const canvas = new Canvas(boardElement.id, {
         outline: new outline.Rounded(),
         width: window.innerWidth * 0.95,
         height: window.innerHeight * 0.65,
-        pieceSize: ((window.innerWidth * 0.8) / level) * 0.5,
+        pieceSize: ((window.innerWidth * 0.5) / level),
         borderFill: 10,
-        strokeWidth: 0.8,
+        strokeWidth: 1.6,
         lineSoftness: 0.18,
         painter: new painters.Konva(),
-        image: gameImg,
+        image: gameImgUrl,
 
         maxPiecesCount: { x: config.row, y: config.col },
         fixed: true,
