@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./WaitingRoom.css";
 import { setGameInfo } from "../stores/waitingRoomSlice";
+import { cropImageToSquare } from "../utils/cropImage";
 import LoadingModal from "./LoadingModal";
 
 const WaitingRoom = () => {
@@ -22,6 +23,9 @@ const WaitingRoom = () => {
   const [robyUserList, setRobyUserList] = useState([]);
   const [activateButton, setActivateButton] = useState(false);
   const [showGameImg, setShowGameImg] = useState(false);
+
+  const [cropGameImg, setCropImage] = useState(null);
+  const [isCropped, setCropFlag] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
@@ -35,7 +39,6 @@ const WaitingRoom = () => {
 
   // socket 연결
   useEffect(() => {
-    console.log(roomID);
     setLoading(true);
     connectSocket(
       () => setIsConnected(true), // 연결 확인
@@ -61,9 +64,10 @@ const WaitingRoom = () => {
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     if (gameStart) {
-      nav(`/game-room/${roomID}`);
+ 
+      nav(`/game-room/${roomID}`, {state: {cropGameImg}});
     }
-  }, [gameStart, roomID, nav]);
+  }, [gameStart, roomID, nav, cropGameImg]);
 
   // 소켓 연결 후 방 입장
   useEffect(() => {
@@ -72,6 +76,8 @@ const WaitingRoom = () => {
       setLoading(false);
     }
   }, [isConnected, roomID]);
+  
+
 
   const joinRoom = () => {
     const data = {
@@ -104,7 +110,17 @@ const WaitingRoom = () => {
           robyData.king.nickname === user.nickName
       );
 
-      console.log(robyData);
+      //불러온 로비데이터의 이미지 크롭
+      cropImageToSquare(robyData?.imgUrl, (croppedImageUrl, err) => {
+        if (err) {
+          console.error("크롭 이미지 생성 실패", err);
+          setCropImage(robyData?.imgUrl);
+          return;
+        }
+        console.log("크롭 이미지 생성 성공");
+        setCropImage(croppedImageUrl);
+        setCropFlag(true);
+      });
     }
   }, [robyData, user.nickName]);
 
@@ -151,7 +167,7 @@ const WaitingRoom = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
-      { loading ? <LoadingModal /> : null }
+       { loading ? <LoadingModal /> : null }
       <div className="waiting-room-header">
         <MainHeader
           title={"PUZZLE"}
@@ -169,7 +185,7 @@ const WaitingRoom = () => {
         {showGameImg ? (
           <img
             className="show-waiting-room-game-img"
-            src={robyData?.imgUrl || ""}
+            src={cropGameImg || ""}
             alt="show-img"
           />
         ) : (

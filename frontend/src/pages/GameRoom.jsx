@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./GameRoom.css";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import GameBoard from "../components/game/GameBoard";
 import socketApi from "../apis/socketApi";
 import MainHeader from "../components/common/MainHeader";
@@ -20,6 +20,10 @@ const GameRoom = () => {
   const { roomID } = useParams();
   const user = useSelector((state) => state.user);
   const waitingRoom = useSelector((state) => state.waitingRoom);
+  
+  const location = useLocation();
+  const gameImg = location.state?.cropGameImg;
+
   const nav = useNavigate();
 
   const {
@@ -352,7 +356,7 @@ const GameRoom = () => {
       </div>
       <div className="game-room-game-board">
         <div className={showWindow === 0 ? "visible" : "hidden"}>
-          <GameBoard id={roomID} sendEndGame={sendEndGame} />
+          <GameBoard id={roomID} gameImg={gameImg} sendEndGame={sendEndGame} />
         </div>
 
         {showWindow === 1 ? (
@@ -377,7 +381,7 @@ const GameRoom = () => {
         {showWindow === 2 ? (
           <img
             className="show-waiting-room-game-img"
-            src={waitingRoom.gameImgUrl || ""}
+            src={gameImg}
             alt="show-img"
           />
         ) : null}
