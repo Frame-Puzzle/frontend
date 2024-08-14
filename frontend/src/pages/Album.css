@@ -1,0 +1,54 @@
+.album-header {
+  width: 100%;
+  height: 10%;
+  box-shadow: 0 2px 4px rgba(238, 238, 238, 0.5);
+}
+
+.album-body {
+  width: 100%;
+  height: 90%;
+}
+
+.album-detail {
+  width: 100%;
+  height: 20%;
+}
+
+.album-board-name {
+  font-size: 23px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2vh;
+}
+
+.album-board-category-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.album-board-category {
+  margin-top: 1vh;
+  background-color: #f1bdec;
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+
+.album-board-keywords {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.album-board-keyword {
+  color: rgb(156, 155, 155);
+  font-family: "Pretendard-Medium";
+}
+
+.album-image-swipe{
+  width: 100%;
+  height: 80%;
+}
+
