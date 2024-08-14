@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./WaitingRoom.css";
 import { setGameInfo } from "../stores/waitingRoomSlice";
+import LoadingModal from "./LoadingModal";
 
 const WaitingRoom = () => {
   const [inputMessage, setInputMessage] = useState("");
@@ -21,6 +22,7 @@ const WaitingRoom = () => {
   const [robyUserList, setRobyUserList] = useState([]);
   const [activateButton, setActivateButton] = useState(false);
   const [showGameImg, setShowGameImg] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { connectSocket, sendMessage, disconnectSocket } = socketApi;
   const nav = useNavigate();
@@ -34,6 +36,7 @@ const WaitingRoom = () => {
   // socket 연결
   useEffect(() => {
     console.log(roomID);
+    setLoading(true);
     connectSocket(
       () => setIsConnected(true), // 연결 확인
       (
@@ -66,6 +69,7 @@ const WaitingRoom = () => {
   useEffect(() => {
     if (isConnected) {
       joinRoom();
+      setLoading(false);
     }
   }, [isConnected, roomID]);
 
@@ -144,6 +148,7 @@ const WaitingRoom = () => {
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
+      { loading ? <LoadingModal /> : null }
       <div className="waiting-room-header">
         <MainHeader
           title={"PUZZLE"}

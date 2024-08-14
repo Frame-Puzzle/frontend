@@ -1,11 +1,12 @@
 import "./PhotoFrame.css";
 import MainHeader from "../components/common/MainHeader";
 import FrameSwipe from "../components/frame/FrameSwipe";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InputFrameImg from "../components/common/InputFrameImg";
 import PhotoFrameModalFrame from "./modalFrame/PhotoFrameModalFrame";
 import { useParams } from "react-router-dom";
 import html2canvas from "html2canvas-pro";
+import LoadingModal from "./LoadingModal";
 
 const PhotoFrame = () => {
   const [selectFrame, setSelectFrame] = useState(0);
@@ -19,6 +20,7 @@ const PhotoFrame = () => {
   ]);
 
   const [slotNum, setSlotNum] = useState(0);
+  const [loading, setLoading] = useState(false);
   const inputFrameImgRef = useRef(null);
 
   const downloadPhotoFrame = () => {
@@ -42,6 +44,7 @@ const PhotoFrame = () => {
           link.href = dataUrl;
           link.download = "photo-frame.png";
           link.click();
+          setLoading(false);
         })
         .catch((error) => {
           console.error("oops, something went wrong!", error);
@@ -49,8 +52,15 @@ const PhotoFrame = () => {
     }
   };
 
+  useEffect(() => {
+    if (loading) {
+      downloadPhotoFrame();
+    }
+  }, [loading])
+
   return (
     <div className="w-full h-full flex flex-wrap relative">
+      {loading ? <LoadingModal /> : null}
       {slotNum !== 0 ? (
         <PhotoFrameModalFrame
           id={boardID}
@@ -72,7 +82,7 @@ const PhotoFrame = () => {
             />
           }
           page="포토프레임"
-          downloadPhotoFrame={downloadPhotoFrame}
+          setLoading={setLoading}
         />
       </div>
 

@@ -14,7 +14,7 @@ const MainHeader = ({
   page,
   path = -1, // 기본값을 -1로 설정
   timer,
-  downloadPhotoFrame,
+  setLoading,
 }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -44,7 +44,9 @@ const MainHeader = ({
           <div onClick={() => dispatch(setModalBoardId(4))}>{icon}</div>
         ) : null}
         {page === "포토프레임" && icon ? (
-          <div onClick={() => downloadPhotoFrame()} style={{ zIndex: 1000 }}>
+          <div onClick={() => {
+            setLoading(true);
+          }} style={{ zIndex: 1000 }}>
             {icon}
           </div>
         ) : null}

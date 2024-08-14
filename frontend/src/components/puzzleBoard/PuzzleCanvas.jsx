@@ -77,13 +77,12 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
             const mission = response.data.data.missionName;
             if (mission) dispatch(setMission(mission));
             else dispatch(setMission(""));
+            dispatch(setPieceId(piece.data.id));
           } catch (error) {
             console.error("Error fetching piece:", error);
           }
         };
-
         fetchPiece();
-        dispatch(setPieceId(piece.data.id));
       };
     });
 
