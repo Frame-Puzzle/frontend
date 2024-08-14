@@ -37,6 +37,7 @@ const UncompletedBoard = ({ boardID }) => {
   useEffect(() => {
     const fetchPuzzleData = async () => {
       const response = await boardApi.get(`/${boardID}`);
+
       const data = response.data.data;
 
       // 퍼즐판 정보 세팅
@@ -59,6 +60,7 @@ const UncompletedBoard = ({ boardID }) => {
     const fetchCreateGameRoom = async () => {
       const response = await boardApi.get(`/${boardID}/rooms`);
       const data = response.data.data;
+
       setCreateRoom(data.exist);
     };
 
@@ -132,7 +134,7 @@ const UncompletedBoard = ({ boardID }) => {
         <div className="game-room-container">
           {/* 대기 방이 생성되어 있지 않은 경우 */}
           {/* 대기 방 생성 조건에 맞지 않을 경우 */}
-          {!createRoom ? (
+          {!createRoom || createRoom ? (
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}

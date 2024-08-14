@@ -22,6 +22,7 @@ import GameRoom from "./pages/GameRoom";
 import LoadingModal from "./pages/LoadingModal";
 import PhotoFrame from "./pages/PhotoFrame";
 
+
 function App() {
   const setScreenSize = () => {
     let vw = window.innerWidth * 0.01;
@@ -89,6 +90,9 @@ function App() {
 
         {/* 네컷 사진 테스트 화면 */}
         <Route path="/photo-frame/:boardID" element={<PhotoFrame />}></Route>
+
+        {/* 모든 이미지 보기 */}
+        <Route path="/album/:boardID" element={<PhotoFrame />}></Route>
       </Routes>
     </div>
   );
