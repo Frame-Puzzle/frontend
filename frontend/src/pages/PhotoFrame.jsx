@@ -21,6 +21,7 @@ const PhotoFrame = () => {
 
   const [slotNum, setSlotNum] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isIconVisible, setIsIconVisible] = useState([true, true, true, true]);
   const inputFrameImgRef = useRef(null);
 
   const downloadPhotoFrame = () => {
@@ -56,7 +57,7 @@ const PhotoFrame = () => {
     if (loading) {
       downloadPhotoFrame();
     }
-  }, [loading])
+  }, [loading]);
 
   return (
     <div className="w-full h-full flex flex-wrap relative">
@@ -68,6 +69,8 @@ const PhotoFrame = () => {
           setSlotNum={setSlotNum}
           setImgUrls={setImgUrls}
           imgUrls={imgUrls}
+          setIsIconVisible={setIsIconVisible}
+          isIconVisible={isIconVisible}
         />
       ) : null}
       <div className="photo-frame-header">
@@ -95,8 +98,7 @@ const PhotoFrame = () => {
           />
           <InputFrameImg
             imageUrls={imgUrls}
-            setImgUrls={setImgUrls}
-            slotNum={slotNum}
+            isIconVisible={isIconVisible}
             setSlotNum={setSlotNum}
           />
         </div>

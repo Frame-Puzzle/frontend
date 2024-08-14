@@ -10,6 +10,8 @@ const PhotoFrameModalFrame = ({
   imgUrls,
   setThumbnailModal,
   setTnTrigger,
+  setIsIconVisible,
+  isIconVisible,
 }) => {
   useEffect(() => {
     if (setTnTrigger) {
@@ -26,7 +28,8 @@ const PhotoFrameModalFrame = ({
           setImgUrls={setImgUrls}
           slotNum={slotNum}
           imgUrls={imgUrls}
-          setThumbnailModal={setThumbnailModal}
+          setIsIconVisible={setIsIconVisible}
+          isIconVisible={isIconVisible}
         />
       ) : (
         <SelectPhoto
