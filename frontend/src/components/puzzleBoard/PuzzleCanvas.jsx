@@ -64,7 +64,6 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
           try {
             const response = await pieceApi.get(`${pieceId + index}`);
 
-            console.log(response);
             const imgUrl = response.data.data.imgUrl;
             dispatch(setImgUrl(imgUrl));
 

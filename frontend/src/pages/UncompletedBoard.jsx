@@ -15,6 +15,7 @@ import PuzzleCanvas from "../components/puzzleBoard/PuzzleCanvas";
 import { setBoardId } from "../stores/waitingRoomSlice";
 import MainNav from "../components/common/MainNav";
 import { setGameLevel } from "../stores/waitingRoomSlice";
+import CreateWaitingRoom from "../components/modal/game/CreateWaitingRoom";
 
 const UncompletedBoard = ({ boardID }) => {
   // 모달 창
@@ -98,6 +99,25 @@ const UncompletedBoard = ({ boardID }) => {
     }
   }, [piece.pieceId]);
 
+  const checkWaitingRoom = async () => {
+    const fetchcheckGameRoom = async () => {
+      const response = await boardApi.get(`/${boardID}/rooms`);
+      const data = response.data.data;
+
+      setCreateRoom(data.exist);
+      dispatch(setGameLevel(data.size));
+
+      dispatch(setBoardId(boardID));
+      if (data.exist) {
+        dispatch(setModalId(3));
+      } else {
+        dispatch(setModalId(2));
+      }
+    };
+
+    fetchcheckGameRoom();
+  };
+
   return (
     <div className="w-full h-full flex flex-wrap relative">
       {imgLoading ? <LoadingModal /> : null}
@@ -141,10 +161,7 @@ const UncompletedBoard = ({ boardID }) => {
             <button
               className="game-room-button"
               disabled={activateGameRoom === 0}
-              onClick={() => {
-                dispatch(setBoardId(boardID));
-                dispatch(setModalId(2));
-              }}
+              onClick={checkWaitingRoom}
             >
               게임 방 만들기
             </button>

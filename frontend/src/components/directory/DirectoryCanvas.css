@@ -1,6 +1,6 @@
 .directory-canvas-container {
   width: 100%;
-  height: 60%;
+  /* height: 60%; */
   position: relative;
   overflow: hidden; 
   display: flex;

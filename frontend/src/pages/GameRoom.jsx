@@ -237,7 +237,7 @@ const GameRoom = () => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "hidden") {
         exitRoom();
-        exitGameRoom(`/pub/exit/puzzle/${roomID}`);
+        exitGame();
         disconnectSocket();
         setIsConnected(false);
       }
@@ -247,7 +247,7 @@ const GameRoom = () => {
 
     return () => {
       exitRoom();
-      exitGameRoom(`/pub/exit/puzzle/${roomID}`);
+      exitGame();
       disconnectSocket();
       setIsConnected(false);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
@@ -291,6 +291,10 @@ const GameRoom = () => {
     };
 
     exitRobyRoom(`/pub/roby/exit/${roomID}`, data);
+  };
+
+  const exitGame = () => {
+    exitGameRoom(`/pub/exit/puzzle/${roomID}`);
   };
 
   const sendEndGame = () => {
