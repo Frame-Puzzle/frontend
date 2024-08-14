@@ -56,7 +56,7 @@ const GameOpenVidu = () => {
       const requestData = { boardId: boardId.current };
       const response = await gameOpenViduApi.post("", requestData);
       const { sessionId, tokenId } = response.data.data;
-      console.log("Fetched sessionId and tokenId:", sessionId, tokenId);
+
       setSessionId(sessionId);
       setTokenId(tokenId);
       return { sessionId, tokenId };
@@ -66,7 +66,7 @@ const GameOpenVidu = () => {
   };
 
   const joinSession = async (sessionId, tokenId) => {
-    console.log("Joining session with:", sessionId, tokenId);
+
     if (!sessionId || !tokenId) {
       console.error("No sessionId or token available");
       return;
@@ -88,7 +88,7 @@ const GameOpenVidu = () => {
 
       mySession.on("streamCreated", (event) => {
         const connectionData = JSON.parse(event.stream.connection.data);
-        console.log("Received connection data:", connectionData); // 디버그를 위한 로그 추가
+
         const nickname = connectionData.clientData; // 각각 client에 대한 정보
 
         // subscriber를 이용해서 진행

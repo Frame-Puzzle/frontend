@@ -23,11 +23,11 @@ const EnterWaitingRoom = () => {
 
       dispatch(setGameImgUrl(data.imgUrl));
       dispatch(setdirectoryName(data.directoryName));
-      console.log("gameData", data);
+
     };
 
     fetchGetGameImage();
-    console.log(waitingRoom.level);
+
   }, []);
 
   return (

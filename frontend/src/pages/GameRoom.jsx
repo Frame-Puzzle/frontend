@@ -101,7 +101,7 @@ const GameRoom = () => {
   };
 
   const joinSession = async (sessionId, tokenId) => {
-    console.log("Joining session with:", sessionId, tokenId);
+
     if (!sessionId || !tokenId) {
       console.error("No sessionId or token available");
       return;
@@ -261,7 +261,7 @@ const GameRoom = () => {
       joinGame();
       joinRoom();
       setLoading(false);
-      console.log(waitingRoom.gameInfo);
+
     }
     //소켓 연결 후 게임 시작되게 하기
   }, [isConnected]);
@@ -307,7 +307,7 @@ const GameRoom = () => {
   };
 
   const sendEndGame = () => {
-    console.log(timerRef.current); // 최신 timer 값을 출력
+
     const data = {
       time: timerRef.current, // 최신 timer 값을 사용
     };

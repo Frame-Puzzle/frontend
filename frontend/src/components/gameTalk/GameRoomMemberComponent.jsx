@@ -6,13 +6,10 @@ const GameRoomMemberComponent = ({ rtcUsers, gameUsers }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    console.log("RTC Users Updated:", rtcUsers);
-    console.log("Game Users:", gameUsers);
 
     if (gameUsers && gameUsers.userList) {
       const mergedUsers = gameUsers.userList.map((user) => {
         const matchedUser = rtcUsers.find((u) => u.name === user.nickname);
-        console.log("matchedUser", matchedUser);
 
         return {
           ...user,
@@ -25,7 +22,7 @@ const GameRoomMemberComponent = ({ rtcUsers, gameUsers }) => {
       });
 
       setUsers(mergedUsers);
-      console.log("Merged Users:", mergedUsers);
+
     }
   }, [rtcUsers, gameUsers]);
 

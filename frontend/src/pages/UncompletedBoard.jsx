@@ -62,7 +62,7 @@ const UncompletedBoard = ({ boardID }) => {
       const response = await boardApi.get(`/${boardID}/rooms`);
       const data = response.data.data;
 
-      console.log(data);
+
       setCreateRoom(data.exist);
       dispatch(setGameLevel(data.size));
     };
