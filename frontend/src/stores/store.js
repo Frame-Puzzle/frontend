@@ -1,20 +1,27 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 // 아래 방식으로 Redux에서 사용할 State 불러오세요!
 // import user from './userSlice';
 // import cart from './cartSlice';
 // sessionStorage에 저장하고 싶으면
 // import sessionStorage from 'redux-persist/lib/storage';
-import user from './userSlice';
-import createBoard from './createBoardSlice';
-import piece from './pieceSlice';
-import storage from 'redux-persist/lib/storage';
-import persistReducer from 'redux-persist/es/persistReducer';
-import persistStore from 'redux-persist/es/persistStore';
-import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import directory from './directorySlice';
-import waitingRoom from './waitingRoomSlice';
-import board from './boardSlice';
-import loading from './loadingSlice';
+import user from "./userSlice";
+import createBoard from "./createBoardSlice";
+import piece from "./pieceSlice";
+import storage from "redux-persist/lib/storage";
+import persistReducer from "redux-persist/es/persistReducer";
+import persistStore from "redux-persist/es/persistStore";
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import directory from "./directorySlice";
+import waitingRoom from "./waitingRoomSlice";
+import board from "./boardSlice";
+import loading from "./loadingSlice";
 
 // reducer 추가하는 곳
 const rootReducer = combineReducers({
@@ -27,16 +34,16 @@ const rootReducer = combineReducers({
   directory: directory.reducer,
   waitingRoom: waitingRoom.reducer,
   board: board.reducer,
-  loading: loading.reducer
+  loading: loading.reducer,
 });
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: storage,
   // user Reducer만 persist 적용하려면 whitelist 사용하세요.
   // whitelist 외에도 blacklist 등 여러 option이 존재합니다.
   // whitelist: ['user']
-  whitelist: ['user', 'createBoard', 'waitingRoom', 'loading']
+  whitelist: ["user", "createBoard", "waitingRoom", "loading"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -50,6 +57,5 @@ export const store = configureStore({
       },
     }),
 });
-
 
 export const persistor = persistStore(store);

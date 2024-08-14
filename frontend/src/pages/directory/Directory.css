@@ -31,10 +31,10 @@
   margin: 0vw 14vw;
 }
 
-.board-plus{
+.board-plus {
   font-size: 4vw;
   font-family: "pretendard-medium";
-  color: #B0B0B0;
+  color: #b0b0b0;
 }
 
 .board-plus-logo {
@@ -44,15 +44,15 @@
   height: 50%;
 }
 
-.direoctory-board-name{
+.directory-board-name {
   display: flex;
   justify-content: center;
   margin: 0 30vw;
   margin-top: -2vh;
-  border: #F1BDEC 2.1px solid;
+  border: #f1bdec 2.1px solid;
   padding: 0.8vh 4vw;
   font-size: 4vw;
-  color: #F1BDEC;
+  color: #f1bdec;
   font-family: "pretendard-bold";
   border-radius: 20px;
 }
