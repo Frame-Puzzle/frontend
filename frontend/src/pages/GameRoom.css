@@ -99,3 +99,6 @@
 .hidden {
   display: none;
 }
+.hidden-audio-selector {
+  display: none;
+}
