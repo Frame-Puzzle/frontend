@@ -37,9 +37,8 @@ const GameRoom = () => {
 
   const timerRef = useRef(timer); // 최신 timer 값을 추적하기 위한 ref
 
-  // openvidu 아예 여기서 실행
+  // openvidu
   const publisher = useRef(null);
-  // 기존 user의 nickname 가져옴
   const nickname = useSelector((state) => state.user.nickName);
   const profileImg = useSelector((state) => state.user.profileImg);
   const [sessionId, setSessionId] = useState(null);
@@ -47,7 +46,6 @@ const GameRoom = () => {
   const [myUserName, setMyUserName] = useState(nickname);
   const [myProfileUrl, setMyProfileUrl] = useState(profileImg);
   const [session, setSession] = useState(null);
-  // 다른 유저들이 방에 들어온 list 확인하기 위함, 들어올 때마다 update
   const [users, setUsers] = useState([]);
   const usersRef = useRef(users); // users 상태를 추적하기 위한 usersRef
 
