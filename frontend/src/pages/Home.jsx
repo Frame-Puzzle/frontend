@@ -9,9 +9,11 @@ import { useSelector } from "react-redux";
 import userApi from "../apis/userApi";
 import { useDispatch } from "react-redux";
 import { setNickName } from "../stores/userSlice";
+import UserGuideModalFrame from "./modalFrame/UserGuideModalFrame";
 
 const Home = () => {
   let [modal, setModal] = useState(false);
+  let [infoModal, setInfoModal] = useState(false);
   const [userNickName, showUserNickName] = useState("");
 
   // JWT Token Test
@@ -38,9 +40,23 @@ const Home = () => {
   return (
     // Page 단위의 Component의 최상위 요소에는 반드시 width: 100%와 height: 100% 속성이 필요하다.*/
     <div className="w-full h-full flex flex-wrap relative">
+      {infoModal ? <UserGuideModalFrame setInfoModal={setInfoModal} /> : null}
       {modal ? <HomeModalFrame setModal={setModal} /> : null}
       <div className="home-main-content bg-color3">
-        <div className="top-title">HOME</div>
+        <div className="top-title flex">
+          <span>HOME</span>
+          <div className="width-fix"></div>
+          <img
+            src="https://frazzle208.s3.ap-northeast-2.amazonaws.com/img/info-guide.png"
+            alt="info-icon"
+            className="info-icon"
+            onClick={(e) => {
+              // 이벤트 버블링 방지
+              e.stopPropagation();
+              setInfoModal(true);
+            }}
+          />
+        </div>
         {/* <div className="user-info">
           안녕하세요
           <br />
