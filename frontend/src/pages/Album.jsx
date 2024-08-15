@@ -19,7 +19,6 @@ const Album = () => {
       const response = await boardApi.get(`/${boardID}/images`);
       const data = response.data.data;
 
-      console.log(data);
       setImgList(data.imgList);
     };
 

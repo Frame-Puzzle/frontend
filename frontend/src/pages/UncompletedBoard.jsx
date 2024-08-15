@@ -15,7 +15,6 @@ import PuzzleCanvas from "../components/puzzleBoard/PuzzleCanvas";
 import { setBoardId } from "../stores/waitingRoomSlice";
 import MainNav from "../components/common/MainNav";
 import { setGameLevel } from "../stores/waitingRoomSlice";
-import CreateWaitingRoom from "../components/modal/game/CreateWaitingRoom";
 
 const UncompletedBoard = ({ boardID }) => {
   // 모달 창
@@ -63,14 +62,14 @@ const UncompletedBoard = ({ boardID }) => {
       const response = await boardApi.get(`/${boardID}/rooms`);
       const data = response.data.data;
 
-      console.log(data);
+
       setCreateRoom(data.exist);
       dispatch(setGameLevel(data.size));
     };
 
     fetchPuzzleData();
     fetchCreateGameRoom();
-  }, [piece.pieceId]);
+  }, [piece.pieceId, board.modalId]);
 
   useEffect(() => {
     if (activateGameRoom === 0) {
@@ -80,7 +79,6 @@ const UncompletedBoard = ({ boardID }) => {
 
     const fetchExistGameRoom = async () => {
       const response = await boardApi.get(`${boardID}/games/in-game`);
-      console.log(response);
       setExistRoom(response.data.data.exist);
     };
 

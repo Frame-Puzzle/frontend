@@ -40,10 +40,6 @@ const CompletedBoard = ({ boardID }) => {
       const response = await boardApi.get(`/${boardID}`);
       const userResponse = await userApi.get();
 
-      // Test
-      console.log(response);
-      console.log(userResponse);
-
       const keyword = response.data.data.keyword;
       setKeyword(keyword);
       const category = response.data.data.category;
@@ -74,8 +70,7 @@ const CompletedBoard = ({ boardID }) => {
     try {
       // 백엔드에 바로 GET 요청을 보내기
       const response = await boardApi.get(`/${boardID}/thumbnails`);
-      // 응답 체크하기
-      console.log(response);
+
       // 우선 변수에 담기 (URL은 null일 수 있음)
       const URL = response.data.data.url;
       // 이어서 State에 담기

@@ -9,7 +9,7 @@ let stompClient = null;
 
 const connectSocket = (onConnectedCallback, onMessageCallback,
   onRobyCallback, onWaitingTimerCallback, onGameStartCallback,
-  onGameInfoCallback, onGameTimerCallback, onGameEndCallback,id) => {
+  onGameInfoCallback, onGameTimerCallback, onGameEndCallback, onGameRoomInfoCallback, id) => {
 
   const state = store.getState();
   const accessToken = state.user.accessToken;
@@ -75,12 +75,21 @@ const connectSocket = (onConnectedCallback, onMessageCallback,
       }
 
       // 게임 종료
-      if(onGameEndCallback){
+      if (onGameEndCallback) {
         stompClient.subscribe(`/sub/game/${id}/puzzle/end`, (message) => {
           const response = JSON.parse(message.body);
           onGameEndCallback(response);
         })
       }
+
+      // 게임 방 입장 정보
+      if (onGameRoomInfoCallback) {
+        stompClient.subscribe(`/sub/game/user-info/${id}`, (message) => {
+          const response = JSON.parse(message.body);
+          onGameRoomInfoCallback(response);
+        })
+      }
+
     }
   );
 }

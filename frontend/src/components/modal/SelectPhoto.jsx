@@ -27,8 +27,7 @@ const SelectPhoto = ({
       };
       // 백엔드에 PUT 요청을 보내기
       const response = await boardApi.put(`/${id}/thumbnails`, requestData);
-      // 응답 체크하기
-      console.log(response.data.message);
+
       // 마지막은 모달창 닫기
       setThumbnailModal(false);
       // CompletedBoard Component에서 감지할 수 있게끔(useEffect를 사용할 수 있게끔) Trigger 발동시키기

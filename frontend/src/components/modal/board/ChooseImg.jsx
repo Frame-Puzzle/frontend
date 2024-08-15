@@ -81,7 +81,7 @@ const ChooseImg = () => {
         },
       });
 
-      console.log("퍼즐 조각 등록:", response);
+
       dispatch(setPieceId(0));
       dispatch(setImgLoading(false));
     } catch (error) {
