@@ -76,6 +76,16 @@ const InputKeyword = () => {
     } else { // 그게 아니라면 '미션 생성하기' 버튼 비활성화
       setActivate(false);
     }
+
+    // 양방향 연결이 되어있는 current를 이용하여 State와 <input> 태그 전부 비우기
+    // 1. 직접 input 필드 초기화
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+    // 2. 입력 지연 후 초기화 (비동기 처리)
+    setTimeout(() => {
+      setCurrent('');
+    }, 0); // 짧은 딜레이 추가
   }, [keyword]);
 
   useEffect(() => {
