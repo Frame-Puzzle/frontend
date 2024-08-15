@@ -48,9 +48,9 @@
 
 /* 활성화된 슬라이드를 위로 띄우기 위한 스타일 */
 
-.swiper-slide-active .user-guide-frame {
+/* .swiper-slide-active .user-guide-frame {
   transform: translateY(-20px);
-}
+} */
 
 /* 모든 슬라이드에 이동 애니메이션 추가 */
 /* 스와이퍼css에 있는 기능 추가 */
