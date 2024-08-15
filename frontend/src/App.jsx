@@ -16,7 +16,6 @@ import CreateBoard from "./pages/board/CreateBoard";
 import BoardSelectSize from "./components/common/BoardSelectSize";
 import BoardMissionOn from "./components/common/BoardMissionOn";
 import BoardSelectMission from "./components/common/BoardSelectMission";
-import GameOpenVidu from "./components/gameTalk/GameOpenvidu";
 import WaitingRoom from "./pages/WaitingRoom";
 import GameRoom from "./pages/GameRoom";
 import LoadingModal from "./pages/LoadingModal";
