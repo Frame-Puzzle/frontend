@@ -99,7 +99,7 @@ const InputKeyword = () => {
       <div className="input-keyword-main-container">
         <span>키워드 입력 (최대 3개)</span>
         <input
-          autoComplete="off" // 이게 안되면 "none"을 입력할 것
+          autoComplete="none" // 이게 안되면 "none"을 입력할 것
           className="input-keyword-input block"
           value={current}
           onChange={(e) => { setCurrent(e.target.value); }}
