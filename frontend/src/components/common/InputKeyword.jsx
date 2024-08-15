@@ -27,6 +27,24 @@ const InputKeyword = () => {
   // '미션 생성하기' 버튼 활성화 스위치
   let [activate, setActivate] = useState(false);
 
+  // 설명 필요..
+  const triggerEnterKeyTwice = () => {
+    if (inputRef.current) {
+      // Enter 키 이벤트를 두 번 더 트리거
+      for (let i = 0; i < 2; i++) {
+        const event = new KeyboardEvent('keydown', {
+          key: 'Enter',
+          code: 'Enter',
+          keyCode: 13,
+          which: 13,
+          bubbles: true,
+          cancelable: true,
+        });
+        inputRef.current.dispatchEvent(event);
+      }
+    }
+  };
+
   // 사용자가 <input> 태그에서 Enter 또는 Spacebar를 눌렀을 때, 실행되어야 하는 작업들
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -55,6 +73,7 @@ const InputKeyword = () => {
       // 2. 입력 지연 후 초기화 (비동기 처리)
       setTimeout(() => {
         setCurrent('');
+        triggerEnterKeyTwice(); // 추가 Enter 이벤트 발생시키기
       }, 0); // 짧은 딜레이 추가
     }
   }
