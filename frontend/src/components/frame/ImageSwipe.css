@@ -13,9 +13,9 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100%; /* 부모 요소에 맞게 height를 100%로 설정 */
-  width: 100%;
-  background-color: gainsboro;
+  height: 90%; /* 부모 요소에 맞게 height를 100%로 설정 */
+  width: 95%;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
