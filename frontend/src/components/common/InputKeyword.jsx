@@ -27,22 +27,6 @@ const InputKeyword = () => {
   // '미션 생성하기' 버튼 활성화 스위치
   let [activate, setActivate] = useState(false);
 
-  // inputRef.current가 있든없든 Enter keydown event 두 번 터뜨리기
-  const triggerEnterKeyTwice = () => {
-    // Enter 키 이벤트를 두 번 더 트리거
-    for (let i = 0; i < 2; i++) {
-      const event = new KeyboardEvent('keydown', {
-        key: 'Enter',
-        code: 'Enter',
-        keyCode: 13,
-        which: 13,
-        bubbles: true,
-        cancelable: true,
-      });
-      inputRef.current.dispatchEvent(event);
-    }
-  };
-
   // 사용자가 <input> 태그에서 Enter 또는 Spacebar를 눌렀을 때, 실행되어야 하는 작업들
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -64,14 +48,9 @@ const InputKeyword = () => {
       deepcopy.push(current);
       setKeyword(deepcopy);
       // 양방향 연결이 되어있는 current를 이용하여 State와 <input> 태그 전부 비우기
-      // 1. 직접 input 필드 초기화
-      if (inputRef.current) {
-        inputRef.current.value = '';
-      }
-      // 2. 입력 지연 후 초기화 (비동기 처리)
+      // 입력 지연 후 초기화 (비동기 처리)
       setTimeout(() => {
         setCurrent('');
-        triggerEnterKeyTwice(); // 추가 Enter 이벤트 발생시키기
       }, 10); // 짧은 딜레이 추가
     }
   }
@@ -95,15 +74,10 @@ const InputKeyword = () => {
     }
 
     // 양방향 연결이 되어있는 current를 이용하여 State와 <input> 태그 전부 비우기
-    // 1. 직접 input 필드 초기화
-    if (inputRef.current) {
-      inputRef.current.value = '';
-    }
-    // 2. 입력 지연 후 초기화 (비동기 처리)
+    // 입력 지연 후 초기화 (비동기 처리)
     setTimeout(() => {
       setCurrent('');
-      triggerEnterKeyTwice(); // 여기도 추가 Enter 이벤트 발생시키기
-    }, 20); // 짧은 딜레이 추가
+    }, 10); // 짧은 딜레이 추가
   }, [keyword]);
 
   useEffect(() => {
@@ -125,10 +99,10 @@ const InputKeyword = () => {
       <div className="input-keyword-main-container">
         <span>키워드 입력 (최대 3개)</span>
         <input
-          ref={inputRef}
+          autoComplete="off" // 이게 안되면 "none"을 입력할 것
           className="input-keyword-input block"
           value={current}
-          onInput={(e) => { setCurrent(e.target.value); }}
+          onChange={(e) => { setCurrent(e.target.value); }}
           onKeyDown={handleKeyDown}
           disabled={isDisabled}>
         </input>
