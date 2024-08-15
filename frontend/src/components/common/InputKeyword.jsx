@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./InputKeyword.css";
 import KeywordPill from "./KeywordPill";
 import isValidKoreanNumeric from "../../utils/stringConfig/isValidKoreanNumeric";
@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { setMissionCnt } from "../../stores/createBoardSlice";
 
 const InputKeyword = () => {
+
+  let inputRef = useRef(null);
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -46,10 +48,14 @@ const InputKeyword = () => {
       deepcopy.push(current);
       setKeyword(deepcopy);
       // 양방향 연결이 되어있는 current를 이용하여 State와 <input> 태그 전부 비우기
-      // 입력 지연 후 초기화 (비동기 처리)
+      // 1. 직접 input 필드 초기화
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+      // 2. 입력 지연 후 초기화 (비동기 처리)
       setTimeout(() => {
         setCurrent('');
-      }, 1); // 짧은 딜레이 추가
+      }, 0); // 짧은 딜레이 추가
     }
   }
 
@@ -91,6 +97,7 @@ const InputKeyword = () => {
       <div className="input-keyword-main-container">
         <span>키워드 입력 (최대 3개)</span>
         <input
+          ref={inputRef}
           className="input-keyword-input block"
           value={current}
           onChange={(e) => { setCurrent(e.target.value); }}
