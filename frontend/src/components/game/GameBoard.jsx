@@ -12,17 +12,9 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
   const waitingRoom = useSelector((state) => state.waitingRoom);
   const audioRef = useRef(new Audio(puzzleClickSound));
 
-  const [cropData, setCropData] = useState(null);
-
   useEffect(() => {
     init();
   }, []);
-
-  useEffect(() => {
-    if (cropData != null) {
-      init();
-    }
-  }, [cropData]);
 
   const init = () => {
     const boardElement = boardRef.current;
@@ -67,12 +59,9 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
       const canvasElement = document.getElementById(boardElement.id);
       canvasElement.style.backgroundColor = "#f0f0f0";
 
-      // 이미지 높이 맞추기
-       gameImg.width >= gameImg.height
-         ? canvas.adjustImagesToPuzzleHeight()
-         : canvas.adjustImagesToPuzzleWidth();
-
-      canvas.adjustImagesToPuzzleHeight();
+      //이미지 높이 맞추기
+       gameImgUrl.width >= gameImgUrl.height
+         ? canvas.adjustImagesToPuzzleHeight() : canvas.adjustImagesToPuzzleWidth();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,
