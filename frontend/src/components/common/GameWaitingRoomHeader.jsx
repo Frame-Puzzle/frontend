@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Profile from "./Profile";
 import "./GameWaitingRoomHeader.css";
+import makeNickNameShort from "../../utils/makeNickNameShort";
 
 const GameWaitingRoomHeader = ({ robyKing, robyUserList }) => {
   return (
@@ -30,7 +31,7 @@ const GameWaitingRoomHeader = ({ robyKing, robyUserList }) => {
                 backgroundImage: `url(${user.profileImg})`,
               }}
             ></div>
-            <span className="game-profile-name">{user.nickname}</span>
+            <span className="game-profile-name">{makeNickNameShort(user.nickname)}</span>
           </div>
         ) : null
       )}

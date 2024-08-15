@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./GameRoomMemberComponent.css";
 import OvAudioComponent from "./OvAudioComponent";
+import makeNickNameShort from "../../utils/makeNickNameShort";
 
 const GameRoomMemberComponent = ({ rtcUsers, gameUsers }) => {
   const [users, setUsers] = useState([]);
@@ -39,7 +40,7 @@ const GameRoomMemberComponent = ({ rtcUsers, gameUsers }) => {
             }}
           ></div>
 
-          <span className="game-room-member-nickname">{user.name}</span>
+          <span className="game-room-member-nickname">{makeNickNameShort(user.name)}</span>
           {user.streamManager && (
             <OvAudioComponent streamManager={user.streamManager} />
           )}
