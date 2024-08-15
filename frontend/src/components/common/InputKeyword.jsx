@@ -10,8 +10,6 @@ import { setMissionCnt } from "../../stores/createBoardSlice";
 
 const InputKeyword = () => {
 
-  let inputRef = useRef(null);
-
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let boardSize = useSelector(state => state.createBoard.boardSize);
@@ -41,8 +39,6 @@ const InputKeyword = () => {
         return;
       }
 
-      // 사용자가 입력하는 기본 동작을 먼저 막고
-      e.preventDefault();
       // 현재 <input>에 있는 값을 keyword 저장 공간에 추가하고
       let deepcopy = [...keyword]; // 얕은 복사 방지
       deepcopy.push(current);
@@ -73,11 +69,6 @@ const InputKeyword = () => {
       setActivate(false);
     }
 
-    // 양방향 연결이 되어있는 current를 이용하여 State와 <input> 태그 전부 비우기
-    // 입력 지연 후 초기화 (비동기 처리)
-    setTimeout(() => {
-      setCurrent('');
-    }, 10); // 짧은 딜레이 추가
   }, [keyword]);
 
   useEffect(() => {
@@ -99,7 +90,7 @@ const InputKeyword = () => {
       <div className="input-keyword-main-container">
         <span>키워드 입력 (최대 3개)</span>
         <input
-          autoComplete="none" // 이게 안되면 "none"을 입력할 것
+          autoComplete="none" // "off"는 인식하지 못하는 경우 존재. "none"을 입력할 것.
           className="input-keyword-input block"
           value={current}
           onChange={(e) => { setCurrent(e.target.value); }}
