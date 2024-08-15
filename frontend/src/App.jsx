@@ -23,7 +23,6 @@ import LoadingModal from "./pages/LoadingModal";
 import PhotoFrame from "./pages/PhotoFrame";
 import Album from "./pages/Album";
 
-
 function App() {
   const setScreenSize = () => {
     let vw = window.innerWidth * 0.01;
@@ -50,9 +49,6 @@ function App() {
 
         {/* 마이 페이지 중 닉네임 변경 페이지 */}
         <Route path="/mypage/edit" element={<ChangeNickName />} />
-
-        {/* !!! 테스트 페이지 rtc !!!*/}
-        <Route path="/testrtc" element={<GameOpenVidu />} />
 
         {/* Google Login API */}
         <Route path="/" element={<Login />} />
