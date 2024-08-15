@@ -27,9 +27,10 @@
 
 .header-title {
   font-size: 5.2vw;
-  font-weight: 900;
+  /* font-weight: 900; */
   margin-right: 2.8vw;
   margin-left: -0.4vw;
+  font-family: "pretendard-bold";
 }
 
 .header-category {
