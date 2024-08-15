@@ -51,8 +51,12 @@ const PuzzleCanvas = ({ boardSize, pieceId, pieceData }) => {
     fitPieces(pieces, boardConfig);
 
     // 클릭 이벤트 생성
-    pieces.forEach((piece, index) => { 
-      if(piece.data.authority === 4){
+    pieces.forEach((piece, index) => {
+      if (piece.data.authority === 4) {
+
+        piece.onMouseDown = (event) => {
+          alert("다른 사람이 올린 사진은 퍼즐이 완성되기 전까지 볼 수 없어요.")
+        }
         return;
       }
       piece.onMouseDown = (event) => {

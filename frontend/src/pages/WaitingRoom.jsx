@@ -65,6 +65,7 @@ const WaitingRoom = () => {
   // 게임 시작 시 게임 룸으로 이동
   useEffect(() => {
     if (gameStart) {
+
       nav(`/game-room/${roomID}`, { state: { cropGameImg } });
     }
   }, [gameStart, roomID, nav, cropGameImg]);
@@ -105,7 +106,7 @@ const WaitingRoom = () => {
       setRobyUserList(robyData.robyUserList);
       setActivateButton(
         robyData.maxPeople / 2 <= robyData.robyUserList.length &&
-          robyData.king.nickname === user.nickName
+        robyData.king.nickname === user.nickName
       );
 
       dispatch(setGameUser(robyData.robyUserList));

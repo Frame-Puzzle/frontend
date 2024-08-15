@@ -5,8 +5,8 @@ import "swiper/css";
 const ImageSwipe = ({ images }) => {
   return (
     <Swiper
-      spaceBetween={10}
-      slidesPerView={2}
+      spaceBetween={15}
+      slidesPerView={1.22}
       centeredSlides={true}
       loop={true}
       effect="creative"
