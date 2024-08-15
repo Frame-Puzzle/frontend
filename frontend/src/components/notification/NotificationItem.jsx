@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import "./NotificationItem.css";
 import { useNavigate } from "react-router-dom";
 import NotificationApi from "../../apis/NotificationApi";
+import { useDispatch } from "react-redux";
+import { setDirectoryId } from "../../stores/createBoardSlice";
 
 // 눌렀을 때 routing은 없고, 읽음 여부 바꿔줘야함.
 // type
@@ -23,6 +25,8 @@ const NotificationItem = ({ item }) => {
   const nav = useNavigate();
   const [read, setRead] = useState(item.isRead); // 버튼 눌렀을 때 읽음 바로 확인해주기 위해
   const [showButtons, setShowButtons] = useState(true);
+
+  let dispatch = useDispatch();
 
   // 날짜 형식을 "2024년 8월 7일 시간까지"로 변환하는 함수
 
@@ -164,6 +168,8 @@ const NotificationItem = ({ item }) => {
           <span
             className="notification-into-puzzle"
             onClick={() => {
+              // 올바른 라우트 기능을 위한 리덕스 정보 세팅
+              dispatch(setDirectoryId(item.directoryId));
               setRead(true);
               // 0으로 보내서 isRead true와 관계없이 항상 버튼이 보이도록 설계 (type 2,3 모두 퍼즐 게임 대기방 입장 버튼이 있는 화면으로 보내기)
               handleAcceptedToggle(0);
