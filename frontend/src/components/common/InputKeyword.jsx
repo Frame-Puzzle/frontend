@@ -128,7 +128,7 @@ const InputKeyword = () => {
           ref={inputRef}
           className="input-keyword-input block"
           value={current}
-          onChange={(e) => { setCurrent(e.target.value); }}
+          onInput={(e) => { setCurrent(e.target.value); }}
           onKeyDown={handleKeyDown}
           disabled={isDisabled}>
         </input>
