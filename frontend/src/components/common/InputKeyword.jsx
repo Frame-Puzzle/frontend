@@ -46,7 +46,10 @@ const InputKeyword = () => {
       deepcopy.push(current);
       setKeyword(deepcopy);
       // 양방향 연결이 되어있는 current를 이용하여 State와 <input> 태그 전부 비우기
-      setCurrent('');
+      // 입력 지연 후 초기화 (비동기 처리)
+      setTimeout(() => {
+        setCurrent('');
+      }, 1); // 짧은 딜레이 추가
     }
   }
 
