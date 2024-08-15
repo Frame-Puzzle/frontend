@@ -11,7 +11,7 @@ const UserGuideModalFrame = ({ setInfoModal }) => {
   }
   return (
     <div
-      className="user-guide-modal flex justify-content-center align-items-center"
+      className="user-guide-modal w-full h-full flex justify-content-center align-items-center"
       onClick={(e) => {
         e.stopPropagation();
         setInfoModal(false);
