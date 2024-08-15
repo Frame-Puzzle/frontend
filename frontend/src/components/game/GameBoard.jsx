@@ -6,7 +6,6 @@ import game4X4Config from "../../utils/gameBoard/game4X4Config";
 import game8X8Config from "../../utils/gameBoard/game8X8Config";
 import game6X6Config from "../../utils/gameBoard/game6X6Config";
 import puzzleClickSound from "./puzzleClick.wav";
-import { cropImageToSquare } from "../../utils/cropImage";
 
 const GameBoard = ({ id, gameImg, sendEndGame }) => {
   const boardRef = useRef(null);
@@ -29,7 +28,6 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
     const boardElement = boardRef.current;
     const gameImgUrl = new Image();
     gameImgUrl.src = gameImg != null ? gameImg : waitingRoom.gameImgUrl;
-
 
     let config;
 
@@ -56,7 +54,6 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
         width: window.innerWidth * 0.95,
         height: window.innerHeight * 0.65,
         pieceSize: ((window.innerWidth * 0.5) / level),
-        borderFill: 10,
         strokeWidth: 1.6,
         lineSoftness: 0.18,
         painter: new painters.Konva(),
@@ -71,9 +68,11 @@ const GameBoard = ({ id, gameImg, sendEndGame }) => {
       canvasElement.style.backgroundColor = "#f0f0f0";
 
       // 이미지 높이 맞추기
-      gameImg.width >= gameImg.height
-        ? canvas.adjustImagesToPuzzleHeight()
-        : canvas.adjustImagesToPuzzleWidth();
+       gameImg.width >= gameImg.height
+         ? canvas.adjustImagesToPuzzleHeight()
+         : canvas.adjustImagesToPuzzleWidth();
+
+      canvas.adjustImagesToPuzzleHeight();
 
       canvas.autogenerate({
         horizontalPiecesCount: config.row,

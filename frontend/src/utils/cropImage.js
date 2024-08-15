@@ -9,8 +9,8 @@ export function cropImageToSquare(imageUrl, callback) {
   
       // 이미지의 중앙에서 정사각형 영역을 크롭
       size = Math.min(img.width, img.height);
-      const x = Math.floor((img.width - size) / 2);
-      const y = Math.floor((img.height - size) / 2);
+      const x = Math.ceil((img.width - size) / 2);
+      const y = Math.ceil((img.height - size) / 2);
   
       // 정사각형 크기로 캔버스 크기 설정
       canvas.width = size;
