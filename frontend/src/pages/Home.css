@@ -70,3 +70,12 @@
   line-height: 100%;
   font-family: "pretendard-bold";
 }
+
+.info-icon {
+  width: auto;
+  height: 3.3vh;
+}
+
+.width-fix {
+  flex-grow: 1;
+}
