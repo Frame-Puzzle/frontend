@@ -53,7 +53,9 @@ const GameRoom = () => {
   const [tokenId, setTokenId] = useState(null);
   const [myUserName, setMyUserName] = useState(nickname);
   const [myProfileUrl, setMyProfileUrl] = useState(profileImg);
-  const [session, setSession] = useState(null);
+
+  const sessionRef = useRef(null);
+
   const [users, setUsers] = useState([]);
   const usersRef = useRef(users); // users 상태를 추적하기 위한 usersRef
 
@@ -67,18 +69,18 @@ const GameRoom = () => {
   const [isJoining, setIsJoining] = useState(false);
 
   // 브라우저 탭을 닫거나, 페이지를 새로 고침하거나, 앱을 종료할 때 leaveSession()을 호출하여 명시적으로 세션
-  useEffect(() => {
-    const onbeforeunload = () => {
-      leaveSession();
-    };
+  // useEffect(() => {
+  //   const onbeforeunload = () => {
+  //     leaveSession();
+  //   };
 
-    // 웹 페이지를 떠나기 전 세션 leave를 먼저 진행시키기 위해 사용
-    window.addEventListener("beforeunload", onbeforeunload);
+  //   // 웹 페이지를 떠나기 전 세션 leave를 먼저 진행시키기 위해 사용
+  //   window.addEventListener("beforeunload", onbeforeunload);
 
-    return () => {
-      window.removeEventListener("beforeunload", onbeforeunload);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", onbeforeunload);
+  //   };
+  // }, []);
 
   useEffect(() => {
     // audio 활성화를 위한 useEffect 함수
@@ -163,7 +165,9 @@ const GameRoom = () => {
       });
       mySession.publish(publisherOV);
       publisher.current = publisherOV;
-      setSession(mySession);
+
+      sessionRef.current = mySession;
+
       // 현재 사용자 정보를 users 배열에 추가
       setUsers((users) => [
         ...users,
@@ -187,11 +191,12 @@ const GameRoom = () => {
     }
   };
 
-  const leaveSession = () => {
-    if (session) {
-      session.disconnect();
+  const leaveSession = async () => {
+    if (sessionRef.current) {
+      await sessionRef.current.disconnect();
     }
-    setSession(null);
+
+    sessionRef.current = null;
     setUsers([]);
     setIsJoining(false);
   };
@@ -234,26 +239,12 @@ const GameRoom = () => {
       roomID // 방 번호
     );
 
-    // visibilitychange 이벤트 리스너 추가
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        leaveSession();
-        exitRoom();
-        exitGame();
-        disconnectSocket();
-        setIsConnected(false);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
     return () => {
       leaveSession();
       exitRoom();
       exitGame();
       disconnectSocket();
       setIsConnected(false);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [roomID, connectSocket, disconnectSocket]);
 

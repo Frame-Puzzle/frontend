@@ -22,6 +22,7 @@ const MainSwipe = () => {
       caption: "with Friends",
     },
   ];
+
   return (
     <Swiper
       spaceBetween={30}
