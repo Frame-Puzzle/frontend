@@ -101,7 +101,6 @@ const GameRoom = () => {
   };
 
   const joinSession = async (sessionId, tokenId) => {
-
     if (!sessionId || !tokenId) {
       console.error("No sessionId or token available");
       return;
@@ -238,6 +237,7 @@ const GameRoom = () => {
     // visibilitychange 이벤트 리스너 추가
     const handleVisibilityChange = () => {
       if (document.visibilityState === "hidden") {
+        leaveSession();
         exitRoom();
         exitGame();
         disconnectSocket();
@@ -248,6 +248,7 @@ const GameRoom = () => {
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      leaveSession();
       exitRoom();
       exitGame();
       disconnectSocket();
@@ -261,7 +262,6 @@ const GameRoom = () => {
       joinGame();
       joinRoom();
       setLoading(false);
-
     }
     //소켓 연결 후 게임 시작되게 하기
   }, [isConnected]);
@@ -275,7 +275,6 @@ const GameRoom = () => {
       nav(`/boards/${roomID}`);
     }, 5000);
   }, [winner, nav, roomID]);
-
 
   const joinGame = () => {
     sendMessage(`/pub/game/entry/${roomID}`);
@@ -307,7 +306,6 @@ const GameRoom = () => {
   };
 
   const sendEndGame = () => {
-
     const data = {
       time: timerRef.current, // 최신 timer 값을 사용
     };
