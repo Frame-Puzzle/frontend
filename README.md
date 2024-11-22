@@ -1,8 +1,6 @@
-# README.md
-
 # 🧩 퍼즐 조각에 추억을 저장해보세요. Frazzle!
 
-![image.png](readmeImg/image.png)
+<img src="readmeImg/image.png" width="400">
 
 # Overview
 
@@ -12,39 +10,39 @@
 
 ### ■ 메인 페이지
 
-![image.png](readmeImg/image%201.png)
+<img src="readmeImg/image%201.png" width="400">
 
 ### ■ 마이 페이지
 
-![image.png](readmeImg/image%202.png)
+<img src="readmeImg/image%202.png" width="400">
 
 ### ■ 디렉토리 상세 페이지
 
-![image.png](readmeImg/de5cce33-f3e4-4cec-802a-8eb5daf03592.png)
+<img src="readmeImg/de5cce33-f3e4-4cec-802a-8eb5daf03592.png" width="400">
 
 ### ■ 퍼즐 상세 페이지
 
-![image.png](readmeImg/image%203.png)
+<img src="readmeImg/image%203.png" width="400">
 
 ### ■ 게임 대기방 페이지
 
-![image.png](readmeImg/image%204.png)
+<img src="readmeImg/image%204.png" width="400">
 
 ### ■ 인게임 페이지
 
-![image.png](readmeImg/image%205.png)
+<img src="readmeImg/image%205.png" width="400">
 
-![image.png](readmeImg/fe3c44f6-714e-4bc3-b8f9-f9cd4edef1de.png)
+<img src="readmeImg/fe3c44f6-714e-4bc3-b8f9-f9cd4edef1de.png" width="400">
 
 ### ■ 사진 조회 페이지
 
-![image.png](readmeImg/image%206.png)
+<img src="readmeImg/image%206.png" width="400">
 
-![image.png](readmeImg/image%207.png)
+<img src="readmeImg/image%207.png" width="400">
 
 ### ■ 네컷 사진 생성 페이지
 
-![image.png](readmeImg/image%208.png)
+<img src="readmeImg/image%208.png" width="400">
 
 # 주요 기능
 
@@ -129,21 +127,9 @@
 
 ---
 
-### 기능 명세서
-
-![func1.png](readmeImg/func1.png)
-
-![func2.png](readmeImg/func2.png)
-
-![image.png](readmeImg/image%209.png)
-
-![func4.png](readmeImg/func4.png)
-
----
-
 ### 시스템 아키텍처
 
-![Architecture.png](readmeImg/Architecture.png)
+<img src="readmeImg/Architecture.png" width="800">
 
 ---
 
@@ -151,39 +137,39 @@
 
 **■ 로그인 및 마이페이지**
 
-![Untitled](readmeImg/Untitled.png)
+<img src="readmeImg/Untitled.png" width="400">
 
 ---
 
 **■ 디렉토리 및 퍼즐판 생성**
 
-![Untitled](readmeImg/Untitled%201.png)
+<img src="readmeImg/Untitled%201.png" width="400">
 
 ---
 
 **■ 알림, 게임 및 꾸미기** 
 
-![Untitled](readmeImg/Untitled%202.png)
+<img src="readmeImg/Untitled%202.png" width="1200">
 
 ---
 
 ### API 명세서
 
-![API1.png](readmeImg/API1.png)
+<img src="readmeImg/API1.png" width="1200">
 
-![API2.png](readmeImg/API2.png)
+<img src="readmeImg/API2.png" width="1200">
 
 ---
 
 ### 화면 설계서
 
-![Figma1.png](readmeImg/Figma1.png)
+<img src="readmeImg/Figma1.png" width="1200">
 
-![Figma2.png](readmeImg/Figma2.png)
+<img src="readmeImg/Figma2.png" width="1200">
 
-![Figma3.png](readmeImg/Figma3.png)
+<img src="readmeImg/Figma3.png" width="1200">
 
-![Figma4.png](readmeImg/Figma4.png)
+<img src="readmeImg/Figma4.png" width="1200">
 
 ---
 
@@ -203,10 +189,8 @@
 
 ex) 백엔드 회원가입 기능
 
-- [FEAT][BE][석범] 회원가입 기능 추가
-
+[FEAT][BE][석범] 회원가입 기능 추가
 ```
-
 ---
 
 ### Git Branch 전략
@@ -221,7 +205,7 @@ ex) 백엔드 회원가입 기능
 
 ### ERD
 
-![ERD.png](readmeImg/ERD.png)
+<img src="readmeImg/ERD.png" width="1200">
 
 ### EC2 포트 정리
 
@@ -238,4 +222,4 @@ ex) 백엔드 회원가입 기능
 
 ### 역할 분배
 
-![image.png](readmeImg/image%2010.png)
+<img src="readmeImg/image%2010.png" width="1200">
